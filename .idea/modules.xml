@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GANBY_ICS372.iml" filepath="$PROJECT_DIR$/GANBY_ICS372.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GANBY.iml" filepath="$PROJECT_DIR$/GANBY.iml" />
     </modules>
   </component>
 </project>
