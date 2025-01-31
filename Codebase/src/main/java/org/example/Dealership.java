@@ -1,9 +1,12 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Dealership{
     private int dealerID;
     private String dealerName;
     private boolean isAcquisitionEnabled;
+    public ArrayList<Vehicle> vehicleList = new ArrayList<>();
 
     //Constructors
     public Dealership(int dealerID, String dealerName, boolean isAcquisitionEnabled){
@@ -31,6 +34,7 @@ public class Dealership{
     public void setIsAcquisitionEnabled(boolean isAcquisitionEnabled){
         this.isAcquisitionEnabled = isAcquisitionEnabled;
     }
+
 
 
 
