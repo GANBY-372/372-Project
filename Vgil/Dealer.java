@@ -17,6 +17,10 @@ public class Dealer {
         System.out.println("Dealer created with ID: " + dealerID);
     }
 
+    public String getDealerID() {
+        return dealerID;
+    }
+
     public void addIncomingVehicle(Vehicle vehicle) {
         if (isAcquisitionEnabled) {
             vehicles.add(vehicle);

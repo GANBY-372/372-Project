@@ -6,16 +6,17 @@ public class DriverClass {
         manager.showAllDealers();
 
         // create a dealer
-        Dealer dealer = new Dealer("1234");
+        testCreateDealer();
+    }
 
-        // enable acquisitions
+    // Tests to run
+    // 1. Create a dealer, enable and disable acquisitions
+    private static void testCreateDealer() {
+        Dealer dealer = new Dealer("12513");
+        System.out.println("Dealer ID: " + dealer.getDealerID());
         dealer.enableAcquisition();
-
-        // create vehicle
-        Vehicle vehicle = new Vehicle();
-
-        // add vehicle to dealer
-        dealer.addIncomingVehicle(vehicle);
-
+        dealer.enableAcquisition();
+        dealer.disableAcquisition();
+        dealer.disableAcquisition();
     }
 }
