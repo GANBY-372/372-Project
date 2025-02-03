@@ -6,7 +6,7 @@ public interface DealershipManager {
 
     /**
      * Displays the list of current vehicles for each dealer and their status.
-     * Essentially serves as the homepage that will load.
+     * Or a message indicating that there are no dealers.
      */
     void showAllDealers();
 

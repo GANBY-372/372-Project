@@ -14,6 +14,7 @@ public class Vehicle {
 
     // Default constructor
     public Vehicle() {
+        System.out.println("Vehicle created with default constructor");
     }
 
     // Full constructor
