@@ -24,11 +24,11 @@ public class Dealer {
     public void setVehicleAcquisitionEnabled (boolean isbuyingVehicles) { this.vehicleAcquisitionEnabled = vehicleAcquisitionEnabled; }
 
     public Set<Vehicle> getVehicles () {
-        return VehicleCatalog.getInstance().filterByDealer(this);
+        return VehicleCatalog.getInstance().getVehicles().filterByDealer(this);
     }
 
     public Vehicle findVehicleById (String vehicleId) {
-        return VehicleCatalog.getInstance().findDealerVehicleById(this, vehicleId);
+        return VehicleCatalog.getInstance().getVehicles().findDealerVehicleById(this, vehicleId);
     }
 
     @Override

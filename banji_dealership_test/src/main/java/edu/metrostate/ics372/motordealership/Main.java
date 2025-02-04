@@ -2,6 +2,7 @@ package edu.metrostate.ics372.motordealership;
 
 import edu.metrostate.ics372.motordealership.dealer.Dealer;
 import edu.metrostate.ics372.motordealership.dealer.DealerCatalog;
+import edu.metrostate.ics372.motordealership.json.JSONFileExporter;
 import edu.metrostate.ics372.motordealership.json.JSONFileImporter;
 import edu.metrostate.ics372.motordealership.vehicle.VehicleCatalog;
 
@@ -17,10 +18,14 @@ public class Main {
 //        jsonFileImporter.printDealerKeys();
 
         jsonFileImporter.processJSON();;
-        System.out.println(VehicleCatalog.getInstance().size() + " vehicles imported into catalog");
-        System.out.println(DealerCatalog.getInstance().size() + " dealers imported into catalog");
+        System.out.println(VehicleCatalog.getInstance().getVehicles().size() + " vehicles imported into catalog");
+        System.out.println(DealerCatalog.getInstance().getDealers().size() + " dealers imported into catalog");
 
         System.out.println(jsonFileImporter.getVehicles().size() + " processed vehicles from JSON");
-        System.out.println(jsonFileImporter.getDealers().size() + " processed dealers from JSON");
+        System.out.println(jsonFileImporter.getDealers().toString());
+//        System.out.println(jsonFileImporter.getDealers().size() + " processed dealers from JSON");
+
+        JSONFileExporter jsonFileExporter = new JSONFileExporter();
+        jsonFileExporter.exportToFile();
     }
 }

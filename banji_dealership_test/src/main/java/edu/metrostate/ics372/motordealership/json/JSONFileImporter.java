@@ -1,8 +1,8 @@
 package edu.metrostate.ics372.motordealership.json;
 
-
 import edu.metrostate.ics372.motordealership.dealer.Dealer;
 import edu.metrostate.ics372.motordealership.dealer.DealerCatalog;
+import edu.metrostate.ics372.motordealership.dealer.Dealers;
 import edu.metrostate.ics372.motordealership.vehicle.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,16 +29,18 @@ public class JSONFileImporter {
     JSONObject jsonObject;
     JSONArray jsonArray;
 
-    private Set<Dealer> dealers;
-    private Set<Vehicle> vehicles;
+    private Dealers dealers;
+    private Vehicles vehicles;
 
     private Dealer dealer;
     private Vehicle vehicle;
 
+
+
     public JSONFileImporter () throws FileNotFoundException {
 
-        this.dealers = new HashSet<>();
-        this.vehicles = new HashSet<>();
+        this.dealers = new Dealers();
+        this.vehicles = new Vehicles();
             try {
 
                 InputStream inputStream = getClass().getResourceAsStream("/inventory.json");
@@ -72,8 +74,8 @@ public class JSONFileImporter {
             throw new IllegalArgumentException("JSON vehicle object is null or empty");
 
         this.dealer = getDealer(jsonObject);
-        dealers.add(dealer);
-        DealerCatalog.getInstance().addDealer(dealer);
+        dealers.addDealer(dealer);
+        DealerCatalog.getInstance().getDealers().addDealer(dealer);
 
         String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
         String model = jsonObject.get(VEHICLE_MODEL_KEY).toString();
@@ -84,7 +86,6 @@ public class JSONFileImporter {
             Instant.ofEpochMilli(epochSeconds),
             TimeZone.getDefault().toZoneId()
         );
-        ;
 
         String type = jsonObject.get(VEHICLE_TYPE_KEY).toString();
         if (type == null || type.isBlank())
@@ -128,16 +129,16 @@ public class JSONFileImporter {
                 .build();
         }
         else { throw new IllegalArgumentException("Unknown category: " + category); }
-        vehicles.add(vehicle);
-        VehicleCatalog.getInstance().addVehicle(vehicle);
+        vehicles.addVehicle(vehicle);
+        VehicleCatalog.getInstance().getVehicles().addVehicle(vehicle);
         return vehicle;
     }
 
-    public Set<Dealer> getDealers () {
+    public Dealers getDealers () {
         return dealers;
     }
 
-    public Set<Vehicle> getVehicles () {
+    public Vehicles getVehicles () {
         return vehicles;
     }
 

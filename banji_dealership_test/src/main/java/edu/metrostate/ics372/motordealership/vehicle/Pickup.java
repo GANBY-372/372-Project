@@ -5,9 +5,11 @@ package edu.metrostate.ics372.motordealership.vehicle;
 import edu.metrostate.ics372.motordealership.dealer.Dealer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.json.simple.JSONObject;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.TimeZone;
 
 
 @AllArgsConstructor
@@ -104,6 +106,17 @@ public class Pickup implements Vehicle {
             + " price:" + price
             + " dealer:" + dealer
             + " acquisitionDate:" + acquisitionDate + "]";
+    }
+
+    public JSONObject toJSON () {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("dealer_id", dealer.getId());
+        jsonObject.put("vehicle_manufacturer", manufacturer);
+        jsonObject.put("vehicle_type", getClass().getSimpleName());
+        jsonObject.put("vehicle_model", model);
+        jsonObject.put("vehicle_price", price);
+        jsonObject.put("acquisition_date", acquisitionDate.atZone(TimeZone.getDefault().toZoneId()).toInstant().toEpochMilli());
+        return jsonObject;
     }
 
     public static Builder builder () {
