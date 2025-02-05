@@ -21,7 +21,7 @@ public class Dealer {
 
     public boolean vehicleAcquisitionEnabled () { return vehicleAcquisitionEnabled; }
 
-    public void setVehicleAcquisitionEnabled (boolean isbuyingVehicles) { this.vehicleAcquisitionEnabled = vehicleAcquisitionEnabled; }
+    public void setVehicleAcquisitionEnabled () { this.vehicleAcquisitionEnabled = vehicleAcquisitionEnabled; }
 
     public Set<Vehicle> getVehicles () {
         return VehicleCatalog.getInstance().getVehicles().filterByDealer(this);
