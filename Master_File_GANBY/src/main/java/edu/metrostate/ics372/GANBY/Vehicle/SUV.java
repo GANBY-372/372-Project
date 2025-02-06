@@ -12,6 +12,7 @@ import java.time.ZoneOffset;
 import java.util.Objects;
 import java.util.TimeZone;
 
+
 @AllArgsConstructor
 public class SUV implements Vehicle {
     private final String id;
@@ -29,6 +30,7 @@ public class SUV implements Vehicle {
         this.price = builder.price;
         this.dealer = builder.dealer;
     }
+
 
     @Override
     public String getId() {
