@@ -75,6 +75,12 @@ public class DriverClass {
         for (Integer key : DealerCatalog.getInstance().getDealerCollection().get(123).getVehicles().keySet()) {
             System.out.println(DealerCatalog.getInstance().getDealerCollection().get(123).getVehicles().get(key));
         }
+
+        //Testing that all dealers can be printed out
+        System.out.println("Printing all Dealers: ");
+        for (Integer key : DealerCatalog.getInstance().getDealerCollection().keySet()) {
+            System.out.println(DealerCatalog.getInstance().getDealerCollection().get(key));
+        }
     }
 
 }

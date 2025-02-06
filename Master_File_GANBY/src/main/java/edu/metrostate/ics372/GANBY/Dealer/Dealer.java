@@ -69,6 +69,6 @@ public class Dealer {
 
     @Override
     public String toString () {
-        return "Id: " + id + "\nVehicle Acquisition Status: " + vehicleAcquisitionEnabled;
+        return "Id: " + id + "\nVehicle Acquisition Status: " + vehicleAcquisitionEnabled + "\n";
     }
 }
