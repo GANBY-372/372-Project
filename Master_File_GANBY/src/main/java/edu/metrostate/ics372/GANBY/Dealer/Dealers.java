@@ -2,7 +2,6 @@ package edu.metrostate.ics372.GANBY.Dealer;
 
 import edu.metrostate.ics372.GANBY.Catalogs.*;
 import edu.metrostate.ics372.GANBY.Vehicle.*;
-import edu.metrostate.ics372.GANBY.JSON.*;
 
 import java.util.HashSet;
 import java.util.Iterator;

@@ -1,34 +1,55 @@
 package edu.metrostate.ics372.GANBY.Dealer;
 
-import edu.metrostate.ics372.GANBY.Catalogs.*;
-import edu.metrostate.ics372.GANBY.Vehicle.*;
-import edu.metrostate.ics372.GANBY.JSON.*;
+import edu.metrostate.ics372.GANBY.Vehicle.Vehicle;
 
+import java.util.HashMap;
 import java.util.Objects;
-import java.util.Set;
 
 public class Dealer {
 
     private final int id;
     private boolean vehicleAcquisitionEnabled;
+    private  HashMap<Integer, Vehicle> vehicleCollection;
 
     public Dealer(int id) {
         this.id = id;
-        this.vehicleAcquisitionEnabled = false;
+        this.vehicleAcquisitionEnabled = true;
+        vehicleCollection = new HashMap<>();
     }
 
     public int getId() { return id; }
 
-    public boolean vehicleAcquisitionEnabled () { return vehicleAcquisitionEnabled; }
+    public boolean getVehicleAcquisitionEnabled() { return vehicleAcquisitionEnabled; }
 
-    public void setVehicleAcquisitionEnabled () { this.vehicleAcquisitionEnabled = vehicleAcquisitionEnabled; }
-
-    public Set<Vehicle> getVehicles () {
-        return VehicleCatalog.getInstance().getVehicles().filterByDealer(this);
+    public void enableVehicleAcquisition() {
+        this.vehicleAcquisitionEnabled = true;
     }
 
-    public Vehicle findVehicleById (String vehicleId) {
-        return VehicleCatalog.getInstance().getVehicles().findDealerVehicleById(this, vehicleId);
+    public void disableVehicleAcquisition() {
+        this.vehicleAcquisitionEnabled = false;
+    }
+
+    //Get all vehicles of a given dealer
+    public HashMap<Integer,Vehicle> getVehicles () {
+        return vehicleCollection;
+    }
+
+    //Add the vehicle to vehicle collection
+    public boolean addVehicle (Vehicle vehicle) {
+        //Adds vehicle to collection if it doesn't already exist in it
+        if(vehicleCollection.containsKey(vehicle.getVehicleId())) {
+            System.out.println("Vehicle already exists");
+            return false;
+        } else{
+            vehicleCollection.put(vehicle.getVehicleId(), vehicle);
+            return true;
+        }
+
+    }
+
+    public Vehicle findVehicleById(int vehicleId) {
+        //Find vehicle by looping through dealer collection of dealers and checking for vehicleId
+        return vehicleCollection.get(vehicleId);
     }
 
     @Override
@@ -48,7 +69,6 @@ public class Dealer {
 
     @Override
     public String toString () {
-        String buyinEnabledString = vehicleAcquisitionEnabled ? " is buying vehicles." : " is not buying vehicles.";
-        return getClass().getSimpleName() + " id:" + id + buyinEnabledString;
+        return "Id: " + id + "\nVehicle Acquisition Status: " + vehicleAcquisitionEnabled;
     }
 }

@@ -1,16 +1,15 @@
+/*
+
 package edu.metrostate.ics372.GANBY.Vehicle;
 
 import edu.metrostate.ics372.GANBY.Dealer.*;
-import edu.metrostate.ics372.GANBY.JSON.*;
-import edu.metrostate.ics372.GANBY.Catalogs.*;
+import edu.metrostate.ics372.GANBY.Vehicle;
 import lombok.AllArgsConstructor;
 import org.json.simple.JSONObject;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Objects;
-import java.util.TimeZone;
 
 
 @AllArgsConstructor
@@ -174,3 +173,6 @@ public class SUV implements Vehicle {
 
     }
 }
+
+
+ */

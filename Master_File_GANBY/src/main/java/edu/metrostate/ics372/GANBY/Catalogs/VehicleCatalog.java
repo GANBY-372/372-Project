@@ -1,15 +1,17 @@
 package edu.metrostate.ics372.GANBY.Catalogs;
-
+/*
 import edu.metrostate.ics372.GANBY.Dealer.*;
 import edu.metrostate.ics372.GANBY.Vehicle.*;
 import edu.metrostate.ics372.GANBY.JSON.*;
+import org.json.simple.JSONObject;
 
+/*
 import java.util.HashSet;
 import java.util.Set;
 public class VehicleCatalog {
 
     private static VehicleCatalog instance;
-    private final Vehicles vehicles;
+    private final HashSet<Vehicle> vehicles;    //Making a singleton hashset of vehicles
 
     private VehicleCatalog () { this.vehicles = new Vehicles(); }
 
@@ -21,6 +23,16 @@ public class VehicleCatalog {
     }
 
     public Vehicles getVehicles() { return vehicles; }
+
+
+        public void addVehicle (Vehicle vehicle) throws IllegalAccessException {
+
+       if (vehicle== null)
+           throw new IllegalAccessException("Cannot add null vehicleEntity to collection");
+       System.out.println("adding " + vehicle.toString() + " to the catalog");
+        this.vehicles.add(vehicle);
+        System.out.println(this.vehicles.size());
+//    }
 //    private List<Vehicle> vehicles;
 
 //    private VehicleCatalog() {
@@ -42,13 +54,7 @@ public class VehicleCatalog {
 //        return vehicles;
 //    }
 //
-//    public void addVehicle (Vehicle vehicle) throws IllegalAccessException {
-//        if (vehicle== null)
-//            throw new IllegalAccessException("Cannot add null vehicleEntity to collection");
-//        System.out.println("adding " + vehicle.toString() + " to the catalog");
-//        this.vehicles.add(vehicle);
-//        System.out.println(this.vehicles.size());
-//    }
+
 //
 //    public void removeVehicle (String id) {
 //        Vehicle vehicle = findById(id);
@@ -83,3 +89,4 @@ public class VehicleCatalog {
 //        return null;
 //    }
 }
+*/
