@@ -30,7 +30,7 @@ public class Dealer {
 
     public int getId() { return id; }
 
-    public boolean vehicleAcquisitionEnabled () { return isVehicleAcquisitionEnabled; }
+    public boolean isVehicleAcquisitionEnabled () { return isVehicleAcquisitionEnabled; }
 
     public void setVehicleAcquisitionEnabled (boolean isbuyingVehicles) { this.isVehicleAcquisitionEnabled = isVehicleAcquisitionEnabled; }
 
