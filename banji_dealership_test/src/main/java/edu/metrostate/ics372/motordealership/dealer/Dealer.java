@@ -1,5 +1,16 @@
-package edu.metrostate.ics372.motordealership.dealer;
+/*
+    * Dealer.java
+    * branched from Banji Dealership Test
+    *
+    * This class represents a dealer in the motor dealership system.
+    * ID is a unique identifier for the dealer and immutable.
+    * isVehicleAcquisitionEnabled is a boolean flag that indicates state.
+    *
+    * Working on commenting and some edits to the code.
+    *
+*/
 
+package edu.metrostate.ics372.motordealership.dealer;
 
 import edu.metrostate.ics372.motordealership.vehicle.Vehicle;
 import edu.metrostate.ics372.motordealership.vehicle.VehicleCatalog;
@@ -10,18 +21,18 @@ import java.util.Set;
 public class Dealer {
 
     private final int id;
-    private boolean vehicleAcquisitionEnabled;
+    private boolean isVehicleAcquisitionEnabled;
 
     public Dealer(int id) {
         this.id = id;
-        this.vehicleAcquisitionEnabled = false;
+        this.isVehicleAcquisitionEnabled = false;
     }
 
     public int getId() { return id; }
 
-    public boolean vehicleAcquisitionEnabled () { return vehicleAcquisitionEnabled; }
+    public boolean vehicleAcquisitionEnabled () { return isVehicleAcquisitionEnabled; }
 
-    public void setVehicleAcquisitionEnabled (boolean isbuyingVehicles) { this.vehicleAcquisitionEnabled = vehicleAcquisitionEnabled; }
+    public void setVehicleAcquisitionEnabled (boolean isbuyingVehicles) { this.isVehicleAcquisitionEnabled = isVehicleAcquisitionEnabled; }
 
     public Set<Vehicle> getVehicles () {
         return VehicleCatalog.getInstance().getVehicles().filterByDealer(this);
@@ -48,7 +59,7 @@ public class Dealer {
 
     @Override
     public String toString () {
-        String buyinEnabledString = vehicleAcquisitionEnabled ? " is buying vehicles." : " is not buying vehicles.";
+        String buyinEnabledString = isVehicleAcquisitionEnabled ? " is buying vehicles." : " is not buying vehicles.";
         return getClass().getSimpleName() + " id:" + id + buyinEnabledString;
     }
 }
