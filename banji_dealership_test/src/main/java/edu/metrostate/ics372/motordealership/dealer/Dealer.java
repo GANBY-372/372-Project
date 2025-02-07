@@ -23,25 +23,41 @@ public class Dealer {
     private final int id;
     private boolean isVehicleAcquisitionEnabled;
 
+    // Constructor
     public Dealer(int id) {
         this.id = id;
         this.isVehicleAcquisitionEnabled = false;
     }
 
+    // Class Methods
+
+    /**
+     * Return the dealer's ID number
+     */
     public int getId() { return id; }
 
+    /**
+     * Check if acquiring vehicles is enabled
+     */
     public boolean isVehicleAcquisitionEnabled () { return isVehicleAcquisitionEnabled; }
 
-    public void setVehicleAcquisitionEnabled (boolean isbuyingVehicles) { this.isVehicleAcquisitionEnabled = isVehicleAcquisitionEnabled; }
-
+    /**
+     * Return set of vehicles at this dealer
+     */
     public Set<Vehicle> getVehicles () {
         return VehicleCatalog.getInstance().getVehicles().filterByDealer(this);
     }
 
+    /**
+     * find a vehicle by ID
+     */
     public Vehicle findVehicleById (String vehicleId) {
         return VehicleCatalog.getInstance().getVehicles().findDealerVehicleById(this, vehicleId);
     }
 
+    /**
+     * Overriding equals method
+     */
     @Override
     public boolean equals (Object object) {
         if (object == this) return true;
@@ -52,11 +68,17 @@ public class Dealer {
         return false;
     }
 
+    /**
+     * Overriding hashCode method
+     */
     @Override
     public int hashCode () {
         return Objects.hashCode(id);
     }
 
+    /**
+     * Overriding toString method.
+     */
     @Override
     public String toString () {
         String buyinEnabledString = isVehicleAcquisitionEnabled ? " is buying vehicles." : " is not buying vehicles.";

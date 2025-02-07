@@ -31,5 +31,9 @@ public class Main {
         System.out.println(jsonFileImporter.getDealers().size() + " processed dealers from JSON");
 
         jsonFileExporter.exportToFile();
+
+        System.out.println("Program Complete");
     }
 }
+
+
