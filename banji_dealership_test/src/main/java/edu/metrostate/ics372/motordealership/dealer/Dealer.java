@@ -20,6 +20,7 @@ import java.util.Set;
 
 public class Dealer {
 
+    // Instance Variables
     private final int id;
     private boolean isVehicleAcquisitionEnabled;
 
@@ -30,7 +31,6 @@ public class Dealer {
     }
 
     // Class Methods
-
     /**
      * Return the dealer's ID number
      */

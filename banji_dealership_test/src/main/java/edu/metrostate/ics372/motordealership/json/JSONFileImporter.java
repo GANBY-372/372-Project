@@ -1,3 +1,14 @@
+/**
+ * JSONFileImporter.java
+ * Version: 1.0
+ * Project: Motor Dealership
+ * This class reads a JSON file and imports the data into the Dealership and Vehicle catalogs.
+ * It uses the JSON simple library to parse the JSON file.
+ * The JSON file must be in the resources folder of the project.
+ *
+ *
+ */
+
 package edu.metrostate.ics372.motordealership.json;
 
 import edu.metrostate.ics372.motordealership.dealer.Dealer;
@@ -16,6 +27,7 @@ import java.util.*;
 
 public class JSONFileImporter {
 
+    // JSON key name constants
     public static final String DEALER_ID_KEY = "dealership_id";
     public static final String VEHICLE_ID_KEY = "vehicle_id";
     public static final String VEHICLE_MANUFACTURER_KEY = "vehicle_manufacturer";
@@ -24,25 +36,26 @@ public class JSONFileImporter {
     public static final String PRICE_KEY = "price";
     public static final String ACQUISITION_DATE_KEY = "acquisition_date";
 
+    // JSON file reader and parser
     private Reader reader;
     private JSONParser jsonParser;
+
+    // JSON objects
     JSONObject jsonObject;
     JSONArray jsonArray;
 
+    // Dealers and Vehicles
     private Dealers dealers;
     private Vehicles vehicles;
-
     private Dealer dealer;
     private Vehicle vehicle;
 
-
-
+    // Constructor reads the JSON file and initializes the JSON parser
     public JSONFileImporter () throws FileNotFoundException {
-
         this.dealers = new Dealers();
         this.vehicles = new Vehicles();
             try {
-
+                // Load the JSON file from the resources folder
                 InputStream inputStream = getClass().getResourceAsStream("/inventory.json");
 
                 if (inputStream == null) {
@@ -53,6 +66,7 @@ public class JSONFileImporter {
 
                 jsonParser = new JSONParser();
 
+                // Parse the JSON file
                 this.jsonObject = (JSONObject) jsonParser.parse(reader);
                 jsonArray = (JSONArray) jsonObject.get("car_inventory");
             } catch (FileNotFoundException e) {
@@ -62,21 +76,25 @@ public class JSONFileImporter {
             }
         }
 
-    private Dealer getDealer (JSONObject jsonObject) {
+        // Extract the dealer from the JSON object
+        private Dealer getDealer (JSONObject jsonObject) {
         String numericString  = jsonObject.get(DEALER_ID_KEY).toString();
         if (numericString == null || numericString.isBlank())
             throw new IllegalArgumentException("Value for dealer id is not numeric. Cannot create dealer.");
         return new Dealer(Integer.parseInt(numericString));
     }
 
+    // Create a vehicle from the JSON object
     public Vehicle createVehicle (JSONObject jsonObject) throws IllegalAccessException {
         if (jsonObject == null || jsonObject.isEmpty())
             throw new IllegalArgumentException("JSON vehicle object is null or empty");
 
+        // Create a dealer
         this.dealer = getDealer(jsonObject);
         dealers.addDealer(dealer);
         DealerCatalog.getInstance().getDealers().addDealer(dealer);
 
+        // Create a vehicle with JSON data
         String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
         String model = jsonObject.get(VEHICLE_MODEL_KEY).toString();
         String id = jsonObject.get(VEHICLE_ID_KEY).toString();
@@ -87,6 +105,7 @@ public class JSONFileImporter {
             TimeZone.getDefault().toZoneId()
         );
 
+        // Get the vehicle type from the JSON object
         String type = jsonObject.get(VEHICLE_TYPE_KEY).toString();
         if (type == null || type.isBlank())
             throw new IllegalArgumentException("JSON vehicle type is null or empty");
@@ -95,6 +114,7 @@ public class JSONFileImporter {
         if (category == null)
             throw new IllegalArgumentException("JSON vehicle category is null or empty");
 
+        // Create a vehicle, category dependent
         if (category.equals(VehicleCategory.SUV)) {
             this.vehicle = new SUV.Builder().dealer(dealer)
                 .id(id)
@@ -134,6 +154,7 @@ public class JSONFileImporter {
         return vehicle;
     }
 
+    // Getters
     public Dealers getDealers () {
         return dealers;
     }
@@ -142,10 +163,11 @@ public class JSONFileImporter {
         return vehicles;
     }
 
+    // Process the JSON file
     public void processJSON () throws IllegalAccessException {
-        for (Object object : jsonArray) {
-            Vehicle vehicle = createVehicle((JSONObject) object);
-            System.out.println(vehicle.toString());
+        for (Object object : jsonArray) { // Process each JSON object
+            Vehicle vehicle = createVehicle((JSONObject) object); // Create a vehicle
+            System.out.println(vehicle.toString()); // Print the vehicle
         }
     }
 
