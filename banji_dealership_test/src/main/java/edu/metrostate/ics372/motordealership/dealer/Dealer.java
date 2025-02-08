@@ -30,55 +30,40 @@ public class Dealer {
         this.isVehicleAcquisitionEnabled = false;
     }
 
-    // Class Methods
-    /**
-     * Return the dealer's ID number
-     */
+    // Return the dealer ID number
     public int getId() { return id; }
 
-    /**
-     * Check if acquiring vehicles is enabled
-     */
+    // Return the state of vehicle acquisition
     public boolean isVehicleAcquisitionEnabled () { return isVehicleAcquisitionEnabled; }
 
-    /**
-     * Return set of vehicles at this dealer
-     */
+    // Get the set of vehicle objects
     public Set<Vehicle> getVehicles () {
         return VehicleCatalog.getInstance().getVehicles().filterByDealer(this);
     }
 
-    /**
-     * find a vehicle by ID
-     */
+    // Find a vehicle by ID
     public Vehicle findVehicleById (String vehicleId) {
         return VehicleCatalog.getInstance().getVehicles().findDealerVehicleById(this, vehicleId);
     }
 
-    /**
-     * Overriding equals method
-     */
+    // Equals method to compare Dealer objects
     @Override
     public boolean equals (Object object) {
-        if (object == this) return true;
-        if (object == null) return false;
-        if (object instanceof Dealer dealer) {
+        if (object == this) return true;        // if object is the same as this object, return true
+        if (object == null) return false;       // if object is null, return false
+        if (object instanceof Dealer dealer) {  // if object is an instance of Dealer
             return id == dealer.getId();
         }
         return false;
     }
 
-    /**
-     * Overriding hashCode method
-     */
+    // Hashcode method to generate a hashcode for the Dealer object
     @Override
     public int hashCode () {
         return Objects.hashCode(id);
     }
 
-    /**
-     * Overriding toString method.
-     */
+    // To string method to return a string representation of the Dealer object
     @Override
     public String toString () {
         String buyinEnabledString = isVehicleAcquisitionEnabled ? " is buying vehicles." : " is not buying vehicles.";

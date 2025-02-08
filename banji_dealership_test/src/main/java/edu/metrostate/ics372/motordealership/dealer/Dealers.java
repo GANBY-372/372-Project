@@ -1,3 +1,9 @@
+/**
+ * Dealers.java
+ * This class represents a collection of dealerships. It is a set of dealerships.
+ * Utilized in the DealerCatalog singleton class.
+ */
+
 package edu.metrostate.ics372.motordealership.dealer;
 
 import java.util.HashSet;
@@ -6,6 +12,7 @@ import java.util.Set;
 
 public class Dealers {
 
+    // dealers is a set of dealers
     private final Set<Dealer> dealers;
 
     public Dealers () {
@@ -16,12 +23,15 @@ public class Dealers {
         return dealers.size();
     }
 
+    // Getter for the set
     public Set<Dealer> getDealers () {
         return dealers;
     }
 
+    // Iterator for returning set of dealers
     public Iterator<Dealer> iterator() { return dealers.iterator();}
 
+    // Add dealer to collection
     public void addDealer (Dealer dealer) throws IllegalAccessException {
         if (dealer == null)
             throw new IllegalArgumentException("Cannot add null dealer to collection");
@@ -32,6 +42,7 @@ public class Dealers {
         System.out.println("added " + dealer.toString() + " collection size: " + dealers.size());
     }
 
+    // Remove dealer by ID number
     public void deleteDealer (int dealerId) {
         Dealer dealer = findDealerById(dealerId);
         if (dealer == null)
@@ -40,6 +51,7 @@ public class Dealers {
             dealers.remove(dealer);
     }
 
+    // Find dealer by ID number
     public Dealer findDealerById (int id) {
         for (Dealer dealer : dealers) {
             if (dealer.getId() == id) return dealer;
@@ -47,6 +59,7 @@ public class Dealers {
         return null;
     }
 
+    // toString method
     @Override
     public String toString () {
         StringBuilder sb = new StringBuilder().append("Dealers:\n");

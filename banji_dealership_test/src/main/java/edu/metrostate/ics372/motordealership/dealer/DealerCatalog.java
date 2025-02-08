@@ -1,14 +1,23 @@
+/**
+ * File: DealerCatalog.java
+ *
+ * DealerCatalog is a singleton class that maintains a collection of Dealer objects.
+ */
+
 package edu.metrostate.ics372.motordealership.dealer;
 
 public class DealerCatalog {
 
+    // private instance
     private static DealerCatalog instance;
-    private final Dealers dealers; //Set<Dealer> dealers;
+    private final Dealers dealers; // Set<Dealer> dealers; as defined in Dealers class
 
+    // private constructor
     private DealerCatalog() {
-        this.dealers = new Dealers(); //dealers = new HashSet<>();
+        this.dealers = new Dealers(); // dealers = new HashSet<>();
     }
 
+    // public static method to access the singleton instance
     public static DealerCatalog getInstance() {
         if (instance == null) {
             instance = new DealerCatalog();
@@ -16,6 +25,7 @@ public class DealerCatalog {
         return instance;
     }
 
+    // public method get Dealers
     public Dealers getDealers() {
         return dealers;
     }
