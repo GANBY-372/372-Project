@@ -19,6 +19,7 @@ public class JSONFileExporter {
     public void exportToFile() {
         JSONArray jsonArray = VehicleCatalog.getInstance().getVehicles().toJSONArray();
 
+
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(jsonArray.toJSONString()); // Correct method to write JSON data
             fileWriter.flush(); // Ensure data is fully written to the file
