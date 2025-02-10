@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.awt.*;
 import java.io.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -38,30 +39,42 @@ public class JSONFileImporter {
 
 
 
-    public JSONFileImporter () throws FileNotFoundException {
-
+    public JSONFileImporter() throws FileNotFoundException {
         this.dealers = new Dealers();
         this.vehicles = new Vehicles();
-            try {
 
-                InputStream inputStream = getClass().getResourceAsStream("/inventory.json");
+        //Asked CHATGPT 4.0 to write code to allow user to choose file to import.
+        try {
+            // File chooser dialog
+            Frame frame = new Frame();
+            FileDialog fileDialog = new FileDialog(frame, "Select a File", FileDialog.LOAD);
+            fileDialog.setVisible(true);
 
-                if (inputStream == null) {
-                    throw new IllegalArgumentException("File 'inventory.json' not found in the project's package path");
-                }
+            String directory = fileDialog.getDirectory();
+            String filename = fileDialog.getFile();
 
-                this.reader = new InputStreamReader(inputStream);
+            if (filename != null) {
+                File selectedFile = new File(directory, filename);
+
+                // ✅ Use FileReader instead of InputStream
+                this.reader = new FileReader(selectedFile);
 
                 jsonParser = new JSONParser();
-
                 this.jsonObject = (JSONObject) jsonParser.parse(reader);
                 jsonArray = (JSONArray) jsonObject.get("car_inventory");
-            } catch (FileNotFoundException e) {
-                throw new FileNotFoundException(e.getMessage());
-            } catch (ParseException | IOException e) {
-                throw new RuntimeException(e);
+
+                System.out.println("Successfully parsed JSON file: " + selectedFile.getAbsolutePath());
+            } else {
+                System.out.println("File selection cancelled.");
             }
+
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException(e.getMessage());
+        } catch (ParseException | IOException e) {
+            throw new RuntimeException(e);
         }
+    }
+
 
     private Dealer getDealer (JSONObject jsonObject) {
         String numericString  = jsonObject.get(DEALER_ID_KEY).toString();
