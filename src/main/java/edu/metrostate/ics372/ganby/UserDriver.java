@@ -38,7 +38,7 @@ public class UserDriver {
     // Method to print the main menu
     public static void printMainMenu() {
         System.out.println("\nMain Menu");
-        System.out.println("----------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------");
         System.out.println("Enter the number of the option you would like to select:");
         System.out.println("\t1. Read JSON vehicle file. (This will bring up file explorer)");
         System.out.println("\t2. Import JSON vehicle file. (This will bring up file explorer)");
@@ -48,7 +48,7 @@ public class UserDriver {
         System.out.println("\t6. Export all vehicles from a dealer to a JSON file");
         System.out.println("\t7. View dealer inventory");
         System.out.println("\t8. Exit");
-        System.out.println("----------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------");
         System.out.println("Enter option number: ");
     }
 

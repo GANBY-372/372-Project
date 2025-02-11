@@ -1,3 +1,10 @@
+/**
+ * JSONFileImporter.java
+ * @author Banji, Yahya, Gil
+ * This class is for importing JSON files.
+ * It opens a file explorer to select a file.
+ *
+ */
 package edu.metrostate.ics372.ganby.json;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
