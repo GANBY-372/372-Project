@@ -1,6 +1,6 @@
 /**
  * UserDriver.java
- * @author Gil
+ * @author G
  * This class runs the user interface for the GANBY Dealership Inventory Manager.
  * It will display a welcome banner, and the main menu.
  * User is able to enter numbers to navigate through the menu.
@@ -9,9 +9,17 @@
 
 package edu.metrostate.ics372.ganby;
 
+import edu.metrostate.ics372.ganby.json.JSONFileImporter;
+
+import java.io.FileNotFoundException;
+
 public class UserDriver {
-    public static void main(String[] args) {
+
+    boolean fileSelected = false;
+
+    public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
         printWelcomeBanner();
+        initializationFileRequest();
         printMainMenu();
         acceptMainMenuOption();
         printExitMessage();
@@ -35,12 +43,24 @@ public class UserDriver {
         System.out.println("******************************************************************");
     }
 
+    // Request user to load a JSON file
+    public static void initializationFileRequest() {
+        System.out.println("\nPlease load a JSON file to begin. Press enter to continue to file explorer.");
+        System.console().readLine();
+        try {
+            JSONFileImporter jsonFileImporter = new JSONFileImporter();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+
+    }
+
     // Method to print the main menu
     public static void printMainMenu() {
         System.out.println("\nMain Menu");
         System.out.println("-------------------------------------------------------------------");
         System.out.println("Enter the number of the option you would like to select:");
-        System.out.println("\t1. Read JSON vehicle file. (This will bring up file explorer)");
+        System.out.println("\t1. Read the JSON vehicle file. (This will bring up file explorer)");
         System.out.println("\t2. Import JSON vehicle file. (This will bring up file explorer)");
         System.out.println("\t3. Add incoming vehicle");
         System.out.println("\t4. Enable Vehicle Acquisition");
@@ -74,8 +94,8 @@ public class UserDriver {
         }
         switch (option) {
             case 1:
-                System.out.println("Read JSON vehicle file.");
-                // readJSONVehicleFile();
+                System.out.println("Read the JSON vehicle file.");
+                readJSONVehicleFile();
                 break;
             case 2:
                 System.out.println("Import JSON vehicle file.");
@@ -105,5 +125,11 @@ public class UserDriver {
                 System.out.println("Exit.");
                 break;
         }
+    }
+
+    // Method to read JSON vehicle file
+    public static void readJSONVehicleFile() {
+        System.out.println("Reading JSON vehicle file...");
+
     }
 }

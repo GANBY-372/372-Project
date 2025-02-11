@@ -1,17 +1,26 @@
+/**
+ * Main.java
+ * @author GANBY
+ */
 package edu.metrostate.ics372.ganby;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main (String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
+import edu.metrostate.ics372.ganby.json.JSONFileImporter;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+import java.io.FileNotFoundException;
+
+
+public class Main {
+    public static void main (String[] args) throws FileNotFoundException, IllegalAccessException {
+
+        // FILE EXPLORER TO SELECT JSON FILE
+        JSONFileImporter jsonFileImporter = new JSONFileImporter();
+
+        // Process the JSON file.
+        jsonFileImporter.processJSON();
+
+        // print list of the dealer IDs
+        System.out.println(DealerCatalog.getInstance().getDealers().size() + " dealers imported into catalog");
+
     }
 }

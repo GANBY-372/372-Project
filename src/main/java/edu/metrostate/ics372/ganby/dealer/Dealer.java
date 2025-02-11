@@ -23,7 +23,7 @@ public class Dealer {
     // Vehicle acquisition is disabled by default
     public Dealer(int id) {
         this.id = id;
-        this.vehicleAcquisitionEnabled = false;
+        this.vehicleAcquisitionEnabled = true;
     }
 
     // Getter for dealer id

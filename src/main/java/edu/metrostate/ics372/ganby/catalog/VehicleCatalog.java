@@ -1,15 +1,26 @@
+/**
+ * VehicleCatalog.java
+ * @author Banji, Gil
+ * This is a singleton class. Maintains a collection of Vehicle objects.
+ * Used to manage the collection of vehicles in the system during runtime.
+ * Singleton pattern ensures only one instance of the class is created.
+ */
 package edu.metrostate.ics372.ganby.catalog;
-
 
 import edu.metrostate.ics372.ganby.vehicle.Vehicles;
 
 public class VehicleCatalog {
 
+    // Singleton instance
     private static VehicleCatalog instance;
+
+    // Collection of vehicles
     private final Vehicles vehicles;
 
+    // Private constructor for singleton
     private VehicleCatalog () { this.vehicles = new Vehicles(); }
 
+    // Public static method to access instance
     public static VehicleCatalog getInstance() {
         if (instance == null) {
             instance = new VehicleCatalog();
@@ -17,6 +28,7 @@ public class VehicleCatalog {
         return instance;
     }
 
+    // Public method to get vehicles
     public Vehicles getVehicles() { return vehicles; }
 //    private List<Vehicle> vehicles;
 

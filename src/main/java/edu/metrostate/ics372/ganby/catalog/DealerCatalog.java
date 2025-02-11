@@ -5,6 +5,7 @@
  * Used to manage the collection of dealers in the system during runtime.
  * Singleton pattern ensures only one instance of the class is created.
  */
+
 package edu.metrostate.ics372.ganby.catalog;
 
 import edu.metrostate.ics372.ganby.dealer.Dealers;

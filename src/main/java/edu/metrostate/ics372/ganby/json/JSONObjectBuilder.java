@@ -1,3 +1,8 @@
+/**
+ * JSONObjectBuilder.java
+ * @autor Banji, Gil
+ * This class is for building JSON objects.
+ */
 package edu.metrostate.ics372.ganby.json;
 
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
@@ -11,12 +16,16 @@ public class JSONObjectBuilder {
 
     public JSONObjectBuilder() {}
 
+    // Build a JSON object from a vehicle object
     public static JSONObject build (Vehicle vehicle) {
         if (vehicle == null) {
             throw new IllegalArgumentException("Vehicle cannot be null");
         }
 
+        // Create a new JSON object
         JSONObject jsonObject = new JSONObject();
+
+        // Add vehicle data to the JSON object
         jsonObject.put("dealer_id", vehicle.getId());
         jsonObject.put("vehicle_manufacturer", vehicle.getManufacturer());
         jsonObject.put("vehicle_type", vehicle.getClass().getSimpleName());
@@ -26,13 +35,18 @@ public class JSONObjectBuilder {
             vehicle.getAcquisitionDate()
                 .atZone(TimeZone.getDefault().toZoneId()).toInstant().toEpochMilli()
         );
+
+        // Validate the JSON object
         validateJSON(jsonObject);
         return jsonObject;
     }
 
+    // Validate the JSON object
+    // Throws a runtime exception if the JSON object is invalid
     private static void validateJSON(JSONObject jsonObject) {
         JSONParser parser = new JSONParser();
         try {
+            // Parse the JSON object to validate it
             parser.parse(jsonObject.toJSONString());
         } catch (ParseException e) {
             throw new RuntimeException("Invalid JSON structure: " + e.getMessage(), e);
