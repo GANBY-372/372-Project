@@ -34,7 +34,7 @@ public class VehicleCatalog {
 
         System.out.println("Vehicle Catalog:");
         System.out.println("------------------------------------------------------------------\n");
-        for (Vehicle vehicle : this.getVehicles().getVehicles()) {
+        for (Vehicle vehicle : this.getVehicles().getVehicles()) { // It works, don't worry bout it...
             System.out.printf("| %-10s | %-15s | %-12s | $%-10.2f | %-8d | %-20s |%n",
                     vehicle.getClass().getSimpleName(),  // Type
                     vehicle.getModel(),                  // Model
@@ -49,65 +49,5 @@ public class VehicleCatalog {
 
     // Public method to get vehicles
     public Vehicles getVehicles() { return vehicles; }
-//    private List<Vehicle> vehicles;
 
-//    private VehicleCatalog() {
-//        this.vehicles = new ArrayList<>();
-//    }
-//
-//    public static VehicleCatalog getInstance () {
-//        if (instance == null) {
-//            return new VehicleCatalog();
-//        }
-//        return instance;
-//    }
-//
-//    public int size() {
-//        return vehicles.size();
-//    }
-//
-//    public List<Vehicle> getVehicles () {
-//        return vehicles;
-//    }
-//
-//    public void addVehicle (Vehicle vehicle) throws IllegalAccessException {
-//        if (vehicle== null)
-//            throw new IllegalAccessException("Cannot add null vehicleEntity to collection");
-//        System.out.println("adding " + vehicle.toString() + " to the catalog");
-//        this.vehicles.add(vehicle);
-//        System.out.println(this.vehicles.size());
-//    }
-//
-//    public void removeVehicle (String id) {
-//        Vehicle vehicle = findById(id);
-//        if (vehicle != null) {
-//            vehicles.remove(vehicle);
-//        }
-//    }
-//
-//    public Vehicle findById (String id) {
-//        for (Vehicle vehicle : vehicles) {
-//            if (id.equalsIgnoreCase(vehicle.getId())) return vehicle;
-//        }
-//        return null;
-//    }
-//
-//    public Set<Vehicle> filterByDealer (Dealer dealer) {
-//        Set<Vehicle> matches = new HashSet<>();
-//        for (Vehicle vehicle : vehicles) {
-//            if (vehicle.getDealer().equals(dealer)) {
-//                matches.add(vehicle);
-//            }
-//        }
-//        return matches;
-//    }
-//
-//    public Vehicle findDealerVehicleById(Dealer dealer, String vehicleId) {
-//        if (dealer == null)
-//            throw new IllegalArgumentException("The dealer cannot be null");
-//        for (Vehicle vehicle : filterByDealer(dealer)) {
-//            if (vehicle.getId().equalsIgnoreCase(vehicleId)) return vehicle;
-//        }
-//        return null;
-//    }
 }

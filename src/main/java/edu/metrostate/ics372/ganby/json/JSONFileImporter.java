@@ -107,13 +107,12 @@ public class JSONFileImporter {
 
     //Used ChatGPT 4.0 to handle type exception.
     public Vehicle createVehicle(JSONObject jsonObject) throws IllegalAccessException {
-        if (jsonObject == null || jsonObject.isEmpty())
+        if (jsonObject == null || jsonObject.isEmpty()){
             throw new IllegalArgumentException("JSON vehicle object is null or empty");
-
+        }
         // Create a dealer
         this.dealer = getDealer(jsonObject);
         dealers.addDealer(dealer);
-
         DealerCatalog.getInstance().getDealers().addDealer(dealer);
 
         // Create the vehicle with JSON data
@@ -129,6 +128,7 @@ public class JSONFileImporter {
 
         // Get vehicle type from JSON object
         String type = (String) jsonObject.get(VEHICLE_TYPE_KEY);
+
         if (type == null || type.isBlank()) {
             System.out.println("Skipping vehicle due to missing or empty vehicle type.");
             return null; // Skip this vehicle if the type is missing
@@ -178,7 +178,7 @@ public class JSONFileImporter {
             return null; // Skip this vehicle if the category is unknown
         }
 
-        vehicles.addVehicle(vehicle);
+        //vehicles.addVehicle(vehicle);     //Why are we adding to vehicles class and then to VehicleCatalog??
 
         // Add vehicle to catalog
         VehicleCatalog.getInstance().getVehicles().addVehicle(vehicle);

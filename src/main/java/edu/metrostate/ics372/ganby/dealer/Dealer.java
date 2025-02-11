@@ -21,36 +21,36 @@ public class Dealer {
     // Instance variables
     @Getter
     private final int id;
-    private boolean vehicleAcquisitionEnabled;
+    private boolean vehicleAcquisitionStatus;
 
     // Constructor, initializes dealer with id
     // Vehicle acquisition is disabled by default
     public Dealer(int id) {
         this.id = id;
-        this.vehicleAcquisitionEnabled = true;
+        this.vehicleAcquisitionStatus = true;
     }
 
     // Getter for vehicle acquisition state
-    public boolean vehicleAcquisitionEnabled () {
-        return vehicleAcquisitionEnabled;
+    public boolean getVehicleAcquisitionStatus() {
+        return vehicleAcquisitionStatus;
     }
 
     // set vehicle acquisition state to true
     public void enableVehicleAcquisition(int id) {
-        if (vehicleAcquisitionEnabled) {
+        if (vehicleAcquisitionStatus) {
             System.out.println("Vehicle acquisition already enabled for dealer id #" + id + ".");
         } else{
-            this.vehicleAcquisitionEnabled = true;
+            this.vehicleAcquisitionStatus = true;
             System.out.println("Successfully enabled vehicle acquisition for dealer id #" + id + ".");
         }
     }
 
     // set vehicle acquisition state to false
     public void disableVehicleAcquisition() {
-        if (!vehicleAcquisitionEnabled) {
+        if (!vehicleAcquisitionStatus) {
             System.out.println("Vehicle acquisition already disabled for dealer id #" + id + ".");
         } else{
-            this.vehicleAcquisitionEnabled = false;
+            this.vehicleAcquisitionStatus = false;
             System.out.println("Successfully disabled vehicle acquisition for dealer id #" + id + ".");
         }
     }
@@ -87,7 +87,7 @@ public class Dealer {
     //Asked CHATGPT 4.0 to format the toString to make a clean output
     @Override
     public String toString() {
-        String acquisitionStatus = vehicleAcquisitionEnabled ? "Yes" : "No";
+        String acquisitionStatus = vehicleAcquisitionStatus ? "Yes" : "No";
         return String.format("| %-10d | %-20s |", id, acquisitionStatus);
     }
 }

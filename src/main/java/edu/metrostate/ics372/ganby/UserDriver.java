@@ -167,48 +167,4 @@ public class UserDriver {
     }
 
 }
-    /*
-    // Method to accept Main Menu option input from user
-    // This method will be used to navigate through the main menu
-    // It will accept user input and call the respective method
-    // It will only accept a number that has an option
-    // any other input will be rejected, and the user will be prompted to reenter a valid number.
-    public static void acceptMainMenuOption() throws IllegalAccessException, FileNotFoundException {
-        int option = 0;
-        boolean validOption = false;
-        while (!validOption) {
-            try {
-                option = Integer.parseInt(System.console().readLine());
-                if (option > 0 && option < 9) {
-                    validOption = true;
-                } else {
-                    System.out.println("Invalid option. Please enter a number between 1 and 8.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid option. Please enter a number between 1 and 8.");
-            }
-        }
-        switch (option) {
-                case 1:
-                    System.out.println("Import JSON vehicle file.");
-                    // importJSONVehicleFile();
-                    JSONFileImporter fileImporter = new JSONFileImporter();
-                    fileImporter.processJSON();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-        }
-    }
-
-    // Method to read JSON vehicle file
-    public static void readJSONVehicleFile() {
-        System.out.println("Reading JSON vehicle file...");
-
-
-    }
-}
-
-     */
 
