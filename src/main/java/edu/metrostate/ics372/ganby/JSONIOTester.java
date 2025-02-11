@@ -17,7 +17,7 @@ public class JSONIOTester {
         jsonFileImporter.processJSON();
         System.out.println(jsonFileImporter.getDealers().toString());
 
-        // Instantiate JSONFileExporter and test the export functionality
+        // Instantiate JSONFileExporter and testing exporter
         JSONFileExporter jsonFileExporter = new JSONFileExporter();
         jsonFileExporter.exportToFile();
     }
