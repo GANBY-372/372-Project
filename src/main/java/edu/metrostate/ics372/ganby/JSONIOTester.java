@@ -20,15 +20,15 @@ public class JSONIOTester {
         JSONFileImporter jsonFileImporter = new JSONFileImporter();
 //
         System.out.println("Importing vehicles...");
-//        jsonFileImporter.printDealerKeys();
+        jsonFileImporter.printDealerKeys();
 
         jsonFileImporter.processJSON();
 //        System.out.println(VehicleCatalog.getInstance().getVehicles().size() + " vehicles imported into catalog");
-        System.out.println(DealerCatalog.getInstance().getDealers().size() + " dealers imported into catalog");
+//        System.out.println(DealerCatalog.getInstance().getDealers().size() + " dealers imported into catalog");
 //
 //        System.out.println(jsonFileImporter.getVehicles().size() + " processed vehicles from JSON");
-//        System.out.println(jsonFileImporter.getDealers().toString());
-////        System.out.println(jsonFileImporter.getDealers().size() + " processed dealers from JSON");
+        System.out.println(jsonFileImporter.getDealers().toString());
+//        System.out.println(jsonFileImporter.getDealers().size() + " processed dealers from JSON");
 //
 //        JSONFileExporter jsonFileExporter = new JSONFileExporter();
 //        jsonFileExporter.exportToFile();

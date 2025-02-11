@@ -22,5 +22,6 @@ public class Main {
         // print list of the dealer IDs
         System.out.println(DealerCatalog.getInstance().getDealers().size() + " dealers imported into catalog");
 
+        // print out the JSON file data
     }
 }

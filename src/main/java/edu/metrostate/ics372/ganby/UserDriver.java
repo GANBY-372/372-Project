@@ -5,21 +5,34 @@
  * It will display a welcome banner, and the main menu.
  * User is able to enter numbers to navigate through the menu.
  * Main menu options are listed in order respective of the requirements.
+ *  ---
+ * Need to complete:
+ *     -    method to list the vehicles in the catalog
+ *     -    method to add a vehicle to the catalog? Or this part of the JSON importer?
+ *     -    method to print JSON file as a string?
+ *
  */
 
 package edu.metrostate.ics372.ganby;
 
+import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
+import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.json.JSONFileImporter;
 
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
 
 public class UserDriver {
 
-    boolean fileSelected = false;
-
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
+
         printWelcomeBanner();
-        initializationFileRequest();
+
+        System.out.println("\nPlease load a JSON file to begin. Press enter to continue to file explorer.");
+        // System.console().readLine();
+        JSONFileImporter jsonFileImporter = new JSONFileImporter();
+        jsonFileImporter.processJSON();
+
         printMainMenu();
         acceptMainMenuOption();
         printExitMessage();
@@ -43,31 +56,27 @@ public class UserDriver {
         System.out.println("******************************************************************");
     }
 
-    // Request user to load a JSON file
-    public static void initializationFileRequest() {
-        System.out.println("\nPlease load a JSON file to begin. Press enter to continue to file explorer.");
-        System.console().readLine();
-        try {
-            JSONFileImporter jsonFileImporter = new JSONFileImporter();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + e.getMessage());
-        }
-
-    }
-
     // Method to print the main menu
     public static void printMainMenu() {
-        System.out.println("\nMain Menu");
+        System.out.println("\nCurrent Dealer Catalog as of " + java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ":");
         System.out.println("-------------------------------------------------------------------");
-        System.out.println("Enter the number of the option you would like to select:");
-        System.out.println("\t1. Read the JSON vehicle file. (This will bring up file explorer)");
-        System.out.println("\t2. Import JSON vehicle file. (This will bring up file explorer)");
-        System.out.println("\t3. Add incoming vehicle");
-        System.out.println("\t4. Enable Vehicle Acquisition");
-        System.out.println("\t5. Disable Vehicle Acquisition");
-        System.out.println("\t6. Export all vehicles from a dealer to a JSON file");
-        System.out.println("\t7. View dealer inventory");
-        System.out.println("\t8. Exit");
+
+        // Dealer and Vehicle count
+        System.out.println("Dealers: " + DealerCatalog.getInstance().getDealers().size() + "\t\tVehicles: " + VehicleCatalog.getInstance().getVehicles().size());
+
+        // List of dealers
+        System.out.println("\n" + DealerCatalog.getInstance().getDealers().toString());
+
+        //List of vehicles at each dealer
+        //System.out.println("\n" + VehicleCatalog.getInstance().getVehicles().toString());
+
+        System.out.println("\n-------------------------------------------------------------------");
+
+        // Main Menu options
+        System.out.println("Menu Options:");
+        System.out.println("1. Import JSON vehicle inventory file.");
+        System.out.println("2. Enable or disable vehicle acquisition.");
+        System.out.println("3. Export dealer inventory to JSON file.");
         System.out.println("-------------------------------------------------------------------");
         System.out.println("Enter option number: ");
     }
@@ -93,43 +102,40 @@ public class UserDriver {
             }
         }
         switch (option) {
-            case 1:
-                System.out.println("Read the JSON vehicle file.");
-                readJSONVehicleFile();
-                break;
-            case 2:
-                System.out.println("Import JSON vehicle file.");
-                // importJSONVehicleFile();
-                break;
-            case 3:
-                System.out.println("Add incoming vehicle.");
-                // addIncomingVehicle();
-                break;
-            case 4:
-                System.out.println("Enable Vehicle Acquisition.");
-                // enableVehicleAcquisition();
-                break;
-            case 5:
-                System.out.println("Disable Vehicle Acquisition.");
-                // disableVehicleAcquisition();
-                break;
-            case 6:
-                System.out.println("Export all vehicles from a dealer to a JSON file.");
-                // exportAllVehiclesToJSON();
-                break;
-            case 7:
-                System.out.println("View dealer inventory.");
-                // viewDealerInventory();
-                break;
-            case 8:
-                System.out.println("Exit.");
-                break;
+                case 1:
+                    System.out.println("Import JSON vehicle file.");
+                    // importJSONVehicleFile();
+                    break;
+                case 2:
+                    System.out.println("Add incoming vehicle.");
+                    // addIncomingVehicle();
+                    break;
+                case 3:
+                    System.out.println("Enable Vehicle Acquisition.");
+                    // enableVehicleAcquisition();
+                    break;
+                case 4:
+                    System.out.println("Disable Vehicle Acquisition.");
+                    // disableVehicleAcquisition();
+                    break;
+                case 5:
+                    System.out.println("Export all vehicles from a dealer to a JSON file.");
+                    // exportAllVehiclesToJSON();
+                    break;
+                case 6:
+                    System.out.println("View dealer inventory.");
+                    // viewDealerInventory();
+                    break;
+                case 7:
+                    System.out.println("Exit.");
+                    break;
         }
     }
 
     // Method to read JSON vehicle file
     public static void readJSONVehicleFile() {
         System.out.println("Reading JSON vehicle file...");
+
 
     }
 }

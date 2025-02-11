@@ -92,8 +92,7 @@ public class JSONFileImporter {
 
 
     // Method to create a dealer from a JSON object
-    // ***NOTE*** We may want to rename this method to something like createDealerFromJSONObject
-    // like the method below. [delete this comment after discussion]
+    // ***NOTE*** We may want to rename this method to something like createDealer [delete this comment after discussion]
     private Dealer getDealer (JSONObject jsonObject) {
         String numericString  = jsonObject.get(DEALER_ID_KEY).toString();
         if (numericString == null || numericString.isBlank())
