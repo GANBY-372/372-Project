@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 public class JSONIOTester {
 
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
+
         JSONFileImporter jsonFileImporter = new JSONFileImporter();
 //
 //        System.out.println("Importing vehicles...");
