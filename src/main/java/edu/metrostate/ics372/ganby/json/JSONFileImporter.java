@@ -104,8 +104,9 @@ public class JSONFileImporter {
         return new Dealer(Integer.parseInt(numericString));
     }
 
-    // Create Vehicle from JSON object
-    public Vehicle createVehicle (JSONObject jsonObject) throws IllegalAccessException {
+
+    //Used ChatGPT 4.0 to handle type exception.
+    public Vehicle createVehicle(JSONObject jsonObject) throws IllegalAccessException {
         if (jsonObject == null || jsonObject.isEmpty())
             throw new IllegalArgumentException("JSON vehicle object is null or empty");
 
@@ -122,54 +123,61 @@ public class JSONFileImporter {
         double price = Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
         long epochSeconds = Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
         LocalDateTime acquisitionDate = LocalDateTime.ofInstant(
-            Instant.ofEpochMilli(epochSeconds),
-            TimeZone.getDefault().toZoneId()
+                Instant.ofEpochMilli(epochSeconds),
+                TimeZone.getDefault().toZoneId()
         );
 
         // Get vehicle type from JSON object
-        String type = jsonObject.get(VEHICLE_TYPE_KEY).toString();
-        if (type == null || type.isBlank())
-            throw new IllegalArgumentException("JSON vehicle type is null or empty");
+        String type = (String) jsonObject.get(VEHICLE_TYPE_KEY);
+        if (type == null || type.isBlank()) {
+            System.out.println("Skipping vehicle due to missing or empty vehicle type.");
+            return null; // Skip this vehicle if the type is missing
+        }
 
         VehicleCategory category = VehicleCategory.fromString(type);
-        if (category == null)
-            throw new IllegalArgumentException("JSON vehicle category is null or empty");
+        if (category == null) {
+            System.out.println("Skipping vehicle due to invalid vehicle category: " + type);    //e.g: electric is invalid
+            return null; // Skip this vehicle if the category is invalid
+        }
 
         // Create vehicle, category is an enum
         if (category.equals(VehicleCategory.SUV)) {
             this.vehicle = new SUV.Builder().dealer(dealer)
-                .id(id)
-                .manufacturer(manufacturer)
-                .model(model)
-                .price(price)
-                .acquisitionDate(acquisitionDate)
-                .build();
+                    .id(id)
+                    .manufacturer(manufacturer)
+                    .model(model)
+                    .price(price)
+                    .acquisitionDate(acquisitionDate)
+                    .build();
         } else if (category.equals(VehicleCategory.PICKUP)) {
             this.vehicle = new Sedan.Builder().dealer(dealer)
-                .id(id)
-                .manufacturer(manufacturer)
-                .model(model)
-                .price(price)
-                .acquisitionDate(acquisitionDate)
-                .build();
-    } else if (category.equals(VehicleCategory.SEDAN)) {
+                    .id(id)
+                    .manufacturer(manufacturer)
+                    .model(model)
+                    .price(price)
+                    .acquisitionDate(acquisitionDate)
+                    .build();
+        } else if (category.equals(VehicleCategory.SEDAN)) {
             this.vehicle = new Sedan.Builder().dealer(dealer)
-                .id(id)
-                .manufacturer(manufacturer)
-                .model(model)
-                .price(price)
-                .acquisitionDate(acquisitionDate)
-                .build();
+                    .id(id)
+                    .manufacturer(manufacturer)
+                    .model(model)
+                    .price(price)
+                    .acquisitionDate(acquisitionDate)
+                    .build();
         } else if (category.equals(VehicleCategory.SPORTS_CAR)) {
             this.vehicle = new SportsCar.Builder().dealer(dealer)
-                .id(id)
-                .manufacturer(manufacturer)
-                .model(model)
-                .price(price)
-                .acquisitionDate(acquisitionDate)
-                .build();
+                    .id(id)
+                    .manufacturer(manufacturer)
+                    .model(model)
+                    .price(price)
+                    .acquisitionDate(acquisitionDate)
+                    .build();
+        } else {
+            System.out.println("Unknown category: " + category);
+            return null; // Skip this vehicle if the category is unknown
         }
-        else { throw new IllegalArgumentException("Unknown category: " + category); }
+
         vehicles.addVehicle(vehicle);
 
         // Add vehicle to catalog

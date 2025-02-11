@@ -1,0 +1,49 @@
+{
+   "car_inventory":[
+      {
+         "dealership_id":"12513",
+	  "vehicle_type":"suv",
+	  "vehicle_manufacturer":"Honda",
+         "vehicle_model":"CR-V",
+         "vehicle_id":"67291a",
+	  "price": 27500,
+	  "acquisition_date": 1615354694451
+      },
+      {
+         "dealership_id":"12513",
+	  "vehicle_type":"sedan",
+	  "vehicle_manufacturer":"BMW",
+         "vehicle_model":"3 Series",
+         "vehicle_id":"99234",
+	  "price": 45320,
+	  "acquisition_date": 1615354694451
+      },
+      {
+         "dealership_id":"12513",
+	  "vehicle_type":"pickup",
+	  "vehicle_manufacturer":"Ram",
+         "vehicle_model":"1500",
+         "vehicle_id":"784123",
+	  "price": 61200,
+	  "acquisition_date": 1615354694451
+      },
+      {
+         "dealership_id":"77338",
+	  "vehicle_type":"sports car",
+	  "vehicle_manufacturer":"Chevrolet",
+         "vehicle_model":"Corvette",
+         "vehicle_id":"998272",
+	  "price": 65999,
+	  "acquisition_date": 1615354694451
+      },
+      {
+         "dealership_id":"77338",
+	  "vehicle_type":"electric",
+	  "vehicle_manufacturer":"Lucid",
+         "vehicle_model":"Air",
+         "vehicle_id":"112233",
+	  "price": 82400,
+	  "acquisition_date": 1615354694451
+      }
+   ]
+}
