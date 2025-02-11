@@ -200,18 +200,6 @@ public class JSONFileImporter {
     }
 
 
-//    public List<Dealer> getDealers () {
-//        List<Dealer> dealers = new ArrayList<>();
-//        for (Object object : jsonArray) {
-//            Dealer dealer = getDealer((JSONObject) object);
-//            if (!dealers.contains(dealer)) {
-//                System.out.println("Added dealer " + dealer.toString());
-//                dealers.add(dealer);
-//            } else { System.out.println(dealer.toString() + " already added"); }
-//        }
-//        return dealers;
-//    }
-
     public void printDealerKeys () {
         for (Object object : jsonArray) {
             String dealerId = ((JSONObject) object).get(DEALER_ID_KEY).toString();

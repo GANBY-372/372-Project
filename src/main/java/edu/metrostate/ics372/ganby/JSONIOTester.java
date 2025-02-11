@@ -19,6 +19,6 @@ public class JSONIOTester {
 
         // Instantiate JSONFileExporter and testing exporter
         JSONFileExporter jsonFileExporter = new JSONFileExporter();
-        jsonFileExporter.exportToFile();
+       // jsonFileExporter.exportToFile();
     }
 }

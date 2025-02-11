@@ -16,14 +16,13 @@ import java.util.Set;
 
 public class JSONFileExporter {
 
-    // Method to export dealer inventory to a JSON file
-    public void exportToFile() {
+    public void exportToFile(Dealer dealer) {
         // Open file save dialog to select save location
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Save JSON File");
 
         // Set default extension to .json
-        fileChooser.setSelectedFile(new File("dealer_inventory.json"));
+        fileChooser.setSelectedFile(new File("dealer #" +dealer.getId() + " inventory.json"));
 
         // Show save file dialog and get user selection
         int userSelection = fileChooser.showSaveDialog(null);
@@ -36,37 +35,28 @@ public class JSONFileExporter {
         // Get the selected file path
         File fileToSave = fileChooser.getSelectedFile();
 
-        // Get the list of dealers
-        Dealers dealers = DealerCatalog.getInstance().getDealers();
+        // Create a JSONArray to hold the dealer's information and their vehicles
+        JSONArray dealerArray = new JSONArray(); // Only one dealer, but we still use an array
 
-        // Create a JSONArray to hold all the dealers and their vehicles
-        JSONArray dealerArray = new JSONArray();
+        // Create a JSONObject for the dealer
+        JSONObject dealerJSON = new JSONObject();
+        dealerJSON.put("dealer_id", dealer.getId());
+        dealerJSON.put("vehicle_acquisition_enabled", dealer.getVehicleAcquisitionStatus());
 
-        // Use an Iterator to loop over the dealers
-        Iterator<Dealer> dealerIterator = dealers.iterator();
+        // Get vehicles associated with the dealer
+        Set<Vehicle> vehicles = dealer.getVehicles();
+        JSONArray vehicleArray = new JSONArray(); // Array to store vehicles for this dealer
 
-        while (dealerIterator.hasNext()) {
-            Dealer dealer = dealerIterator.next();
-            // Create a JSONObject for the dealer
-            JSONObject dealerJSON = new JSONObject();
-            dealerJSON.put("dealer_id", dealer.getId());
-            dealerJSON.put("vehicle_acquisition_enabled", dealer.getVehicleAcquisitionStatus());
-
-            // Get vehicles associated with the dealer
-            Set<Vehicle> vehicles = dealer.getVehicles();
-            JSONArray vehicleArray = new JSONArray();
-
-            // Add each vehicle associated with this dealer to the vehicleArray
-            for (Vehicle vehicle : vehicles) {
-                vehicleArray.add(JSONObjectBuilder.build(vehicle));
-            }
-
-            // Add the vehicle array to the dealer JSON object
-            dealerJSON.put("vehicles", vehicleArray);
-
-            // Add the dealer JSON object to the dealer array
-            dealerArray.add(dealerJSON);
+        // Add each vehicle associated with this dealer to the vehicleArray
+        for (Vehicle vehicle : vehicles) {
+            vehicleArray.add(JSONObjectBuilder.build(vehicle)); // Assuming build() converts Vehicle to JSONObject
         }
+
+        // Add the vehicle array to the dealer JSON object
+        dealerJSON.put("vehicles", vehicleArray);
+
+        // Add the dealer JSON object to the dealer array (even though it only has one dealer)
+        dealerArray.add(dealerJSON);
 
         // Write the dealer array to the selected file with pretty print
         try (FileWriter file = new FileWriter(fileToSave)) {
@@ -77,4 +67,6 @@ public class JSONFileExporter {
             System.out.println("An error occurred while exporting to JSON: " + e.getMessage());
         }
     }
+
+
 }

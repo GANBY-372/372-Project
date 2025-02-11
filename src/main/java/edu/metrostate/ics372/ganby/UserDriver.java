@@ -17,6 +17,8 @@ package edu.metrostate.ics372.ganby;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
 import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
+import edu.metrostate.ics372.ganby.dealer.Dealer;
+import edu.metrostate.ics372.ganby.json.JSONFileExporter;
 import edu.metrostate.ics372.ganby.json.JSONFileImporter;
 
 import java.io.FileNotFoundException;
@@ -140,14 +142,22 @@ public class UserDriver {
 
                 case 3:
                     System.out.print("Enter ID of dealer: ");
-                    if (!scanner.hasNextInt()) {
+                    if (scanner.hasNextInt()) {
+                        int id = scanner.nextInt();
+                        scanner.nextLine(); // Consume newline
+
+                        Dealer dealer = DealerCatalog.getInstance().getDealers().findDealerById(id);
+                        if (dealer == null) {
+                            System.out.println("Dealer with ID " + id + " not found.");
+                            break;
+                        }
+
+                        JSONFileExporter fileExporter = new JSONFileExporter();
+                        fileExporter.exportToFile(dealer);
+                    } else {
                         System.out.println("Invalid input. Please enter a valid dealer ID.");
                         scanner.next(); // Clear invalid input
-                        break;
                     }
-                    int id = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    System.out.println("To be implemented by Abdirahman");
                     break;
 
                 case 4:
