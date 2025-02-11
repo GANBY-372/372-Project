@@ -33,7 +33,8 @@ public class Vehicles {
             System.out.println(vehicle.getId() + " is already in the collection");
             return;
         } else {
-            System.out.println("adding " + vehicle.toString() + " to the catalog");
+            //commenting this line for clean console output
+            //System.out.println("adding " + vehicle.toString() + " to the catalog");
             this.vehicles.add(vehicle);
             System.out.println(this.vehicles.size());
         }

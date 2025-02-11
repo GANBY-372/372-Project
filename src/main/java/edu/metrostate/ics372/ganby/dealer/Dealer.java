@@ -10,12 +10,16 @@ package edu.metrostate.ics372.ganby.dealer;
 
 import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import lombok.Getter;
+
 import java.util.Objects;
 import java.util.Set;
 
 public class Dealer {
 
+    // Getter for dealer id
     // Instance variables
+    @Getter
     private final int id;
     private boolean vehicleAcquisitionEnabled;
 
@@ -26,17 +30,29 @@ public class Dealer {
         this.vehicleAcquisitionEnabled = true;
     }
 
-    // Getter for dealer id
-    public int getId() { return id; }
-
     // Getter for vehicle acquisition state
     public boolean vehicleAcquisitionEnabled () {
         return vehicleAcquisitionEnabled;
     }
 
-    // Setter for vehicle acquisition state
-    public void setVehicleAcquisitionEnabled (boolean isbuyingVehicles) {
-        this.vehicleAcquisitionEnabled = vehicleAcquisitionEnabled;
+    // set vehicle acquisition state to true
+    public void enableVehicleAcquisition(int id) {
+        if (vehicleAcquisitionEnabled) {
+            System.out.println("Vehicle acquisition already enabled for dealer id #" + id + ".");
+        } else{
+            this.vehicleAcquisitionEnabled = true;
+            System.out.println("Successfully enabled vehicle acquisition for dealer id #" + id + ".");
+        }
+    }
+
+    // set vehicle acquisition state to false
+    public void disableVehicleAcquisition() {
+        if (!vehicleAcquisitionEnabled) {
+            System.out.println("Vehicle acquisition already disabled for dealer id #" + id + ".");
+        } else{
+            this.vehicleAcquisitionEnabled = true;
+            System.out.println("Successfully disabled vehicle acquisition for dealer id #" + id + ".");
+        }
     }
 
     // Getter for vehicles associated with dealer, Returns a set of vehicle objects
@@ -68,9 +84,10 @@ public class Dealer {
     }
 
     // toString method
+    //Asked CHATGPT 4.0 to format the toString to make a clean output
     @Override
-    public String toString () {
-        String buyinEnabledString = vehicleAcquisitionEnabled ? " is buying vehicles." : " is not buying vehicles.";
-        return getClass().getSimpleName() + " id:" + id + buyinEnabledString;
+    public String toString() {
+        String acquisitionStatus = vehicleAcquisitionEnabled ? "Yes" : "No";
+        return String.format("| %-10d | %-20s |", id, acquisitionStatus);
     }
 }

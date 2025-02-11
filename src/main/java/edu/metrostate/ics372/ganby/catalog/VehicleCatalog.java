@@ -7,6 +7,7 @@
  */
 package edu.metrostate.ics372.ganby.catalog;
 
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import edu.metrostate.ics372.ganby.vehicle.Vehicles;
 
 public class VehicleCatalog {
@@ -26,6 +27,24 @@ public class VehicleCatalog {
             instance = new VehicleCatalog();
         }
         return instance;
+    }
+
+    //Method to print out list of all Vehicles
+    public void printAllVehicles(){
+
+        System.out.println("Vehicle Catalog:");
+        System.out.println("------------------------------------------------------------------\n");
+        for (Vehicle vehicle : this.getVehicles().getVehicles()) {
+            System.out.printf("| %-10s | %-15s | %-12s | $%-10.2f | %-8d | %-20s |%n",
+                    vehicle.getClass().getSimpleName(),  // Type
+                    vehicle.getModel(),                  // Model
+                    vehicle.getManufacturer(),           // Manufacturer
+                    vehicle.getPrice(),                  // Price
+                    vehicle.getDealer().getId(),         // Dealer ID
+                    vehicle.getAcquisitionDate());       // Acquisition Date
+        }
+
+        System.out.println("------------------------------------------------------------------");
     }
 
     // Public method to get vehicles

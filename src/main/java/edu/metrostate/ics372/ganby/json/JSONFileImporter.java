@@ -12,6 +12,7 @@ import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.dealer.Dealers;
 import edu.metrostate.ics372.ganby.vehicle.*;
+import lombok.Getter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -42,8 +43,11 @@ public class JSONFileImporter {
     JSONObject jsonObject;
     JSONArray jsonArray;
 
+    // Getters
     // Dealers and Vehicles
+    @Getter
     private Dealers dealers;
+    @Getter
     private Vehicles vehicles;
     private Dealer dealer;
     private Vehicle vehicle;
@@ -173,20 +177,17 @@ public class JSONFileImporter {
         return vehicle;
     }
 
-    // Getters
-    public Dealers getDealers () {
-        return dealers;
-    }
-
-    public Vehicles getVehicles () {
-        return vehicles;
-    }
-
     // Process JSON file
-    public void processJSON () throws IllegalAccessException {
+    public void processJSON() throws IllegalAccessException {
+        if (jsonArray == null || jsonArray.isEmpty()) {
+            return;
+        }
+
         for (Object object : jsonArray) {
             Vehicle vehicle = createVehicle((JSONObject) object);
-            System.out.println(vehicle.toString());
+
+            //prints the vehicle, but it's commented out for clean console output
+            //System.out.println(vehicle.toString());
         }
     }
 
@@ -206,7 +207,7 @@ public class JSONFileImporter {
     public void printDealerKeys () {
         for (Object object : jsonArray) {
             String dealerId = ((JSONObject) object).get(DEALER_ID_KEY).toString();
-            System.out.println(dealerId);
+            //ystem.out.println(dealerId);
         }
     }
 }
