@@ -1,6 +1,6 @@
 /**
  * Dealers.java
- * @author Banji, Gil
+ * @author B, G
  * This class is a collection of dealers.
  */
 

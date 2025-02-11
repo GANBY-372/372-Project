@@ -77,6 +77,7 @@ public class UserDriver {
         System.out.println("1. Import JSON vehicle inventory file.");
         System.out.println("2. Enable or disable vehicle acquisition.");
         System.out.println("3. Export dealer inventory to JSON file.");
+        System.out.println("4. List vehicles in the catalog.");
         System.out.println("-------------------------------------------------------------------");
         System.out.println("Enter option number: ");
     }
@@ -107,27 +108,8 @@ public class UserDriver {
                     // importJSONVehicleFile();
                     break;
                 case 2:
-                    System.out.println("Add incoming vehicle.");
-                    // addIncomingVehicle();
                     break;
                 case 3:
-                    System.out.println("Enable Vehicle Acquisition.");
-                    // enableVehicleAcquisition();
-                    break;
-                case 4:
-                    System.out.println("Disable Vehicle Acquisition.");
-                    // disableVehicleAcquisition();
-                    break;
-                case 5:
-                    System.out.println("Export all vehicles from a dealer to a JSON file.");
-                    // exportAllVehiclesToJSON();
-                    break;
-                case 6:
-                    System.out.println("View dealer inventory.");
-                    // viewDealerInventory();
-                    break;
-                case 7:
-                    System.out.println("Exit.");
                     break;
         }
     }

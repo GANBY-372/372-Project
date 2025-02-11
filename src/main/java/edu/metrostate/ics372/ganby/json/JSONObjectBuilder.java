@@ -1,6 +1,6 @@
 /**
  * JSONObjectBuilder.java
- * @autor Banji, Gil
+ * @autor B, G
  * This class is for building JSON objects.
  */
 package edu.metrostate.ics372.ganby.json;

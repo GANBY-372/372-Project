@@ -30,7 +30,7 @@ public class JSONIOTester {
         System.out.println(jsonFileImporter.getDealers().toString());
 //        System.out.println(jsonFileImporter.getDealers().size() + " processed dealers from JSON");
 //
-//        JSONFileExporter jsonFileExporter = new JSONFileExporter();
-//        jsonFileExporter.exportToFile();
+        JSONFileExporter jsonFileExporter = new JSONFileExporter();
+        jsonFileExporter.exportToFile();
     }
 }

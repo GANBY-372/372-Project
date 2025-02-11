@@ -1,6 +1,6 @@
 /**
  * DealerCatalog.java
- * @author Banji, Gil
+ * @author B, G
  * This is a singleton class. Maintains a collection of Dealer objects.
  * Used to manage the collection of dealers in the system during runtime.
  * Singleton pattern ensures only one instance of the class is created.

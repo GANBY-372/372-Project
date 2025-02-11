@@ -1,6 +1,6 @@
 /**
  * Dealer.java
- * @author Banji, Gil
+ * @author B, G
  * This class represents a dealer in the motor dealership system.
  * ID is a unique identifier for the dealer and immutable.
  * vehicleAcquisitionEnabled is a boolean flag that indicates state.
