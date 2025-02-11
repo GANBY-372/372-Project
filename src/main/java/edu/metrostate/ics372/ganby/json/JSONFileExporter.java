@@ -50,7 +50,7 @@ public class JSONFileExporter {
             // Create a JSONObject for the dealer
             JSONObject dealerJSON = new JSONObject();
             dealerJSON.put("dealer_id", dealer.getId());
-            dealerJSON.put("vehicle_acquisition_enabled", dealer.vehicleAcquisitionEnabled());
+            dealerJSON.put("vehicle_acquisition_enabled", dealer.getVehicleAcquisitionStatus());
 
             // Get vehicles associated with the dealer
             Set<Vehicle> vehicles = dealer.getVehicles();
