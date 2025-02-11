@@ -1,5 +1,6 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
+import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,11 +28,14 @@ public class Vehicles {
     public Iterator<Vehicle> iterator() { return vehicles.iterator(); }
 
     public void addVehicle (Vehicle vehicle) throws IllegalAccessException {
-        if (vehicle== null)
+        if (vehicle== null) {
             throw new IllegalArgumentException("Cannot add null vehicleEntity to collection");
-        if (vehicles.contains(vehicle)) {
+        } else if (vehicles.contains(vehicle)) {
             System.out.println(vehicle.getId() + " is already in the collection");
             return;
+        } else if (!DealerCatalog.getInstance().getDealers().findDealerById(vehicle.getDealer().getId()).
+                getVehicleAcquisitionStatus()) {
+            System.out.println("This dealer for this Vehicle" + vehicle + "  is not accepting vehicles at the moment.");
         } else {
             //commenting this line for clean console output
             //System.out.println("adding " + vehicle.toString() + " to the catalog");

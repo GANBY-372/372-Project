@@ -1,7 +1,7 @@
 {
    "car_inventory":[
       {
-         "dealership_id":"12513",
+         "dealership_id":"123",
 	  "vehicle_type":"suv",
 	  "vehicle_manufacturer":"Honda",
          "vehicle_model":"CR-V",
@@ -10,7 +10,7 @@
 	  "acquisition_date": 1615354694451
       },
       {
-         "dealership_id":"12513",
+         "dealership_id":"123",
 	  "vehicle_type":"sedan",
 	  "vehicle_manufacturer":"BMW",
          "vehicle_model":"3 Series",
