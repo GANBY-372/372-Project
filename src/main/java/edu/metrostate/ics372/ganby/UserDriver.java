@@ -1,18 +1,3 @@
-/**
- * UserDriver.java
- *
- * @author G
- * This class runs the user interface for the GANBY Dealership Inventory Manager.
- * It will display a welcome banner, and the main menu.
- * User is able to enter numbers to navigate through the menu.
- * Main menu options are listed in order respective of the requirements.
- * ---
- * Need to complete:
- * -    method to list the vehicles in the catalog
- * -    method to add a vehicle to the catalog? Or this part of the JSON importer?
- * -    method to print JSON file as a string?
- */
-
 package edu.metrostate.ics372.ganby;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
@@ -25,13 +10,16 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import javax.swing.JFileChooser;
+import java.io.File;
+
 public class UserDriver {
 
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
 
         printWelcomeBanner();
 
-        /* Commenting this out to let the user input the inventory json manually by choosing option 1 in menu
+        /* Commenting this out to let the user input the inventory JSON manually by choosing option 1 in the menu
         System.out.println("\nPlease load a JSON file to begin. Press enter to continue to file explorer.");
         // System.console().readLine();
         JSONFileImporter jsonFileImporter = new JSONFileImporter();
@@ -106,7 +94,6 @@ public class UserDriver {
                     fileImporter.processJSON();
                     break;
 
-
                 case 2:
                     System.out.print("Enter ID of dealer: (or Q to quit) ");
                     if (scanner.hasNextInt()) {
@@ -141,24 +128,45 @@ public class UserDriver {
                     break;
 
                 case 3:
+                    // Ask user for dealer ID
                     System.out.print("Enter ID of dealer: ");
                     if (scanner.hasNextInt()) {
                         int id = scanner.nextInt();
                         scanner.nextLine(); // Consume newline
 
+                        // Find the dealer by ID
                         Dealer dealer = DealerCatalog.getInstance().getDealers().findDealerById(id);
                         if (dealer == null) {
                             System.out.println("Dealer with ID " + id + " not found.");
                             break;
                         }
 
+                        // Now, ask user where to save the file
+                        System.out.println("Selected dealer: " + dealer.toString());
+
+                        // Use JSONFileExporter to export the dealer's inventory to a file
                         JSONFileExporter fileExporter = new JSONFileExporter();
-                        fileExporter.exportToFile(dealer);
+                        // Open a file chooser dialog for user to pick where to save the file
+                        JFileChooser fileChooser = new JFileChooser();
+                        fileChooser.setDialogTitle("Specify a file to save");
+                        fileChooser.setSelectedFile(new File("dealer_inventory_" + id + ".json"));
+                        int userSelection = fileChooser.showSaveDialog(null);
+
+                        if (userSelection == JFileChooser.APPROVE_OPTION) {
+                            // Get the selected file path
+                            File fileToSave = fileChooser.getSelectedFile();
+                            // Pass the file path to exportToFile method
+                            fileExporter.exportToFile(dealer, fileToSave.getAbsolutePath());
+                            System.out.println("Dealer inventory saved to: " + fileToSave.getAbsolutePath());
+                        } else {
+                            System.out.println("Save operation canceled.");
+                        }
                     } else {
                         System.out.println("Invalid input. Please enter a valid dealer ID.");
                         scanner.next(); // Clear invalid input
                     }
                     break;
+
 
                 case 4:
                     VehicleCatalog.getInstance().printAllVehicles();
@@ -175,6 +183,4 @@ public class UserDriver {
         }
         scanner.close(); // Close scanner when exiting loop
     }
-
 }
-
