@@ -72,7 +72,7 @@ public class JSONFileImporter {
             if (filename != null) {
                 File selectedFile = new File(directory, filename);
 
-                // ✅ Use FileReader instead of InputStream
+                // Use FileReader instead of InputStream
                 // reader reads the selected file
                 this.reader = new FileReader(selectedFile);
 
@@ -207,7 +207,7 @@ public class JSONFileImporter {
     public void printDealerKeys () {
         for (Object object : jsonArray) {
             String dealerId = ((JSONObject) object).get(DEALER_ID_KEY).toString();
-            //ystem.out.println(dealerId);
+            //System.out.println(dealerId);
         }
     }
 }

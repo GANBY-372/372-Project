@@ -84,12 +84,13 @@ public class UserDriver {
             System.out.println("\nMenu Options:");
             System.out.println("1. Import JSON vehicle inventory file.");
             System.out.println("2. Enable or disable vehicle acquisition.");
+            System.out.println("3. Print ");
             System.out.println("3. Export dealer inventory to JSON file.");
             System.out.println("4. List vehicles in the catalog.");
             System.out.println("5. End Program.");
             System.out.println("-------------------------------------------------------------------");
 
-            System.out.print("Enter option number: ");
+            System.out.print("Enter option number:\n");
             if (!scanner.hasNextInt()) { // Handle non-integer input
                 System.out.println("Invalid input. Please enter a number between 1 and 5.");
                 scanner.next(); // Clear invalid input

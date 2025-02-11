@@ -50,7 +50,7 @@ public class Dealer {
         if (!vehicleAcquisitionEnabled) {
             System.out.println("Vehicle acquisition already disabled for dealer id #" + id + ".");
         } else{
-            this.vehicleAcquisitionEnabled = true;
+            this.vehicleAcquisitionEnabled = false;
             System.out.println("Successfully disabled vehicle acquisition for dealer id #" + id + ".");
         }
     }
