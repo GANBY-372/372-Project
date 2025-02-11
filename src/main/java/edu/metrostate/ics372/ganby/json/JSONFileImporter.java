@@ -25,6 +25,7 @@ import java.util.TimeZone;
 
 public class JSONFileImporter {
 
+    // JSON key name constants
     public static final String DEALER_ID_KEY = "dealership_id";
     public static final String VEHICLE_ID_KEY = "vehicle_id";
     public static final String VEHICLE_MANUFACTURER_KEY = "vehicle_manufacturer";
@@ -33,20 +34,24 @@ public class JSONFileImporter {
     public static final String PRICE_KEY = "price";
     public static final String ACQUISITION_DATE_KEY = "acquisition_date";
 
+    // JSON file reader and parser tools
     private Reader reader;
     private JSONParser jsonParser;
+
+    // JSON object and array buckets
     JSONObject jsonObject;
     JSONArray jsonArray;
 
+    // Dealers and Vehicles
     private Dealers dealers;
     private Vehicles vehicles;
-
     private Dealer dealer;
     private Vehicle vehicle;
 
-
-
+    // Constructor reads JSON file and initializes JSON parser
     public JSONFileImporter() throws FileNotFoundException {
+
+        // Create collections for dealers and vehicles, these are Sets of respective objects
         this.dealers = new Dealers();
         this.vehicles = new Vehicles();
 
@@ -64,9 +69,12 @@ public class JSONFileImporter {
                 File selectedFile = new File(directory, filename);
 
                 // ✅ Use FileReader instead of InputStream
+                // reader reads the selected file
                 this.reader = new FileReader(selectedFile);
 
                 jsonParser = new JSONParser();
+
+                // Parse the JSON file and get the JSON array of objects
                 this.jsonObject = (JSONObject) jsonParser.parse(reader);
                 jsonArray = (JSONArray) jsonObject.get("car_inventory");
 
@@ -83,6 +91,9 @@ public class JSONFileImporter {
     }
 
 
+    // Method to create a dealer from a JSON object
+    // ***NOTE*** We may want to rename this method to something like createDealerFromJSONObject
+    // like the method below. [delete this comment after discussion]
     private Dealer getDealer (JSONObject jsonObject) {
         String numericString  = jsonObject.get(DEALER_ID_KEY).toString();
         if (numericString == null || numericString.isBlank())
@@ -90,14 +101,18 @@ public class JSONFileImporter {
         return new Dealer(Integer.parseInt(numericString));
     }
 
+    // Create Vehicle from JSON object
     public Vehicle createVehicle (JSONObject jsonObject) throws IllegalAccessException {
         if (jsonObject == null || jsonObject.isEmpty())
             throw new IllegalArgumentException("JSON vehicle object is null or empty");
 
+        // Create a dealer
         this.dealer = getDealer(jsonObject);
         dealers.addDealer(dealer);
+
         DealerCatalog.getInstance().getDealers().addDealer(dealer);
 
+        // Create the vehicle with JSON data
         String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
         String model = jsonObject.get(VEHICLE_MODEL_KEY).toString();
         String id = jsonObject.get(VEHICLE_ID_KEY).toString();
@@ -108,6 +123,7 @@ public class JSONFileImporter {
             TimeZone.getDefault().toZoneId()
         );
 
+        // Get vehicle type from JSON object
         String type = jsonObject.get(VEHICLE_TYPE_KEY).toString();
         if (type == null || type.isBlank())
             throw new IllegalArgumentException("JSON vehicle type is null or empty");
@@ -116,6 +132,7 @@ public class JSONFileImporter {
         if (category == null)
             throw new IllegalArgumentException("JSON vehicle category is null or empty");
 
+        // Create vehicle, category is an enum
         if (category.equals(VehicleCategory.SUV)) {
             this.vehicle = new SUV.Builder().dealer(dealer)
                 .id(id)
@@ -151,10 +168,13 @@ public class JSONFileImporter {
         }
         else { throw new IllegalArgumentException("Unknown category: " + category); }
         vehicles.addVehicle(vehicle);
+
+        // Add vehicle to catalog
         VehicleCatalog.getInstance().getVehicles().addVehicle(vehicle);
         return vehicle;
     }
 
+    // Getters
     public Dealers getDealers () {
         return dealers;
     }
@@ -163,6 +183,7 @@ public class JSONFileImporter {
         return vehicles;
     }
 
+    // Process JSON file
     public void processJSON () throws IllegalAccessException {
         for (Object object : jsonArray) {
             Vehicle vehicle = createVehicle((JSONObject) object);
