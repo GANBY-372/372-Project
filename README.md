@@ -1,78 +1,80 @@
-# 372 Project - Vehicle Inventory Tracking System
+# 372 Project
 
-## Overview
-This program provides a tracking system for a company that owns multiple car dealerships. It allows admins to manage vehicle inventories, record incoming vehicles, and export data in JSON format.
+## Readme
 
-## Using This Program
-The `UserDriver` class serves as the user interface. It features a terminal-based menu with popup windows for importing and exporting JSON files.
+### Using This Program
+The `UserDriver` class file serves as the user interface. This is a terminal-based interface with a popup window interface for importing and exporting JSON files.  
+The menu screen shows numbered options for the user to type in the terminal.  
 
-### Menu Options
-The program provides the following functionalities:
-1. Import JSON vehicle inventory file.
-2. Enable or disable vehicle acquisition.
-3. Export dealer inventory to a JSON file.
-4. List all vehicles in the catalog.
-5. End the program.
+The program has the following options:  
+- Import JSON vehicle inventory file.  
+- Enable or disable vehicle acquisition.  
+- Export dealer inventory to JSON file.  
+- List all vehicles in the catalog.  
+- End Program.  
 
-## Assignment Requirements
-1. Read a file that is in JSON format.
-2. Support four different vehicle types: **SUV, Sedan, Pickup, and Sports Car**.
-3. Read and store the **vehicle ID, manufacturer, model, acquisition date, and price** for each entry, associating them with the specified dealer ID.
-4. Read and store additional metadata for each vehicle.
-5. Support the following commands for each dealer:
-   - Enable/disable vehicle acquisition.
-   - Prevent adding vehicles to dealers with disabled acquisition.
-   - Maintain records for dealers even if acquisition is disabled.
-   - Export all vehicles from a dealer into a single JSON file.
-   - Display the list of current vehicles for each dealer.
+### Assignment  
+Build a tracking system for a company that owns multiple car dealerships. Admins will need to be able to record vehicles that arrive at the various dealers.  
 
-## Technical Details
-- Java standard libraries and additional external libraries (such as Jackson for JSON processing) are utilized.
-- External JAR files should be included in the source submission.
-- Proper documentation, including a **class diagram** and a **sequence diagram** for adding a vehicle, is expected.
+## Requirements  
+1. Read a file that is in JSON format.  
+2. Support 4 different types of vehicles in the input file: **suv, sedan, pickup, and sports car**.  
+3. Read and store the **vehicle ID, manufacturer, model, acquisition date, and price** for each entry and associate it with the specified dealer ID.  
+4. Read and store the associated metadata for each vehicle.  
+5. Support the following commands for each dealer:  
+6. Only allow adding incoming vehicles to a dealer that has enabled receiving vehicles.  
+7. Keep records for a dealer that has disabled receiving vehicles, but will not allow new incoming vehicles.  
+8. Be able to export all vehicles from a dealer into a single JSON file.  
+9. Show the list of current vehicles for each dealer.  
 
-## Class Structure
+## Other  
+- Usage of the Java standard libraries or other libraries as part of your program is expected.  
+- Include external JAR files with your source when you submit it.  
+- Documentation of the software is expected.  
+- Include a class diagram & sequence diagram of the **add incoming vehicle** operation.  
 
-### Dealer Management
-- `Dealer`
-  - `private final id : int`
-  - `private isVehicleAcquisitionEnabled : boolean`
-- `Dealers`
-  - `private final Set<Dealer>`
-- `DealerCatalog`
-  - `private final id : int`
-  - `private final Dealers`
+## Class Files  
 
-### Vehicle Management
-- `Vehicle`
-  - `getId : String`
-  - `getModel : String`
-  - `getManufacturer : String`
-  - `getPrice : double`
-  - `getDealer : Dealer`
-  - `getAcquisitionDate : LocalDateTime`
-- `Vehicles`
-  - `private final Set<Vehicle>`
-- `VehicleCatalog`
-  - `private static VehicleCatalog`
-  - `private final Vehicles`
-- `VehicleCategory`
-  - `Pickup`
-  - `Sedan`
-  - `SportsCar`
-  - `SUV`
+### Dealer Management  
+- `Dealer`  
+  - `private final id : int`  
+  - `private isVehicleAcquisitionEnabled : boolean`  
+- `Dealers`  
+  - `private final Set<Dealer>`  
+- `DealerCatalog`  
+  - `private final id : int`  
+  - `private final Dealers`  
 
-### JSON Processing
-- `JSONFileExporter`
-- `JSONFileImporter`
-- `JSONFileObjectBuilder`
+### Vehicle Management  
+- `Vehicle`  
+  - `getId : String`  
+  - `getModel : String`  
+  - `getManufacturer : String`  
+  - `getPrice : double`  
+  - `getDealer : Dealer`  
+  - `getAcquisitionDate : LocalDateTime`  
+- `Vehicles`  
+  - `private final Set<Vehicle>`  
+- `VehicleCatalog`  
+  - `private static VehicleCatalog`  
+  - `private final Vehicles`  
+- `VehicleCategory`  
+  - `Pickup`  
+  - `Sedan`  
+  - `SportsCar`  
+  - `SUV`  
 
-### Main Classes
-- `Main`
-- `JSONIOTester`
-- `UserDriver`
+### JSON Processing  
+- `JSONFileExporter`  
+- `JSONFileImporter`  
+- `JSONFileObjectBuilder`  
 
-## Sample JSON Input Data
+### Main Classes  
+- `Main`  
+- `JSONIOTester`  
+- `UserDriver`  
+
+## Input Data Example - JSON File  
 ```json
 {
   "Car_inventory": [
