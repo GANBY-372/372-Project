@@ -2,7 +2,6 @@ package edu.metrostate.ics372.ganby.json;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
-import edu.metrostate.ics372.ganby.vehicle.VehicleCategory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,7 +13,6 @@ public class JSONFileExporter {
     // Export dealer to file
     public void exportToFile(Dealer dealer, String filePath) {
         try (FileWriter writer = new FileWriter(filePath)) {
-            // Convert the dealer to JSON format
             String json = convertDealerToJson(dealer);
             writer.write(json);
             System.out.println("Successfully exported to " + filePath);
@@ -23,19 +21,15 @@ public class JSONFileExporter {
         }
     }
 
-    // Method to convert a dealer object to a JSON string using json-simple
+    // Convert a dealer object to a pretty-printed JSON string
     private String convertDealerToJson(Dealer dealer) {
-        // Create the main JSON object
         JSONObject rootJson = new JSONObject();
-
-        // Create a JSON array for car inventory
         JSONArray carInventoryJson = new JSONArray();
-
 
         for (Vehicle vehicle : dealer.getVehicles()) {
             JSONObject vehicleJson = new JSONObject();
             vehicleJson.put("dealership_id", String.valueOf(dealer.getId()));
-            vehicleJson.put("vehicle_type", dealer); //We need type (idk how to find it yet)
+            vehicleJson.put("vehicle_type", vehicle.getModel());
             vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
             vehicleJson.put("vehicle_model", vehicle.getModel());
             vehicleJson.put("vehicle_id", String.valueOf(vehicle.getId()));
@@ -45,10 +39,53 @@ public class JSONFileExporter {
             carInventoryJson.add(vehicleJson);
         }
 
-        // Add car inventory array to root JSON
         rootJson.put("car_inventory", carInventoryJson);
 
-        // Return the JSON string representation of the dealer object
-        return rootJson.toJSONString();
+        // Pretty-print the JSON output
+        return prettyPrintJson(rootJson.toJSONString());
+    }
+
+    // Manually format JSON for vertical output
+    private String prettyPrintJson(String json) {
+        StringBuilder formattedJson = new StringBuilder();
+        int indentLevel = 0;
+        boolean inQuotes = false;
+
+        for (char c : json.toCharArray()) {
+            switch (c) {
+                case '{':
+                case '[':
+                    formattedJson.append(c);
+                    if (!inQuotes) {
+                        formattedJson.append("\n").append("  ".repeat(++indentLevel));
+                    }
+                    break;
+                case '}':
+                case ']':
+                    if (!inQuotes) {
+                        formattedJson.append("\n").append("  ".repeat(--indentLevel));
+                    }
+                    formattedJson.append(c);
+                    break;
+                case ',':
+                    formattedJson.append(c);
+                    if (!inQuotes) {
+                        formattedJson.append("\n").append("  ".repeat(indentLevel));
+                    }
+                    break;
+                case ':':
+                    formattedJson.append(c).append(" ");
+                    break;
+                case '"':
+                    formattedJson.append(c);
+                    inQuotes = !inQuotes;
+                    break;
+                default:
+                    formattedJson.append(c);
+                    break;
+            }
+        }
+
+        return formattedJson.toString();
     }
 }
