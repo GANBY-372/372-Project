@@ -1,3 +1,7 @@
+/**
+ * VehicleCategory.java
+ * Enum class for vehicle categories
+ */
 package edu.metrostate.ics372.ganby.vehicle;
 
 public enum VehicleCategory {
