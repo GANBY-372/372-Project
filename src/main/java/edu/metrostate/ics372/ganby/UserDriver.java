@@ -18,40 +18,15 @@ public class UserDriver {
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
 
         printWelcomeBanner();
-
-        /* Commenting this out to let the user input the inventory JSON manually by choosing option 1 in the menu
-        System.out.println("\nPlease load a JSON file to begin. Press enter to continue to file explorer.");
-        // System.console().readLine();
-        JSONFileImporter jsonFileImporter = new JSONFileImporter();
-        jsonFileImporter.processJSON();
-         */
-
         printOptions();
         //acceptMainMenuOption();
         printCurrentInventoryStatus();
         printExitMessage();
     }
 
-    // Method to print the welcome banner
-    public static void printWelcomeBanner() {
-        System.out.println("\n*********************************************************");
-        System.out.println("*                                                       *");
-        System.out.println("*  Welcome to the GANBY Dealership Inventory Manager!   *");
-        System.out.println("*                                                       *");
-        System.out.println("*********************************************************");
-    }
-
-    // Method to print the exit message
-    public static void printExitMessage() {
-        System.out.println("\n\n******************************************************************");
-        System.out.println("*                                                                *");
-        System.out.println("*  Thank you for using the GANBY Dealership Inventory Manager!   *");
-        System.out.println("*                                                                *");
-        System.out.println("******************************************************************");
-    }
 
     public static void printCurrentInventoryStatus() {
-        System.out.println("\nCurrent Dealer Catalog as of " + java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ":");
+        System.out.println("\nCurrent Dealer Catalog as of " + java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE MM-dd-yyyy hh:mm a")));
         System.out.println("-------------------------------------------------------------------");
 
         // Dealer and Vehicle count
@@ -182,5 +157,27 @@ public class UserDriver {
             }
         }
         scanner.close(); // Close scanner when exiting loop
+    }
+
+    // Method to print the welcome banner
+    public static void printWelcomeBanner() {
+        System.out.println("\n*********************************************************");
+        System.out.println("*                                                       *");
+        System.out.println("*  Welcome to the GANBY Dealership Inventory Manager!   *");
+        System.out.println("*                                                       *");
+        System.out.println("*********************************************************");
+    }
+
+    // Method to print the exit message
+    public static void printExitMessage() {
+        System.out.println("\n\n******************************************************************");
+        System.out.println("*                                                                *");
+        System.out.println("*  Thank you for using the GANBY Dealership Inventory Manager!   *");
+        System.out.println("*                                                                *");
+        System.out.println("******************************************************************");
+
+        if (VehicleCatalog.getInstance().getVehicles().size() == 0) {
+            System.out.println("\nThe Dealer Catalog is empty. Please import a JSON file to begin.");
+        }
     }
 }
