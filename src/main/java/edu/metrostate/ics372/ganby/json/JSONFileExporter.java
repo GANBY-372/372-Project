@@ -51,7 +51,7 @@ public class JSONFileExporter {
         return prettyPrintJson(rootJson.toJSONString());
     }
 
-    // Manually format JSON for vertical output
+    // Manually format JSON for vertical output (easier to read)
     private String prettyPrintJson(String json) {
         StringBuilder formattedJson = new StringBuilder();
         int indentLevel = 0;
