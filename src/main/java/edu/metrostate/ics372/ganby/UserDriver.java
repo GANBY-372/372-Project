@@ -80,12 +80,12 @@ public class UserDriver {
             scanner.nextLine(); // Consume newline to avoid InputMismatchException
 
             switch (userInput) {
-                case 1:
+                case 1: //Importing a JSON file. Works for inventory.json or any json file that contains vehicle(s)
                     JSONFileImporter fileImporter = new JSONFileImporter();
                     fileImporter.processJSON();
                     break;
 
-                case 2:
+                case 2: //Enabling or Disabling Dealer Acquisition
                     System.out.print("Enter ID of dealer: (or Q to quit) ");
                     if (scanner.hasNextInt()) {
                         int idToEnableOrDisable = scanner.nextInt();
@@ -120,7 +120,7 @@ public class UserDriver {
 
 
 
-                case 3:
+                case 3: //Exporting Dealer Inventory
                     // Ask user for dealer ID
                     System.out.print("Enter ID of dealer: ");
                     if (scanner.hasNextInt()) {
@@ -161,11 +161,11 @@ public class UserDriver {
 
 
 
-                case 4:
+                case 4: //Shows list of current vehicles for each dealer
                     DealerCatalog.getInstance().printAllVehiclesById();
                     break;
 
-                case 5:
+                case 5: //End program.
                     System.out.println("Ending Program.");
                     printCurrentInventoryStatus();  //Lets user take a last look as inventory
                     printExitMessage();    //Prints final exit message
