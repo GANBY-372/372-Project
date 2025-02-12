@@ -45,12 +45,12 @@ The program provides the following functionalities:
 
 ### Vehicle Management
 - `Vehicle`
-  - `String getId();`
-  - `String getModel();`
-  - `String getManufacturer();`
-  - `double getPrice();`
-  - `Dealer getDealer();`
-  - `LocalDateTime getAcquisitionDate();`
+  - `getId : String`
+  - `getModel : String`
+  - `getManufacturer : String`
+  - `getPrice : double`
+  - `getDealer : Dealer`
+  - `getAcquisitionDate : LocalDateTime`
 - `Vehicles`
   - `private final Set<Vehicle>`
 - `VehicleCatalog`
