@@ -8,6 +8,9 @@ import org.json.simple.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 public class JSONFileExporter {
 
@@ -22,7 +25,7 @@ public class JSONFileExporter {
         }
     }
 
-    // Convert a dealer object to a pretty-printed JSON string
+    // Convert a dealer object to a JSON string
     private String convertDealerToJson(Dealer dealer) {
         JSONObject rootJson = new JSONObject();
         JSONArray carInventoryJson = new JSONArray();
@@ -35,14 +38,16 @@ public class JSONFileExporter {
             vehicleJson.put("vehicle_model", vehicle.getModel());
             vehicleJson.put("vehicle_id", String.valueOf(vehicle.getId()));
             vehicleJson.put("price", vehicle.getPrice());
-            vehicleJson.put("acquisition_date", vehicle.getAcquisitionDate());
+            ZoneId zoneId = ZoneId.of("America/Chicago");
+            long epochMillis = vehicle.getAcquisitionDate().atZone(zoneId).toInstant().toEpochMilli();
+            vehicleJson.put("acquisition_date", epochMillis);
 
             carInventoryJson.add(vehicleJson);
         }
 
         rootJson.put("car_inventory", carInventoryJson);
 
-        // Pretty-print the JSON output
+        // Print the JSON output
         return prettyPrintJson(rootJson.toJSONString());
     }
 
