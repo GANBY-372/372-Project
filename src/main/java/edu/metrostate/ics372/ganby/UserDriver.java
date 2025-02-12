@@ -10,29 +10,14 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import javax.swing.JFileChooser;
-import java.io.File;
 import java.awt.FileDialog;
 import java.awt.Frame;
-import java.io.File;
 
 public class UserDriver {
 
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
-
-        printWelcomeBanner();
-
-        /* Commenting this out to let the user input the inventory JSON manually by choosing option 1 in the menu
-        System.out.println("\nPlease load a JSON file to begin. Press enter to continue to file explorer.");
-        // System.console().readLine();
-        JSONFileImporter jsonFileImporter = new JSONFileImporter();
-        jsonFileImporter.processJSON();
-         */
-
-        printOptions();
-        //acceptMainMenuOption();
-        printCurrentInventoryStatus();
-        printExitMessage();
+        runProgram();   //This is the master method that runs the program. It uses the other three methods when
+                        //appropriate.
     }
 
     // Method to print the welcome banner
@@ -68,8 +53,11 @@ public class UserDriver {
     }
 
     // Method to print the main menu
-    public static void printOptions() throws FileNotFoundException, IllegalAccessException {
-        Scanner scanner = new Scanner(System.in); // Use a single scanner instance
+    public static void runProgram() throws FileNotFoundException, IllegalAccessException {
+
+        printWelcomeBanner();
+
+        Scanner scanner = new Scanner(System.in); // Use a single scanner instance for the user input
         int userInput = -1;
 
         while (userInput != 5) { // Continue until user chooses to exit
@@ -163,7 +151,7 @@ public class UserDriver {
                             JSONFileExporter fileExporter = new JSONFileExporter();
                             fileExporter.exportToFile(dealer, filePath);
                         } else {
-                            System.out.println("Save operation cancelled.");
+                            System.out.println("Export operation cancelled.");
                         }
                     } else {
                         System.out.println("Invalid input. Please enter a valid dealer ID.");
@@ -179,7 +167,8 @@ public class UserDriver {
 
                 case 5:
                     System.out.println("Ending Program.");
-                    printExitMessage();
+                    printCurrentInventoryStatus();  //Lets user take a last look as inventory
+                    printExitMessage();    //Prints final exit message
                     break;
 
                 default:

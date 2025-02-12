@@ -29,18 +29,16 @@ public class Vehicles {
 
     public void addVehicle (Vehicle vehicle) throws IllegalAccessException {
         if (vehicle== null) {
-            throw new IllegalArgumentException("Cannot add null vehicleEntity to collection");
+            throw new IllegalArgumentException("Cannot add null vehicle to collection");
         } else if (vehicles.contains(vehicle)) {
-            System.out.println(vehicle.getId() + " is already in the collection");
+            System.out.println("Vehicle Id #" + vehicle.getId() + " is already in the collection");
             return;
         } else if (!DealerCatalog.getInstance().getDealers().findDealerById(vehicle.getDealer().getId()).
                 getVehicleAcquisitionStatus()) {
-            System.out.println("This dealer for this Vehicle" + vehicle + "  is not accepting vehicles at the moment.");
+            System.out.println("Dealer Id #" + vehicle.getDealer().getId() + " is not accepting vehicles at the moment.");
         } else {
-            //commenting this line for clean console output
-            //System.out.println("adding " + vehicle.toString() + " to the catalog");
             this.vehicles.add(vehicle);
-            System.out.println(this.vehicles.size());
+
         }
     }
 

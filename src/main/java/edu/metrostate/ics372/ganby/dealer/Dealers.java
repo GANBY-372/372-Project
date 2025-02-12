@@ -46,11 +46,7 @@ public class Dealers {
             throw new IllegalArgumentException("Cannot add null dealer to collection");
         if (findDealerById(dealer.getId()) != null)
             return; //throw new IllegalAccessException("Dealer is already in the collection");
-        //Commenting this out for clean console output
-        //System.out.println("adding " + dealer.toString() + " to the collection");
         this.dealers.add(dealer);
-        //Commenting this out for clean console output
-       // System.out.println("added " + dealer.toString() + " collection size: " + dealers.size());
     }
 
     // Remove dealer from collection with id

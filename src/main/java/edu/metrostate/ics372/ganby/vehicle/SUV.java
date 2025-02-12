@@ -105,21 +105,6 @@ public class SUV implements Vehicle {
 
     public JSONObject toJSON () {
         return JSONObjectBuilder.build(this);
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("dealer_id", dealer.getId());
-//        jsonObject.put("vehicle_manufacturer", manufacturer);
-//        jsonObject.put("vehicle_type", getClass().getSimpleName());
-//        jsonObject.put("vehicle_model", model);
-//        jsonObject.put("vehicle_price", price);
-////        jsonObject.put("acquisition_date", acquisitionDate.atZone(TimeZone.getDefault().toZoneId()).toInstant().toEpochMilli());
-//
-//        if (acquisitionDate != null) {
-//            jsonObject.put("acquisition_date", acquisitionDate.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
-//        } else {
-//            jsonObject.put("acquisition_date", LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()); // Ensures JSON validity
-//        }
-//
-//        return jsonObject;
     }
 
     public static Builder builder () {
