@@ -12,6 +12,9 @@ import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 import java.io.File;
+import java.awt.FileDialog;
+import java.awt.Frame;
+import java.io.File;
 
 public class UserDriver {
 
@@ -127,6 +130,8 @@ public class UserDriver {
                     }
                     break;
 
+
+
                 case 3:
                     // Ask user for dealer ID
                     System.out.print("Enter ID of dealer: ");
@@ -144,19 +149,19 @@ public class UserDriver {
                         // Now, ask user where to save the file
                         System.out.println("Selected dealer: " + dealer.getId());
 
-                        // Use JSONFileExporter to export the dealer's inventory to a file
-                        JSONFileExporter fileExporter = new JSONFileExporter();
-                        // Open a file chooser dialog for user to pick where to save the file
-                        JFileChooser fileChooser = new JFileChooser();
-                        fileChooser.setDialogTitle("Specify a file to save");
-                        fileChooser.setSelectedFile(new File("dealer_inventory_" + id + ".json"));
-                        int userSelection = fileChooser.showSaveDialog(null);
+                        // Use FileDialog for file selection
+                        FileDialog fileDialog = new FileDialog((Frame) null, "Save File", FileDialog.SAVE);
+                        fileDialog.setFile("dealer_inventory_" + id + ".json"); // Default filename
+                        fileDialog.setVisible(true);
 
-                        if (userSelection == JFileChooser.APPROVE_OPTION) {
-                            // Get the selected file path
-                            File fileToSave = fileChooser.getSelectedFile();
-                            // Pass the file path to exportToFile method
-                            fileExporter.exportToFile(dealer, fileToSave.getAbsolutePath());
+                        // Get selected file
+                        String directory = fileDialog.getDirectory();
+                        String filename = fileDialog.getFile();
+
+                        if (directory != null && filename != null) {
+                            String filePath = directory + filename; // Construct full path
+                            JSONFileExporter fileExporter = new JSONFileExporter();
+                            fileExporter.exportToFile(dealer, filePath);
                         } else {
                             System.out.println("Save operation cancelled.");
                         }
@@ -165,6 +170,7 @@ public class UserDriver {
                         scanner.next(); // Clear invalid input
                     }
                     break;
+
 
 
                 case 4:
