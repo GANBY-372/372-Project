@@ -28,4 +28,13 @@ public enum VehicleCategory {
         ) return SPORTS_CAR;
         else return null;
     }
+
+    //Returns the type of vehicle: Pickup, Sedan, SportsCar, or SUV as a String
+    public static String getVehicleType (Vehicle vehicle) {
+        if (vehicle instanceof SUV) return "SUV";
+        else if (vehicle instanceof Sedan) return "Sedan";
+        else if (vehicle instanceof Pickup) return "Pickup";
+        else if (vehicle instanceof SportsCar) return "SportsCar";
+        else return null;
+    }
 }

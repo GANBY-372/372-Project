@@ -106,14 +106,6 @@ public class SportsCar implements Vehicle {
 
     public JSONObject toJSON () {
         return JSONObjectBuilder.build(this);
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("dealer_id", dealer.getId());
-//        jsonObject.put("vehicle_manufacturer", manufacturer);
-//        jsonObject.put("vehicle_type", getClass().getSimpleName());
-//        jsonObject.put("vehicle_model", model);
-//        jsonObject.put("vehicle_price", price);
-//        jsonObject.put("acquisition_date", acquisitionDate.atZone(TimeZone.getDefault().toZoneId()).toInstant().toEpochMilli());
-//        return jsonObject;
     }
 
     public static Builder builder () {

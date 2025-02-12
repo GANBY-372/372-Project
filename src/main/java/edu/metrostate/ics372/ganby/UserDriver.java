@@ -10,23 +10,36 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import javax.swing.JFileChooser;
-import java.io.File;
+import java.awt.FileDialog;
+import java.awt.Frame;
 
 public class UserDriver {
 
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
-
-        printWelcomeBanner();
-        printOptions();
-        //acceptMainMenuOption();
-        printCurrentInventoryStatus();
-        printExitMessage();
+        runProgram();   //This is the master method that runs the program. It uses the other three methods when
+                        //appropriate.
     }
 
+    // Method to print the welcome banner
+    public static void printWelcomeBanner() {
+        System.out.println("\n*********************************************************");
+        System.out.println("*                                                       *");
+        System.out.println("*  Welcome to the GANBY Dealership Inventory Manager!   *");
+        System.out.println("*                                                       *");
+        System.out.println("*********************************************************");
+    }
+
+    // Method to print the exit message
+    public static void printExitMessage() {
+        System.out.println("\n\n******************************************************************");
+        System.out.println("*                                                                *");
+        System.out.println("*  Thank you for using the GANBY Dealership Inventory Manager!   *");
+        System.out.println("*                                                                *");
+        System.out.println("******************************************************************");
+    }
 
     public static void printCurrentInventoryStatus() {
-        System.out.println("\nCurrent Dealer Catalog as of " + java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE MM-dd-yyyy hh:mm a")));
+        System.out.println("\nCurrent Dealer Catalog as of " + java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ":");
         System.out.println("-------------------------------------------------------------------");
 
         // Dealer and Vehicle count
@@ -40,8 +53,11 @@ public class UserDriver {
     }
 
     // Method to print the main menu
-    public static void printOptions() throws FileNotFoundException, IllegalAccessException {
-        Scanner scanner = new Scanner(System.in); // Use a single scanner instance
+    public static void runProgram() throws FileNotFoundException, IllegalAccessException {
+
+        printWelcomeBanner();
+
+        Scanner scanner = new Scanner(System.in); // Use a single scanner instance for the user input
         int userInput = -1;
 
         while (userInput != 5) { // Continue until user chooses to exit
@@ -64,12 +80,12 @@ public class UserDriver {
             scanner.nextLine(); // Consume newline to avoid InputMismatchException
 
             switch (userInput) {
-                case 1:
+                case 1: //Importing a JSON file. Works for inventory.json or any json file that contains vehicle(s)
                     JSONFileImporter fileImporter = new JSONFileImporter();
                     fileImporter.processJSON();
                     break;
 
-                case 2:
+                case 2: //Enabling or Disabling Dealer Acquisition
                     System.out.print("Enter ID of dealer: (or Q to quit) ");
                     if (scanner.hasNextInt()) {
                         int idToEnableOrDisable = scanner.nextInt();
@@ -102,7 +118,9 @@ public class UserDriver {
                     }
                     break;
 
-                case 3:
+
+
+                case 3: //Exporting Dealer Inventory
                     // Ask user for dealer ID
                     System.out.print("Enter ID of dealer: ");
                     if (scanner.hasNextInt()) {
@@ -117,24 +135,23 @@ public class UserDriver {
                         }
 
                         // Now, ask user where to save the file
-                        System.out.println("Selected dealer: " + dealer.toString());
+                        System.out.println("Selected dealer: " + dealer.getId());
 
-                        // Use JSONFileExporter to export the dealer's inventory to a file
-                        JSONFileExporter fileExporter = new JSONFileExporter();
-                        // Open a file chooser dialog for user to pick where to save the file
-                        JFileChooser fileChooser = new JFileChooser();
-                        fileChooser.setDialogTitle("Specify a file to save");
-                        fileChooser.setSelectedFile(new File("dealer_inventory_" + id + ".json"));
-                        int userSelection = fileChooser.showSaveDialog(null);
+                        // Use FileDialog for file selection
+                        FileDialog fileDialog = new FileDialog((Frame) null, "Save File", FileDialog.SAVE);
+                        fileDialog.setFile("dealer_inventory_" + id + ".json"); // Default filename
+                        fileDialog.setVisible(true);
 
-                        if (userSelection == JFileChooser.APPROVE_OPTION) {
-                            // Get the selected file path
-                            File fileToSave = fileChooser.getSelectedFile();
-                            // Pass the file path to exportToFile method
-                            fileExporter.exportToFile(dealer, fileToSave.getAbsolutePath());
-                            System.out.println("Dealer inventory saved to: " + fileToSave.getAbsolutePath());
+                        // Get selected file
+                        String directory = fileDialog.getDirectory();
+                        String filename = fileDialog.getFile();
+
+                        if (directory != null && filename != null) {
+                            String filePath = directory + filename; // Construct full path
+                            JSONFileExporter fileExporter = new JSONFileExporter();
+                            fileExporter.exportToFile(dealer, filePath);
                         } else {
-                            System.out.println("Save operation canceled.");
+                            System.out.println("Export operation cancelled.");
                         }
                     } else {
                         System.out.println("Invalid input. Please enter a valid dealer ID.");
@@ -143,13 +160,15 @@ public class UserDriver {
                     break;
 
 
-                case 4:
-                    VehicleCatalog.getInstance().printAllVehicles();
+
+                case 4: //Shows list of current vehicles for each dealer
+                    DealerCatalog.getInstance().printAllVehiclesById();
                     break;
 
-                case 5:
+                case 5: //End program.
                     System.out.println("Ending Program.");
-                    printExitMessage();
+                    printCurrentInventoryStatus();  //Lets user take a last look as inventory
+                    printExitMessage();    //Prints final exit message
                     break;
 
                 default:
@@ -157,27 +176,5 @@ public class UserDriver {
             }
         }
         scanner.close(); // Close scanner when exiting loop
-    }
-
-    // Method to print the welcome banner
-    public static void printWelcomeBanner() {
-        System.out.println("\n*********************************************************");
-        System.out.println("*                                                       *");
-        System.out.println("*  Welcome to the GANBY Dealership Inventory Manager!   *");
-        System.out.println("*                                                       *");
-        System.out.println("*********************************************************");
-    }
-
-    // Method to print the exit message
-    public static void printExitMessage() {
-        System.out.println("\n\n******************************************************************");
-        System.out.println("*                                                                *");
-        System.out.println("*  Thank you for using the GANBY Dealership Inventory Manager!   *");
-        System.out.println("*                                                                *");
-        System.out.println("******************************************************************");
-
-        if (VehicleCatalog.getInstance().getVehicles().size() == 0) {
-            System.out.println("\nThe Dealer Catalog is empty. Please import a JSON file to begin.");
-        }
     }
 }

@@ -193,9 +193,6 @@ public class JSONFileImporter {
 
         for (Object object : jsonArray) {
             Vehicle vehicle = createVehicle((JSONObject) object);
-
-            //prints the vehicle, but it's commented out for clean console output
-            //System.out.println(vehicle.toString());
         }
     }
 
@@ -203,7 +200,6 @@ public class JSONFileImporter {
     public void printDealerKeys () {
         for (Object object : jsonArray) {
             String dealerId = ((JSONObject) object).get(DEALER_ID_KEY).toString();
-            //System.out.println(dealerId);
         }
     }
 }
