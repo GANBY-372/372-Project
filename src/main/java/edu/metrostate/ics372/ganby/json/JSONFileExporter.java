@@ -24,28 +24,29 @@ public class JSONFileExporter {
 
     // Method to convert a dealer object to a JSON string using json-simple
     private String convertDealerToJson(Dealer dealer) {
-        // Create JSON object for the dealer
-        JSONObject dealerJson = new JSONObject();
-        dealerJson.put("dealerId", dealer.getId());
+        // Create the main JSON object
+        JSONObject rootJson = new JSONObject();
 
-        // Add vehicles to the dealer JSON
-        JSONArray vehiclesJson = new JSONArray();
+        // Create a JSON array for car inventory
+        JSONArray carInventoryJson = new JSONArray();
+
         for (Vehicle vehicle : dealer.getVehicles()) {
             JSONObject vehicleJson = new JSONObject();
-            vehicleJson.put("id", vehicle.getId());
-            vehicleJson.put("model", vehicle.getModel());
-            vehicleJson.put("manufacturer", vehicle.getManufacturer());
+            vehicleJson.put("dealership_id", String.valueOf(dealer.getId()));
+            vehicleJson.put("vehicle_type", vehicle.getManufacturer()); // Assuming Vehicle class has a getType() method
+            vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
+            vehicleJson.put("vehicle_model", vehicle.getModel());
+            vehicleJson.put("vehicle_id", String.valueOf(vehicle.getId()));
             vehicleJson.put("price", vehicle.getPrice());
-            vehicleJson.put("dealer", dealer.toString()); // This is the dealer information
+            vehicleJson.put("acquisition_date", vehicle.getAcquisitionDate()); // Assuming acquisitionDate is Instant
 
-            vehiclesJson.add(vehicleJson);
+            carInventoryJson.add(vehicleJson);
         }
 
-        // Add vehicle acquisition status to the dealer JSON
-        dealerJson.put("acquisitionStatus", dealer.getVehicleAcquisitionStatus());
-        dealerJson.put("vehicles", vehiclesJson);
+        // Add car inventory array to root JSON
+        rootJson.put("car_inventory", carInventoryJson);
 
         // Return the JSON string representation of the dealer object
-        return dealerJson.toJSONString();
+        return rootJson.toJSONString();
     }
 }
