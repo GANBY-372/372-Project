@@ -168,7 +168,7 @@ public class UserDriver {
 
 
                 case 4:
-                    VehicleCatalog.getInstance().printAllVehicles();
+                    DealerCatalog.getInstance().printAllVehiclesById();
                     break;
 
                 case 5:
