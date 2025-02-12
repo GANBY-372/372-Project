@@ -2,6 +2,7 @@ package edu.metrostate.ics372.ganby.json;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.vehicle.VehicleCategory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -30,15 +31,16 @@ public class JSONFileExporter {
         // Create a JSON array for car inventory
         JSONArray carInventoryJson = new JSONArray();
 
+
         for (Vehicle vehicle : dealer.getVehicles()) {
             JSONObject vehicleJson = new JSONObject();
             vehicleJson.put("dealership_id", String.valueOf(dealer.getId()));
-            vehicleJson.put("vehicle_type", vehicle.getManufacturer()); // Assuming Vehicle class has a getType() method
+            vehicleJson.put("vehicle_type", dealer); //We need type (idk how to find it yet)
             vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
             vehicleJson.put("vehicle_model", vehicle.getModel());
             vehicleJson.put("vehicle_id", String.valueOf(vehicle.getId()));
             vehicleJson.put("price", vehicle.getPrice());
-            vehicleJson.put("acquisition_date", vehicle.getAcquisitionDate()); // Assuming acquisitionDate is Instant
+            vehicleJson.put("acquisition_date", vehicle.getAcquisitionDate());
 
             carInventoryJson.add(vehicleJson);
         }
