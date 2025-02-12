@@ -66,7 +66,7 @@ public class UserDriver {
             System.out.println("1. Import JSON vehicle inventory file.");
             System.out.println("2. Enable or disable vehicle acquisition.");
             System.out.println("3. Export dealer inventory to JSON file.");
-            System.out.println("4. List all vehicles in the catalog.");
+            System.out.println("4. Show list of current vehicles for each dealer.");
             System.out.println("5. End Program.");
             System.out.println("-------------------------------------------------------------------");
 
