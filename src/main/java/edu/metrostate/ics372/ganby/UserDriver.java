@@ -142,7 +142,7 @@ public class UserDriver {
                         }
 
                         // Now, ask user where to save the file
-                        System.out.println("Selected dealer: " + dealer.toString());
+                        System.out.println("Selected dealer: " + dealer.getId());
 
                         // Use JSONFileExporter to export the dealer's inventory to a file
                         JSONFileExporter fileExporter = new JSONFileExporter();
@@ -157,9 +157,8 @@ public class UserDriver {
                             File fileToSave = fileChooser.getSelectedFile();
                             // Pass the file path to exportToFile method
                             fileExporter.exportToFile(dealer, fileToSave.getAbsolutePath());
-                            System.out.println("Dealer inventory saved to: " + fileToSave.getAbsolutePath());
                         } else {
-                            System.out.println("Save operation canceled.");
+                            System.out.println("Save operation cancelled.");
                         }
                     } else {
                         System.out.println("Invalid input. Please enter a valid dealer ID.");

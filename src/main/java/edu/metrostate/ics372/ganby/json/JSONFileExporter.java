@@ -2,6 +2,7 @@ package edu.metrostate.ics372.ganby.json;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.vehicle.VehicleCategory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -29,7 +30,7 @@ public class JSONFileExporter {
         for (Vehicle vehicle : dealer.getVehicles()) {
             JSONObject vehicleJson = new JSONObject();
             vehicleJson.put("dealership_id", String.valueOf(dealer.getId()));
-            vehicleJson.put("vehicle_type", vehicle.getModel());
+            vehicleJson.put("vehicle_type", VehicleCategory.getVehicleType(vehicle));
             vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
             vehicleJson.put("vehicle_model", vehicle.getModel());
             vehicleJson.put("vehicle_id", String.valueOf(vehicle.getId()));
