@@ -9,8 +9,6 @@ import org.json.simple.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 
 public class JSONFileExporter {
 
@@ -30,13 +28,13 @@ public class JSONFileExporter {
         JSONObject rootJson = new JSONObject();
         JSONArray carInventoryJson = new JSONArray();
 
-        for (Vehicle vehicle : dealer.getVehicles()) {
+        for (Vehicle vehicle : dealer.getVehicleCollection().values()) {
             JSONObject vehicleJson = new JSONObject();
-            vehicleJson.put("dealership_id", String.valueOf(dealer.getId()));
+            vehicleJson.put("dealership_id", String.valueOf(dealer.getDealerId()));
             vehicleJson.put("vehicle_type", VehicleCategory.getVehicleType(vehicle));
             vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
             vehicleJson.put("vehicle_model", vehicle.getModel());
-            vehicleJson.put("vehicle_id", String.valueOf(vehicle.getId()));
+            vehicleJson.put("vehicle_id", String.valueOf(vehicle.getVehicleId()));
             vehicleJson.put("price", vehicle.getPrice());
             ZoneId zoneId = ZoneId.of("America/Chicago");
             long epochMillis = vehicle.getAcquisitionDate().atZone(zoneId).toInstant().toEpochMilli();

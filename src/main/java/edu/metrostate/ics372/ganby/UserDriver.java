@@ -1,7 +1,7 @@
 package edu.metrostate.ics372.ganby;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
-import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
+//import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.json.JSONFileExporter;
 import edu.metrostate.ics372.ganby.json.JSONFileImporter;
@@ -43,7 +43,8 @@ public class UserDriver {
         System.out.println("-------------------------------------------------------------------");
 
         // Dealer and Vehicle count
-        System.out.println("Dealers: " + DealerCatalog.getInstance().getDealers().size() + "\t\tVehicles: " + VehicleCatalog.getInstance().getVehicles().size());
+        System.out.println("Dealers: " + DealerCatalog.getInstance().amountOfAllDealers() +
+                "\t\tVehicles: " + DealerCatalog.getInstance().amountOfAllVehicles());
 
         // List of dealers
         DealerCatalog.getInstance().printAllDealers();
@@ -88,25 +89,27 @@ public class UserDriver {
                 case 2: //Enabling or Disabling Dealer Acquisition
                     System.out.print("Enter ID of dealer: (or Q to quit) ");
                     if (scanner.hasNextInt()) {
-                        int idToEnableOrDisable = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
+                        String idToEnableOrDisable = scanner.nextLine();
 
+                        label:
                         while (true) {
                             System.out.print("Enable (E) or Disable (D) acquisition (or Q to quit): ");
                             String option = scanner.next().trim().toUpperCase();
 
-                            if (option.equals("E")) {
-                                DealerCatalog.getInstance().enableDealerAcquisition(idToEnableOrDisable);
-                                break;
-                            } else if (option.equals("D")) {
-                                DealerCatalog.getInstance().disableDealerAcquisition(idToEnableOrDisable);
-                                break;
-                            } else if (option.equals("Q")) {
-                                System.out.println("Operation canceled.");
-                                break;
-                            } else {
-                                System.out.println("Invalid option. Please enter E to enable, D to disable, " +
-                                        "or Q to quit.");
+                            switch (option) {
+                                case "E":
+                                    DealerCatalog.getInstance().enableDealerAcquisition(idToEnableOrDisable);
+                                    break label;
+                                case "D":
+                                    DealerCatalog.getInstance().disableDealerAcquisition(idToEnableOrDisable);
+                                    break label;
+                                case "Q":
+                                    System.out.println("Operation canceled.");
+                                    break label;
+                                default:
+                                    System.out.println("Invalid option. Please enter E to enable, D to disable, " +
+                                            "or Q to quit.");
+                                    break;
                             }
                         }
                     } else if (scanner.hasNext("Q") || scanner.hasNext("q")) {
@@ -124,18 +127,18 @@ public class UserDriver {
                     // Ask user for dealer ID
                     System.out.print("Enter ID of dealer: ");
                     if (scanner.hasNextInt()) {
-                        int id = scanner.nextInt();
+                        String id = scanner.nextLine();
                         scanner.nextLine(); // Consume newline
 
                         // Find the dealer by ID
-                        Dealer dealer = DealerCatalog.getInstance().getDealers().findDealerById(id);
+                        Dealer dealer = DealerCatalog.getInstance().findDealerById(id);
                         if (dealer == null) {
                             System.out.println("Dealer with ID " + id + " not found.");
                             break;
                         }
 
                         // Now, ask user where to save the file
-                        System.out.println("Selected dealer: " + dealer.getId());
+                        System.out.println("Selected dealer: " + dealer.getDealerId());
 
                         // Use FileDialog for file selection
                         FileDialog fileDialog = new FileDialog((Frame) null, "Save File", FileDialog.SAVE);

@@ -8,9 +8,8 @@
 package edu.metrostate.ics372.ganby.json;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
-import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
+//import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
-import edu.metrostate.ics372.ganby.dealer.Dealers;
 import edu.metrostate.ics372.ganby.vehicle.*;
 import lombok.Getter;
 import org.json.simple.JSONArray;
@@ -43,21 +42,8 @@ public class JSONFileImporter {
     JSONObject jsonObject;
     JSONArray jsonArray;
 
-    // Getters
-    // Dealers and Vehicles
-    @Getter
-    private Dealers dealers;
-    @Getter
-    private Vehicles vehicles;
-    private Dealer dealer;
-    private Vehicle vehicle;
-
     // Constructor reads JSON file and initializes JSON parser
     public JSONFileImporter() throws FileNotFoundException {
-
-        // Create collections for dealers and vehicles, these are Sets of respective objects
-        this.dealers = new Dealers();
-        this.vehicles = new Vehicles();
 
         //Asked CHATGPT 4.0 to write code to allow user to choose file to import.
         try {
@@ -101,7 +87,7 @@ public class JSONFileImporter {
         String numericString  = jsonObject.get(DEALER_ID_KEY).toString();
         if (numericString == null || numericString.isBlank())
             throw new IllegalArgumentException("Value for dealer id is not numeric. Cannot create dealer.");
-        return new Dealer(Integer.parseInt(numericString));
+        return new Dealer(numericString);
     }
 
 
@@ -110,16 +96,13 @@ public class JSONFileImporter {
         if (jsonObject == null || jsonObject.isEmpty()){
             throw new IllegalArgumentException("JSON vehicle object is null or empty");
         }
-        // Create a dealer
-        this.dealer = getDealer(jsonObject);
-        dealers.addDealer(dealer);
-        DealerCatalog.getInstance().getDealers().addDealer(dealer);
 
         // Create the vehicle with JSON data
         String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
         String model = jsonObject.get(VEHICLE_MODEL_KEY).toString();
         String id = jsonObject.get(VEHICLE_ID_KEY).toString();
         double price = Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
+        String dealerId = jsonObject.get(DEALER_ID_KEY).toString();
         long epochSeconds = Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
         LocalDateTime acquisitionDate = LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(epochSeconds),
@@ -136,43 +119,21 @@ public class JSONFileImporter {
 
         VehicleCategory category = VehicleCategory.fromString(type);
         if (category == null) {
-            System.out.println("Skipping vehicle due to invalid vehicle category: " + type);    //e.g: electric is invalid
+            System.out.println("Skipping vehicle id #" + jsonObject.get(VEHICLE_ID_KEY)+
+                    " due to invalid vehicle category: " + type);    //e.g: electric is invalid
             return null; // Skip this vehicle if the category is invalid
         }
 
         // Create vehicle, category is an enum
+        Vehicle vehicle;
         if (category.equals(VehicleCategory.SUV)) {
-            this.vehicle = new SUV.Builder().dealer(dealer)
-                    .id(id)
-                    .manufacturer(manufacturer)
-                    .model(model)
-                    .price(price)
-                    .acquisitionDate(acquisitionDate)
-                    .build();
-        } else if (category.equals(VehicleCategory.PICKUP)) {
-            this.vehicle = new Sedan.Builder().dealer(dealer)
-                    .id(id)
-                    .manufacturer(manufacturer)
-                    .model(model)
-                    .price(price)
-                    .acquisitionDate(acquisitionDate)
-                    .build();
+            vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
         } else if (category.equals(VehicleCategory.SEDAN)) {
-            this.vehicle = new Sedan.Builder().dealer(dealer)
-                    .id(id)
-                    .manufacturer(manufacturer)
-                    .model(model)
-                    .price(price)
-                    .acquisitionDate(acquisitionDate)
-                    .build();
+            vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
+        } else if (category.equals(VehicleCategory.PICKUP)) {
+            vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
         } else if (category.equals(VehicleCategory.SPORTS_CAR)) {
-            this.vehicle = new SportsCar.Builder().dealer(dealer)
-                    .id(id)
-                    .manufacturer(manufacturer)
-                    .model(model)
-                    .price(price)
-                    .acquisitionDate(acquisitionDate)
-                    .build();
+            vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
         } else {
             System.out.println("Unknown category: " + category);
             return null; // Skip this vehicle if the category is unknown
@@ -181,7 +142,7 @@ public class JSONFileImporter {
         //vehicles.addVehicle(vehicle);     //Why are we adding to vehicles class and then to VehicleCatalog??
 
         // Add vehicle to catalog
-        VehicleCatalog.getInstance().getVehicles().addVehicle(vehicle);
+        DealerCatalog.getInstance().addVehicle(vehicle);
         return vehicle;
     }
 
@@ -196,10 +157,12 @@ public class JSONFileImporter {
         }
     }
 
-
+    /* No usages.
     public void printDealerKeys () {
         for (Object object : jsonArray) {
             String dealerId = ((JSONObject) object).get(DEALER_ID_KEY).toString();
         }
     }
+
+     */
 }

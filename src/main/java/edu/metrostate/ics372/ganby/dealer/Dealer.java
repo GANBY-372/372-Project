@@ -7,62 +7,70 @@
  */
 
 package edu.metrostate.ics372.ganby.dealer;
-
-import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
-import lombok.Getter;
-
+import java.util.HashMap;
 import java.util.Objects;
-import java.util.Set;
 
 public class Dealer {
 
     // Getter for dealer id
     // Instance variables
-    @Getter
-    private final int id;
-    private boolean vehicleAcquisitionStatus;
+    private final String id;    //id is string because some IDs may contain letters
+    private boolean isVehicleAcquisitionEnabled;
+    // Getter for vehicles associated with dealer, Returns a set of vehicle objects
+    private HashMap<String, Vehicle> vehicleCollection;
 
     // Constructor, initializes dealer with id
-    // Vehicle acquisition is disabled by default
-    public Dealer(int id) {
+    // Vehicle acquisition is enabled by default
+    public Dealer(String id) {
         this.id = id;
-        this.vehicleAcquisitionStatus = true;
+        this.isVehicleAcquisitionEnabled = true;
+        vehicleCollection = new HashMap<>();
+    }
+
+    //Getter for dealerId
+    public String getDealerId(){
+        return id;
     }
 
     // Getter for vehicle acquisition state
-    public boolean getVehicleAcquisitionStatus() {
-        return vehicleAcquisitionStatus;
+    public boolean getIsVehicleAcquisitionStatus() {
+        return isVehicleAcquisitionEnabled;
+    }
+
+    public HashMap<String, Vehicle> getVehicleCollection() {
+        return vehicleCollection;
     }
 
     // set vehicle acquisition state to true
-    public void enableVehicleAcquisition(int id) {
-        if (vehicleAcquisitionStatus) {
-            System.out.println("Vehicle acquisition already enabled for dealer id #" + id + ".");
+    public void enableVehicleAcquisition(String dealerId) {
+        if (isVehicleAcquisitionEnabled) {
+            System.out.println("Vehicle acquisition already enabled for dealer id #" + dealerId + ".");
         } else{
-            this.vehicleAcquisitionStatus = true;
-            System.out.println("Successfully enabled vehicle acquisition for dealer id #" + id + ".");
+            this.isVehicleAcquisitionEnabled = true;
+            System.out.println("Successfully enabled vehicle acquisition for dealer id #" + dealerId + ".");
         }
     }
 
     // set vehicle acquisition state to false
-    public void disableVehicleAcquisition() {
-        if (!vehicleAcquisitionStatus) {
-            System.out.println("Vehicle acquisition already disabled for dealer id #" + id + ".");
+    public void disableVehicleAcquisition(String dealerId) {
+        if (!isVehicleAcquisitionEnabled) {
+            System.out.println("Vehicle acquisition already disabled for dealer id #" + dealerId + ".");
         } else{
-            this.vehicleAcquisitionStatus = false;
-            System.out.println("Successfully disabled vehicle acquisition for dealer id #" + id + ".");
+            this.isVehicleAcquisitionEnabled = false;
+            System.out.println("Successfully disabled vehicle acquisition for dealer id #" + dealerId + ".");
         }
-    }
-
-    // Getter for vehicles associated with dealer, Returns a set of vehicle objects
-    public Set<Vehicle> getVehicles () {
-        return VehicleCatalog.getInstance().getVehicles().filterByDealer(this);
     }
 
     // Find vehicle by id, returns a vehicle object
     public Vehicle findVehicleById (String vehicleId) {
-        return VehicleCatalog.getInstance().getVehicles().findDealerVehicleById(this, vehicleId);
+        return getVehicleCollection().get(vehicleId);
+    }
+
+
+    //Add the vehicle to vehicle collection
+    public void addVehicle (Vehicle vehicle) {
+            vehicleCollection.put(vehicle.getVehicleId(), vehicle);
     }
 
     // Equals method
@@ -71,7 +79,7 @@ public class Dealer {
         if (object == this) return true;        // If object is compared with itself return true
         if (object == null) return false;       // If object is null return false
         if (object instanceof Dealer dealer) {  // If neither are true, check if object is an instance of Dealer
-            return id == dealer.getId();        // Is object a dealer with same id?
+            return id.equals(dealer.getDealerId()) ;        // Is object a dealer with same id?
         }
         return false;                           // If none of the above, return false
     }
@@ -87,7 +95,7 @@ public class Dealer {
     //Asked CHATGPT 4.0 to format the toString to make a clean output
     @Override
     public String toString() {
-        String acquisitionStatus = vehicleAcquisitionStatus ? "Yes" : "No";
-        return String.format("| %-10d | %-20s |", id, acquisitionStatus);
+        String acquisitionStatus = isVehicleAcquisitionEnabled ? "Yes" : "No";
+        return String.format("| %-10d | %-20s |", Integer.parseInt(id), acquisitionStatus);
     }
 }

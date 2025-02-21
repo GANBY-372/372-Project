@@ -1,35 +1,31 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
-import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.json.JSONObjectBuilder;
-import lombok.AllArgsConstructor;
 import org.json.simple.JSONObject;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-@AllArgsConstructor
 public class Sedan implements Vehicle {
 
-    private final String id;
+    private final String id;    //id is string because some IDs may contain letters
     private final String model;
     private final String manufacturer;
     private double price;
-    private Dealer dealer;
+    private String dealerId;
     private LocalDateTime acquisitionDate;
 
-    public Sedan (Builder builder) {
-        this.id = builder.id;
-        this.model = builder.model;
-        this.manufacturer = builder.manufacturer;
-        this.acquisitionDate = builder.acquisitionDate;
-        this.price = builder.price;
-        this.dealer = builder.dealer;
+    public Sedan(String id, String model, String manufacturer, double price, String dealerId, LocalDateTime acquisitionDate) {
+        this.id = id;
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.price = price;
+        this.dealerId = dealerId;
+        this.acquisitionDate = acquisitionDate;
     }
 
     @Override
-    public String getId () {
+    public String getVehicleId() {
         return id;
     }
 
@@ -49,8 +45,8 @@ public class Sedan implements Vehicle {
     }
 
     @Override
-    public Dealer getDealer () {
-        return dealer;
+    public String getDealerId () {
+        return dealerId;
     }
 
     @Override
@@ -64,12 +60,15 @@ public class Sedan implements Vehicle {
         this.price = price;
     }
 
-    @Override
+
+    /*
     public void setDealer (Dealer dealer) {
         if (dealer == null) throw new IllegalArgumentException("Dealer cannot be null");
         this.dealer = dealer;
     }
 
+
+     */
     @Override
     public void setAcquisitionDate (LocalDateTime newAcquisitionDate) {
         if (newAcquisitionDate == null)
@@ -81,8 +80,8 @@ public class Sedan implements Vehicle {
     public boolean equals (Object object) {
         if (object == this) return true;
         if (object == null) return false;
-        if (object instanceof Sedan vehicle) {
-            return id.equalsIgnoreCase(vehicle.getId());
+        if (object instanceof Sedan sedan) {
+            return id == sedan.getVehicleId();
         }
         return false;
     }
@@ -95,18 +94,20 @@ public class Sedan implements Vehicle {
     @Override
     public String toString () {
         return getClass().getSimpleName() +
-            " [id:" + id
-            + " model:" + model
-            + " manufacturer:" + manufacturer
-            + " price:" + price
-            + " dealer:" + dealer
-            + " acquisitionDate:" + acquisitionDate + "]";
+                " [id:" + id
+                + " model:" + model
+                + " manufacturer:" + manufacturer
+                + " price:" + price
+                + " dealer id:" + dealerId
+                + " acquisitionDate:" + acquisitionDate + "]";
     }
 
     public JSONObject toJSON () {
         return JSONObjectBuilder.build(this);
     }
 
+
+    /*
     public static Builder builder () {
         return new Builder();
     }
@@ -140,8 +141,8 @@ public class Sedan implements Vehicle {
             return this;
         }
 
-        public Builder dealer (Dealer dealer) {
-            this.dealer = dealer;
+        public Builder dealer (int id) {
+            this.dealerId = dealer;
             return this;
         }
 
@@ -150,8 +151,10 @@ public class Sedan implements Vehicle {
             return this;
         }
 
-        public Sedan build () {
-            return new Sedan(this);
+        public SUV build () {
+            return new SUV(this);
         }
     }
+
+     */
 }

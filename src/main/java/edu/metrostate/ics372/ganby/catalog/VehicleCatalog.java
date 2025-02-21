@@ -4,7 +4,7 @@
  * This is a singleton class. Maintains a collection of Vehicle objects.
  * Used to manage the collection of vehicles in the system during runtime.
  * Singleton pattern ensures only one instance of the class is created.
- */
+
 package edu.metrostate.ics372.ganby.catalog;
 
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
@@ -51,3 +51,4 @@ public class VehicleCatalog {
     public Vehicles getVehicles() { return vehicles; }
 
 }
+ */
