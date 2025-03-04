@@ -123,21 +123,22 @@ public class UserDriver {
 
 
 
-                case 3: //Exporting Dealer Inventory
-                    // Ask user for dealer ID
-                    System.out.print("Enter ID of dealer: ");
-                    if (scanner.hasNextInt()) {
-                        String id = scanner.nextLine();
-                        scanner.nextLine(); // Consume newline
+                case 3: // Exporting Dealer Inventory
+                    while (true) {
+                        System.out.print("Enter ID of dealer (or Q to quit): ");
+                        String id = scanner.nextLine().trim();
 
-                        // Find the dealer by ID
-                        Dealer dealer = DealerCatalog.getInstance().findDealerById(id);
-                        if (dealer == null) {
-                            System.out.println("Dealer with ID " + id + " not found.");
+                        if (id.equalsIgnoreCase("Q")) {
+                            System.out.println("Operation canceled.");
                             break;
                         }
 
-                        // Now, ask user where to save the file
+                        Dealer dealer = DealerCatalog.getInstance().findDealerById(id);
+                        if (dealer == null) {
+                            System.out.println("Dealer with ID " + id + " not found. Please enter a valid ID.");
+                            continue;
+                        }
+
                         System.out.println("Selected dealer: " + dealer.getDealerId());
 
                         // Use FileDialog for file selection
@@ -153,14 +154,14 @@ public class UserDriver {
                             String filePath = directory + filename; // Construct full path
                             JSONFileExporter fileExporter = new JSONFileExporter();
                             fileExporter.exportToFile(dealer, filePath);
+                            System.out.println("Inventory exported successfully.");
                         } else {
-                            System.out.println("Export operation cancelled.");
+                            System.out.println("Export operation canceled.");
                         }
-                    } else {
-                        System.out.println("Invalid input. Please enter a valid dealer ID.");
-                        scanner.next(); // Clear invalid input
+                        break;
                     }
                     break;
+
 
 
 
