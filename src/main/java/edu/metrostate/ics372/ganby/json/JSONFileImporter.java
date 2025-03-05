@@ -1,6 +1,5 @@
 /**
  * JSONFileImporter.java
- * @author B, Y, G
  * This class is for importing JSON files.
  * It opens a file explorer to select a file.
  */
@@ -26,13 +25,13 @@ import java.util.TimeZone;
 public class JSONFileImporter {
 
     // JSON key name constants
-    public static final String DEALER_ID_KEY = "dealership_id";
-    public static final String VEHICLE_ID_KEY = "vehicle_id";
-    public static final String VEHICLE_MANUFACTURER_KEY = "vehicle_manufacturer";
-    public static final String VEHICLE_MODEL_KEY = "vehicle_model";
-    public static final String VEHICLE_TYPE_KEY = "vehicle_type";
-    public static final String PRICE_KEY = "price";
-    public static final String ACQUISITION_DATE_KEY = "acquisition_date";
+    public static final String DEALER_ID_KEY =              "dealership_id";
+    public static final String VEHICLE_ID_KEY =             "vehicle_id";
+    public static final String VEHICLE_MANUFACTURER_KEY =   "vehicle_manufacturer";
+    public static final String VEHICLE_MODEL_KEY =          "vehicle_model";
+    public static final String VEHICLE_TYPE_KEY =           "vehicle_type";
+    public static final String PRICE_KEY =                  "price";
+    public static final String ACQUISITION_DATE_KEY =       "acquisition_date";
 
     // JSON file reader and parser tools
     private Reader reader;
@@ -98,12 +97,12 @@ public class JSONFileImporter {
         }
 
         // Create the vehicle with JSON data
-        String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
-        String model = jsonObject.get(VEHICLE_MODEL_KEY).toString();
-        String id = jsonObject.get(VEHICLE_ID_KEY).toString();
-        double price = Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
-        String dealerId = jsonObject.get(DEALER_ID_KEY).toString();
-        long epochSeconds = Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
+        String manufacturer =           jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
+        String model =                  jsonObject.get(VEHICLE_MODEL_KEY).toString();
+        String id =                     jsonObject.get(VEHICLE_ID_KEY).toString();
+        double price =                  Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
+        String dealerId =               jsonObject.get(DEALER_ID_KEY).toString();
+        long epochSeconds =             Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
         LocalDateTime acquisitionDate = LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(epochSeconds),
                 TimeZone.getDefault().toZoneId()
@@ -126,17 +125,15 @@ public class JSONFileImporter {
 
         // Create vehicle, category is an enum
         Vehicle vehicle;
-        if (category.equals(VehicleCategory.SUV)) {
-            vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
-        } else if (category.equals(VehicleCategory.SEDAN)) {
-            vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
-        } else if (category.equals(VehicleCategory.PICKUP)) {
-            vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
-        } else if (category.equals(VehicleCategory.SPORTS_CAR)) {
-            vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
-        } else {
-            System.out.println("Unknown category: " + category);
-            return null; // Skip this vehicle if the category is unknown
+        switch (category) {
+            case SUV ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case SEDAN ->       vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case PICKUP ->      vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case SPORTS_CAR ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
+            default -> {
+                System.out.println("Unknown category: " + category);
+                return null;
+            }
         }
 
         //vehicles.addVehicle(vehicle);     //Why are we adding to vehicles class and then to VehicleCatalog??

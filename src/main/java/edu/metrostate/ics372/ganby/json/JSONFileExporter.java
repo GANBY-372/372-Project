@@ -23,6 +23,13 @@ public class JSONFileExporter {
         }
     }
 
+    /**
+     * Save the instance to a file. This saves the instance so it will be available at next boot.
+     */
+    public void saveInstance() {
+
+    }
+
     // Convert a dealer object to a JSON string
     private String convertDealerToJson(Dealer dealer) {
         JSONObject rootJson = new JSONObject();

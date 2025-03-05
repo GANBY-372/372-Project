@@ -132,6 +132,8 @@ public void printAllVehiclesById() {
     }
 }
 
+
+
 //Asked ChatGPT 4.0 to make a clean and formatted output for vehicles
 //This method get all vehicles of a given dealer
 public void getAllVehiclesOfDealer(String id) {

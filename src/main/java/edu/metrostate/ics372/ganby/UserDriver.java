@@ -124,9 +124,9 @@ public class UserDriver {
 
 
                 case 3: //Exporting Dealer Inventory
-                    // Ask user for dealer ID
-                    System.out.print("Enter ID of dealer: ");
-                    if (scanner.hasNextInt()) {
+                    System.out.print("Enter ID of dealer: "); // Ask user for dealer ID
+
+                    if (scanner.hasNextInt()) {               // Accept only integer input
                         String id = scanner.nextLine();
                         scanner.nextLine(); // Consume newline
 
@@ -136,8 +136,6 @@ public class UserDriver {
                             System.out.println("Dealer with ID " + id + " not found.");
                             break;
                         }
-
-                        // Now, ask user where to save the file
                         System.out.println("Selected dealer: " + dealer.getDealerId());
 
                         // Use FileDialog for file selection
@@ -145,14 +143,15 @@ public class UserDriver {
                         fileDialog.setFile("dealer_inventory_" + id + ".json"); // Default filename
                         fileDialog.setVisible(true);
 
-                        // Get selected file
+                        // Set directory and filename based on user selection, so we can make path
                         String directory = fileDialog.getDirectory();
                         String filename = fileDialog.getFile();
 
+                        // If user clicks cancel, directory and filename will be null
                         if (directory != null && filename != null) {
-                            String filePath = directory + filename; // Construct full path
-                            JSONFileExporter fileExporter = new JSONFileExporter();
-                            fileExporter.exportToFile(dealer, filePath);
+                            String filePath = directory + filename;                 // path to target write file
+                            JSONFileExporter fileExporter = new JSONFileExporter(); // Create exporter instance
+                            fileExporter.exportToFile(dealer, filePath);            // exporter writes to file
                         } else {
                             System.out.println("Export operation cancelled.");
                         }
