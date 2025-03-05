@@ -123,19 +123,22 @@ public class UserDriver {
 
 
 
-                case 3: //Exporting Dealer Inventory
-                    System.out.print("Enter ID of dealer: "); // Ask user for dealer ID
+                case 3: // Exporting Dealer Inventory
+                    while (true) {
+                        System.out.print("Enter ID of dealer (or Q to quit): ");
+                        String id = scanner.nextLine().trim();
 
-                    if (scanner.hasNextInt()) {               // Accept only integer input
-                        String id = scanner.nextLine();
-                        scanner.nextLine(); // Consume newline
-
-                        // Find the dealer by ID
-                        Dealer dealer = DealerCatalog.getInstance().findDealerById(id);
-                        if (dealer == null) {
-                            System.out.println("Dealer with ID " + id + " not found.");
+                        if (id.equalsIgnoreCase("Q")) {
+                            System.out.println("Operation canceled.");
                             break;
                         }
+
+                        Dealer dealer = DealerCatalog.getInstance().findDealerById(id);
+                        if (dealer == null) {
+                            System.out.println("Dealer with ID " + id + " not found. Please enter a valid ID.");
+                            continue;
+                        }
+
                         System.out.println("Selected dealer: " + dealer.getDealerId());
 
                         // Use FileDialog for file selection
@@ -143,23 +146,22 @@ public class UserDriver {
                         fileDialog.setFile("dealer_inventory_" + id + ".json"); // Default filename
                         fileDialog.setVisible(true);
 
-                        // Set directory and filename based on user selection, so we can make path
+                        // Get selected file
                         String directory = fileDialog.getDirectory();
                         String filename = fileDialog.getFile();
 
-                        // If user clicks cancel, directory and filename will be null
                         if (directory != null && filename != null) {
-                            String filePath = directory + filename;                 // path to target write file
-                            JSONFileExporter fileExporter = new JSONFileExporter(); // Create exporter instance
-                            fileExporter.exportToFile(dealer, filePath);            // exporter writes to file
+                            String filePath = directory + filename; // Construct full path
+                            JSONFileExporter fileExporter = new JSONFileExporter();
+                            fileExporter.exportToFile(dealer, filePath);
+                            System.out.println("Inventory exported successfully.");
                         } else {
-                            System.out.println("Export operation cancelled.");
+                            System.out.println("Export operation canceled.");
                         }
-                    } else {
-                        System.out.println("Invalid input. Please enter a valid dealer ID.");
-                        scanner.next(); // Clear invalid input
+                        break;
                     }
                     break;
+
 
 
 

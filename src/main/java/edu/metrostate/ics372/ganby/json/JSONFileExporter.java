@@ -37,11 +37,11 @@ public class JSONFileExporter {
 
         for (Vehicle vehicle : dealer.getVehicleCollection().values()) {
             JSONObject vehicleJson = new JSONObject();
-            vehicleJson.put("dealership_id", String.valueOf(dealer.getDealerId()));
+            vehicleJson.put("dealership_id", dealer.getDealerId());
             vehicleJson.put("vehicle_type", VehicleCategory.getVehicleType(vehicle));
             vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
             vehicleJson.put("vehicle_model", vehicle.getModel());
-            vehicleJson.put("vehicle_id", String.valueOf(vehicle.getVehicleId()));
+            vehicleJson.put("vehicle_id", vehicle.getVehicleId());
             vehicleJson.put("price", vehicle.getPrice());
             ZoneId zoneId = ZoneId.of("America/Chicago");
             long epochMillis = vehicle.getAcquisitionDate().atZone(zoneId).toInstant().toEpochMilli();
