@@ -38,13 +38,16 @@ public class JSONFileImporter {
     private JSONParser jsonParser;
 
     // JSON object and array buckets
-    JSONObject jsonObject;
-    JSONArray jsonArray;
+    JSONObject  jsonObject;
+    JSONArray   jsonArray;
 
-    // Constructor reads JSON file and initializes JSON parser
+    // TODO: Decouple file chooser and constructor so we can use this class to load a state on boot
+    /**
+     * Constructor and file chooser and Importer method in one.
+     * @throws FileNotFoundException
+     */
     public JSONFileImporter() throws FileNotFoundException {
 
-        //Asked CHATGPT 4.0 to write code to allow user to choose file to import.
         try {
             // File chooser dialog
             Frame frame = new Frame();
@@ -79,9 +82,14 @@ public class JSONFileImporter {
         }
     }
 
-
-    // Method to create a dealer from a JSON object
-    // ***NOTE*** We may want to rename this method to something like createDealer [delete this comment after discussion]
+    // TODO: Rename this method, it looks like a basic getter, but it seems to create a dealer for the object
+    // TODO: THis method throws exception for non numeric - we decided id should be a string so need to edit
+    /**
+     * Creates a dealer from a JSON object using the dealer ID associated with the object.
+     * @param jsonObject JSON object containing the dealer ID
+     * @return Dealer object
+     * @throws IllegalArgumentException if the dealer ID is not numeric
+     */
     private Dealer getDealer (JSONObject jsonObject) {
         String numericString  = jsonObject.get(DEALER_ID_KEY).toString();
         if (numericString == null || numericString.isBlank())
@@ -89,8 +97,12 @@ public class JSONFileImporter {
         return new Dealer(numericString);
     }
 
-
-    //Used ChatGPT 4.0 to handle type exception.
+    /**
+     * Creates a vehicle from a JSON object.
+     * @param jsonObject JSON object containing vehicle data
+     * @return Vehicle object
+     * @throws IllegalAccessException if null object or empty object
+     */
     public Vehicle createVehicle(JSONObject jsonObject) throws IllegalAccessException {
         if (jsonObject == null || jsonObject.isEmpty()){
             throw new IllegalArgumentException("JSON vehicle object is null or empty");
@@ -143,7 +155,10 @@ public class JSONFileImporter {
         return vehicle;
     }
 
-    // Process JSON file
+    /**
+     * Processes the JSON array of objects. This adds JSON file list of vehicles to the catalog.
+     * @throws IllegalAccessException if null or empty JSON array
+     */
     public void processJSON() throws IllegalAccessException {
         if (jsonArray == null || jsonArray.isEmpty()) {
             return;
@@ -160,6 +175,5 @@ public class JSONFileImporter {
             String dealerId = ((JSONObject) object).get(DEALER_ID_KEY).toString();
         }
     }
-
      */
 }

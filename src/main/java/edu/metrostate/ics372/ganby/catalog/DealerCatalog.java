@@ -1,7 +1,5 @@
 /**
  * DealerCatalog.java
- *
- * @authors GBY
  * This is a singleton class. Maintains a single collection of Dealer objects.
  * Used to manage the collection of dealers in the system during runtime.
  * Singleton pattern ensures only one instance of the class is created.
@@ -14,14 +12,19 @@ import java.util.HashMap;
 
 public class DealerCatalog {
 
-    private static DealerCatalog instance;
+    private static DealerCatalog    instance;
+    // TODO: Change name here - are we going with collection or catalog? both is confusing
     private HashMap<String, Dealer> dealerCollection;
 
+    //Private constructor to prevent instantiation
     private DealerCatalog() {
         dealerCollection = new HashMap<>();
     }
 
-    //Singleton implementation
+    /**
+     * Method to get the instance of the DealerCatalog
+     * @return instance of DealerCatalog
+     */
     public static DealerCatalog getInstance() {
         if (instance == null) {
             instance = new DealerCatalog();
@@ -29,16 +32,29 @@ public class DealerCatalog {
         return instance;
     }
 
-    // Public method to get dealers
+    // TODO: Change name here? This uses collection, but the class is called catalog
+    /**
+     * Method to get the dealer collection / collection
+     * @return HashMap of dealers
+     */
     public HashMap<String, Dealer> getDealerCollection() {
         return dealerCollection;
     }
 
-    //returns a dealer object given an id.
+    // TODO: Method name could be more accurate. getDealerById(), getDealerWithId(), etc.
+    /**
+     * Returns a dealer object using the dealer id
+     * @param id String dealer id
+     * @return Dealer object
+     */
     public Dealer findDealerById(String id) {
         return dealerCollection.get(id);
     }
 
+    /**
+     * Add a vehicle to the dealer collection
+     * @param vehicle Vehicle object
+     */
     public void addVehicle(Vehicle vehicle) {
 
         if (vehicle == null) {    //Doesn't add vehicle if it's null
@@ -77,7 +93,9 @@ public class DealerCatalog {
     }
 
 
-//Method to print out list of all Dealers
+/**
+ * Print the dealers in the collection
+ */
 public void printAllDealers() {
     System.out.println("-------------------------------------------");
     System.out.printf("| %-10s | %-20s |%n", "Dealer ID", "Acquisition Enabled");
@@ -88,6 +106,10 @@ public void printAllDealers() {
     System.out.println("-------------------------------------------");
 }
 
+/**
+ * Enable Dealer Acquisition with the dealer id
+ * @param id dealer id
+ */
 public void enableDealerAcquisition(String id) {
     if (this.getDealerCollection().get(id) == null) {
         System.out.println("Dealer does not exist.");
@@ -96,6 +118,10 @@ public void enableDealerAcquisition(String id) {
     }
 }
 
+/**
+     * Disable Dealer Acquisition with the dealer id
+     * @param id String
+     */
 public void disableDealerAcquisition(String id) {
     if (this.getDealerCollection().get(id) == null) {
         System.out.println("Dealer does not exist.");
@@ -104,8 +130,9 @@ public void disableDealerAcquisition(String id) {
     }
 }
 
-//Asked CHATGPT 4.0 to write this method for me. It formatted it and figured out the logic.
-//Prints all Vehicles in the Catalog sorted by Dealer
+/**
+ * Prints table of all vehicles sorted by dealer id
+ */
 public void printAllVehiclesById() {
     System.out.println("Vehicles by Dealer:");
 
@@ -131,11 +158,11 @@ public void printAllVehiclesById() {
 }
 
 
-    /**
-     * Method to print all vehicles of a dealer
-     * @param id dealer id
-     */
-    public void getAllVehiclesOfDealer(String id) {
+/**
+ * Method to print all vehicles of a dealer
+ * @param id dealer id
+ */
+public void getAllVehiclesOfDealer(String id) {
     System.out.println("-------------------------------------------------------------");
     System.out.printf("| %-10s | %-15s | %-10s | %-10s | %-15s |\n",
             "Type", "Model", "Manufacturer", "Price", "Acquisition Date");
@@ -151,14 +178,18 @@ public void printAllVehiclesById() {
     System.out.println("-------------------------------------------------------------");
 }
 
-    /**
-     * Method to get the total number of dealers
-     * @return
-     */
-    public int amountOfAllDealers() {
+/**
+ * Method to get the total number of dealers
+ * @return int
+ */
+public int amountOfAllDealers() {
     return this.dealerCollection.size();
 }
 
+/**
+ * Method to get the total number of vehicles
+ * @return int
+ */
 public int amountOfAllVehicles() {
     int totalAmount = 0;
     for (Dealer dealer : this.getDealerCollection().values()) {

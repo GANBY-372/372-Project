@@ -16,7 +16,12 @@ public class JSONObjectBuilder {
 
     public JSONObjectBuilder() {}
 
-    // Build a JSON object from a vehicle object
+    // TODO: Maybe change the name to something more descriptive
+    /**
+     * Build a JSON object from a vehicle object
+     * @param vehicle the vehicle object
+     * @return the JSON object
+     */
     public static JSONObject build (Vehicle vehicle) {
         if (vehicle == null) {
             throw new IllegalArgumentException("Vehicle cannot be null");
@@ -41,8 +46,11 @@ public class JSONObjectBuilder {
         return jsonObject;
     }
 
-    // Validate the JSON object
-    // Throws a runtime exception if the JSON object is invalid
+    /**
+     * Validate a JSON object
+     * @param jsonObject the JSON object
+     * @throws RuntimeException if the JSON object is invalid
+     */
     private static void validateJSON(JSONObject jsonObject) {
         JSONParser parser = new JSONParser();
         try {
