@@ -13,36 +13,52 @@ import java.util.Objects;
 
 public class Dealer {
 
-    // Getter for dealer id
+    // TODO: Add Name attribute to Dealer
     // Instance variables
-    private final String id;    //id is string because some IDs may contain letters
-    private boolean isVehicleAcquisitionEnabled;
-    // Getter for vehicles associated with dealer, Returns a set of vehicle objects
-    private HashMap<String, Vehicle> vehicleCollection;
+    private final String                id;
+    private boolean                     isVehicleAcquisitionEnabled;
+    private HashMap<String, Vehicle>    vehicleCollection;
 
-    // Constructor, initializes dealer with id
-    // Vehicle acquisition is enabled by default
+    /**
+     * Constructor for Dealer
+     * @param id String
+     */
     public Dealer(String id) {
         this.id = id;
         this.isVehicleAcquisitionEnabled = true;
         vehicleCollection = new HashMap<>();
     }
 
-    //Getter for dealerId
+    /**
+     * Get the dealer id
+     * @return String dealer id
+     */
     public String getDealerId(){
         return id;
     }
 
-    // Getter for vehicle acquisition state
+    // TODO: Change method to "getIsVehicleAcquisitionEnabled" for consistency with the attribute it gets
+    /**
+     * Get the vehicle acquisition status
+     * @return boolean
+     */
     public boolean getIsVehicleAcquisitionStatus() {
         return isVehicleAcquisitionEnabled;
     }
 
+    // TODO: Drop this lombok functionality, we are not using it and IDE is throwing a notice
+    /**
+     * Get the vehicle collection
+     * @return HashMap<String, Vehicle> vehicleCollection
+     */
     public HashMap<String, Vehicle> getVehicleCollection() {
         return vehicleCollection;
     }
 
-    // set vehicle acquisition state to true
+    /**
+     * Set the dealer acquisition status to true / enabled
+     * @param dealerId String
+     */
     public void enableVehicleAcquisition(String dealerId) {
         if (isVehicleAcquisitionEnabled) {
             System.out.println("Vehicle acquisition already enabled for dealer id #" + dealerId + ".");
@@ -52,7 +68,10 @@ public class Dealer {
         }
     }
 
-    // set vehicle acquisition state to false
+    /**
+     * Set the dealer acquisition status to false / disabled
+     * @param dealerId String
+     */
     public void disableVehicleAcquisition(String dealerId) {
         if (!isVehicleAcquisitionEnabled) {
             System.out.println("Vehicle acquisition already disabled for dealer id #" + dealerId + ".");
@@ -62,18 +81,28 @@ public class Dealer {
         }
     }
 
-    // Find vehicle by id, returns a vehicle object
+    /**
+     * Find a vehicle by its id
+     * @param vehicleId String
+     * @return Vehicle
+     */
     public Vehicle findVehicleById (String vehicleId) {
         return getVehicleCollection().get(vehicleId);
     }
 
-
-    //Add the vehicle to vehicle collection
+    /**
+     * Add a vehicle to the dealer's vehicle collection
+     * @param vehicle Vehicle
+     */
     public void addVehicle (Vehicle vehicle) {
             vehicleCollection.put(vehicle.getVehicleId(), vehicle);
     }
 
-    // Equals method
+    /**
+     * Equals method to compare two dealers
+     * @param object Object
+     * @return boolean
+     */
     @Override
     public boolean equals (Object object) {
         if (object == this) return true;        // If object is compared with itself return true
@@ -84,15 +113,19 @@ public class Dealer {
         return false;                           // If none of the above, return false
     }
 
-    // Hashcode is used to determine the location of an object in a hash table
-    // returns the dealers index in a hash table
+    /**
+     * Hashcode is used to determine the location of an object in a hash table
+     * @return int
+     */
     @Override
     public int hashCode () {
         return Objects.hashCode(id);
     }
 
-    // toString method
-    //Asked CHATGPT 4.0 to format the toString to make a clean output
+    /**
+     * String representation of a dealer
+     * @return String
+     */
     @Override
     public String toString() {
         String acquisitionStatus = isVehicleAcquisitionEnabled ? "Yes" : "No";

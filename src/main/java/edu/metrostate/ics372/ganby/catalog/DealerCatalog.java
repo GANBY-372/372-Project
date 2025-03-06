@@ -1,17 +1,15 @@
 /**
  * DealerCatalog.java
  *
- * @author B, G
- * This is a singleton class. Maintains a collection of Dealer objects.
+ * @authors GBY
+ * This is a singleton class. Maintains a single collection of Dealer objects.
  * Used to manage the collection of dealers in the system during runtime.
  * Singleton pattern ensures only one instance of the class is created.
  */
 
 package edu.metrostate.ics372.ganby.catalog;
-
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
-
 import java.util.HashMap;
 
 public class DealerCatalog {
@@ -133,10 +131,11 @@ public void printAllVehiclesById() {
 }
 
 
-
-//Asked ChatGPT 4.0 to make a clean and formatted output for vehicles
-//This method get all vehicles of a given dealer
-public void getAllVehiclesOfDealer(String id) {
+    /**
+     * Method to print all vehicles of a dealer
+     * @param id dealer id
+     */
+    public void getAllVehiclesOfDealer(String id) {
     System.out.println("-------------------------------------------------------------");
     System.out.printf("| %-10s | %-15s | %-10s | %-10s | %-15s |\n",
             "Type", "Model", "Manufacturer", "Price", "Acquisition Date");
@@ -152,7 +151,11 @@ public void getAllVehiclesOfDealer(String id) {
     System.out.println("-------------------------------------------------------------");
 }
 
-public int amountOfAllDealers() {
+    /**
+     * Method to get the total number of dealers
+     * @return
+     */
+    public int amountOfAllDealers() {
     return this.dealerCollection.size();
 }
 
