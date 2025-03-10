@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+:Customer:
+:Dealer:
+package CheckRentalAvailability #AliceBlue {
+	Customer --> (View available rentals) #green;line.bold;text:green
+	Customer --> (Refresh view) #green;line.bold;text:green
+	Customer --> (Filter available rentals) #green;line.bold;text:green
+	Customer --> (Select from available vehicles) #green;line.bold;text:green
+
+	(View available rentals) <-- Dealer #red;line.bold;text:red
+	(Refresh view) <-- Dealer #red;line.bold;text:red
+	(Filter available rentals) <-- Dealer #red;line.bold;text:red
+	(Select from available vehicles) <-- Dealer #red;line.bold;text:red
+}
+@enduml

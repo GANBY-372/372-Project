@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+:Customer:
+:Dealer:
+package RentalRequest #aliceblue {
+	Customer --> (Submit) #green;line.bold;text:green
+	Customer --> (Cancel) #green;line.bold;text:green
+	(Submit) .> (Controls) : extends
+	(Cancel) .> (Controls) :extends
+	(Submit) <-- Dealer #red;line.bold;text:red
+	(Cancel) <-- Dealer #red;line.bold;text:red
+}
+@enduml

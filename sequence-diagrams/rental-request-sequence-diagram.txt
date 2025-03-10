@@ -1,0 +1,38 @@
+@startuml
+title Request Rental
+
+
+actor User
+participant "View" as View
+participant "Controller" as Controller
+participant "Form Input Validator" as Validator
+participant "Service" as Service
+participant "Repository" as Repository
+User -> View: Fill Rental Request Form
+View -> Controller: Submit Rental Request Form
+Controller -> Validator: Validate Rental Request Form
+Validator -> Validator: Validate Form Data
+alt Valid Form
+   Validator -> Service: Forward Rental Request
+   Service -> Service: Process Rental Request
+   alt Vehicle Available
+      alt Accept Request
+         Service -> Repository: Save Rental Request
+         Service -> View: Send Rental Agreement Form
+         User -> Service: Accept Rental Aggreement
+         Service -> Service: Set Vehicle as Rented
+         Service -> Repository: Save Rental Information
+      else Reject Reques
+         Service -> User: Notify of Rejection
+       end
+    else Vehicle Unavailable
+       Service -> User: Notify of unavalibity
+    end 
+else Invalid Form
+   Validator -> Validator: Reject Form
+   Validator -> View: Form Validation Failed Response
+end
+Validator -> Service: Forward Vehicle Rental Request
+Validator -> Service: Process Rental Request 
+Service -> Service: Validate Request
+@enduml
