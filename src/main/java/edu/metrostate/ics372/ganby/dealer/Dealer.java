@@ -13,52 +13,53 @@ import java.util.Objects;
 
 public class Dealer {
 
-    // TODO: Add Name attribute to Dealer
+    // Getter for dealer id
     // Instance variables
-    private final String                id;
-    private boolean                     isVehicleAcquisitionEnabled;
-    private HashMap<String, Vehicle>    vehicleCollection;
+    private String name;
+    private final String id;    //id is string because some IDs may contain letters
+    private boolean isVehicleAcquisitionEnabled;
+    // Getter for vehicles associated with dealer, Returns a set of vehicle objects
+    private HashMap<String, Vehicle> vehicleCollection;
 
-    /**
-     * Constructor for Dealer
-     * @param id String
-     */
+    // Constructor, initializes dealer with id
+    // Vehicle acquisition is enabled by default
     public Dealer(String id) {
         this.id = id;
         this.isVehicleAcquisitionEnabled = true;
         vehicleCollection = new HashMap<>();
+        name = null;
     }
 
-    /**
-     * Get the dealer id
-     * @return String dealer id
-     */
+    // Constructor, initializes dealer with id
+    // Vehicle acquisition is enabled by default
+    public Dealer(String id, String name) {
+        this.id = id;
+        this.isVehicleAcquisitionEnabled = true;
+        vehicleCollection = new HashMap<>();
+        this.name = name;
+    }
+
+
+    //Getter for dealerId
     public String getDealerId(){
         return id;
     }
 
-    // TODO: Change method to "getIsVehicleAcquisitionEnabled" for consistency with the attribute it gets
-    /**
-     * Get the vehicle acquisition status
-     * @return boolean
-     */
+    //Getter for dealerId
+    public String getDealerName(){
+        return name;
+    }
+
+    // Getter for vehicle acquisition state
     public boolean getIsVehicleAcquisitionStatus() {
         return isVehicleAcquisitionEnabled;
     }
 
-    // TODO: Drop this lombok functionality, we are not using it and IDE is throwing a notice
-    /**
-     * Get the vehicle collection
-     * @return HashMap<String, Vehicle> vehicleCollection
-     */
     public HashMap<String, Vehicle> getVehicleCollection() {
         return vehicleCollection;
     }
 
-    /**
-     * Set the dealer acquisition status to true / enabled
-     * @param dealerId String
-     */
+    // set vehicle acquisition state to true
     public void enableVehicleAcquisition(String dealerId) {
         if (isVehicleAcquisitionEnabled) {
             System.out.println("Vehicle acquisition already enabled for dealer id #" + dealerId + ".");
@@ -68,10 +69,7 @@ public class Dealer {
         }
     }
 
-    /**
-     * Set the dealer acquisition status to false / disabled
-     * @param dealerId String
-     */
+    // set vehicle acquisition state to false
     public void disableVehicleAcquisition(String dealerId) {
         if (!isVehicleAcquisitionEnabled) {
             System.out.println("Vehicle acquisition already disabled for dealer id #" + dealerId + ".");
@@ -81,28 +79,18 @@ public class Dealer {
         }
     }
 
-    /**
-     * Find a vehicle by its id
-     * @param vehicleId String
-     * @return Vehicle
-     */
+    // Find vehicle by id, returns a vehicle object
     public Vehicle findVehicleById (String vehicleId) {
         return getVehicleCollection().get(vehicleId);
     }
 
-    /**
-     * Add a vehicle to the dealer's vehicle collection
-     * @param vehicle Vehicle
-     */
+
+    //Add the vehicle to vehicle collection
     public void addVehicle (Vehicle vehicle) {
             vehicleCollection.put(vehicle.getVehicleId(), vehicle);
     }
 
-    /**
-     * Equals method to compare two dealers
-     * @param object Object
-     * @return boolean
-     */
+    // Equals method
     @Override
     public boolean equals (Object object) {
         if (object == this) return true;        // If object is compared with itself return true
@@ -113,19 +101,15 @@ public class Dealer {
         return false;                           // If none of the above, return false
     }
 
-    /**
-     * Hashcode is used to determine the location of an object in a hash table
-     * @return int
-     */
+    // Hashcode is used to determine the location of an object in a hash table
+    // returns the dealers index in a hash table
     @Override
     public int hashCode () {
         return Objects.hashCode(id);
     }
 
-    /**
-     * String representation of a dealer
-     * @return String
-     */
+    // toString method
+    //Asked CHATGPT 4.0 to format the toString to make a clean output
     @Override
     public String toString() {
         String acquisitionStatus = isVehicleAcquisitionEnabled ? "Yes" : "No";
