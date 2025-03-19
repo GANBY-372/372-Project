@@ -13,14 +13,15 @@ import java.util.Scanner;
 import java.awt.FileDialog;
 import java.awt.Frame;
 
-public class UserDriver {
+public class TestDriver {
 
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
-        runProgram();   //This is the master method that runs the program. It uses the other three methods when
-                        //appropriate.
+        runProgram();
     }
 
-    // Method to print the welcome banner
+    /**
+     * Method to print the welcome banner
+     */
     public static void printWelcomeBanner() {
         System.out.println("\n*********************************************************");
         System.out.println("*                                                       *");
@@ -29,7 +30,9 @@ public class UserDriver {
         System.out.println("*********************************************************");
     }
 
-    // Method to print the exit message
+    /**
+     * Method to print the exit message
+     */
     public static void printExitMessage() {
         System.out.println("\n\n******************************************************************");
         System.out.println("*                                                                *");
@@ -38,6 +41,9 @@ public class UserDriver {
         System.out.println("******************************************************************");
     }
 
+    /**
+     * Method to print the current inventory status
+     */
     public static void printCurrentInventoryStatus() {
         System.out.println("\nCurrent Dealer Catalog as of " + java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ":");
         System.out.println("-------------------------------------------------------------------");
@@ -53,7 +59,9 @@ public class UserDriver {
 
     }
 
-    // Method to print the main menu
+    /**
+     * Method to print the main menu
+     */
     public static void runProgram() throws FileNotFoundException, IllegalAccessException {
 
         printWelcomeBanner();

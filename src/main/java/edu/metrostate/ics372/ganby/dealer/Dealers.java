@@ -2,7 +2,7 @@
  * Dealers.java
  * @author B, G
  * This class is a collection of dealers.
- */
+
 
 package edu.metrostate.ics372.ganby.dealer;
 
@@ -77,3 +77,5 @@ public class Dealers {
         return sb.toString();
     }
 }
+
+ */
