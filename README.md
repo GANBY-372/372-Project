@@ -69,9 +69,7 @@ Build a tracking system for a company that owns multiple car dealerships. Admins
 - `JSONFileImporter`  
 - `JSONFileObjectBuilder`  
 
-### Main Classes  
-- `Main`  
-- `JSONIOTester`  
+### Main Classes   
 - `UserDriver`  
 
 ## Input Data Example - JSON File  
