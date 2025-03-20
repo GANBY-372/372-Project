@@ -1,15 +1,12 @@
 package edu.metrostate.ics372.ganby;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
-import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
+//import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.json.JSONFileExporter;
 import edu.metrostate.ics372.ganby.json.JSONFileImporter;
-import edu.metrostate.ics372.ganby.xml.XMLFileImporter;  // Make sure the correct import is used
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -20,7 +17,7 @@ public class UserDriver {
 
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
         runProgram();   //This is the master method that runs the program. It uses the other three methods when
-        //appropriate.
+                        //appropriate.
     }
 
     // Method to print the welcome banner
@@ -46,7 +43,8 @@ public class UserDriver {
         System.out.println("-------------------------------------------------------------------");
 
         // Dealer and Vehicle count
-        System.out.println("Dealers: " + DealerCatalog.getInstance().getDealers().size() + "\t\tVehicles: " + VehicleCatalog.getInstance().getVehicles().size());
+        System.out.println("Dealers: " + DealerCatalog.getInstance().amountOfAllDealers() +
+                "\t\tVehicles: " + DealerCatalog.getInstance().amountOfAllVehicles());
 
         // List of dealers
         DealerCatalog.getInstance().printAllDealers();
@@ -66,7 +64,7 @@ public class UserDriver {
         while (userInput != 5) { // Continue until user chooses to exit
             printCurrentInventoryStatus();
             System.out.println("\nMenu Options:");
-            System.out.println("1. Import JSON or XML vehicle inventory file.");
+            System.out.println("1. Import JSON vehicle inventory file.");
             System.out.println("2. Enable or disable vehicle acquisition.");
             System.out.println("3. Export dealer inventory to JSON file.");
             System.out.println("4. Show list of current vehicles for each dealer.");
@@ -83,54 +81,35 @@ public class UserDriver {
             scanner.nextLine(); // Consume newline to avoid InputMismatchException
 
             switch (userInput) {
-                case 1: // Importing a JSON or XML file
-                    System.out.println("Please choose a file type to import: ");
-                    System.out.println("1. JSON");
-                    System.out.println("2. XML");
-                    System.out.println("or type the file format directly (json or xml)");
-
-                    String userInputFile = scanner.nextLine().toLowerCase(); // Get user input as a string and convert to lowercase
-
-                    // If the user selects JSON or 'json', call the JSONFileImporter
-                    if (userInputFile.equals("1") || userInputFile.equals("json")) {
-                        JSONFileImporter jsonFileImporter = new JSONFileImporter();
-                        jsonFileImporter.processJSON();  // This will open the file dialog and process the selected JSON file
-                    }
-                    // If the user selects XML or 'xml', call the XMLFileImporter
-                    else if (userInputFile.equals("2") || userInputFile.equals("xml")) {
-                        XMLFileImporter xmlFileImporter = new XMLFileImporter(); // Create instance to select and parse XML
-                        try {
-                            xmlFileImporter.importFile(); // Process the selected XML file
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    } else {
-                        System.out.println("Invalid choice. Please select either 1, 2, json, or xml.");
-                    }
+                case 1: //Importing a JSON file. Works for inventory.json or any json file that contains vehicle(s)
+                    JSONFileImporter fileImporter = new JSONFileImporter();
+                    fileImporter.processJSON();
                     break;
 
-                case 2: // Enabling or Disabling Dealer Acquisition
+                case 2: //Enabling or Disabling Dealer Acquisition
                     System.out.print("Enter ID of dealer: (or Q to quit) ");
                     if (scanner.hasNextInt()) {
-                        int idToEnableOrDisable = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
+                        String idToEnableOrDisable = scanner.nextLine();
 
+                        label:
                         while (true) {
                             System.out.print("Enable (E) or Disable (D) acquisition (or Q to quit): ");
                             String option = scanner.next().trim().toUpperCase();
 
-                            if (option.equals("E")) {
-                                DealerCatalog.getInstance().enableDealerAcquisition(idToEnableOrDisable);
-                                break;
-                            } else if (option.equals("D")) {
-                                DealerCatalog.getInstance().disableDealerAcquisition(idToEnableOrDisable);
-                                break;
-                            } else if (option.equals("Q")) {
-                                System.out.println("Operation canceled.");
-                                break;
-                            } else {
-                                System.out.println("Invalid option. Please enter E to enable, D to disable, " +
-                                        "or Q to quit.");
+                            switch (option) {
+                                case "E":
+                                    DealerCatalog.getInstance().enableDealerAcquisition(idToEnableOrDisable);
+                                    break label;
+                                case "D":
+                                    DealerCatalog.getInstance().disableDealerAcquisition(idToEnableOrDisable);
+                                    break label;
+                                case "Q":
+                                    System.out.println("Operation canceled.");
+                                    break label;
+                                default:
+                                    System.out.println("Invalid option. Please enter E to enable, D to disable, " +
+                                            "or Q to quit.");
+                                    break;
                             }
                         }
                     } else if (scanner.hasNext("Q") || scanner.hasNext("q")) {
@@ -142,22 +121,25 @@ public class UserDriver {
                     }
                     break;
 
-                case 3: // Exporting Dealer Inventory
-                    // Ask user for dealer ID
-                    System.out.print("Enter ID of dealer: ");
-                    if (scanner.hasNextInt()) {
-                        int id = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
 
-                        // Find the dealer by ID
-                        Dealer dealer = DealerCatalog.getInstance().getDealers().findDealerById(id);
-                        if (dealer == null) {
-                            System.out.println("Dealer with ID " + id + " not found.");
+
+                case 3: // Exporting Dealer Inventory
+                    while (true) {
+                        System.out.print("Enter ID of dealer (or Q to quit): ");
+                        String id = scanner.nextLine().trim();
+
+                        if (id.equalsIgnoreCase("Q")) {
+                            System.out.println("Operation canceled.");
                             break;
                         }
 
-                        // Now, ask user where to save the file
-                        System.out.println("Selected dealer: " + dealer.getId());
+                        Dealer dealer = DealerCatalog.getInstance().findDealerById(id);
+                        if (dealer == null) {
+                            System.out.println("Dealer with ID " + id + " not found. Please enter a valid ID.");
+                            continue;
+                        }
+
+                        System.out.println("Selected dealer: " + dealer.getDealerId());
 
                         // Use FileDialog for file selection
                         FileDialog fileDialog = new FileDialog((Frame) null, "Save File", FileDialog.SAVE);
@@ -172,23 +154,25 @@ public class UserDriver {
                             String filePath = directory + filename; // Construct full path
                             JSONFileExporter fileExporter = new JSONFileExporter();
                             fileExporter.exportToFile(dealer, filePath);
+                            System.out.println("Inventory exported successfully.");
                         } else {
-                            System.out.println("Export operation cancelled.");
+                            System.out.println("Export operation canceled.");
                         }
-                    } else {
-                        System.out.println("Invalid input. Please enter a valid dealer ID.");
-                        scanner.next(); // Clear invalid input
+                        break;
                     }
                     break;
 
-                case 4: // Shows list of current vehicles for each dealer
+
+
+
+                case 4: //Shows list of current vehicles for each dealer
                     DealerCatalog.getInstance().printAllVehiclesById();
                     break;
 
-                case 5: // End program.
+                case 5: //End program.
                     System.out.println("Ending Program.");
-                    printCurrentInventoryStatus();  // Lets user take a last look at inventory
-                    printExitMessage();    // Prints final exit message
+                    printCurrentInventoryStatus();  //Lets user take a last look as inventory
+                    printExitMessage();    //Prints final exit message
                     break;
 
                 default:
