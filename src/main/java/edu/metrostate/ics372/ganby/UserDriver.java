@@ -159,7 +159,7 @@ public class UserDriver {
                             break;
                         }
 
-                        Dealer dealer = DealerCatalog.getInstance().findDealerById(id);
+                        Dealer dealer = DealerCatalog.getInstance().getDealerWithId(id);
                         if (dealer == null) {
                             System.out.println("Dealer with ID " + id + " not found. Please enter a valid ID.");
                             continue;
@@ -189,7 +189,7 @@ public class UserDriver {
                     break;
 
                 case 4: // Shows list of current vehicles for each dealer
-                    DealerCatalog.getInstance().printAllVehiclesById();
+                    DealerCatalog.getInstance().printAllVehiclesByDealerId();
                     break;
 
                 case 5: // End program
