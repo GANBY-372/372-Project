@@ -1,11 +1,8 @@
 package edu.metrostate.ics372.ganby.xml;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
-import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
-import edu.metrostate.ics372.ganby.dealer.Dealers;
 import edu.metrostate.ics372.ganby.vehicle.*;
-import lombok.Getter;
 import org.w3c.dom.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,27 +12,10 @@ import java.time.LocalDateTime;
 
 public class XMLFileImporter {
 
-    // XML file reader tools
-    private Reader reader;
+    private Document xmlDocument;
 
-    // Getters
-    @Getter
-    private Dealers dealers;
-    @Getter
-    private Vehicles vehicles;
-    private Dealer dealer;
-    private Vehicle vehicle;
-
-    // Constructor initializes collections
-    public XMLFileImporter() {
-        this.dealers = new Dealers();
-        this.vehicles = new Vehicles();
-    }
-
-    // Method to allow the user to choose a file and determine its type
-    public void importFile() throws Exception {
+    public XMLFileImporter() throws FileNotFoundException {
         try {
-            // File chooser dialog
             Frame frame = new Frame();
             FileDialog fileDialog = new FileDialog(frame, "Select a File", FileDialog.LOAD);
             fileDialog.setVisible(true);
@@ -45,149 +25,84 @@ public class XMLFileImporter {
 
             if (filename != null) {
                 File selectedFile = new File(directory, filename);
-                String fileExtension = getFileExtension(selectedFile);
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                this.xmlDocument = dBuilder.parse(selectedFile);
+                this.xmlDocument.getDocumentElement().normalize();
 
-                if ("xml".equalsIgnoreCase(fileExtension)) {
-                    importXML(selectedFile);
-                } else {
-                    System.out.println("Unsupported file type: " + fileExtension);
-                }
+                System.out.println("Successfully parsed XML file: " + selectedFile.getAbsolutePath());
             } else {
                 System.out.println("File selection cancelled.");
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error importing file: " + e.getMessage(), e);
+            throw new RuntimeException(e);
         }
     }
 
-    // Helper method to get the file extension
-    private String getFileExtension(File file) {
-        String name = file.getName();
-        int lastIndex = name.lastIndexOf('.');
-        return (lastIndex == -1) ? "" : name.substring(lastIndex + 1);
+    public Document getXmlDocument() {
+        return xmlDocument;
     }
 
-    // Method to import XML files
-    private void importXML(File file) throws Exception {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(file);
-            document.getDocumentElement().normalize();
+    public void processXML(Document xmlDocument) throws IllegalAccessException {
+        NodeList dealerList = xmlDocument.getElementsByTagName("Dealer");
+        for (int i = 0; i < dealerList.getLength(); i++) {
+            Node dealerNode = dealerList.item(i);
+            if (dealerNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element dealerElement = (Element) dealerNode;
+                String dealerId = dealerElement.getAttribute("id");
+                String dealerName = dealerElement.getElementsByTagName("Name").item(0).getTextContent();
+                Dealer dealer = new Dealer(dealerId, dealerName);
 
-            NodeList dealerNodes = document.getElementsByTagName("Dealer");
-
-            for (int i = 0; i < dealerNodes.getLength(); i++) {
-                Node dealerNode = dealerNodes.item(i);
-                if (dealerNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element dealerElement = (Element) dealerNode;
-                    processDealerFromXML(dealerElement);
+                NodeList vehicleList = dealerElement.getElementsByTagName("Vehicle");
+                for (int j = 0; j < vehicleList.getLength(); j++) {
+                    Node vehicleNode = vehicleList.item(j);
+                    if (vehicleNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element vehicleElement = (Element) vehicleNode;
+                        Vehicle vehicle = createVehicle(vehicleElement, dealerId);
+                        if (vehicle != null) {
+                            DealerCatalog.getInstance().addVehicle(vehicle);
+                        }
+                    }
                 }
             }
-
-            System.out.println("Successfully parsed XML file: " + file.getAbsolutePath());
-        } catch (Exception e) {
-            throw new RuntimeException("Error parsing XML file: " + e.getMessage(), e);
         }
     }
 
-    // Method to process a dealer and its vehicles from an XML element
-    private void processDealerFromXML(Element dealerElement) throws IllegalAccessException {
-        String dealerId = dealerElement.getAttribute("id");
-        if (dealerId == null || dealerId.isBlank()) {
-            System.out.println("Skipping dealer due to missing or invalid ID.");
-            return;
+    private Vehicle createVehicle(Element vehicleElement, String dealerId) throws IllegalAccessException {
+        if (vehicleElement == null) {
+            throw new IllegalArgumentException("XML vehicle element is null.");
         }
 
-        Dealer dealer = new Dealer(Integer.parseInt(dealerId));
-        dealers.addDealer(dealer);
-        DealerCatalog.getInstance().getDealers().addDealer(dealer);
+        String manufacturer = vehicleElement.getElementsByTagName("Make").item(0).getTextContent();
+        String model = vehicleElement.getElementsByTagName("Model").item(0).getTextContent();
+        String id = vehicleElement.getAttribute("id");
+        double price = Double.parseDouble(vehicleElement.getElementsByTagName("Price").item(0).getTextContent());
 
-        NodeList vehicleNodes = dealerElement.getElementsByTagName("Vehicle");
-        for (int i = 0; i < vehicleNodes.getLength(); i++) {
-            Node vehicleNode = vehicleNodes.item(i);
-            if (vehicleNode.getNodeType() == Node.ELEMENT_NODE) {
-                Element vehicleElement = (Element) vehicleNode;
-                processVehicleFromXML(vehicleElement, dealer);
-            }
-        }
-    }
-
-    // Method to process a vehicle from an XML element
-    private void processVehicleFromXML(Element vehicleElement, Dealer dealer) throws IllegalAccessException {
-        String vehicleId = vehicleElement.getAttribute("id");
         String type = vehicleElement.getAttribute("type");
-        if (vehicleId == null || vehicleId.isBlank() || type == null || type.isBlank()) {
-            System.out.println("Skipping vehicle due to missing or invalid attributes.");
-            return;
+        if (type == null || type.isBlank()) {
+            System.out.println("Skipping vehicle due to missing or empty vehicle type.");
+            return null;
         }
-
-        String manufacturer = getElementText(vehicleElement, "Make");
-        String model = getElementText(vehicleElement, "Model");
-        String priceText = getElementText(vehicleElement, "Price");
-        double price = priceText != null ? Double.parseDouble(priceText) : 0.0;
 
         VehicleCategory category = VehicleCategory.fromString(type);
         if (category == null) {
-            System.out.println("Skipping vehicle due to invalid category: " + type);
-            return;
+            System.out.println("Skipping vehicle id #" + id + " due to invalid vehicle category: " + type);
+            return null;
         }
 
-        LocalDateTime acquisitionDate = LocalDateTime.now(); // Default to current time if not provided
+        LocalDateTime acquisitionDate = LocalDateTime.now(); // sets the acquisition date to now.
 
         Vehicle vehicle;
         switch (category) {
-            case SUV:
-                vehicle = new SUV.Builder().dealer(dealer)
-                        .id(vehicleId)
-                        .manufacturer(manufacturer)
-                        .model(model)
-                        .price(price)
-                        .acquisitionDate(acquisitionDate)
-                        .build();
-                break;
-            case PICKUP:
-                vehicle = new Pickup.Builder().dealer(dealer)
-                        .id(vehicleId)
-                        .manufacturer(manufacturer)
-                        .model(model)
-                        .price(price)
-                        .acquisitionDate(acquisitionDate)
-                        .build();
-                break;
-            case SEDAN:
-                vehicle = new Sedan.Builder().dealer(dealer)
-                        .id(vehicleId)
-                        .manufacturer(manufacturer)
-                        .model(model)
-                        .price(price)
-                        .acquisitionDate(acquisitionDate)
-                        .build();
-                break;
-            case SPORTS_CAR:
-                vehicle = new SportsCar.Builder().dealer(dealer)
-                        .id(vehicleId)
-                        .manufacturer(manufacturer)
-                        .model(model)
-                        .price(price)
-                        .acquisitionDate(acquisitionDate)
-                        .build();
-                break;
-            default:
+            case SUV -> vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case SEDAN -> vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case PICKUP -> vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case SPORTS_CAR -> vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
+            default -> {
                 System.out.println("Unknown category: " + category);
-                return;
+                return null;
+            }
         }
-
-        vehicles.addVehicle(vehicle);
-        VehicleCatalog.getInstance().getVehicles().addVehicle(vehicle);
-    }
-
-    // Helper method to get text content of an element
-    private String getElementText(Element parent, String tagName) {
-        NodeList nodeList = parent.getElementsByTagName(tagName);
-        if (nodeList.getLength() > 0) {
-            return nodeList.item(0).getTextContent();
-        }
-        return null;
+        return vehicle;
     }
 }
