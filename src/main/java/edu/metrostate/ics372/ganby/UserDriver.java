@@ -2,6 +2,7 @@ package edu.metrostate.ics372.ganby;
 
 import catalog.DealerCatalog;
 import dealer.Dealer;
+import  edu.metrostate.ics372.ganby.xml.XMLFileExporter;
 import json.JSONFileExporter;
 import json.JSONFileImporter;
 import edu.metrostate.ics372.ganby.xml.XMLFileImporter;
@@ -64,7 +65,7 @@ public class UserDriver {
             System.out.println("\nMenu Options:");
             System.out.println("1. Import JSON or XML vehicle inventory file.");
             System.out.println("2. Enable or disable vehicle acquisition.");
-            System.out.println("3. Export dealer inventory to JSON file.");
+            System.out.println("3. Export dealer inventory to JSON or XML file.");
             System.out.println("4. Show list of current vehicles for each dealer.");
             System.out.println("5. End Program.");
             System.out.println("-------------------------------------------------------------------");
@@ -151,9 +152,27 @@ public class UserDriver {
 
                 case 3: // Exporting Dealer Inventory
                     while (true) {
+                        // Prompt user for file format first
+                        System.out.println("Please choose a file type to export: ");
+                        System.out.println("1. JSON");
+                        System.out.println("2. XML");
+                        System.out.println("or type the file format directly (json or xml)");
+                        System.out.print("Enter your choice: ");
+
+                        String fileFormat = scanner.nextLine().trim().toLowerCase();
+
+                        if (fileFormat.equals("1")) {
+                            fileFormat = "json";
+                        } else if (fileFormat.equals("2")) {
+                            fileFormat = "xml";
+                        } else if (!fileFormat.equals("json") && !fileFormat.equals("xml")) {
+                            System.out.println("Invalid choice. Please enter '1', '2', 'json', or 'xml'.");
+                            continue;
+                        }
+
+                        // Now ask for dealer ID
                         System.out.print("Enter ID of dealer (or Q to quit): ");
                         String id = scanner.nextLine().trim();
-
                         if (id.equalsIgnoreCase("Q")) {
                             System.out.println("Operation canceled.");
                             break;
@@ -165,11 +184,9 @@ public class UserDriver {
                             continue;
                         }
 
-                        System.out.println("Selected dealer: " + dealer.getDealerId());
-
                         // Use FileDialog for file selection
                         FileDialog fileDialog = new FileDialog((Frame) null, "Save File", FileDialog.SAVE);
-                        fileDialog.setFile("dealer_inventory_" + id + ".json"); // Default filename
+                        fileDialog.setFile("dealer_inventory_" + id + "." + fileFormat); // Default filename
                         fileDialog.setVisible(true);
 
                         // Get selected file
@@ -178,15 +195,23 @@ public class UserDriver {
 
                         if (directory != null && filename != null) {
                             String filePath = directory + filename; // Construct full path
-                            JSONFileExporter fileExporter = new JSONFileExporter();
-                            fileExporter.exportToFile(dealer, filePath);
-                            System.out.println("Inventory exported successfully.");
+
+                            if (fileFormat.equals("json")) {
+                                JSONFileExporter fileExporter = new JSONFileExporter();
+                                fileExporter.exportToFile(dealer, filePath);
+                            } else {
+                                XMLFileExporter fileExporter = new XMLFileExporter();
+                                fileExporter.exportToFile(dealer, filePath);
+                            }
+
+                            System.out.println("Inventory exported successfully to " + filePath);
                         } else {
                             System.out.println("Export operation canceled.");
                         }
                         break;
                     }
                     break;
+
 
                 case 4: // Shows list of current vehicles for each dealer
                     DealerCatalog.getInstance().printAllVehiclesById();
