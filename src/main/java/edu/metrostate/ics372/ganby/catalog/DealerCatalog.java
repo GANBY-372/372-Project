@@ -78,14 +78,14 @@ public class DealerCatalog {
             //If dealer does exist then check if vehicle already exists in dealer's vehicle collection and check
             //if dealer's vehicle acquisition is enabled. This if statement handles the case when both conditions are
             //false.
-        } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCollection().containsKey(vehicle.getVehicleId()) &&
+        } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCatalog().containsKey(vehicle.getVehicleId()) &&
                 !dealerCatalog.get(vehicle.getDealerId()).getIsVehicleAcquisitionEnabled()) {
             System.out.println("Acquisition Disabled for dealer id #" + vehicle.getDealerId() +
                     " and vehicle id #" + vehicle.getVehicleId() + ", already exists in the collection.");
 
             //Checks acquisition status, if false then vehicle will not be added. This if-statement handles the case
             //when the vehicle already exists in the dealer's vehicle collection
-        } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCollection().containsKey(vehicle.getVehicleId())) {
+        } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCatalog().containsKey(vehicle.getVehicleId())) {
             System.out.println("Vehicle id #" + vehicle.getVehicleId() + " already exists in dealer's the collection.");
         } else if (!dealerCatalog.get(vehicle.getDealerId()).getIsVehicleAcquisitionEnabled()) {
             System.out.println("Acquisition Disabled for dealer id #" + vehicle.getDealerId());
@@ -105,8 +105,8 @@ public class DealerCatalog {
      */
     public void modifyVehiclePrice(String VehicleId, double price) {
         for (Dealer dealer : dealerCatalog.values()) {
-            if (dealer.getVehicleCollection().containsKey(VehicleId)) {
-                dealer.getVehicleCollection().get(VehicleId).setPrice(price);
+            if (dealer.getVehicleCatalog().containsKey(VehicleId)) {
+                dealer.getVehicleCatalog().get(VehicleId).setPrice(price);
             }
         }
     }
@@ -127,7 +127,7 @@ public class DealerCatalog {
             System.out.println("-------------------------------------------------------------------------------");
 
             // Convert the vehicle collection to a list for sorting
-            List<Vehicle> sortedVehicles = new ArrayList<>(dealer.getVehicleCollection().values());
+            List<Vehicle> sortedVehicles = new ArrayList<>(dealer.getVehicleCatalog().values());
 
             // Sort the list by price in ascending order
             sortedVehicles.sort(Comparator.comparingDouble(Vehicle::getPrice));
@@ -156,7 +156,7 @@ public class DealerCatalog {
         boolean found = false;
 
         for (Dealer dealer : this.getDealerCatalog().values()) {
-            List<Vehicle> filteredVehicles = dealer.getVehicleCollection().values().stream()
+            List<Vehicle> filteredVehicles = dealer.getVehicleCatalog().values().stream()
                     .filter(vehicle -> vehicle.getPrice() >= minPrice && vehicle.getPrice() <= maxPrice)
                     .sorted(Comparator.comparingDouble(Vehicle::getPrice))
                     .toList();
@@ -200,7 +200,7 @@ public class DealerCatalog {
         System.out.println("------------------------------------------------");
 
         for (Dealer dealer : this.getDealerCatalog().values()) {
-            int vehicleCount = dealer.getVehicleCollection().size();
+            int vehicleCount = dealer.getVehicleCatalog().size();
             if (vehicleCount >= minVehicles && vehicleCount <= maxVehicles) {
                 found = true;
                 System.out.printf("| %-10s | %-20s | %-15d |%n",
@@ -246,7 +246,7 @@ public class DealerCatalog {
                     "Type", "Model", "Manufacturer", "Price", "Acquisition Date");
             System.out.println("-------------------------------------------------------------------------------");
 
-            for (Vehicle vehicle : dealer.getVehicleCollection().values()) {
+            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
                 System.out.printf("| %-10s | %-15s | %-12s | $%-9.2f | %-20s |%n",
                         vehicle.getClass().getSimpleName(),  // Type
                         vehicle.getModel(),                  // Model
@@ -268,7 +268,7 @@ public class DealerCatalog {
         System.out.printf("| %-10s | %-15s | %-10s | %-10s | %-15s |\n",
                 "Type", "Model", "Manufacturer", "Price", "Acquisition Date");
         System.out.println("-------------------------------------------------------------");
-        for (Vehicle v : this.getDealerCatalog().get(id).getVehicleCollection().values()) {
+        for (Vehicle v : this.getDealerCatalog().get(id).getVehicleCatalog().values()) {
             System.out.printf("| %-10s | %-15s | %-10s | $%-9.2f | %-15s |\n",
                     v.getClass().getSimpleName(), // Sedan, SUV, etc.
                     v.getModel(),
@@ -294,7 +294,7 @@ public class DealerCatalog {
     public int amountOfAllVehicles() {
         int totalAmount = 0;
         for (Dealer dealer : this.getDealerCatalog().values()) {
-            totalAmount += dealer.getVehicleCollection().size();
+            totalAmount += dealer.getVehicleCatalog().size();
         }
         return totalAmount;
     }

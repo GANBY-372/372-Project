@@ -7,10 +7,9 @@
 package edu.metrostate.ics372.ganby.json;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
-//import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.*;
-import lombok.Getter;
+//import lombok.Getter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -128,22 +127,15 @@ public class JSONFileImporter {
             return null; // Skip this vehicle if the type is missing
         }
 
-        VehicleCategory category = VehicleCategory.fromString(type);
-        if (category == null) {
-            System.out.println("Skipping vehicle id #" + jsonObject.get(VEHICLE_ID_KEY)+
-                    " due to invalid vehicle category: " + type);    //e.g: electric is invalid
-            return null; // Skip this vehicle if the category is invalid
-        }
-
         // Create vehicle, category is an enum
         Vehicle vehicle;
-        switch (category) {
-            case SUV ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case SEDAN ->       vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case PICKUP ->      vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case SPORTS_CAR ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
+        switch (type) {
+            case "SUV" ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SEDAN" ->       vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "PICKUP" ->      vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SPORTS_CAR" ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
             default -> {
-                System.out.println("Unknown category: " + category);
+                System.out.println("Unknown category: " + type);
                 return null;
             }
         }

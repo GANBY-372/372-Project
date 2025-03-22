@@ -2,6 +2,7 @@ package edu.metrostate.ics372.ganby;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import edu.metrostate.ics372.ganby.json.JSONFileExporter;
 import edu.metrostate.ics372.ganby.json.JSONFileImporter;
 import edu.metrostate.ics372.ganby.xml.XMLFileImporter;

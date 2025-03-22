@@ -2,6 +2,7 @@ package edu.metrostate.ics372.ganby.xml;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
+
 import edu.metrostate.ics372.ganby.vehicle.*;
 import org.w3c.dom.*;
 import javax.xml.parsers.DocumentBuilder;
@@ -84,8 +85,7 @@ public class XMLFileImporter {
             return null;
         }
 
-        VehicleCategory category = VehicleCategory.fromString(type);
-        if (category == null) {
+        if (type == null) {
             System.out.println("Skipping vehicle id #" + id + " due to invalid vehicle category: " + type);
             return null;
         }
@@ -93,13 +93,13 @@ public class XMLFileImporter {
         LocalDateTime acquisitionDate = LocalDateTime.now(); // sets the acquisition date to now.
 
         Vehicle vehicle;
-        switch (category) {
-            case SUV -> vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case SEDAN -> vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case PICKUP -> vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case SPORTS_CAR -> vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
+        switch (type) {
+            case "SUV" ->  vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SEDAN" ->  vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "PICKUP" ->  vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SPORTS_CAR" ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
             default -> {
-                System.out.println("Unknown category: " + category);
+                System.out.println("Unknown category: " + type);
                 return null;
             }
         }

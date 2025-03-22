@@ -3,7 +3,6 @@ package edu.metrostate.ics372.ganby.json;
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
-import edu.metrostate.ics372.ganby.vehicle.VehicleCategory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.io.FileWriter;
@@ -36,10 +35,10 @@ public class JSONFileExporter {
         JSONObject rootJson = new JSONObject();
         JSONArray carInventoryJson = new JSONArray();
 
-        for (Vehicle vehicle : dealer.getVehicleCollection().values()) {
+        for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
             JSONObject vehicleJson = new JSONObject();
             vehicleJson.put("dealership_id", dealer.getDealerId());
-            vehicleJson.put("vehicle_type", VehicleCategory.getVehicleType(vehicle));
+            vehicleJson.put("vehicle_type", vehicle.getType());
             vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
             vehicleJson.put("vehicle_model", vehicle.getModel());
             vehicleJson.put("vehicle_id", vehicle.getVehicleId());
@@ -113,11 +112,11 @@ public class JSONFileExporter {
         JSONObject rootJson = new JSONObject();
         JSONArray carInventoryJson = new JSONArray();
 
-        for (Dealer dealer : DealerCatalog.getInstance().getDealerCollection().values()) {
-            for (Vehicle vehicle : dealer.getVehicleCollection().values()) {
+        for (Dealer dealer : DealerCatalog.getInstance().getDealerCatalog().values()) {
+            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
                 JSONObject vehicleJson = new JSONObject();
                 vehicleJson.put("dealership_id", dealer.getDealerId());
-                vehicleJson.put("vehicle_type", VehicleCategory.getVehicleType(vehicle));
+                vehicleJson.put("vehicle_type", vehicle.getType());
                 vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
                 vehicleJson.put("vehicle_model", vehicle.getModel());
                 vehicleJson.put("vehicle_id", vehicle.getVehicleId());
