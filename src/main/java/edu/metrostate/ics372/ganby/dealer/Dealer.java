@@ -8,6 +8,7 @@
 
 package edu.metrostate.ics372.ganby.dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class Dealer {
     private final String id;    //id is string because some IDs may contain letters
     private boolean isVehicleAcquisitionEnabled;
     // Getter for vehicles associated with dealer, Returns a set of vehicle objects
-    private HashMap<String, Vehicle> vehicleCollection;
+    private HashMap<String, Vehicle> vehicleCatalog;
 
     // TODO: Implement automatic naming if dealer name is not specified.
     /**
@@ -29,7 +30,7 @@ public class Dealer {
     public Dealer(String id) {
         this.id = id;
         this.isVehicleAcquisitionEnabled = true;
-        vehicleCollection = new HashMap<>();
+        vehicleCatalog = new HashMap<>();
         name = null;
     }
 
@@ -41,7 +42,7 @@ public class Dealer {
     public Dealer(String id, String name) {
         this.id = id;
         this.isVehicleAcquisitionEnabled = true;
-        vehicleCollection = new HashMap<>();
+        vehicleCatalog = new HashMap<>();
         this.name = name;
     }
 
@@ -73,10 +74,10 @@ public class Dealer {
 
      /**
      * Get the vehicle collection
-     * @return HashMap<String, Vehicle> vehicleCollection
+     * @return HashMap<String, Vehicle> vehicleCatalog
      */
-    public HashMap<String, Vehicle> getVehicleCollection() {
-        return vehicleCollection;
+    public HashMap<String, Vehicle> getVehicleCatalog() {
+        return vehicleCatalog;
     }
 
 
@@ -113,7 +114,7 @@ public class Dealer {
      * @return Vehicle
      */
     public Vehicle findVehicleById (String vehicleId) {
-        return getVehicleCollection().get(vehicleId);
+        return getVehicleCatalog().get(vehicleId);
     }
 
 
@@ -123,7 +124,7 @@ public class Dealer {
      * @param vehicle Vehicle
      */
     public void addVehicle (Vehicle vehicle) {
-            vehicleCollection.put(vehicle.getVehicleId(), vehicle);
+            vehicleCatalog.put(vehicle.getVehicleId(), vehicle);
     }
 
 
