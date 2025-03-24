@@ -129,11 +129,11 @@ public class JSONFileImporter {
 
         // Create vehicle, category is an enum
         Vehicle vehicle;
-        switch (type) {
-            case "SUV" ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+        switch (type.trim().replaceAll("\\s+", "").toUpperCase()) { //trim type string and set to upper case
+                case "SUV" ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
             case "SEDAN" ->       vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
             case "PICKUP" ->      vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "SPORTS_CAR" ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SPORTSCAR" ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
             default -> {
                 System.out.println("Unknown category: " + type);
                 return null;
