@@ -21,6 +21,7 @@ public class Dealer {
     private boolean isVehicleAcquisitionEnabled;
     // Getter for vehicles associated with dealer, Returns a set of vehicle objects
     private HashMap<String, Vehicle> vehicleCatalog;
+    //Counter for Default name
     private static int counter = 0;
 
     // TODO: Implement automatic naming if dealer name is not specified.
@@ -34,6 +35,7 @@ public class Dealer {
         this.isVehicleAcquisitionEnabled = true;
         vehicleCatalog = new HashMap<>();
         this.name = "Dealer Number:" + counter;
+
     }
 
 
