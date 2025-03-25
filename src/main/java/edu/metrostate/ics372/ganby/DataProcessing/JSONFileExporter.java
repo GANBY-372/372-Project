@@ -1,6 +1,6 @@
-package edu.metrostate.ics372.ganby.json;
+package edu.metrostate.ics372.ganby.DataProcessing;
 
-import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import org.json.simple.JSONArray;

@@ -72,7 +72,7 @@ public class Dealer {
     }
 
 
-     /**
+    /**
      * Get the vehicle collection
      * @return HashMap<String, Vehicle> vehicleCatalog
      */
@@ -124,7 +124,7 @@ public class Dealer {
      * @param vehicle Vehicle
      */
     public void addVehicle (Vehicle vehicle) {
-            vehicleCatalog.put(vehicle.getVehicleId(), vehicle);
+        vehicleCatalog.put(vehicle.getVehicleId(), vehicle);
     }
 
 

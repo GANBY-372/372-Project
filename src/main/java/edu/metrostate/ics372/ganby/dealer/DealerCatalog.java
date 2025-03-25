@@ -5,7 +5,7 @@
  * Singleton pattern ensures only one instance of the class is created.
  */
 
-package edu.metrostate.ics372.ganby.catalog;
+package edu.metrostate.ics372.ganby.dealer;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;

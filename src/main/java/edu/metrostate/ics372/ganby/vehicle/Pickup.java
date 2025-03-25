@@ -19,14 +19,14 @@ public class Pickup extends Vehicle {
 
     //In the case rent status is specified
     public Pickup(String id, String model, String manufacturer, double price, String dealerId,
-               LocalDateTime acquisitionDate,Boolean isRentedOut) {
+                  LocalDateTime acquisitionDate,Boolean isRentedOut) {
         super(id,model,manufacturer,price,dealerId,acquisitionDate, isRentedOut);
         type = "Pickup";
     }
 
     //In the case rent status is not specified
     public Pickup(String id, String model, String manufacturer, double price, String dealerId,
-               LocalDateTime acquisitionDate) {
+                  LocalDateTime acquisitionDate) {
         super(id,model,manufacturer,price,dealerId,acquisitionDate);
         type = "Pickup";
     }

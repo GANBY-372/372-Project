@@ -4,12 +4,15 @@
  * It opens a file explorer to select a file.
  */
 
-package edu.metrostate.ics372.ganby.json;
+package edu.metrostate.ics372.ganby.DataProcessing;
 
-import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
-import edu.metrostate.ics372.ganby.vehicle.*;
-//import lombok.Getter;
+import edu.metrostate.ics372.ganby.vehicle.SUV;
+import edu.metrostate.ics372.ganby.vehicle.SportsCar;
+import edu.metrostate.ics372.ganby.vehicle.Sedan;
+import edu.metrostate.ics372.ganby.vehicle.Pickup;
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -129,8 +132,8 @@ public class JSONFileImporter {
 
         // Create vehicle, category is an enum
         Vehicle vehicle;
-        switch (type.trim().replaceAll("\\s+", "").toUpperCase()) { //trim type string and set to upper case
-                case "SUV" ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+        switch (type.trim().replaceAll("\\s+", "").toUpperCase()) {
+            case "SUV" ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
             case "SEDAN" ->       vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
             case "PICKUP" ->      vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
             case "SPORTSCAR" ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);

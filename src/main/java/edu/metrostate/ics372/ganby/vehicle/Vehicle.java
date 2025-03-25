@@ -1,7 +1,7 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
+import edu.metrostate.ics372.ganby.DataProcessing.JSONObjectBuilder;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
-import edu.metrostate.ics372.ganby.json.JSONObjectBuilder;
 import org.json.simple.JSONObject;
 
 import java.time.LocalDateTime;

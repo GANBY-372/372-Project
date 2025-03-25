@@ -1,9 +1,14 @@
-package edu.metrostate.ics372.ganby.xml;
+package edu.metrostate.ics372.ganby.DataProcessing;
 
-import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 
-import edu.metrostate.ics372.ganby.vehicle.*;
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.vehicle.SUV;
+import edu.metrostate.ics372.ganby.vehicle.Sedan;
+import edu.metrostate.ics372.ganby.vehicle.SportsCar;
+import edu.metrostate.ics372.ganby.vehicle.Pickup;
+
 import org.w3c.dom.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
