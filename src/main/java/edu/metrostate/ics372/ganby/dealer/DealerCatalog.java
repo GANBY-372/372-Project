@@ -7,13 +7,11 @@
 
 package edu.metrostate.ics372.ganby.dealer;
 
-import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class DealerCatalog {
 
@@ -54,6 +52,26 @@ public class DealerCatalog {
      */
     public Dealer getDealerWithId(String id) {
         return dealerCatalog.get(id);
+    }
+
+    public Dealer getDealerWithName(String name) {
+        if (name == null) return null;
+        for (Dealer dealer : dealerCatalog.values()) {
+            if (dealer.getDealerName().equalsIgnoreCase(name)) return dealer;
+        }
+        return null;
+    }
+
+    public ObservableList<Dealer> getDealerWhoAreBuying() {
+        Set<Dealer> matches = new HashSet<>();
+
+        for (Dealer dealer : dealerCatalog.values()) {
+            if (dealer.getIsVehicleAcquisitionEnabled()) {
+                System.out.println(dealer.getDealerName() + "  is buying");
+                matches.add(dealer);
+            }
+        }
+        return FXCollections.observableArrayList(matches);
     }
 
 

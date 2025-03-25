@@ -13,6 +13,7 @@ import edu.metrostate.ics372.ganby.vehicle.SportsCar;
 import edu.metrostate.ics372.ganby.vehicle.Sedan;
 import edu.metrostate.ics372.ganby.vehicle.Pickup;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -48,7 +49,7 @@ public class JSONFileImporter {
      * Constructor and file chooser and Importer method in one.
      * @throws FileNotFoundException
      */
-    public JSONFileImporter() throws FileNotFoundException {
+    public JSONFileImporter(Stage primaryStage) throws FileNotFoundException {
 
         try {
             // File chooser dialog
