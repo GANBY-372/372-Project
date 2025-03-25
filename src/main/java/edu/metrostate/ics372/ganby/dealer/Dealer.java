@@ -11,6 +11,7 @@ import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Set;
 
 public class Dealer {
 
@@ -127,6 +128,61 @@ public class Dealer {
         vehicleCatalog.put(vehicle.getVehicleId(), vehicle);
     }
 
+
+
+
+    public boolean transferVehicleSet(Set<Vehicle> vehicles, Dealer dealer) {
+        if (vehicles == null) {
+            System.out.print("Cannot transfer a null vehicle set.");
+            return false;
+        }
+        if (dealer == null) {
+            System.out.print("Cannot transfer a vehicle set to a null dealer.");
+            return false;
+        }
+
+        for (Vehicle vehicle : vehicles) {
+            if (!transferVehicle(vehicle, dealer)) {
+                System.out.println("Batch transfer to dealer: " + dealer.getDealerName() + " failed at vehicleid " + vehicle.getVehicleId());
+                return false;
+            }
+        }
+        System.out.println("Batch transfer to dealer: " + dealer.getDealerName() + " successful.");
+        return true;
+    }
+
+    public boolean transferVehicle (Vehicle vehicle, Dealer dealer) {
+
+        if (vehicle == null) {
+            System.out.print("Cannot transfer a null vehicle.");
+            return false;
+        }
+        if (dealer == null) {
+            System.out.print("Cannot transfer a vehicle to a null dealer.");
+            return false;
+        }
+        /* Tranferring is not buying.
+        if (!dealer.getIsVehicleAcquisitionEnabled()) {
+            System.out.println("Cannot transfer a vehicle to a dealer who is not buying.");
+            return false;
+        }
+
+         */
+
+        if (this.vehicleCatalog.get(vehicle.getVehicleId()) == null) {
+            System.out.println("Cannot transfer a vehicle that is not owned by this dealer.");
+            return false;
+        }
+
+        this.vehicleCatalog.remove(vehicle.getVehicleId());
+
+        vehicle.setDealer(dealer);
+        dealer.getVehicleCatalog().put(vehicle.getVehicleId(), vehicle);
+
+
+        System.out.println("Successfully transferred vehicle " + vehicle.getVehicleId()+ " to dealer " + dealer.getDealerName());
+        return dealer.getVehicleCatalog().get(vehicle.getVehicleId()) != null;
+    }
 
 
     /**

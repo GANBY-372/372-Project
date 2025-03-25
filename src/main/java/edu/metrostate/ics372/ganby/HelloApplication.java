@@ -1,38 +1,40 @@
-
 package edu.metrostate.ics372.ganby;
 
-
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class HelloApplication extends Application {
-
     @Override
-    public void start(Stage primaryStage) {
-        // Create a Label to display "Hello, JavaFX!"
-        Label helloLabel = new Label("Hello, JavaFX!");
+    public void start(Stage stage) {
 
-        // Create a layout pane to hold the label
-        StackPane root = new StackPane();
-        root.getChildren().add(helloLabel);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("dealer-view-old.fxml")); // Correct Path
 
-        // Create a Scene with the layout pane
-        Scene scene = new Scene(root, 300, 200); // Width: 300, Height: 200
+            // Log to console in case the resource is not found
+            if (fxmlLoader == null) {
+                throw new RuntimeException("FXML file not found in the resources folder!");
+            }
 
-        // Set the title of the Stage (window)
-        primaryStage.setTitle("Hello JavaFX Application");
+            // Load FXML and set up scene
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
 
-        // Set the Scene for the Stage
-        primaryStage.setScene(scene);
-
-        // Show the Stage
-        primaryStage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to load FXML file: " + e.getMessage());
+            e.printStackTrace();
+        } catch (RuntimeException e) {
+            System.err.println("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 }
