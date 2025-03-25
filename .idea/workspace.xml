@@ -5,48 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe8c7c3b-3e61-4bfd-a95f-e7550945975f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SequenceFinalDraft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMLFinalDraft.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sequence-diagrams/rental-request-sequence-diagram.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/HelloApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/HelloController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/TestDriver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/UserDriver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/catalog/DealerCatalog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/contextmenu/TableRightClickDelete.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/contextmenu/VehicleContextMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/Dealer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/json/JSONFileExporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/json/JSONFileImporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/json/JSONObjectBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Interface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SUV.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SportsCar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Vehicle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/VehicleCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/wizard/AddDealerWizard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/wizard/AddVehicleWizard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/wizard/TransferVehicleWizard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/xml/XMLFileImporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/Imports/inventory.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/Imports/testJSON.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/dealer-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/hello-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/Imports/dealer-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/dealer-view-old.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/dealer-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/dealer-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,18 +20,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "banjilawal"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;banjilawal&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:GANBY-372/372-Project.git",
-    "accountId": "6e47f767-25d6-4d8f-810a-8394097bb1c3"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:GANBY-372/372-Project.git&quot;,
+    &quot;accountId&quot;: &quot;6e47f767-25d6-4d8f-810a-8394097bb1c3&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -87,11 +51,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
+    "Maven.ganby [clean].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "banji",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/griot/IdeaProjects/ganby",
+    "last_opened_file_path": "/home/griot/IdeaProjects/ganby/src/main/resources/edu/metrostate/ics372/ganby",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -106,11 +71,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby" />
+      <recent name="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby" />
+      <recent name="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/Imports" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/xml" />
-      <recent name="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby" />
-      <recent name="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby" />
-      <recent name="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/catalog" />
     </key>
   </component>
   <component name="RunManager">
@@ -151,6 +116,7 @@
       <updated>1742918223860</updated>
       <workItem from="1742918225308" duration="1066000" />
       <workItem from="1742919307375" duration="588000" />
+      <workItem from="1742919912607" duration="3620000" />
     </task>
     <servers />
   </component>
