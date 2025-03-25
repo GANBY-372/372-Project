@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fe8c7c3b-3e61-4bfd-a95f-e7550945975f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/Imports/dealer-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/dealer-view-old.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/dealer-view-not-working.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/dealer-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/dealer-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/metrostate/ics372/ganby/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +62,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel",
@@ -116,7 +116,8 @@
       <updated>1742918223860</updated>
       <workItem from="1742918225308" duration="1066000" />
       <workItem from="1742919307375" duration="588000" />
-      <workItem from="1742919912607" duration="3620000" />
+      <workItem from="1742919912607" duration="4376000" />
+      <workItem from="1742931221124" duration="7491000" />
     </task>
     <servers />
   </component>
