@@ -1,4 +1,4 @@
-package edu.metrostate.ics372.ganby.vehicle;
+package edu.metrostate.ics372.ganby.Vehicle;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +18,7 @@ public class SUV extends Vehicle {
 
     //In the case rent status is specified
     public SUV(String id, String model, String manufacturer, double price, String dealerId,
-                  LocalDateTime acquisitionDate,Boolean isRentedOut) {
+               LocalDateTime acquisitionDate,Boolean isRentedOut) {
         super(id,model,manufacturer,price,dealerId,acquisitionDate, isRentedOut);
         type = "SUV";
     }
@@ -36,12 +36,12 @@ public class SUV extends Vehicle {
 
     @Override
     public boolean equals (Object object) {
-            if (object == this) return true;
-            if (object == null) return false;
-            if (object instanceof SUV suv) {
-                return this.id.equals(suv.getVehicleId());
-            }
-            return false;
+        if (object == this) return true;
+        if (object == null) return false;
+        if (object instanceof SUV suv) {
+            return this.id.equals(suv.getVehicleId());
+        }
+        return false;
     }
 
 

@@ -5,10 +5,10 @@
  * Singleton pattern ensures only one instance of the class is created.
  */
 
-package edu.metrostate.ics372.ganby.catalog;
+package edu.metrostate.ics372.ganby.Dealer;
 
-import edu.metrostate.ics372.ganby.dealer.Dealer;
-import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.Dealer.Dealer;
+import edu.metrostate.ics372.ganby.Vehicle.Vehicle;
 
 import java.util.ArrayList;
 import java.util.Comparator;

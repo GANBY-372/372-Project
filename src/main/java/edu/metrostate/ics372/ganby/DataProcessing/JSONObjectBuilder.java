@@ -3,9 +3,9 @@
  * @autor B, G
  * This class is for building JSON objects.
  */
-package edu.metrostate.ics372.ganby.json;
+package edu.metrostate.ics372.ganby.DataProcessing;
 
-import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.Vehicle.Vehicle;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -37,8 +37,8 @@ public class JSONObjectBuilder {
         jsonObject.put("vehicle_model", vehicle.getModel());
         jsonObject.put("vehicle_price", vehicle.getPrice());
         jsonObject.put("acquisition_date",
-            vehicle.getAcquisitionDate()
-                .atZone(TimeZone.getDefault().toZoneId()).toInstant().toEpochMilli()
+                vehicle.getAcquisitionDate()
+                        .atZone(TimeZone.getDefault().toZoneId()).toInstant().toEpochMilli()
         );
 
         // Validate the JSON object

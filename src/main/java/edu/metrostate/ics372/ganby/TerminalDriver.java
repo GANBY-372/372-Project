@@ -1,11 +1,10 @@
 package edu.metrostate.ics372.ganby;
 
-import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
-import edu.metrostate.ics372.ganby.dealer.Dealer;
-import edu.metrostate.ics372.ganby.vehicle.Vehicle;
-import edu.metrostate.ics372.ganby.json.JSONFileExporter;
-import edu.metrostate.ics372.ganby.json.JSONFileImporter;
-import edu.metrostate.ics372.ganby.xml.XMLFileImporter;
+import edu.metrostate.ics372.ganby.DataProcessing.JSONFileExporter;
+import edu.metrostate.ics372.ganby.DataProcessing.XMLFileImporter;
+import edu.metrostate.ics372.ganby.Dealer.DealerCatalog;
+import edu.metrostate.ics372.ganby.Dealer.Dealer;
+import edu.metrostate.ics372.ganby.DataProcessing.JSONFileImporter;
 import org.w3c.dom.Document;
 
 import java.io.FileNotFoundException;
@@ -14,7 +13,7 @@ import java.util.Scanner;
 import java.awt.FileDialog;
 import java.awt.Frame;
 
-public class UserDriver {
+public class TerminalDriver {
 
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
         runProgram();   // This is the master method that runs the program. It uses the other three methods when appropriate.
@@ -131,7 +130,6 @@ public class UserDriver {
                                     break label;
                                 case "D":
                                     DealerCatalog.getInstance().disableDealerAcquisition(idToEnableOrDisable);
-                                    break label;
                                 case "Q":
                                     System.out.println("Operation canceled.");
                                     break label;
