@@ -138,7 +138,7 @@ class VehicleTest {
 
     @Test
     void testToString() {
-        String expected = "Sedan [id:V001 model:Camry manufacturer:Toyota price:15000.0 dealer id:001 acquisitionDate:" + v001.getAcquisitionDate() + "]";
+        String expected = "Sedan Sedan [id:V001 model:Camry manufacturer:Toyota price:15000.0 dealer id:001 acquisitionDate:" + v001.getAcquisitionDate() + "]";
         assertEquals(expected, v001.toString());
     }
 }

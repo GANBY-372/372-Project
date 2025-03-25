@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/VehicleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/VehicleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/VehicleTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +55,8 @@
     "Application.TerminalDriver.executor": "Run",
     "Application.TestEnv.executor": "Run",
     "Application.UserDriver.executor": "Run",
+    "JUnit.VehicleTest.executor": "Run",
+    "Maven.FX_372_Project [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
@@ -85,23 +88,10 @@
       <recent name="edu.metrostate.ics372.ganby.vehicle" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.VehicleTest">
+  <component name="RunManager" selected="JUnit.VehicleTest.testToString">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.HelloApplication" />
       <module name="FX_372_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JSONIOTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.JSONIOTester" />
-      <module name="ganby" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="edu.metrostate.ics372.ganby.*" />
@@ -153,13 +143,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="VehicleTest.testToString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FX_372_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.metrostate.ics372.ganby.vehicle.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.VehicleTest" />
+      <option name="METHOD_NAME" value="testToString" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.VehicleTest.testToString" />
         <item itemvalue="JUnit.VehicleTest" />
         <item itemvalue="Application.TestEnv" />
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.UserDriver" />
-        <item itemvalue="Application.JSONIOTester" />
       </list>
     </recent_temporary>
   </component>
@@ -205,7 +211,7 @@
       <workItem from="1742928880931" duration="101000" />
       <workItem from="1742929025149" duration="3000" />
       <workItem from="1742929046658" duration="2229000" />
-      <workItem from="1742944925230" duration="584000" />
+      <workItem from="1742944925230" duration="1184000" />
     </task>
     <servers />
   </component>
