@@ -19,7 +19,7 @@ public class DealerCatalog {
 
     private static DealerCatalog instance;
 
-    private HashMap<String, Dealer> dealerCatalog;
+    private final HashMap<String, Dealer> dealerCatalog;
 
     /**
      * Private constructor to prevent instantiation
@@ -64,7 +64,6 @@ public class DealerCatalog {
     public void addVehicle(Vehicle vehicle) {
 
         if (vehicle == null) {    //Doesn't add vehicle if it's null
-            return;
 
             //Checks if dealer exists. This first if-statement handles the case when dealer does not exist
         } else if (!dealerCatalog.containsKey(vehicle.getDealerId())) {

@@ -26,10 +26,10 @@ public class TestEnv {
         LocalDateTime now = LocalDateTime.now();
 
         // create  Vehicle children objects
-        Vehicle v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "D001", LocalDateTime.now(), false);
-        Vehicle v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "D001", LocalDateTime.now(), false);
-        Vehicle v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "D001", LocalDateTime.now(), false);
-        Vehicle v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "D002", LocalDateTime.now(), false);
+        Vehicle v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", LocalDateTime.now(), false);
+        Vehicle v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001", LocalDateTime.now(), false);
+        Vehicle v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", LocalDateTime.now(), false);
+        Vehicle v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002", LocalDateTime.now(), false);
         System.out.println("Vehicles created:");
         System.out.println(v001);
         System.out.println(v002);
@@ -56,8 +56,8 @@ public class TestEnv {
         Dealer d001 = new Dealer("001", "Toyota of St. Paul");
         Dealer d002 = new Dealer("002", "Honda of St. Paul");
         System.out.println("Dealers created:");
-        System.out.println(d001.toString());
-        System.out.println(d002.toString());
+        System.out.println(d001);
+        System.out.println(d002);
 
         // *** Testing Dealer Methods ***
         // Get Dealer ID

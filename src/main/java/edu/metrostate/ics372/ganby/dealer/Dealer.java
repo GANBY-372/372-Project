@@ -14,11 +14,11 @@ import java.util.Objects;
 public class Dealer {
 
     // Instance variables
-    private String name;
+    private final String name;
     private final String id;    //id is string because some IDs may contain letters
     private boolean isVehicleAcquisitionEnabled;
     // Getter for vehicles associated with dealer, Returns a set of vehicle objects
-    private HashMap<String, Vehicle> vehicleCatalog;
+    private final HashMap<String, Vehicle> vehicleCatalog;
 
     /**
      * Constructor for Dealer if name is not specified
