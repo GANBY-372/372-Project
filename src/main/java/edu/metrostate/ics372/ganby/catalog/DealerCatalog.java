@@ -9,11 +9,10 @@ package edu.metrostate.ics372.ganby.catalog;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class DealerCatalog {
 
@@ -79,7 +78,7 @@ public class DealerCatalog {
             //if dealer's vehicle acquisition is enabled. This if statement handles the case when both conditions are
             //false.
         } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCatalog().containsKey(vehicle.getVehicleId()) &&
-                !dealerCatalog.get(vehicle.getDealerId()).getIsVehicleAcquisitionEnabled()) {
+                !dealerCatalog.get(vehicle.getDealerId()).getIsBuying()) {
             System.out.println("Acquisition Disabled for dealer id #" + vehicle.getDealerId() +
                     " and vehicle id #" + vehicle.getVehicleId() + ", already exists in the collection.");
 
@@ -87,7 +86,7 @@ public class DealerCatalog {
             //when the vehicle already exists in the dealer's vehicle collection
         } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCatalog().containsKey(vehicle.getVehicleId())) {
             System.out.println("Vehicle id #" + vehicle.getVehicleId() + " already exists in dealer's the collection.");
-        } else if (!dealerCatalog.get(vehicle.getDealerId()).getIsVehicleAcquisitionEnabled()) {
+        } else if (!dealerCatalog.get(vehicle.getDealerId()).getIsBuying()) {
             System.out.println("Acquisition Disabled for dealer id #" + vehicle.getDealerId());
             //All conditions are met and the vehicle is added
         } else {
@@ -321,5 +320,25 @@ public class DealerCatalog {
         } else {
             this.getDealerCatalog().get(id).disableVehicleAcquisition(id);
         }
+    }
+
+    public ObservableList<Dealer> getDealerWhoAreBuying() {
+        Set<Dealer> matches = new HashSet<>();
+
+        for (Dealer dealer : dealerCatalog.values()) {
+            if (dealer.getIsBuying()) {
+                System.out.println(dealer.getDealerName() + "  is buying");
+                matches.add(dealer);
+            }
+        }
+        return FXCollections.observableArrayList(matches);
+    }
+
+    public Dealer getDealerByName (String name) {
+        if (name == null) return null;
+        for (Dealer dealer : dealerCatalog.values()) {
+            if (dealer.getDealerName().equalsIgnoreCase(name)) return dealer;
+        }
+        return null;
     }
 }

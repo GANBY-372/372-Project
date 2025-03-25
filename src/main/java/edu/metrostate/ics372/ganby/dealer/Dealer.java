@@ -1,16 +1,12 @@
-/**
- * Dealer.java
- * @author B, G
- * This class represents a dealer in the motor dealership system.
- * ID is a unique identifier for the dealer and immutable.
- * vehicleAcquisitionEnabled is a boolean flag that indicates state.
- */
-
 package edu.metrostate.ics372.ganby.dealer;
+
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.Set;
 
 public class Dealer {
 
@@ -18,7 +14,9 @@ public class Dealer {
     // Instance variables
     private String name;
     private final String id;    //id is string because some IDs may contain letters
-    private boolean isVehicleAcquisitionEnabled;
+
+//    private BooleanProperty isBuying;
+    private BooleanProperty isBuying;
     // Getter for vehicles associated with dealer, Returns a set of vehicle objects
     private HashMap<String, Vehicle> vehicleCatalog;
 
@@ -28,10 +26,7 @@ public class Dealer {
      * @param id String
      */
     public Dealer(String id) {
-        this.id = id;
-        this.isVehicleAcquisitionEnabled = true;
-        vehicleCatalog = new HashMap<>();
-        name = null;
+        this(id, "Dealer-" + id);
     }
 
     /**
@@ -41,7 +36,7 @@ public class Dealer {
      */
     public Dealer(String id, String name) {
         this.id = id;
-        this.isVehicleAcquisitionEnabled = true;
+        this.isBuying = new SimpleBooleanProperty(true);
         vehicleCatalog = new HashMap<>();
         this.name = name;
     }
@@ -58,7 +53,8 @@ public class Dealer {
     /**
      * Get the dealer name
      * @return String dealer name
-     */     public String getDealerName(){
+     */
+    public String getDealerName(){
         return name;
     }
 
@@ -67,12 +63,12 @@ public class Dealer {
      * Get the vehicle acquisition status
      * @return boolean
      */
-    public boolean getIsVehicleAcquisitionEnabled() {
-        return isVehicleAcquisitionEnabled;
+    public boolean getIsBuying () {
+        return isBuying.get();
     }
 
 
-     /**
+    /**
      * Get the vehicle collection
      * @return HashMap<String, Vehicle> vehicleCatalog
      */
@@ -87,10 +83,10 @@ public class Dealer {
      * @param dealerId String
      */
     public void enableVehicleAcquisition(String dealerId) {
-        if (isVehicleAcquisitionEnabled) {
+        if (isBuying.get()) {
             System.out.println("Vehicle acquisition already enabled for dealer id #" + dealerId + ".");
         } else{
-            this.isVehicleAcquisitionEnabled = true;
+            this.isBuying.set(true);
             System.out.println("Successfully enabled vehicle acquisition for dealer id #" + dealerId + ".");
         }
     }
@@ -100,10 +96,10 @@ public class Dealer {
      * @param dealerId String
      */
     public void disableVehicleAcquisition(String dealerId) {
-        if (!isVehicleAcquisitionEnabled) {
+        if (!isBuying.get()) {
             System.out.println("Vehicle acquisition already disabled for dealer id #" + dealerId + ".");
         } else{
-            this.isVehicleAcquisitionEnabled = false;
+            this.isBuying.set(false);
             System.out.println("Successfully disabled vehicle acquisition for dealer id #" + dealerId + ".");
         }
     }
@@ -124,7 +120,7 @@ public class Dealer {
      * @param vehicle Vehicle
      */
     public void addVehicle (Vehicle vehicle) {
-            vehicleCatalog.put(vehicle.getVehicleId(), vehicle);
+        vehicleCatalog.put(vehicle.getVehicleId(), vehicle);
     }
 
 
@@ -161,7 +157,58 @@ public class Dealer {
      */
     @Override
     public String toString() {
-        String acquisitionStatus = isVehicleAcquisitionEnabled ? "Yes" : "No";
+        String acquisitionStatus = isBuying.get() ? "Yes" : "No";
         return String.format("| %-10d | %-20s |", Integer.parseInt(id), acquisitionStatus);
+    }
+
+    public boolean transferVehicleSet(Set<Vehicle> vehicles, Dealer dealer) {
+        if (vehicles == null) {
+            System.out.print("Cannot transfer a null vehicle set.");
+            return false;
+        }
+        if (dealer == null) {
+            System.out.print("Cannot transfer a vehicle set to a null dealer.");
+            return false;
+        }
+
+        for (Vehicle vehicle : vehicles) {
+            if (!transferVehicle(vehicle, dealer)) {
+                System.out.println("Batch transfer to dealer: " + dealer.getDealerName() + " failed at vehicleid " + vehicle.getVehicleId());
+                return false;
+            }
+        }
+        System.out.println("Batch transfer to dealer: " + dealer.getDealerName() + " successful.");
+        return true;
+    }
+
+    public boolean transferVehicle (Vehicle vehicle, Dealer dealer) {
+
+        if (vehicle == null) {
+            System.out.print("Cannot transfer a null vehicle.");
+            return false;
+        }
+        if (dealer == null) {
+            System.out.print("Cannot transfer a vehicle to a null dealer.");
+            return false;
+        }
+
+        if (!dealer.isBuying.get()) {
+            System.out.println("Cannot transfer a vehicle to a dealer who is not buying.");
+            return false;
+        }
+
+        if (this.vehicleCatalog.get(vehicle.getVehicleId()) == null) {
+            System.out.println("Cannot transfer a vehicle that is not owned by this dealer.");
+            return false;
+        }
+
+        this.vehicleCatalog.remove(vehicle.getVehicleId());
+
+        vehicle.setDealer(dealer);
+        dealer.getVehicleCatalog().put(vehicle.getVehicleId(), vehicle);
+
+
+        System.out.println("Successfully transferred vehicle " + vehicle.getVehicleId()+ " to dealer " + dealer.getDealerName());
+        return dealer.getVehicleCatalog().get(vehicle.getVehicleId()) != null;
     }
 }

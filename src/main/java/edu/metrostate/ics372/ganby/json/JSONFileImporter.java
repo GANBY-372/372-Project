@@ -5,17 +5,16 @@
  */
 
 package edu.metrostate.ics372.ganby.json;
-
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.*;
-//import lombok.Getter;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.awt.*;
 import java.io.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -24,50 +23,52 @@ import java.util.TimeZone;
 public class JSONFileImporter {
 
     // JSON key name constants
-    public static final String DEALER_ID_KEY =              "dealership_id";
-    public static final String VEHICLE_ID_KEY =             "vehicle_id";
-    public static final String VEHICLE_MANUFACTURER_KEY =   "vehicle_manufacturer";
-    public static final String VEHICLE_MODEL_KEY =          "vehicle_model";
-    public static final String VEHICLE_TYPE_KEY =           "vehicle_type";
-    public static final String PRICE_KEY =                  "price";
-    public static final String ACQUISITION_DATE_KEY =       "acquisition_date";
+    public static final String DEALER_ID_KEY = "dealership_id";
+    public static final String VEHICLE_ID_KEY = "vehicle_id";
+    public static final String VEHICLE_MANUFACTURER_KEY = "vehicle_manufacturer";
+    public static final String VEHICLE_MODEL_KEY = "vehicle_model";
+    public static final String VEHICLE_TYPE_KEY = "vehicle_type";
+    public static final String PRICE_KEY = "price";
+    public static final String ACQUISITION_DATE_KEY = "acquisition_date";
 
     // JSON file reader and parser tools
     private Reader reader;
     private JSONParser jsonParser;
 
     // JSON object and array buckets
-    JSONObject  jsonObject;
-    JSONArray   jsonArray;
+    JSONObject jsonObject;
+    JSONArray jsonArray;
 
-    // TODO: Decouple file chooser and constructor so we can use this class to load a state on boot
     /**
-     * Constructor and file chooser and Importer method in one.
-     * @throws FileNotFoundException
+     * Constructor and file chooser and importer method in one (with JavaFX FileChooser).
+     *
+     * @param primaryStage The primary stage from your JavaFX application for initializing the dialog.
+     * @throws FileNotFoundException when the selected file cannot be found.
      */
-    public JSONFileImporter() throws FileNotFoundException {
-
+    public JSONFileImporter(Stage primaryStage) throws FileNotFoundException {
         try {
-            // File chooser dialog
-            Frame frame = new Frame();
-            FileDialog fileDialog = new FileDialog(frame, "Select a File", FileDialog.LOAD);
-            fileDialog.setVisible(true);
+            // Create a JavaFX FileChooser
+            FileChooser fileChooser = new FileChooser();
 
-            String directory = fileDialog.getDirectory();
-            String filename = fileDialog.getFile();
+            // Configure FileChooser options
+            fileChooser.setTitle("Select a JSON File");
+            fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JSON Files (*.json)", "*.json"),
+                new FileChooser.ExtensionFilter("All Files", "*.*")
+            );
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
-            if (filename != null) {
-                File selectedFile = new File(directory, filename);
+            // Show the Open File dialog and retrieve the selected file
+            File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
-                // Use FileReader instead of InputStream
-                // reader reads the selected file
+            if (selectedFile != null) {
+                // Initialize the Reader and JSONParser
                 this.reader = new FileReader(selectedFile);
+                this.jsonParser = new JSONParser();
 
-                jsonParser = new JSONParser();
-
-                // Parse the JSON file and get the JSON array of objects
+                // Parse the JSON file and get the JSON object and array
                 this.jsonObject = (JSONObject) jsonParser.parse(reader);
-                jsonArray = (JSONArray) jsonObject.get("car_inventory");
+                this.jsonArray = (JSONArray) jsonObject.get("car_inventory");
 
                 System.out.println("Successfully parsed JSON file: " + selectedFile.getAbsolutePath());
             } else {
@@ -75,22 +76,22 @@ public class JSONFileImporter {
             }
 
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException(e.getMessage());
+            throw new FileNotFoundException("The specified file could not be found: " + e.getMessage());
         } catch (ParseException | IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error while reading or parsing the JSON file: " + e.getMessage(), e);
         }
     }
 
-    // TODO: Rename this method, it looks like a basic getter, but it seems to create a dealer for the object
-    // TODO: THis method throws exception for non numeric - we decided id should be a string so need to edit
     /**
-     * Creates a dealer from a JSON object using the dealer ID associated with the object.
+     * Creates a dealer from a JSON object using the dealer ID associated with the
+     * object.
+     *
      * @param jsonObject JSON object containing the dealer ID
      * @return Dealer object
-     * @throws IllegalArgumentException if the dealer ID is not numeric
+     * @throws IllegalArgumentException if the dealer ID is invalid
      */
-    private Dealer getDealer (JSONObject jsonObject) {
-        String numericString  = jsonObject.get(DEALER_ID_KEY).toString();
+    private Dealer getDealer(JSONObject jsonObject) {
+        String numericString = jsonObject.get(DEALER_ID_KEY).toString();
         if (numericString == null || numericString.isBlank())
             throw new IllegalArgumentException("Value for dealer id is not numeric. Cannot create dealer.");
         return new Dealer(numericString);
@@ -98,26 +99,26 @@ public class JSONFileImporter {
 
     /**
      * Creates a vehicle from a JSON object.
+     *
      * @param jsonObject JSON object containing vehicle data
      * @return Vehicle object
      * @throws IllegalAccessException if null object or empty object
      */
     public Vehicle createVehicle(JSONObject jsonObject) throws IllegalAccessException {
-        if (jsonObject == null || jsonObject.isEmpty()){
+        if (jsonObject == null || jsonObject.isEmpty()) {
             throw new IllegalArgumentException("JSON vehicle object is null or empty");
         }
 
-        // Create the vehicle with JSON data
-        String manufacturer =           jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
-        String model =                  jsonObject.get(VEHICLE_MODEL_KEY).toString();
-        String id =                     jsonObject.get(VEHICLE_ID_KEY).toString();
-        double price =                  Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
-        String dealerId =               jsonObject.get(DEALER_ID_KEY).toString();
-        long epochSeconds =             Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
+        // Extract data from the JSON object
+        String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
+        String model = jsonObject.get(VEHICLE_MODEL_KEY).toString();
+        String id = jsonObject.get(VEHICLE_ID_KEY).toString();
+        double price = Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
+        String dealerId = jsonObject.get(DEALER_ID_KEY).toString();
+        long epochSeconds = Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
         LocalDateTime acquisitionDate = LocalDateTime.ofInstant(
-                Instant.ofEpochMilli(epochSeconds),
-                TimeZone.getDefault().toZoneId()
-        );
+            Instant.ofEpochMilli(epochSeconds),
+            TimeZone.getDefault().toZoneId());
 
         // Get vehicle type from JSON object
         String type = (String) jsonObject.get(VEHICLE_TYPE_KEY);
@@ -127,20 +128,18 @@ public class JSONFileImporter {
             return null; // Skip this vehicle if the type is missing
         }
 
-        // Create vehicle, category is an enum
+        // Create appropriate vehicle instance based on type
         Vehicle vehicle;
-        switch (type.trim().replaceAll("\\s+", "").toUpperCase()) { //trim type string and set to upper case
-                case "SUV" ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "SEDAN" ->       vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "PICKUP" ->      vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "SPORTSCAR" ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
+        switch (type.trim().replaceAll("\\s+", "").toUpperCase()) {
+            case "SUV" -> vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SEDAN" -> vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "PICKUP" -> vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SPORTSCAR" -> vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
             default -> {
                 System.out.println("Unknown category: " + type);
                 return null;
             }
         }
-
-        //vehicles.addVehicle(vehicle);     //Why are we adding to vehicles class and then to VehicleCatalog??
 
         // Add vehicle to catalog
         DealerCatalog.getInstance().addVehicle(vehicle);
@@ -148,7 +147,9 @@ public class JSONFileImporter {
     }
 
     /**
-     * Processes the JSON array of objects. This adds JSON file list of vehicles to the catalog.
+     * Processes the JSON array of objects. This adds JSON file list of vehicles to
+     * the catalog.
+     *
      * @throws IllegalAccessException if null or empty JSON array
      */
     public void processJSON() throws IllegalAccessException {
@@ -160,12 +161,160 @@ public class JSONFileImporter {
             Vehicle vehicle = createVehicle((JSONObject) object);
         }
     }
-
-    /* No usages.
-    public void printDealerKeys () {
-        for (Object object : jsonArray) {
-            String dealerId = ((JSONObject) object).get(DEALER_ID_KEY).toString();
-        }
-    }
-     */
 }
+
+//
+//import java.awt.*;
+//import java.io.*;
+//import java.time.Instant;
+//import java.time.LocalDateTime;
+//import java.util.TimeZone;
+//
+//public class JSONFileImporter {
+//
+//    // JSON key name constants
+//    public static final String DEALER_ID_KEY =              "dealership_id";
+//    public static final String VEHICLE_ID_KEY =             "vehicle_id";
+//    public static final String VEHICLE_MANUFACTURER_KEY =   "vehicle_manufacturer";
+//    public static final String VEHICLE_MODEL_KEY =          "vehicle_model";
+//    public static final String VEHICLE_TYPE_KEY =           "vehicle_type";
+//    public static final String PRICE_KEY =                  "price";
+//    public static final String ACQUISITION_DATE_KEY =       "acquisition_date";
+//
+//    // JSON file reader and parser tools
+//    private Reader reader;
+//    private JSONParser jsonParser;
+//
+//    // JSON object and array buckets
+//    JSONObject  jsonObject;
+//    JSONArray jsonArray;
+//
+//    // TODO: Decouple file chooser and constructor so we can use this class to load a state on boot
+//    /**
+//     * Constructor and file chooser and Importer method in one.
+//     * @throws FileNotFoundException
+//     */
+//    public JSONFileImporter() throws FileNotFoundException {
+//
+//        try {
+//            // File chooser dialog
+//            Frame frame = new Frame();
+//            FileDialog fileDialog = new FileDialog(frame, "Select a File", FileDialog.LOAD);
+//            fileDialog.setVisible(true);
+//
+//            String directory = fileDialog.getDirectory();
+//            String filename = fileDialog.getFile();
+//
+//            if (filename != null) {
+//                File selectedFile = new File(directory, filename);
+//
+//                // Use FileReader instead of InputStream
+//                // reader reads the selected file
+//                this.reader = new FileReader(selectedFile);
+//
+//                jsonParser = new JSONParser();
+//
+//                // Parse the JSON file and get the JSON array of objects
+//                this.jsonObject = (JSONObject) jsonParser.parse(reader);
+//                jsonArray = (JSONArray) jsonObject.get("car_inventory");
+//
+//                System.out.println("Successfully parsed JSON file: " + selectedFile.getAbsolutePath());
+//            } else {
+//                System.out.println("File selection cancelled.");
+//            }
+//
+//        } catch (FileNotFoundException e) {
+//            throw new FileNotFoundException(e.getMessage());
+//        } catch (ParseException | IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    // TODO: Rename this method, it looks like a basic getter, but it seems to create a dealer for the object
+//    // TODO: THis method throws exception for non numeric - we decided id should be a string so need to edit
+//    /**
+//     * Creates a dealer from a JSON object using the dealer ID associated with the object.
+//     * @param jsonObject JSON object containing the dealer ID
+//     * @return Dealer object
+//     * @throws IllegalArgumentException if the dealer ID is not numeric
+//     */
+//    private Dealer getDealer (JSONObject jsonObject) {
+//        String numericString  = jsonObject.get(DEALER_ID_KEY).toString();
+//        if (numericString == null || numericString.isBlank())
+//            throw new IllegalArgumentException("Value for dealer id is not numeric. Cannot create dealer.");
+//        return new Dealer(numericString);
+//    }
+//
+//    /**
+//     * Creates a vehicle from a JSON object.
+//     * @param jsonObject JSON object containing vehicle data
+//     * @return Vehicle object
+//     * @throws IllegalAccessException if null object or empty object
+//     */
+//    public Vehicle createVehicle(JSONObject jsonObject) throws IllegalAccessException {
+//        if (jsonObject == null || jsonObject.isEmpty()){
+//            throw new IllegalArgumentException("JSON vehicle object is null or empty");
+//        }
+//
+//        // Create the vehicle with JSON data
+//        String manufacturer =           jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
+//        String model =                  jsonObject.get(VEHICLE_MODEL_KEY).toString();
+//        String id =                     jsonObject.get(VEHICLE_ID_KEY).toString();
+//        double price =                  Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
+//        String dealerId =               jsonObject.get(DEALER_ID_KEY).toString();
+//        long epochSeconds =             Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
+//        LocalDateTime acquisitionDate = LocalDateTime.ofInstant(
+//                Instant.ofEpochMilli(epochSeconds),
+//                TimeZone.getDefault().toZoneId()
+//        );
+//
+//        // Get vehicle type from JSON object
+//        String type = (String) jsonObject.get(VEHICLE_TYPE_KEY);
+//
+//        if (type == null || type.isBlank()) {
+//            System.out.println("Skipping vehicle due to missing or empty vehicle type.");
+//            return null; // Skip this vehicle if the type is missing
+//        }
+//
+//        // Create vehicle, category is an enum
+//        Vehicle vehicle;
+//        switch (type.trim().replaceAll("\\s+", "").toUpperCase()) { //trim type string and set to upper case
+//                case "SUV" ->         vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+//            case "SEDAN" ->       vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
+//            case "PICKUP" ->      vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
+//            case "SPORTSCAR" ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
+//            default -> {
+//                System.out.println("Unknown category: " + type);
+//                return null;
+//            }
+//        }
+//
+//        //vehicles.addVehicle(vehicle);     //Why are we adding to vehicles class and then to VehicleCatalog??
+//
+//        // Add vehicle to catalog
+//        DealerCatalog.getInstance().addVehicle(vehicle);
+//        return vehicle;
+//    }
+//
+//    /**
+//     * Processes the JSON array of objects. This adds JSON file list of vehicles to the catalog.
+//     * @throws IllegalAccessException if null or empty JSON array
+//     */
+//    public void processJSON() throws IllegalAccessException {
+//        if (jsonArray == null || jsonArray.isEmpty()) {
+//            return;
+//        }
+//
+//        for (Object object : jsonArray) {
+//            Vehicle vehicle = createVehicle((JSONObject) object);
+//        }
+//    }
+//
+//    /* No usages.
+//    public void printDealerKeys () {
+//        for (Object object : jsonArray) {
+//            String dealerId = ((JSONObject) object).get(DEALER_ID_KEY).toString();
+//        }
+//    }
+//     */
+//}

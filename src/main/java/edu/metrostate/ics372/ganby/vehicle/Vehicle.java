@@ -1,8 +1,10 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
+
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.json.JSONObjectBuilder;
 import org.json.simple.JSONObject;
+
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -17,6 +19,12 @@ public abstract class Vehicle {
     protected LocalDateTime acquisitionDate;
     protected Boolean isRentedOut;
 
+    //In the case rent status is not specified
+    public Vehicle(String id, String model, String manufacturer, double price, String dealerId,
+                   LocalDateTime acquisitionDate) {
+        this(id, model, manufacturer, price, dealerId, acquisitionDate, null);
+    }
+
 
     //In the case rent status is specified
     public Vehicle(String id, String model, String manufacturer, double price, String dealerId,
@@ -28,18 +36,6 @@ public abstract class Vehicle {
         this.dealerId = dealerId;
         this.acquisitionDate = acquisitionDate;
         this.isRentedOut = isRentedOut;
-    }
-
-    //In the case rent status is not specified
-    public Vehicle(String id, String model, String manufacturer, double price, String dealerId,
-                   LocalDateTime acquisitionDate) {
-        this.id = id;
-        this.model = model;
-        this.manufacturer = manufacturer;
-        this.price = price;
-        this.dealerId = dealerId;
-        this.acquisitionDate = acquisitionDate;
-        isRentedOut = false;    //False by default but can be set later
     }
 
     public abstract String getType();
@@ -108,12 +104,12 @@ public abstract class Vehicle {
     @Override
     public String toString() {
         return getClass().getSimpleName() +
-                " [id:" + id
-                + " model:" + model
-                + " manufacturer:" + manufacturer
-                + " price:" + price
-                + " dealer id:" + dealerId
-                + " acquisitionDate:" + acquisitionDate + "]";
+            " [id:" + id
+            + " model:" + model
+            + " manufacturer:" + manufacturer
+            + " price:" + price
+            + " dealer id:" + dealerId
+            + " acquisitionDate:" + acquisitionDate + "]";
     }
 
     public JSONObject toJSON() {
