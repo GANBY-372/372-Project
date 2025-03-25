@@ -1,26 +1,27 @@
 package edu.metrostate.ics372.ganby;
 
 import edu.metrostate.ics372.ganby.catalog.DealerCatalog;
+//import edu.metrostate.ics372.ganby.catalog.VehicleCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
-import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import edu.metrostate.ics372.ganby.json.JSONFileExporter;
 import edu.metrostate.ics372.ganby.json.JSONFileImporter;
-import edu.metrostate.ics372.ganby.xml.XMLFileImporter;
-import org.w3c.dom.Document;
 
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 import java.awt.FileDialog;
 import java.awt.Frame;
 
-public class UserDriver {
+public class TestDriver {
 
     public static void main(String[] args) throws FileNotFoundException, IllegalAccessException {
-        runProgram();   // This is the master method that runs the program. It uses the other three methods when appropriate.
+        runProgram();
     }
 
-    // Method to print the welcome banner
+    /**
+     * Method to print the welcome banner
+     */
     public static void printWelcomeBanner() {
         System.out.println("\n*********************************************************");
         System.out.println("*                                                       *");
@@ -29,7 +30,9 @@ public class UserDriver {
         System.out.println("*********************************************************");
     }
 
-    // Method to print the exit message
+    /**
+     * Method to print the exit message
+     */
     public static void printExitMessage() {
         System.out.println("\n\n******************************************************************");
         System.out.println("*                                                                *");
@@ -38,6 +41,9 @@ public class UserDriver {
         System.out.println("******************************************************************");
     }
 
+    /**
+     * Method to print the current inventory status
+     */
     public static void printCurrentInventoryStatus() {
         System.out.println("\nCurrent Dealer Catalog as of " + java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ":");
         System.out.println("-------------------------------------------------------------------");
@@ -50,9 +56,12 @@ public class UserDriver {
         DealerCatalog.getInstance().printAllDealers();
 
         System.out.println("\n-------------------------------------------------------------------");
+
     }
 
-    // Method to print the main menu
+    /**
+     * Method to print the main menu
+     */
     public static void runProgram() throws FileNotFoundException, IllegalAccessException {
 
         printWelcomeBanner();
@@ -63,7 +72,7 @@ public class UserDriver {
         while (userInput != 5) { // Continue until user chooses to exit
             printCurrentInventoryStatus();
             System.out.println("\nMenu Options:");
-            System.out.println("1. Import JSON or XML vehicle inventory file.");
+            System.out.println("1. Import JSON vehicle inventory file.");
             System.out.println("2. Enable or disable vehicle acquisition.");
             System.out.println("3. Export dealer inventory to JSON file.");
             System.out.println("4. Show list of current vehicles for each dealer.");
@@ -80,42 +89,12 @@ public class UserDriver {
             scanner.nextLine(); // Consume newline to avoid InputMismatchException
 
             switch (userInput) {
-                case 1: // Importing a JSON or XML file
-                    System.out.println("Please choose a file type to import: ");
-                    System.out.println("1. JSON");
-                    System.out.println("2. XML");
-                    System.out.println("or type the file format directly (json or xml)");
-
-                    String userInputFile = scanner.nextLine().toLowerCase(); // Get user input as a string and convert to lowercase
-
-                    // If the user selects JSON or 'json', call the JSONFileImporter
-                    if (userInputFile.equals("1") || userInputFile.equals("json")) {
-                        JSONFileImporter jsonFileImporter = new JSONFileImporter();
-                        jsonFileImporter.processJSON();  // This will open the file dialog and process the selected JSON file
-                    }
-                    // If the user selects XML or 'xml', call the XMLFileImporter
-                    else if (userInputFile.equals("2") || userInputFile.equals("xml")) {
-                        try {
-                            // Create XMLFileImporter instance to select and parse XML
-                            XMLFileImporter xmlFileImporter = new XMLFileImporter();
-
-                            // Get the Document object from XMLFileImporter
-                            Document xmlDocument = xmlFileImporter.getXmlDocument();
-
-                            // Pass the Document object to processXML()
-                            if (xmlDocument != null) {
-                                xmlFileImporter.processXML(xmlDocument);
-                            }
-
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    } else {
-                        System.out.println("Invalid choice. Please select either 1, 2, json, or xml.");
-                    }
+                case 1: //Importing a JSON file. Works for inventory.json or any json file that contains vehicle(s)
+                    JSONFileImporter fileImporter = new JSONFileImporter();
+                    fileImporter.processJSON();
                     break;
 
-                case 2: // Enabling or Disabling Dealer Acquisition
+                case 2: //Enabling or Disabling Dealer Acquisition
                     System.out.print("Enter ID of dealer: (or Q to quit) ");
                     if (scanner.hasNextInt()) {
                         String idToEnableOrDisable = scanner.nextLine();
@@ -149,6 +128,8 @@ public class UserDriver {
                         scanner.next(); // Clear invalid input
                     }
                     break;
+
+
 
                 case 3: // Exporting Dealer Inventory
                     while (true) {
@@ -189,14 +170,17 @@ public class UserDriver {
                     }
                     break;
 
-                case 4: // Shows list of current vehicles for each dealer
+
+
+
+                case 4: //Shows list of current vehicles for each dealer
                     DealerCatalog.getInstance().printAllVehiclesByDealerId();
                     break;
 
-                case 5: // End program
+                case 5: //End program.
                     System.out.println("Ending Program.");
-                    printCurrentInventoryStatus();  // Lets user take a last look at inventory
-                    printExitMessage();    // Prints final exit message
+                    printCurrentInventoryStatus();  //Lets user take a last look as inventory
+                    printExitMessage();    //Prints final exit message
                     break;
 
                 default:
