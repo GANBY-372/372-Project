@@ -5,7 +5,7 @@
  */
 package edu.metrostate.ics372.ganby.DataProcessing;
 
-import edu.metrostate.ics372.ganby.Vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

@@ -1,4 +1,4 @@
-package edu.metrostate.ics372.ganby.Vehicle;
+package edu.metrostate.ics372.ganby.vehicle;
 
 import java.time.LocalDateTime;
 

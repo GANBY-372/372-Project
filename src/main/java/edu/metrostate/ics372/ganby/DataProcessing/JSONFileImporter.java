@@ -6,13 +6,13 @@
 
 package edu.metrostate.ics372.ganby.DataProcessing;
 
-import edu.metrostate.ics372.ganby.Dealer.DealerCatalog;
-import edu.metrostate.ics372.ganby.Dealer.Dealer;
-import edu.metrostate.ics372.ganby.Vehicle.SUV;
-import edu.metrostate.ics372.ganby.Vehicle.SportsCar;
-import edu.metrostate.ics372.ganby.Vehicle.Sedan;
-import edu.metrostate.ics372.ganby.Vehicle.Pickup;
-import edu.metrostate.ics372.ganby.Vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
+import edu.metrostate.ics372.ganby.dealer.Dealer;
+import edu.metrostate.ics372.ganby.vehicle.SUV;
+import edu.metrostate.ics372.ganby.vehicle.SportsCar;
+import edu.metrostate.ics372.ganby.vehicle.Sedan;
+import edu.metrostate.ics372.ganby.vehicle.Pickup;
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

@@ -2,8 +2,8 @@ package edu.metrostate.ics372.ganby;
 
 import edu.metrostate.ics372.ganby.DataProcessing.JSONFileExporter;
 import edu.metrostate.ics372.ganby.DataProcessing.XMLFileImporter;
-import edu.metrostate.ics372.ganby.Dealer.DealerCatalog;
-import edu.metrostate.ics372.ganby.Dealer.Dealer;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
+import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.DataProcessing.JSONFileImporter;
 import org.w3c.dom.Document;
 

@@ -1,8 +1,8 @@
 package edu.metrostate.ics372.ganby.DataProcessing;
 
-import edu.metrostate.ics372.ganby.Dealer.DealerCatalog;
-import edu.metrostate.ics372.ganby.Dealer.Dealer;
-import edu.metrostate.ics372.ganby.Vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
+import edu.metrostate.ics372.ganby.dealer.Dealer;
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import java.io.FileWriter;

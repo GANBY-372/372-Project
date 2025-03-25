@@ -6,8 +6,8 @@
  * vehicleAcquisitionEnabled is a boolean flag that indicates state.
  */
 
-package edu.metrostate.ics372.ganby.Dealer;
-import edu.metrostate.ics372.ganby.Vehicle.Vehicle;
+package edu.metrostate.ics372.ganby.dealer;
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 
 import java.util.HashMap;
 import java.util.Objects;
