@@ -48,6 +48,10 @@ public abstract class Vehicle {
         isRentedOut = rentedOut;
     }
 
+    public Boolean getIsRentedOut() {
+        return isRentedOut;
+    }
+
     public String getVehicleId() {
         return id;
     }

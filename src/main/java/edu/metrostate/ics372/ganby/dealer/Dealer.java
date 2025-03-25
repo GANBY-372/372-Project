@@ -1,6 +1,5 @@
 /**
  * Dealer.java
- * @author B, G
  * This class represents a dealer in the motor dealership system.
  * ID is a unique identifier for the dealer and immutable.
  * vehicleAcquisitionEnabled is a boolean flag that indicates state.
@@ -14,7 +13,6 @@ import java.util.Objects;
 
 public class Dealer {
 
-    // Getter for dealer id
     // Instance variables
     private String name;
     private final String id;    //id is string because some IDs may contain letters
@@ -22,7 +20,6 @@ public class Dealer {
     // Getter for vehicles associated with dealer, Returns a set of vehicle objects
     private HashMap<String, Vehicle> vehicleCatalog;
 
-    // TODO: Implement automatic naming if dealer name is not specified.
     /**
      * Constructor for Dealer if name is not specified
      * @param id String
@@ -46,7 +43,6 @@ public class Dealer {
         this.name = name;
     }
 
-
     /**
      * Get the dealer id
      * @return String dealer id
@@ -62,7 +58,6 @@ public class Dealer {
         return name;
     }
 
-
     /**
      * Get the vehicle acquisition status
      * @return boolean
@@ -71,7 +66,6 @@ public class Dealer {
         return isVehicleAcquisitionEnabled;
     }
 
-
     /**
      * Get the vehicle collection
      * @return HashMap<String, Vehicle> vehicleCatalog
@@ -79,8 +73,6 @@ public class Dealer {
     public HashMap<String, Vehicle> getVehicleCatalog() {
         return vehicleCatalog;
     }
-
-
 
     /**
      * Set the dealer acquisition status to true / enabled
@@ -117,8 +109,6 @@ public class Dealer {
         return getVehicleCatalog().get(vehicleId);
     }
 
-
-
     /**
      * Add a vehicle to the dealer's vehicle collection
      * @param vehicle Vehicle
@@ -126,8 +116,6 @@ public class Dealer {
     public void addVehicle (Vehicle vehicle) {
         vehicleCatalog.put(vehicle.getVehicleId(), vehicle);
     }
-
-
 
     /**
      * Equals method to compare two dealers
@@ -144,7 +132,6 @@ public class Dealer {
         return false;                           // If none of the above, return false
     }
 
-
     /**
      * Hashcode is used to determine the location of an object in a hash table
      * @return int
@@ -154,14 +141,13 @@ public class Dealer {
         return Objects.hashCode(id);
     }
 
-
     /**
      * String representation of a dealer
      * @return String
      */
-    @Override
-    public String toString() {
-        String acquisitionStatus = isVehicleAcquisitionEnabled ? "Yes" : "No";
-        return String.format("| %-10d | %-20s |", Integer.parseInt(id), acquisitionStatus);
-    }
+@Override
+        public String toString() {
+            String acquisitionStatus = isVehicleAcquisitionEnabled ? "Yes" : "No";
+            return String.format("| %-10d | %-20s | %-20s |", Integer.parseInt(id), name, acquisitionStatus);
+        }
 }
