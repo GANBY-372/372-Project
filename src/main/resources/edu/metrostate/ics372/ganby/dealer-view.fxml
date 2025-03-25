@@ -20,47 +20,18 @@
     fx:controller="edu.metrostate.ics372.ganby.dealer.DealerController"
 >
     <children>
-        <TableView
-            fx:id="dealerTable" layoutX="13.0" layoutY="129.0" prefHeight="663.0" prefWidth="478.0"
-        >
+        <TableView fx:id="dealerTable" layoutX="13.0" layoutY="129.0" prefHeight="663.0" prefWidth="580.0">
             <columns>
-                <TableColumn
-                    fx:id="isBuyingColumn"
-                    prefWidth="183.0"
-                    text="Is Buying"
-                />
-                <TableColumn
-                    fx:id="dealerIdColumn"
-                    prefWidth="75.0"
-                    text="dealer ID"
-                />
-                <TableColumn
-                    fx:id="dealerNameColumn"
-                    prefWidth="183.0"
-                    text="dealer Name"
-                />
-                <TableColumn
-                    fx:id="dealerInventoryColumn"
-                    prefWidth="183.0"
-                    text="Inventory Size"
-                />
+                <TableColumn fx:id="isBuyingColumn" prefWidth="183.0" text="Is Buying"/>
+                <TableColumn fx:id="dealerIdColumn" prefWidth="75.0" text="Dealer ID"/>
+                <TableColumn fx:id="dealerNameColumn" prefWidth="183.0" text="Dealer Name"/>
+                <TableColumn fx:id="dealerInventoryColumn" prefWidth="183.0" text="Inventory"/>
             </columns>
         </TableView>
-        <AnchorPane
-            fx:id="userDetailPane"
-            layoutX="506.0"
-            layoutY="127.0"
-            prefHeight="663.0"
-            prefWidth="719.0"
-        >
+        <AnchorPane fx:id="dealerDetailPane" layoutX="606.0" layoutY="127.0" prefHeight="663.0" prefWidth="820.0">
             <children>
                 <Label
-                    fx:id="dealerNameLabel"
-                    layoutX="41.0"
-                    layoutY="69.0"
-                    prefHeight="25.0"
-                    prefWidth="85.0"
-                    text="Dealer Name"
+                    fx:id="dealerNameLabel" layoutX="41.0" layoutY="69.0" prefHeight="25.0" prefWidth="85.0" text="Dealer Name"
                 />
                 <Label
                     fx:id="dealerIdLabel"
@@ -98,13 +69,13 @@
                         <HBox fx:id="radioButtonBox" prefHeight="43.0" prefWidth="230.0">
                             <children>
                                 <RadioButton
-                                        fx:id="isBuyingRadioButton"
-                                        contentDisplay="TOP"
-                                        mnemonicParsing="false"
-                                        prefHeight="38.0"
-                                        prefWidth="117.0"
-                                        text="Buying"
-                                        textAlignment="CENTER"
+                                    fx:id="isBuyingRadioButton"
+                                    contentDisplay="TOP"
+                                    mnemonicParsing="false"
+                                    prefHeight="38.0"
+                                    prefWidth="117.0"
+                                    text="Buying"
+                                    textAlignment="CENTER"
                                 >
                                     <!--                            <toggleGroup>-->
                                     <!--                              <ToggleGroup fx:id="isBuying" />-->
@@ -137,73 +108,73 @@
                 <VBox fx:id="vehicleListVBox" layoutY="198.0" prefHeight="443.0" prefWidth="719.0">
                     <children>
                         <Button
-                                fx:id="addVehicleButton"
-                                layoutX="662.0"
-                                layoutY="69.0"
-                                mnemonicParsing="false"
-                                prefHeight="77.0"
-                                prefWidth="719.0"
-                                text="Add Vehicle"
-                                textAlignment="CENTER"
-                                onAction="#openAddVehicleWizard"
+                            fx:id="addVehicleButton"
+                            layoutX="662.0"
+                            layoutY="69.0"
+                            mnemonicParsing="false"
+                            prefHeight="77.0"
+                            prefWidth="719.0"
+                            text="Add Vehicle"
+                            textAlignment="CENTER"
+                            onAction="#openAddVehicleWizard"
                         />
                         <ButtonBar fx:id="vehicleFilterButtonBar" prefHeight="105.0" prefWidth="719.0">
                             <buttons>
                                 <Button
-                                        fx:id="rentableFilterButton"
-                                        layoutX="642.0"
-                                        layoutY="18.0"
-                                        mnemonicParsing="false"
-                                        onAction="#getRentables"
-                                        text="Available for Rent"
-                                        textAlignment="CENTER"
-                                        wrapText="true"
+                                    fx:id="rentableFilterButton"
+                                    layoutX="642.0"
+                                    layoutY="18.0"
+                                    mnemonicParsing="false"
+                                    onAction="#getRentables"
+                                    text="Available for Rent"
+                                    textAlignment="CENTER"
+                                    wrapText="true"
                                 >
                                     <font><Font size="15.0" /></font>
                                 </Button>
                                 <Button
-                                        fx:id="sportsCarFilterButton"
-                                        layoutX="545.0"
-                                        layoutY="18.0"
-                                        mnemonicParsing="false"
-                                        onAction="#filterBySportsCar"
-                                        prefHeight="56.0"
-                                        text="Sport Car"
-                                        wrapText="true"
+                                    fx:id="sportsCarFilterButton"
+                                    layoutX="545.0"
+                                    layoutY="18.0"
+                                    mnemonicParsing="false"
+                                    onAction="#filterBySportsCar"
+                                    prefHeight="56.0"
+                                    text="Sport Car"
+                                    wrapText="true"
                                 >
                                     <font><Font size="15.0" /></font>
                                 </Button>
                                 <Button
-                                        fx:id="suvFilterButton"
-                                        layoutX="448.0"
-                                        layoutY="18.0"
-                                        mnemonicParsing="false"
-                                        onAction="#filterBySUV"
-                                        prefHeight="54.0"
-                                        text="SUV"
-                                        wrapText="true"
+                                    fx:id="suvFilterButton"
+                                    layoutX="448.0"
+                                    layoutY="18.0"
+                                    mnemonicParsing="false"
+                                    onAction="#filterBySUV"
+                                    prefHeight="54.0"
+                                    text="SUV"
+                                    wrapText="true"
                                 >
                                     <font><Font size="15.0" /></font>
                                 </Button>
                                 <Button
-                                        fx:id="truckFilterButton"
-                                        layoutX="351.0" layoutY="18.0"
-                                        mnemonicParsing="false"
-                                        onAction="#filterByTruck"
-                                        prefHeight="54.0" text="Truck"
-                                        wrapText="true"
+                                    fx:id="truckFilterButton"
+                                    layoutX="351.0" layoutY="18.0"
+                                    mnemonicParsing="false"
+                                    onAction="#filterByTruck"
+                                    prefHeight="54.0" text="Truck"
+                                    wrapText="true"
                                 >
                                     <font><Font size="15.0" /></font>
                                 </Button>
                                 <Button
-                                        fx:id="sedanFilterButton"
-                                        layoutX="254.0"
-                                        layoutY="18.0"
-                                        mnemonicParsing="false"
-                                        onAction="#filterBySedan"
-                                        prefHeight="50.0"
-                                        text="Sedan"
-                                        wrapText="true"
+                                    fx:id="sedanFilterButton"
+                                    layoutX="254.0"
+                                    layoutY="18.0"
+                                    mnemonicParsing="false"
+                                    onAction="#filterBySedan"
+                                    prefHeight="50.0"
+                                    text="Sedan"
+                                    wrapText="true"
                                 >
                                     <font><Font size="15.0" /></font>
                                 </Button>

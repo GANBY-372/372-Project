@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class GanbyApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
 
             // Load FXML and set up scene
             Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Hello!");
+            stage.setTitle("Ganby Application!");
             stage.setScene(scene);
             stage.show();
 

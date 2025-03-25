@@ -166,7 +166,7 @@
 //                            continue;
 //                        }
 //
-//                        System.out.println("Selected dealer: " + dealer.getDealerId());
+//                        System.out.println("Selected dealer: " + dealer.getId());
 //
 //                        // Use FileDialog for file selection
 //                        FileDialog fileDialog = new FileDialog((Frame) null, "Save File", FileDialog.SAVE);

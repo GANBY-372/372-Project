@@ -76,7 +76,7 @@ public abstract class Vehicle {
 
     public void setDealer(Dealer dealer) {
         if (dealer == null) throw new IllegalArgumentException("Dealer cannot be null");
-        this.dealerId = dealer.getDealerId();
+        this.dealerId = dealer.getId();
     }
 
 

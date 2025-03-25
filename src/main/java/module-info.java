@@ -2,9 +2,10 @@ module edu.metrostate.ics372.ganby {
     requires javafx.fxml;
     requires javafx.controls;
     requires javafx.graphics;
+    requires javafx.base;
     requires json.simple;
 
-    opens edu.metrostate.ics372.ganby.dealer to javafx.fxml;
+    opens edu.metrostate.ics372.ganby.dealer to javafx.base, javafx.fxml;
 
     exports edu.metrostate.ics372.ganby;
 }

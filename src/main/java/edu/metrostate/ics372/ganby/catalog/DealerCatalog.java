@@ -118,7 +118,7 @@ public class DealerCatalog {
         System.out.println("Vehicles by Price:");
 
         for (Dealer dealer : this.getDealerCatalog().values()) {
-            System.out.printf("%nDealer ID #%d:%n", Integer.parseInt(dealer.getDealerId())); // Print Dealer ID above the table
+            System.out.printf("%nDealer ID #%d:%n", Integer.parseInt(dealer.getId())); // Print Dealer ID above the table
 
             System.out.println("-------------------------------------------------------------------------------");
             System.out.printf("| %-10s | %-15s | %-12s | %-10s | %-20s |%n",
@@ -162,7 +162,7 @@ public class DealerCatalog {
 
             if (!filteredVehicles.isEmpty()) {
                 found = true;
-                System.out.printf("%nDealer ID #%d:%n", Integer.parseInt(dealer.getDealerId())); // Print Dealer ID above the table
+                System.out.printf("%nDealer ID #%d:%n", Integer.parseInt(dealer.getId())); // Print Dealer ID above the table
                 System.out.println("-------------------------------------------------------------------------------");
                 System.out.printf("| %-10s | %-15s | %-12s | %-10s | %-20s |%n",
                         "Type", "Model", "Manufacturer", "Price", "Acquisition Date");
@@ -203,8 +203,8 @@ public class DealerCatalog {
             if (vehicleCount >= minVehicles && vehicleCount <= maxVehicles) {
                 found = true;
                 System.out.printf("| %-10s | %-20s | %-15d |%n",
-                        dealer.getDealerId(),
-                        dealer.getDealerName(),
+                        dealer.getId(),
+                        dealer.getName(),
                         vehicleCount);
             }
         }
@@ -238,7 +238,7 @@ public class DealerCatalog {
         System.out.println("Vehicles by Dealer:");
 
         for (Dealer dealer : this.getDealerCatalog().values()) {
-            System.out.printf("%nDealer ID #%d:%n", Integer.parseInt(dealer.getDealerId())); // Print Dealer ID above the table
+            System.out.printf("%nDealer ID #%d:%n", Integer.parseInt(dealer.getId())); // Print Dealer ID above the table
 
             System.out.println("-------------------------------------------------------------------------------");
             System.out.printf("| %-10s | %-15s | %-12s | %-10s | %-20s |%n",
@@ -327,7 +327,7 @@ public class DealerCatalog {
 
         for (Dealer dealer : dealerCatalog.values()) {
             if (dealer.getIsBuying()) {
-                System.out.println(dealer.getDealerName() + "  is buying");
+                System.out.println(dealer.getName() + "  is buying");
                 matches.add(dealer);
             }
         }
@@ -337,7 +337,7 @@ public class DealerCatalog {
     public Dealer getDealerByName (String name) {
         if (name == null) return null;
         for (Dealer dealer : dealerCatalog.values()) {
-            if (dealer.getDealerName().equalsIgnoreCase(name)) return dealer;
+            if (dealer.getName().equalsIgnoreCase(name)) return dealer;
         }
         return null;
     }

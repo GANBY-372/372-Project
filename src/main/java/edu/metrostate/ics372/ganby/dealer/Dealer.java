@@ -13,7 +13,7 @@ public class Dealer {
     // Getter for dealer id
     // Instance variables
     private String name;
-    private final String id;    //id is string because some IDs may contain letters
+    private String id;    //id is string because some IDs may contain letters
 
 //    private BooleanProperty isBuying;
     private BooleanProperty isBuying;
@@ -46,7 +46,7 @@ public class Dealer {
      * Get the dealer id
      * @return String dealer id
      */
-    public String getDealerId(){
+    public String getId (){
         return id;
     }
 
@@ -54,7 +54,7 @@ public class Dealer {
      * Get the dealer name
      * @return String dealer name
      */
-    public String getDealerName(){
+    public String getName (){
         return name;
     }
 
@@ -135,7 +135,7 @@ public class Dealer {
         if (object == this) return true;        // If object is compared with itself return true
         if (object == null) return false;       // If object is null return false
         if (object instanceof Dealer dealer) {  // If neither are true, check if object is an instance of Dealer
-            return id.equals(dealer.getDealerId()) ;        // Is object a dealer with same id?
+            return id.equals(dealer.getId()) ;        // Is object a dealer with same id?
         }
         return false;                           // If none of the above, return false
     }
@@ -173,11 +173,11 @@ public class Dealer {
 
         for (Vehicle vehicle : vehicles) {
             if (!transferVehicle(vehicle, dealer)) {
-                System.out.println("Batch transfer to dealer: " + dealer.getDealerName() + " failed at vehicleid " + vehicle.getVehicleId());
+                System.out.println("Batch transfer to dealer: " + dealer.getName() + " failed at vehicleid " + vehicle.getVehicleId());
                 return false;
             }
         }
-        System.out.println("Batch transfer to dealer: " + dealer.getDealerName() + " successful.");
+        System.out.println("Batch transfer to dealer: " + dealer.getName() + " successful.");
         return true;
     }
 
@@ -208,7 +208,7 @@ public class Dealer {
         dealer.getVehicleCatalog().put(vehicle.getVehicleId(), vehicle);
 
 
-        System.out.println("Successfully transferred vehicle " + vehicle.getVehicleId()+ " to dealer " + dealer.getDealerName());
+        System.out.println("Successfully transferred vehicle " + vehicle.getVehicleId()+ " to dealer " + dealer.getName());
         return dealer.getVehicleCatalog().get(vehicle.getVehicleId()) != null;
     }
 }
