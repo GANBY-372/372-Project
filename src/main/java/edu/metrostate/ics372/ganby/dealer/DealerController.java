@@ -137,14 +137,21 @@ public class DealerController {
             }
         });
 
-
-
         // 🟦 Listen for dealer selection (for showing details + vehicles)
         dealerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null && !allDealersSelected) {
                 updateDealerDetailPane(newVal);
                 populateVehicleList(newVal);
                 addVehicleButton.setDisable(false);
+            }
+        });
+
+        // 🟨 Listen for vehicle selection to update rent status button label
+        vehicleTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                toggleRentStatusButton.setText(newVal.getIsRentedOut() ? "Set as Available" : "Set as Rented");
+            } else {
+                toggleRentStatusButton.setText("Set Rent Status");
             }
         });
 
@@ -155,6 +162,8 @@ public class DealerController {
                 dealer -> dealer.getVehicleCatalog().isEmpty()
         );
     }
+
+
 
 
 
@@ -546,12 +555,74 @@ public class DealerController {
     }
 
 
+    @FXML
     public void deleteSelectedVehicle(ActionEvent actionEvent) {
+        Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
+        if (selectedVehicle == null) {
+            showAlert(Alert.AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to delete.");
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirm Vehicle Deletion");
+        confirm.setHeaderText(null);
+        confirm.setContentText("Are you sure you want to delete vehicle ID: " + selectedVehicle.getVehicleId() + "?");
+
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                Dealer dealer = DealerCatalog.getInstance().getDealerWithId(selectedVehicle.getDealerId());
+                if (dealer != null) {
+                    dealer.getVehicleCatalog().remove(selectedVehicle.getVehicleId());
+                    vehicleObservableList.remove(selectedVehicle);
+                    vehicleTable.refresh();
+                    showAlert(Alert.AlertType.INFORMATION, "Deleted", "Vehicle deleted successfully.");
+                }
+            }
+        });
     }
 
+    @FXML
     public void modifyVehiclePrice(ActionEvent actionEvent) {
+        Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
+        if (selectedVehicle == null) {
+            showAlert(Alert.AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to modify.");
+            return;
+        }
+
+        TextInputDialog dialog = new TextInputDialog(String.valueOf(selectedVehicle.getPrice()));
+        dialog.setTitle("Modify Price");
+        dialog.setHeaderText("Update vehicle price");
+        dialog.setContentText("New price:");
+
+        dialog.showAndWait().ifPresent(input -> {
+            try {
+                double newPrice = Double.parseDouble(input);
+                if (newPrice < 0) throw new NumberFormatException("Price must be non-negative.");
+                selectedVehicle.setPrice(newPrice);
+                vehicleTable.refresh();
+                showAlert(Alert.AlertType.INFORMATION, "Updated", "Price updated to $" + newPrice);
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid price.");
+            }
+        });
     }
 
-    public void toggleRentStatus(ActionEvent actionEvent) {
+    @FXML
+    public void toggleRentStatus(ActionEvent event) {
+        Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
+
+        if (selectedVehicle == null) {
+            showAlert(Alert.AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to change rent status.");
+            return;
+        }
+
+        boolean currentStatus = selectedVehicle.getIsRentedOut();
+        selectedVehicle.setRentedStatus(!currentStatus);
+
+        // Refresh the table and update button label
+        vehicleTable.refresh();
+        toggleRentStatusButton.setText(selectedVehicle.getIsRentedOut() ? "Set as Available" : "Set as Rented Out");
     }
+
+
 }
