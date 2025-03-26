@@ -1,5 +1,7 @@
 package edu.metrostate.ics372.ganby.dealer;
 
+import edu.metrostate.ics372.ganby.contextmenu.TableRightClickDelete;
+import edu.metrostate.ics372.ganby.contextmenu.VehicleContextMenu;
 import edu.metrostate.ics372.ganby.vehicle.VehicleCategory;
 import edu.metrostate.ics372.ganby.wizard.AddVehicleWizard;
 import javafx.beans.value.ChangeListener;
@@ -213,12 +215,18 @@ public class DealerController {
             }
         });
 
+        TableRightClickDelete.enableRightClickDelete(dealerTable, dealerObservableList, dealer -> dealer.getVehicleCatalog().isEmpty());
         vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         vehicleModelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         vehicleManufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
         vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
 //        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentable"));
+
+        vehicleTable.setItems(vehicleObservableList); // Set observable list
+
+        VehicleContextMenu contextMenu = new VehicleContextMenu(vehicleTable);
+        contextMenu.addContextMenu();
     }
 
     private void loadData () {
@@ -470,10 +478,10 @@ public class DealerController {
 //        acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
 //        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentable"));
 //////
-////        vehicleTable.setItems(vehicleObservableList); // Set observable list
+//        vehicleTable.setItems(vehicleObservableList); // Set observable list
 //
-////        VehicleContextMenu contextMenu = new VehicleContextMenu(vehicleTable);
-////        contextMenu.addContextMenu();
+//        VehicleContextMenu contextMenu = new VehicleContextMenu(vehicleTable);
+//        contextMenu.addContextMenu();
 //
 //        addDealerButton.setOnAction(event -> openAddDealerWizard());
 //    }
