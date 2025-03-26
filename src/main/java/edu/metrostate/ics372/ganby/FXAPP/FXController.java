@@ -325,45 +325,19 @@ public class FXController {
 
 
 
-    //VEHICLES MODIFICATIONS
     /**
-     * Deletes the selected dealer if they have no vehicles.
+     * Deletes the selected dealer.
      *
      * @param event the ActionEvent triggered by delete button
      */
     @FXML
     private void deleteSelectedDealer(ActionEvent event) {
         Dealer selected = dealerTable.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to delete.");
-            return;
-        }
-
-        if (!selected.getVehicleCatalog().isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Cannot Delete", "Dealer still has vehicles. Remove them first.");
-            return;
-        }
-
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("Confirm Deletion");
-        confirm.setContentText("Are you sure you want to delete dealer: " + selected.getName() + "?");
-
-        confirm.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                DealerCatalog.getInstance().getDealers().remove(selected);
-                DealerCatalog.getInstance().getDealerCatalog().remove(selected.getId());
-                dealerObservableList.remove(selected);
-                vehicleObservableList.clear();
-                dealerTable.refresh();
-                vehicleTable.refresh();
-
-                dealerIdTextField.clear();
-                dealerNameTextField.clear();
-
-                showAlert(Alert.AlertType.INFORMATION, "Deleted", "Dealer deleted successfully.");
-            }
-        });
+        DealerDeletionHelper.deleteDealer(selected, dealerObservableList, vehicleObservableList, dealerTable, vehicleTable);
     }
+
+
+    //VEHICLES MODIFICATIONS
 
     /**
      * Deletes the selected vehicle from both the UI and catalog using helper.
@@ -384,7 +358,6 @@ public class FXController {
     public void modifyVehiclePrice(ActionEvent actionEvent) {
         VehicleActionHelper.modifyVehiclePrice(vehicleTable);
     }
-
 
     /**
      * Toggles rent status of the selected vehicle and updates the label accordingly.

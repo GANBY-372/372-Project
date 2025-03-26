@@ -78,21 +78,32 @@ public class VehicleActionHelper {
     }
 
     /**
-     * Toggles the rent status of the selected vehicle and updates the button label.
+     * Toggles the rent status of the selected vehicle.
+     * Prevents rent status changes for SportsCars and displays a warning.
      *
-     * @param vehicleTable the vehicle table with selection
-     * @param toggleButton the button whose label should update accordingly
+     * @param vehicleTable the TableView displaying vehicles
+     * @param toggleButton the toggle button whose label should reflect current status
      */
     public static void toggleRentStatus(TableView<Vehicle> vehicleTable, Button toggleButton) {
         Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
         if (selectedVehicle == null) {
-            showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to change rent status.");
+            showAlert(Alert.AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to change rent status.");
             return;
         }
 
-        selectedVehicle.setRentedOut(!selectedVehicle.getIsRentedOut());
-        vehicleTable.refresh();
+        // Attempt to toggle rent status
+        boolean newStatus = !selectedVehicle.getIsRentedOut();
+        String resultType = selectedVehicle.
+                setRentedOut(newStatus).trim().replaceAll("\\s+", "").toUpperCase();
 
+        // If SportsCar, show warning and skip change
+        if ("SPORTSCAR".equals(resultType)) {
+            showAlert(Alert.AlertType.WARNING, "Not Allowed", "SportsCars cannot be rented.");
+            return;
+        }
+
+        // Refresh UI and update button label
+        vehicleTable.refresh();
         toggleButton.setText(selectedVehicle.getIsRentedOut() ? "Set as Available" : "Set as Rented Out");
     }
 

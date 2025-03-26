@@ -98,7 +98,7 @@ public class JSONFileImporter {
 
         String type = jsonObject.get(VEHICLE_TYPE_KEY).toString().trim();
 
-        Vehicle vehicle = switch (type.toUpperCase()) {
+        Vehicle vehicle = switch (type.trim().replaceAll("\\s+", "").toUpperCase()) {
             case "SUV" -> new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
             case "SEDAN" -> new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
             case "PICKUP" -> new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
