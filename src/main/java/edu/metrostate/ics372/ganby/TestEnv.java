@@ -61,9 +61,9 @@ public class TestEnv {
 
         // *** Testing Dealer Methods ***
         // Get Dealer ID
-        System.out.println("Dealer ID: " + d001.getDealerId());
+        System.out.println("Dealer ID: " + d001.getId());
         // Get Dealer Name
-        System.out.println("Dealer Name: " + d001.getDealerName());
+        System.out.println("Dealer Name: " + d001.getName());
         // Get Vehicle Acquisition Status
         System.out.println("Vehicle Acquisition Status: " + d001.getIsVehicleAcquisitionEnabled());
         // Get Vehicle Catalog

@@ -19,6 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javafx.stage.FileChooser;
 import java.awt.*;
 import java.io.*;
 import java.time.Instant;
@@ -50,26 +51,19 @@ public class JSONFileImporter {
      * @throws FileNotFoundException
      */
     public JSONFileImporter(Stage primaryStage) throws FileNotFoundException {
-
         try {
-            // File chooser dialog
-            Frame frame = new Frame();
-            FileDialog fileDialog = new FileDialog(frame, "Select a File", FileDialog.LOAD);
-            fileDialog.setVisible(true);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select a JSON File");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("JSON Files", "*.json")
+            );
 
-            String directory = fileDialog.getDirectory();
-            String filename = fileDialog.getFile();
+            File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
-            if (filename != null) {
-                File selectedFile = new File(directory, filename);
-
-                // Use FileReader instead of InputStream
-                // reader reads the selected file
+            if (selectedFile != null) {
                 this.reader = new FileReader(selectedFile);
-
                 jsonParser = new JSONParser();
 
-                // Parse the JSON file and get the JSON array of objects
                 this.jsonObject = (JSONObject) jsonParser.parse(reader);
                 jsonArray = (JSONArray) jsonObject.get("car_inventory");
 

@@ -2,53 +2,37 @@ package edu.metrostate.ics372.ganby.vehicle;
 
 import java.time.LocalDateTime;
 
-
 public class Pickup extends Vehicle {
 
-    private final String type;
-
-    //This is the case that category is not specified, but I imagine it's never going to be specified.
-     /*
-    public Pickup(String id, String model, String manufacturer, double price, String dealerId, LocalDateTime acquisitionDate,
-        Boolean isRentedOut String type) {
-        super(id,model,manufacturer,price,dealerId,acquisitionDate);
-        this.type = "Pickup";
+    // Constructor with rent status
+    public Pickup(String id, String model, String manufacturer, double price, String dealerId,
+               LocalDateTime acquisitionDate, Boolean isRentedOut) {
+        super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut);
     }
 
-     */
-
-    //In the case rent status is specified
+    // Constructor without rent status
     public Pickup(String id, String model, String manufacturer, double price, String dealerId,
-                  LocalDateTime acquisitionDate,Boolean isRentedOut) {
-        super(id,model,manufacturer,price,dealerId,acquisitionDate, isRentedOut);
-        type = "Pickup";
-    }
-
-    //In the case rent status is not specified
-    public Pickup(String id, String model, String manufacturer, double price, String dealerId,
-                  LocalDateTime acquisitionDate) {
-        super(id,model,manufacturer,price,dealerId,acquisitionDate);
-        type = "Pickup";
+               LocalDateTime acquisitionDate) {
+        super(id, model, manufacturer, price, dealerId, acquisitionDate);
     }
 
     @Override
     public String getType() {
-        return type;
+        return "Pickup";
     }
 
     @Override
-    public boolean equals (Object object) {
+    public boolean equals(Object object) {
         if (object == this) return true;
         if (object == null) return false;
-        if (object instanceof Pickup pickup) {
-            return id.equals(pickup.getVehicleId());
+        if (object instanceof SUV suv) {
+            return this.id.get().equals(suv.getVehicleId());
         }
         return false;
     }
 
-
     @Override
-    public String toString () {
-        return type + " " + super.toString();
+    public String toString() {
+        return getType() + " " + super.toString();
     }
 }

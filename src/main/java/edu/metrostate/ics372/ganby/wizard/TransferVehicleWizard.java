@@ -47,7 +47,7 @@ public class TransferVehicleWizard {
             @Override
             public String toString(Dealer dealer) {
                 // Display the dealer name in the ComboBox dropdown
-                return dealer != null ? dealer.getDealerName() : "";
+                return dealer != null ? dealer.getName() : "";
             }
 
             @Override
@@ -92,7 +92,7 @@ public class TransferVehicleWizard {
                 showAlert(
                         Alert.AlertType.INFORMATION,
                         "Transfer Successful",
-                        "Vehicle transferred successfully to dealer: " + receivingDealer.getDealerName()
+                        "Vehicle transferred successfully to dealer: " + receivingDealer.getName()
                 );
                 wizardStage.close();
             } else {

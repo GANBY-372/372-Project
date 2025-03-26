@@ -1,36 +1,36 @@
 package edu.metrostate.ics372.ganby.DataProcessing;
 
-import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
+import edu.metrostate.ics372.ganby.vehicle.*;
 
-import edu.metrostate.ics372.ganby.vehicle.Vehicle;
-import edu.metrostate.ics372.ganby.vehicle.SUV;
-import edu.metrostate.ics372.ganby.vehicle.Sedan;
-import edu.metrostate.ics372.ganby.vehicle.SportsCar;
-import edu.metrostate.ics372.ganby.vehicle.Pickup;
-
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.w3c.dom.*;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.*;
-import java.io.*;
+import java.io.File;
 import java.time.LocalDateTime;
 
 public class XMLFileImporter {
 
     private Document xmlDocument;
 
-    public XMLFileImporter() throws FileNotFoundException {
+    /**
+     * Constructor: prompts user with JavaFX FileChooser dialog
+     */
+    public XMLFileImporter(Stage primaryStage) {
         try {
-            Frame frame = new Frame();
-            FileDialog fileDialog = new FileDialog(frame, "Select a File", FileDialog.LOAD);
-            fileDialog.setVisible(true);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select an XML File");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("XML Files", "*.xml")
+            );
 
-            String directory = fileDialog.getDirectory();
-            String filename = fileDialog.getFile();
+            File selectedFile = fileChooser.showOpenDialog(primaryStage);
 
-            if (filename != null) {
-                File selectedFile = new File(directory, filename);
+            if (selectedFile != null) {
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                 this.xmlDocument = dBuilder.parse(selectedFile);
@@ -40,8 +40,9 @@ public class XMLFileImporter {
             } else {
                 System.out.println("File selection cancelled.");
             }
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error loading XML file: " + e.getMessage(), e);
         }
     }
 
@@ -90,24 +91,17 @@ public class XMLFileImporter {
             return null;
         }
 
-        if (type == null) {
-            System.out.println("Skipping vehicle id #" + id + " due to invalid vehicle category: " + type);
-            return null;
-        }
+        LocalDateTime acquisitionDate = LocalDateTime.now(); // Placeholder for now
 
-        LocalDateTime acquisitionDate = LocalDateTime.now(); // sets the acquisition date to now.
-
-        Vehicle vehicle;
-        switch (type.trim().replaceAll("\\s+", "").toUpperCase()) {
-            case "SUV" ->  vehicle = new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "SEDAN" ->  vehicle = new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "PICKUP" ->  vehicle = new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "SPORTSCAR" ->  vehicle = new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
+        return switch (type.trim().replaceAll("\\s+", "").toUpperCase()) {
+            case "SUV" -> new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SEDAN" -> new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "PICKUP" -> new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
+            case "SPORTSCAR" -> new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
             default -> {
-                System.out.println("Unknown category: " + type);
-                return null;
+                System.out.println("Unknown vehicle type: " + type);
+                yield null;
             }
-        }
-        return vehicle;
+        };
     }
 }

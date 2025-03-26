@@ -1,16 +1,16 @@
 package edu.metrostate.ics372.ganby.dealer;
 
-
-import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
+import edu.metrostate.ics372.ganby.DataProcessing.XMLFileImporter;
 import edu.metrostate.ics372.ganby.contextmenu.TableRightClickDelete;
 import edu.metrostate.ics372.ganby.DataProcessing.JSONFileImporter;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import edu.metrostate.ics372.ganby.wizard.AddVehicleWizard;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,239 +20,184 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.w3c.dom.Document;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
+/**
+ * Controller for Dealer management screen. Supports dealer CRUD operations,
+ * vehicle filtering, and inventory interaction. Works with updated JavaFX `Dealer` class.
+ */
 public class DealerController {
 
     public AnchorPane dealerDetailPane;
-
     public VBox vehicleListVBox;
     public Button addVehicleButton;
     public AnchorPane rootPane;
 
-    // Labels
-    @FXML
-    public Label dealerNameLabel;
-
-    @FXML
-    public Label dealerIdLabel;
-
-    @FXML
-    public HBox radioButtonBox;
-
-    @FXML
-    public RadioButton isBuyingRadioButton;
+    @FXML public Label dealerNameLabel;
+    @FXML public Label dealerIdLabel;
+    @FXML public HBox radioButtonBox;
+    @FXML public RadioButton isBuyingRadioButton;
     public Label isBuyingLabel;
 
+    @FXML private TextField dealerIdTextField;
+    @FXML private TextField dealerNameTextField;
 
-    @FXML
-    private TextField dealerIdTextField;
+    @FXML private TableView<Dealer> dealerTable;
+    @FXML private TableColumn<Dealer, String> dealerIdColumn;
+    @FXML private TableColumn<Dealer, String> dealerNameColumn;
+    @FXML private TableColumn<Dealer, Boolean> isBuyingColumn;
+    @FXML public TableColumn<Dealer, Integer> dealerInventoryColumn;
 
-    @FXML
-    private TextField dealerNameTextField;
+    @FXML public TableView<Vehicle> vehicleTable;
+    @FXML public TableColumn<Vehicle, String> vehicleIdColumn;
+    @FXML public TableColumn<String, String> vehicleCategoryColumn;
+    @FXML public TableColumn<Vehicle, String> vehicleManufacturerColumn;
+    @FXML public TableColumn<Vehicle, Double> vehiclePriceColumn;
+    @FXML public TableColumn<Vehicle, LocalDateTime> acquisitionDateColumn;
+    @FXML public TableColumn<Vehicle, Boolean> isRentableColumn;
 
-
-
-
-    // DealerTable Components
-    @FXML
-    private TableView<Dealer> dealerTable;
-
-    // DealerTable Columns
-    @FXML
-    private TableColumn<Dealer, String> dealerIdColumn;
-
-    @FXML
-    private TableColumn<Dealer, String> dealerNameColumn;
-
-    @FXML
-    private TableColumn<Dealer, Boolean> isBuyingColumn;
-
-    @FXML
-    public TableColumn<Dealer, Integer> dealerInventoryColumn;
-
-
-    // Dealer's Vehicle TableView and Its' Columns
-    @FXML
-    public TableView<Vehicle> vehicleTable;
-
-    @FXML
-    public TableColumn<Vehicle, String> vehicleIdColumn;
-
-    @FXML
-    public TableColumn<String, String> vehicleCategoryColumn;
-
-    @FXML
-    public TableColumn<Vehicle, String> vehicleMakeColumn;
-
-    @FXML
-    public TableColumn<Vehicle, Double> vehiclePriceColumn;
-
-    @FXML
-    public TableColumn<Vehicle, LocalDateTime> acquisitionDateColumn;
-
-    @FXML
-    public TableColumn<Vehicle, Boolean> isRentableColumn;
-
-
-    // Navigation Bar and Its' Components
-
-    @FXML
-    public ButtonBar navigationButtonBar;
-
-    @FXML
-    public Button addDealerButton;
-
-    @FXML
-    public Button exportJSONWizardButton;
-
-    @FXML
-    public Button importJSONWizardButton;
+    @FXML public ButtonBar navigationButtonBar;
+    @FXML public Button addDealerButton;
+    @FXML public Button exportJSONWizardButton;
+    @FXML public Button importJSONWizardButton;
     public Button importXMLWizardButton;
     public Button rentalViewButton;
     public Button vehicleViewButton;
     public Button homeViewButton;
 
-    @FXML
-    public ButtonBar vehicleFilterButtonBar;
-
-    @FXML
-    public Button rentableFilterButton;
-
-    @FXML
-    public Button sportsCarFilterButton;
-
-    @FXML
-    public Button sedanFilterButton;
-
-    @FXML
-    public Button suvFilterButton;
-
-    @FXML
-    public Button truckFilterButton;
-
-
+    @FXML public ButtonBar vehicleFilterButtonBar;
+    @FXML public Button rentableFilterButton;
+    @FXML public Button sportsCarFilterButton;
+    @FXML public Button sedanFilterButton;
+    @FXML public Button suvFilterButton;
+    @FXML public Button truckFilterButton;
 
     private final ObservableList<Dealer> dealerObservableList = FXCollections.observableArrayList();
     private final ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
 
+    /**
+     * Initializes controller and sets up table bindings.
+     */
     @FXML
     public void initialize() {
-        // Initialize Table Column Bindings
-        System.out.println("Dealer Table: initialization with " +  DealerCatalog.getInstance().getDealerCatalog().values() + " dealers");
+        // Dealer table bindings
+        dealerIdColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+        dealerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        isBuyingColumn.setCellValueFactory(cellData -> cellData.getValue().isAcquisitionEnabledProperty());
+        dealerInventoryColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVehicleCatalog().size()));
 
+        // ✅ Vehicle table bindings
+        vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
+        vehicleManufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+        vehicleCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
+        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentedOut"));
 
-        dealerIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        dealerNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        isBuyingColumn.setCellValueFactory(new PropertyValueFactory<>("isBuying"));
-
-        dealerInventoryColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getVehicleCatalog().size())
-        );
-
+        // Load data into dealer table
         loadData();
 
-        // Listener for table row selection
-        dealerTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
-            @Override
-            public void changed(ObservableValue<? extends Dealer> observable, Dealer oldValue, Dealer newValue) {
-                if (newValue != null) {
-                    updateDealerDetailPane(newValue);
-                    populateVehicleList(newValue); // Populate vehicle list when a dealer is selected
-                }
+        // Listen for selected dealer
+        dealerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                updateDealerDetailPane(newVal);
+                populateVehicleList(newVal);
             }
         });
+
+        // Enable right-click delete only for dealers without vehicles
         TableRightClickDelete.enableRightClickDelete(dealerTable, dealerObservableList, dealer -> dealer.getVehicleCatalog().isEmpty());
-
-//        vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        vehicleCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-//        vehicleMakeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
-//        vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//        acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
-//        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentable"));
-////
-//        vehicleTable.setItems(vehicleObservableList); // Set observable list
-
-//        VehicleContextMenu contextMenu = new VehicleContextMenu(vehicleTable);
-//        contextMenu.addContextMenu();
-
-//        addDealerButton.setOnAction(event -> openAddDealerWizard());
     }
 
+
+    /**
+     * Loads dealers from catalog to table.
+     */
     private void loadData() {
-        System.out.println("Loading Data...");
-        dealerObservableList.addAll(DealerCatalog.getInstance().getDealerCatalog().values());
-        for (Dealer dealer : dealerObservableList) {
-            System.out.println(dealer.getDealerName());
-        }
+        dealerObservableList.setAll(DealerCatalog.getInstance().getDealers());
         dealerTable.setItems(dealerObservableList);
     }
 
-    private void updateDealerDetailPane(Dealer selectedDealer) {
-        // Clear existing content in dealerDetailPane
-        dealerIdTextField.clear();
-        dealerNameTextField.clear();
-
-        // Add new content to dealerDetailPane
-        dealerIdTextField.setText(String.valueOf(selectedDealer.getDealerId()));
-        dealerNameTextField.setText(selectedDealer.getDealerName());
+    /**
+     * Populates input pane with selected dealer's info.
+     */
+    private void updateDealerDetailPane(Dealer dealer) {
+        dealerIdTextField.setText(dealer.getId());
+        dealerNameTextField.setText(dealer.getName());
     }
 
-    private void populateVehicleList(Dealer selectedDealer) {
-        // Clear any existing vehicles in the observable list
-        vehicleObservableList.clear();
-
-        // Add the vehicles for the selected dealer
-        for (Vehicle vehicle : selectedDealer.getVehicleCatalog().values()) {
-            System.out.println(vehicle.toString());
-        }
-        vehicleObservableList.addAll(selectedDealer.getVehicleCatalog().values());
+    /**
+     * Shows selected dealer's vehicles in table.
+     */
+    private void populateVehicleList(Dealer dealer) {
+        vehicleObservableList.setAll(dealer.getVehicleCatalog().values());
         vehicleTable.setItems(vehicleObservableList);
     }
 
+    /**
+     * Opens Add Dealer wizard modal.
+     */
     @FXML
     private void openAddDealerWizard() {
         Stage wizardStage = new Stage();
         wizardStage.initModality(Modality.APPLICATION_MODAL);
-        wizardStage.setTitle("Add New Dealer Wizard");
+        wizardStage.setTitle("Add New Dealer");
 
         Label nameLabel = new Label("Dealer Name:");
         TextField nameField = new TextField();
         Label idLabel = new Label("Dealer ID:");
-        TextField idField = new TextField(DealerCatalog.getInstance().getDealerCatalog().size() + 1 + "");
+        TextField idField = new TextField();
 
         Button saveButton = new Button("Save");
         Button cancelButton = new Button("Cancel");
 
         GridPane gridPane = new GridPane();
+        gridPane.setVgap(10);
+        gridPane.setHgap(10);
         gridPane.addRow(0, idLabel, idField);
         gridPane.addRow(1, nameLabel, nameField);
 
         HBox buttonBox = new HBox(10, saveButton, cancelButton);
         VBox layout = new VBox(10, gridPane, buttonBox);
+        layout.setPadding(new Insets(10));
 
         Scene scene = new Scene(layout, 400, 200);
         wizardStage.setScene(scene);
 
         saveButton.setOnAction(event -> {
             try {
-                String dealerId = idField.getText();
-                String dealerName = nameField.getText();
-                if (dealerName.isBlank()) throw new IllegalArgumentException("Dealer Name cannot be empty.");
+                String dealerId = idField.getText().trim();
+                String dealerName = nameField.getText().trim();
+
+                if (dealerId.isBlank() || dealerName.isBlank()) {
+                    throw new IllegalArgumentException("Dealer ID and Name cannot be empty.");
+                }
+
+                if (DealerCatalog.getInstance().getDealerWithId(dealerId) != null) {
+                    throw new IllegalArgumentException("Dealer with ID already exists.");
+                }
 
                 Dealer newDealer = new Dealer(dealerId, dealerName);
+                DealerCatalog.getInstance().addDealer(newDealer);
                 dealerObservableList.add(newDealer);
+
                 wizardStage.close();
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Dealer added successfully!");
             } catch (Exception e) {
                 showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
             }
         });
 
-        cancelButton.setOnAction(event -> wizardStage.close());
+        cancelButton.setOnAction(e -> wizardStage.close());
         wizardStage.showAndWait();
     }
 
+    /**
+     * Displays an alert popup.
+     */
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -261,172 +206,124 @@ public class DealerController {
         alert.showAndWait();
     }
 
+    /**
+     * Imports dealers and vehicles from JSON.
+     */
     @FXML
     private void importJSONFile(ActionEvent event) {
         try {
-            // Create a new stage for the FileChooser
             Stage primaryStage = new Stage();
-
-            // Instantiate the JSONFileImporter and open the FileChooser
-            JSONFileImporter jsonFileImporter = new JSONFileImporter(primaryStage);
-
-            // Process the JSON file (parse vehicles and dealers)
-            jsonFileImporter.processJSON();
-
-            // Reload the dealer table with updated catalog
-            dealerObservableList.setAll(DealerCatalog.getInstance().getDealerCatalog().values());
+            JSONFileImporter importer = new JSONFileImporter(primaryStage);
+            importer.processJSON();
+            dealerObservableList.setAll(DealerCatalog.getInstance().getDealers());
             dealerTable.setItems(dealerObservableList);
-
-            // Show success message to the user
             showAlert(Alert.AlertType.INFORMATION, "Import Successful", "JSON file successfully imported!");
-
         } catch (Exception e) {
-            // Show error message on failure
             showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing JSON file: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @FXML
-    public void filterBySportsCar (ActionEvent actionEvent) {
-//        vehicleObservableList.clear();
-//
-//        // Get the selected dealer from the dealer table
-//        Dealer dealer = dealerTable.getSelectionModel().getSelectedItem();
-//
-//        if (dealer == null) {
-//            showAlert(
-//                Alert.AlertType.WARNING,
-//                "No Dealer Selected",
-//                "Please select a dealer to filter vehicles."
-//            );
-//            return;
-//        }
-//
-//        // Get the vehicles of the selected category
-//        vehicleObservableList.addAll(dealer.getVehiclesByCategory(VehicleCategory.SPORTS_CAR));
-//
-//        // Set the table to display the filtered list
-//        vehicleTable.setItems(vehicleObservableList);
+    private void importXMLFile(ActionEvent event) {
+        try {
+            Stage primaryStage = new Stage();
+            XMLFileImporter xmlImporter = new XMLFileImporter(primaryStage);
+            Document doc = xmlImporter.getXmlDocument();
+            if (doc != null) {
+                xmlImporter.processXML(doc);
+
+                // Refresh UI
+                dealerObservableList.setAll(DealerCatalog.getInstance().getDealers());
+                dealerTable.setItems(dealerObservableList);
+                vehicleObservableList.clear();
+                vehicleTable.setItems(vehicleObservableList);
+
+                showAlert(Alert.AlertType.INFORMATION, "Import Successful", "XML file successfully imported!");
+            }
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing XML file:\n" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void exportData(ActionEvent actionEvent) {
+        System.out.println("Exporting...");
+    }
+
+    // Vehicle filters below:
+
+    @FXML
+    public void filterBySedan(ActionEvent e) {
+        filterVehicles("Sedan");
     }
 
     @FXML
-    public void filterBySUV (ActionEvent actionEvent) {
-//        vehicleObservableList.clear();
-//
-//        // Get the selected dealer from the dealer table
-//        Dealer dealer = dealerTable.getSelectionModel().getSelectedItem();
-//
-//        if (dealer == null) {
-//            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
-//            return;
-//        }
-//
-//        // Get the vehicles of the selected category
-//        vehicleObservableList.addAll(dealer.getVehiclesByCategory(VehicleCategory.SUV));
-//
-//        // Set the table to display the filtered list
-//        vehicleTable.setItems(vehicleObservableList);
+    public void filterBySportsCar(ActionEvent e) {
+        filterVehicles("SportsCar");
     }
 
     @FXML
-    public void filterByTruck (ActionEvent actionEvent) {
-//        vehicleObservableList.clear();
-//
-//        // Get the selected dealer from the dealer table
-//        Dealer dealer = dealerTable.getSelectionModel().getSelectedItem();
-//
-//        if (dealer == null) {
-//            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
-//            return;
-//        }
-//
-//        // Get the vehicles of the selected category
-//        vehicleObservableList.addAll(dealer.getVehiclesByCategory(VehicleCategory.TRUCK));
-//
-//        // Set the table to display the filtered list
-//        vehicleTable.setItems(vehicleObservableList);
+    public void filterByPickup(ActionEvent e) {
+        filterVehicles("Pickup");
     }
 
     @FXML
-    public void filterBySedan (ActionEvent actionEvent) {
-//        vehicleObservableList.clear();
-//
-//        // Get the selected dealer from the dealer table
-//        Dealer dealer = dealerTable.getSelectionModel().getSelectedItem();
-//
-//        if (dealer == null) {
-//            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
-//            return;
-//        }
-//
-//        // Get the vehicles of the selected category
-//        vehicleObservableList.addAll(dealer.getVehiclesByCategory(VehicleCategory.SEDAN));
-//
-//        // Set the table to display the filtered list
-//        vehicleTable.setItems(vehicleObservableList);
+    public void filterBySUV(ActionEvent e) {
+        filterVehicles("SUV");
     }
 
-    @FXML
-    public void getRentables (ActionEvent actionEvent) {
-//        vehicleObservableList.clear();
-//
-//        // Get the selected dealer from the dealer table
-//        Dealer dealer = dealerTable.getSelectionModel().getSelectedItem();
-//
-//        if (dealer == null) {
-//            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
-//            return;
-//        }
-//
-//        // Get the vehicles of the selected category
-//        vehicleObservableList.addAll(dealer.getRentableVehicles());
-//
-//        // Set the table to display the filtered list
-//        vehicleTable.setItems(vehicleObservableList);
+    private void filterVehicles(String type) {
+        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+        if (selectedDealer == null) {
+            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
+            return;
+        }
+        vehicleObservableList.setAll(DealerCatalog.getInstance().getVehiclesByType(type));
+        vehicleTable.setItems(vehicleObservableList);
     }
-    //
+
+    /**
+     * Displays vehicles marked as rented out for selected dealer.
+     */
+    @FXML
+    public void getRentables(ActionEvent e) {
+        Dealer dealer = dealerTable.getSelectionModel().getSelectedItem();
+        if (dealer == null) {
+            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
+            return;
+        }
+        vehicleObservableList.setAll(dealer.getRentedOutVehicles());
+        vehicleTable.setItems(vehicleObservableList);
+    }
+
+    /**
+     * Opens the Add Vehicle wizard.
+     */
     @FXML
     private void openAddVehicleWizard() {
-//        // Get the selected dealer
-//        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
-//
-//        // If no dealer is selected, show a warning
-//        if (selectedDealer == null) {
-//            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
-//            return;
-//        }
-//
-//        // Invoke the Add Vehicle Wizard
-//        AddVehicleWizard addVehicleWizard = new AddVehicleWizard(selectedDealer);
-//        addVehicleWizard.show();
-//
-//        // Refresh the vehicle table (if applicable)
-//        vehicleObservableList.setAll(selectedDealer.getVehicles());
+        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+
+        if (selectedDealer == null) {
+            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
+            return;
+        }
+
+        // Pass vehicleObservableList to the wizard
+        AddVehicleWizard addVehicleWizard = new AddVehicleWizard(selectedDealer, vehicleObservableList);
+        addVehicleWizard.show();
+
+        // Refresh the table after wizard closes
+        populateVehicleList(selectedDealer);
     }
 
+    /**
+     * Placeholder for transfer vehicle functionality.
+     */
     @FXML
     private void openTransferVehicleWizard() {
-//        // Get the selected vehicle
-//        Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
-//
-//        if (selectedVehicle == null) {
-//            showAlert(Alert.AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to transfer.");
-//            return;
-//        }
-//
-//        // Get the current dealer of the selected vehicle
-//        Dealer currentDealer = selectedVehicle.getDealer();
-//        if (currentDealer == null) {
-//            showAlert(Alert.AlertType.ERROR, "Error", "Selected vehicle does not belong to any dealer!");
-//            return;
-//        }
-//
-//        // Launch the Transfer Wizard
-//        TransferVehicleWizard transferVehicleWizard = new TransferVehicleWizard(selectedVehicle, currentDealer);
-//        transferVehicleWizard.show();
-//
-//        // Refresh the vehicle list for the current dealer to reflect changes
-//        vehicleObservableList.setAll(currentDealer.getVehicles());
+        // Implementation coming soon
     }
+
+
 }

@@ -16,6 +16,35 @@
         xmlns:fx="http://javafx.com/fxml/1"
         fx:controller="edu.metrostate.ics372.ganby.dealer.DealerController"
 >
+    <!-- IMPORT/EXPORT BUTTONS -->
+    <HBox layoutX="13.0" layoutY="20.0" spacing="10.0">
+        <children>
+            <Button
+                    fx:id="importJsonButton"
+                    text="Import JSON"
+                    onAction="#importJSONFile" />
+            <Button
+                    fx:id="importXmlButton"
+                    text="Import XML"
+                    onAction="#importXMLFile" />
+            <Button
+                    fx:id="exportDataButton"
+                    text="Export Data"
+                    onAction="#exportData" />
+        </children>
+    </HBox>
+
+    <!-- NEW: Add Dealer Button -->
+    <Button
+            fx:id="addDealerButton"
+            layoutX="13.0"
+            layoutY="80.0"
+            mnemonicParsing="false"
+            text="Add Dealer"
+            prefWidth="150.0"
+            onAction="#openAddDealerWizard"
+    />
+
     <children>
         <TableView fx:id="dealerTable" layoutX="13.0" layoutY="129.0" prefHeight="663.0" prefWidth="478.0">
             <columns>
@@ -137,7 +166,7 @@
                                         layoutY="18.0"
                                         mnemonicParsing="false"
                                         onAction="#getRentables"
-                                        text="Available for Rent"
+                                        text="Rented Out"
                                         textAlignment="CENTER"
                                         wrapText="true"
                                 >
@@ -171,8 +200,8 @@
                                         fx:id="truckFilterButton"
                                         layoutX="351.0" layoutY="18.0"
                                         mnemonicParsing="false"
-                                        onAction="#filterByTruck"
-                                        prefHeight="54.0" text="Truck"
+                                        onAction="#filterByPickup"
+                                        prefHeight="54.0" text="Pickup"
                                         wrapText="true"
                                 >
                                     <font><Font size="15.0" /></font>
@@ -194,7 +223,7 @@
                         <TableView fx:id="vehicleTable" prefHeight="382.0" prefWidth="719.0">
                             <columns>
                                 <TableColumn fx:id="vehicleIdColumn" prefWidth="101.0" text="ID" />
-                                <TableColumn fx:id="vehicleMakeColumn" minWidth="0.0" prefWidth="99.0" text="Make" />
+                                <TableColumn fx:id="vehicleManufacturerColumn" minWidth="0.0" prefWidth="99.0" text="Manufacturer" />
                                 <TableColumn fx:id="vehicleCategoryColumn" prefWidth="155.0" text="Type" />
                                 <TableColumn fx:id="vehiclePriceColumn" minWidth="0.0" prefWidth="101.0" text="Price" />
                                 <TableColumn fx:id="acquisitionDateColumn" minWidth="0.0" prefWidth="159.0" text="Acquisition Date" />

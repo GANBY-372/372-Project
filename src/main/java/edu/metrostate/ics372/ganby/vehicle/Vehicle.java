@@ -2,6 +2,8 @@ package edu.metrostate.ics372.ganby.vehicle;
 
 import edu.metrostate.ics372.ganby.DataProcessing.JSONObjectBuilder;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
+import javafx.beans.property.*;
+
 import org.json.simple.JSONObject;
 
 import java.time.LocalDateTime;
@@ -9,115 +11,97 @@ import java.util.Objects;
 
 public abstract class Vehicle {
 
-    protected final String id;    //id is string because some IDs may contain letters
-    protected final String model;
-    protected final String manufacturer;
-    protected double price;
-    protected String dealerId;
-    protected LocalDateTime acquisitionDate;
-    protected Boolean isRentedOut;
+    protected final StringProperty id;
+    protected final StringProperty model;
+    protected final StringProperty manufacturer;
+    protected final DoubleProperty price;
+    protected final StringProperty dealerId;
+    protected final ObjectProperty<LocalDateTime> acquisitionDate;
+    protected final BooleanProperty isRentedOut;
 
-
-    //In the case rent status is specified
+    // Constructor when rent status is specified
     public Vehicle(String id, String model, String manufacturer, double price, String dealerId,
                    LocalDateTime acquisitionDate, Boolean isRentedOut) {
-        this.id = id;
-        this.model = model;
-        this.manufacturer = manufacturer;
-        this.price = price;
-        this.dealerId = dealerId;
-        this.acquisitionDate = acquisitionDate;
-        this.isRentedOut = isRentedOut;
+        this.id = new SimpleStringProperty(id);
+        this.model = new SimpleStringProperty(model);
+        this.manufacturer = new SimpleStringProperty(manufacturer);
+        this.price = new SimpleDoubleProperty(price);
+        this.dealerId = new SimpleStringProperty(dealerId);
+        this.acquisitionDate = new SimpleObjectProperty<>(acquisitionDate);
+        this.isRentedOut = new SimpleBooleanProperty(isRentedOut);
     }
 
-    //In the case rent status is not specified
+    // Constructor when rent status is not specified
     public Vehicle(String id, String model, String manufacturer, double price, String dealerId,
                    LocalDateTime acquisitionDate) {
-        this.id = id;
-        this.model = model;
-        this.manufacturer = manufacturer;
-        this.price = price;
-        this.dealerId = dealerId;
-        this.acquisitionDate = acquisitionDate;
-        isRentedOut = false;    //False by default but can be set later
+        this(id, model, manufacturer, price, dealerId, acquisitionDate, false);
     }
 
     public abstract String getType();
 
-    public void setRentedOut(Boolean rentedOut) {
-        isRentedOut = rentedOut;
-    }
+    // Getters for JavaFX TableView binding
+    public String getVehicleId() { return id.get(); }
+    public String getModel() { return model.get(); }
+    public String getManufacturer() { return manufacturer.get(); }
+    public double getPrice() { return price.get(); }
+    public String getDealerId() { return dealerId.get(); }
+    public LocalDateTime getAcquisitionDate() { return acquisitionDate.get(); }
+    public Boolean getIsRentedOut() { return isRentedOut.get(); }
 
-    public Boolean getIsRentedOut() {
-        return isRentedOut;
-    }
-
-    public String getVehicleId() {
-        return id;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public String getDealerId() {
-        return dealerId;
-    }
-
-    public LocalDateTime getAcquisitionDate() {
-        return acquisitionDate;
-    }
-
+    // Setters
     public void setPrice(double price) {
         if (price < 0) throw new IllegalArgumentException("Price cannot be negative");
-        this.price = price;
+        this.price.set(price);
     }
-
 
     public void setDealer(Dealer dealer) {
         if (dealer == null) throw new IllegalArgumentException("Dealer cannot be null");
-        this.dealerId = dealer.getDealerId();
+        this.dealerId.set(dealer.getId());
     }
-
 
     public void setAcquisitionDate(LocalDateTime newAcquisitionDate) {
         if (newAcquisitionDate == null)
             throw new IllegalArgumentException("New acquisition date cannot be null");
-        this.acquisitionDate = newAcquisitionDate;
+        this.acquisitionDate.set(newAcquisitionDate);
     }
+
+    public void setRentedStatus(Boolean rentedOut) {
+        this.isRentedOut.set(rentedOut);
+    }
+
+    // JavaFX Properties for binding
+    public StringProperty vehicleIdProperty() { return id; }
+    public StringProperty modelProperty() { return model; }
+    public StringProperty manufacturerProperty() { return manufacturer; }
+    public DoubleProperty priceProperty() { return price; }
+    public StringProperty dealerIdProperty() { return dealerId; }
+    public ObjectProperty<LocalDateTime> acquisitionDateProperty() { return acquisitionDate; }
+    public BooleanProperty isRentedOutProperty() { return isRentedOut; }
 
     @Override
     public boolean equals(Object object) {
         if (object == this) return true;
         if (object == null) return false;
         if (object instanceof Vehicle vehicle) {
-            return id.equals(vehicle.getVehicleId());
+            return id.get().equals(vehicle.getVehicleId());
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(id.get());
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() +
-                " [id:" + id
-                + " model:" + model
-                + " manufacturer:" + manufacturer
-                + " price:" + price
-                + " dealer id:" + dealerId
-                + " acquisitionDate:" + acquisitionDate + "]";
+                " [id:" + getVehicleId()
+                + " model:" + getModel()
+                + " manufacturer:" + getManufacturer()
+                + " price:" + getPrice()
+                + " dealer id:" + getDealerId()
+                + " acquisitionDate:" + getAcquisitionDate() + "]";
     }
 
     public JSONObject toJSON() {
