@@ -82,6 +82,7 @@ public class DealerController {
     private final ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
     private boolean allDealersSelected = false;@FXML
     private Button toggleAcquisitionButton;
+    private boolean suppressSelectionListener = false;
 
 
 
@@ -116,6 +117,8 @@ public class DealerController {
         dealerTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<>() {
             @Override
             public void onChanged(Change<? extends Dealer> change) {
+                if (suppressSelectionListener) return;
+
                 if (allDealersSelected &&
                         dealerTable.getSelectionModel().getSelectedItems().size() < dealerObservableList.size()) {
 
@@ -128,6 +131,8 @@ public class DealerController {
                 }
             }
         });
+
+
 
         // 🟦 Listen for dealer selection (for showing details + vehicles)
         dealerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
@@ -318,7 +323,6 @@ public class DealerController {
 
     private void filterVehicles(String type) {
         if (allDealersSelected) {
-            // All dealers: search across all vehicles
             vehicleObservableList.setAll(
                     DealerCatalog.getInstance()
                             .getAllVehicles()
@@ -328,22 +332,23 @@ public class DealerController {
             );
         } else {
             Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
-            if (selectedDealer != null) {
-                vehicleObservableList.setAll(
-                        selectedDealer.getVehicleCatalog()
-                                .values()
-                                .stream()
-                                .filter(v -> v.getType().equalsIgnoreCase(type))
-                                .toList()
-                );
-            } else {
+            if (selectedDealer == null) {
                 showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
                 return;
             }
+
+            vehicleObservableList.setAll(
+                    selectedDealer.getVehicleCatalog()
+                            .values()
+                            .stream()
+                            .filter(v -> v.getType().equalsIgnoreCase(type))
+                            .toList()
+            );
         }
 
         vehicleTable.setItems(vehicleObservableList);
     }
+
 
 
     /**
@@ -445,10 +450,12 @@ public class DealerController {
 
         if (!allDealersSelected) {
             // Selecting all dealers
+            suppressSelectionListener = true;
             allDealersSelected = true;
             selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
             selectionModel.clearSelection();
             selectionModel.selectAll();
+            suppressSelectionListener = false;
 
             dealerIdTextField.setText("ALL");
             dealerNameTextField.setText("All Dealers Selected");
@@ -457,11 +464,12 @@ public class DealerController {
             vehicleTable.setItems(vehicleObservableList);
 
             addVehicleButton.setDisable(true);
-            selectAllDealersButton.setText("Unselect All Dealers"); // ✅ SET TO UNSELECT
+            selectAllDealersButton.setText("Unselect All Dealers");
         } else {
-            // Unselect all dealers
             allDealersSelected = false;
+            suppressSelectionListener = true;
             selectionModel.clearSelection();
+            suppressSelectionListener = false;
 
             dealerIdTextField.clear();
             dealerNameTextField.clear();
@@ -470,9 +478,10 @@ public class DealerController {
             vehicleTable.setItems(vehicleObservableList);
 
             addVehicleButton.setDisable(false);
-            selectAllDealersButton.setText("Select All Dealers"); // ✅ RESET TO SELECT
+            selectAllDealersButton.setText("Select All Dealers");
         }
     }
+
 
 
 
