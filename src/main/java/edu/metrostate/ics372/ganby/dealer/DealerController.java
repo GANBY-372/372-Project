@@ -80,7 +80,10 @@ public class DealerController {
 
     private final ObservableList<Dealer> dealerObservableList = FXCollections.observableArrayList();
     private final ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
-    private boolean allDealersSelected = false;
+    private boolean allDealersSelected = false;@FXML
+    private Button toggleAcquisitionButton;
+
+
 
 
     /**
@@ -161,6 +164,12 @@ public class DealerController {
     private void updateDealerDetailPane(Dealer dealer) {
         dealerIdTextField.setText(dealer.getId());
         dealerNameTextField.setText(dealer.getName());
+
+        if (dealer.getIsVehicleAcquisitionEnabled()) {
+            toggleAcquisitionButton.setText("Disable Acquisition");
+        } else {
+            toggleAcquisitionButton.setText("Enable Acquisition");
+        }
     }
 
     /**
@@ -463,6 +472,63 @@ public class DealerController {
             addVehicleButton.setDisable(false);
             selectAllDealersButton.setText("Select All Dealers"); // ✅ RESET TO SELECT
         }
+    }
+
+
+
+    @FXML
+    private void toggleAcquisition(ActionEvent event) {
+        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+        if (selectedDealer != null) {
+            boolean current = selectedDealer.getIsVehicleAcquisitionEnabled();
+            if (current) {
+                DealerCatalog.getInstance().disableDealerAcquisition(selectedDealer.getId());
+            } else {
+                DealerCatalog.getInstance().enableDealerAcquisition(selectedDealer.getId());
+            }
+
+            // Refresh display and button text
+            updateDealerDetailPane(selectedDealer);
+            dealerTable.refresh();  // update column
+        }
+    }
+
+
+    @FXML
+    private void deleteSelectedDealer(ActionEvent event) {
+        Dealer selected = dealerTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to delete.");
+            return;
+        }
+
+        if (!selected.getVehicleCatalog().isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Cannot Delete", "Dealer still has vehicles. Remove them first.");
+            return;
+        }
+
+        // Confirm deletion
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirm Deletion");
+        confirm.setHeaderText(null);
+        confirm.setContentText("Are you sure you want to delete dealer: " + selected.getName() + "?");
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                DealerCatalog.getInstance().getDealers().remove(selected);
+                DealerCatalog.getInstance().getDealerCatalog().remove(selected.getId());
+                dealerObservableList.remove(selected);
+                vehicleObservableList.clear();
+                dealerTable.refresh();
+                vehicleTable.refresh();
+
+                dealerIdTextField.clear();
+                dealerNameTextField.clear();
+
+                showAlert(Alert.AlertType.INFORMATION, "Deleted", "Dealer deleted successfully.");
+            }
+        });
+
+
     }
 
 

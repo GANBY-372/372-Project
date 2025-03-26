@@ -115,38 +115,20 @@
                         prefWidth="223.0"
                         promptText="123456..."
                 />
-                <VBox layoutX="423.0" layoutY="67.0" prefHeight="47.0" prefWidth="230.0">
-                    <children>
-                        <HBox fx:id="radioButtonBox" prefHeight="43.0" prefWidth="230.0">
-                            <children>
-                                <RadioButton
-                                        fx:id="isBuyingRadioButton"
-                                        contentDisplay="TOP"
-                                        mnemonicParsing="false"
-                                        prefHeight="38.0"
-                                        prefWidth="117.0"
-                                        text="Buying"
-                                        textAlignment="CENTER"
-                                />
-                                <RadioButton
-                                        id="noButton"
-                                        contentDisplay="TOP"
-                                        layoutX="10.0"
-                                        layoutY="10.0"
-                                        mnemonicParsing="false"
-                                        prefHeight="38.0"
-                                        prefWidth="70.0"
-                                        text="No"
-                                        textAlignment="CENTER"
-                                />
-                            </children>
-                        </HBox>
-                        <Label
-                                fx:id="isBuyingLabel" alignment="CENTER" prefHeight="44.0" prefWidth="230.0"
-                                text="Is Buying Vehicles"
-                                textAlignment="CENTER"
-                        />
-                    </children>
+                <VBox layoutX="423.0" layoutY="69.0" spacing="10.0">
+                    <Button
+                            fx:id="toggleAcquisitionButton"
+                            text="Disable Acquisition"
+                            prefWidth="200.0"
+                            onAction="#toggleAcquisition"
+                    />
+                    <Button
+                            fx:id="deleteDealerButton"
+                            text="Delete Dealer"
+                            prefWidth="200.0"
+                            onAction="#deleteSelectedDealer"
+                            style="-fx-background-color: #d9534f; -fx-text-fill: white;"
+                    />
                 </VBox>
                 <VBox fx:id="vehicleListVBox" layoutY="198.0" prefHeight="443.0" prefWidth="719.0">
                     <children>
