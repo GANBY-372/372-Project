@@ -11,11 +11,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class HelloApplication extends Application {
+public class FXDriver extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("dealer-view-old.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXAPP-View.fxml"));
 
         Parent root = fxmlLoader.load();
         System.out.println("FXML file loaded successfully");

@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DealerDeletionHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SUV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SUV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SportsCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SportsCar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Vehicle.java" afterDir="false" />
-    </list>
+    <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,9 +92,9 @@
       <recent name="edu.metrostate.ics372.ganby.vehicle" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.HelloApplication">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.HelloApplication" />
+  <component name="RunManager" selected="Application.FXDriver">
+    <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
@@ -177,7 +165,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.FXDriver" />
         <item itemvalue="JUnit.VehicleTest.testToString" />
         <item itemvalue="JUnit.VehicleTest" />
         <item itemvalue="Application.TestEnv" />
@@ -230,7 +218,7 @@
       <workItem from="1742944925230" duration="1184000" />
       <workItem from="1742993466517" duration="6685000" />
       <workItem from="1743000177172" duration="1366000" />
-      <workItem from="1743010194840" duration="8372000" />
+      <workItem from="1743010194840" duration="8673000" />
     </task>
     <servers />
   </component>
