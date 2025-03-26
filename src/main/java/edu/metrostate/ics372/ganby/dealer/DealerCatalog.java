@@ -80,12 +80,20 @@ public class DealerCatalog {
      * Get all dealers who are actively acquiring vehicles
      * @return ObservableList of dealers
      */
-    public ObservableList<Dealer> getDealerWhoAreBuying() {
+    public ObservableList<Dealer> getDealersWhoAreBuying() {
         return FXCollections.observableArrayList(
                 dealerList.stream()
                         .filter(Dealer::getIsVehicleAcquisitionEnabled)
                         .toList()
         );
+    }
+
+    public ArrayList<Vehicle> getAllVehicles() {
+        ArrayList<Vehicle> allVehicles = new ArrayList<>();
+        for (Dealer dealer : dealerCatalog.values()) {
+            allVehicles.addAll(dealer.getVehicleCatalog().values());
+        }
+        return allVehicles;
     }
 
     /**

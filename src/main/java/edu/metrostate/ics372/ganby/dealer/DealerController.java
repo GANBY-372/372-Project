@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.List;
 
 /**
  * Controller for Dealer management screen. Supports dealer CRUD operations,
@@ -52,15 +52,17 @@ public class DealerController {
     @FXML public TableColumn<Dealer, Integer> dealerInventoryColumn;
 
     @FXML public TableView<Vehicle> vehicleTable;
+    public TableColumn <String, String> vehicleDealerIdColumn;
     @FXML public TableColumn<Vehicle, String> vehicleIdColumn;
-    @FXML public TableColumn<String, String> vehicleCategoryColumn;
+    @FXML public TableColumn<String, String> vehicleTypeColumn;
     @FXML public TableColumn<Vehicle, String> vehicleManufacturerColumn;
     @FXML public TableColumn<Vehicle, Double> vehiclePriceColumn;
     @FXML public TableColumn<Vehicle, LocalDateTime> acquisitionDateColumn;
-    @FXML public TableColumn<Vehicle, Boolean> isRentableColumn;
+    @FXML public TableColumn<Vehicle, Boolean> isRentedOutColumn;
 
     @FXML public ButtonBar navigationButtonBar;
     @FXML public Button addDealerButton;
+    @FXML private Button selectAllDealersButton;
     @FXML public Button exportJSONWizardButton;
     @FXML public Button importJSONWizardButton;
     public Button importXMLWizardButton;
@@ -69,7 +71,7 @@ public class DealerController {
     public Button homeViewButton;
 
     @FXML public ButtonBar vehicleFilterButtonBar;
-    @FXML public Button rentableFilterButton;
+    @FXML public Button rentedOutFilterButton;
     @FXML public Button sportsCarFilterButton;
     @FXML public Button sedanFilterButton;
     @FXML public Button suvFilterButton;
@@ -77,40 +79,63 @@ public class DealerController {
 
     private final ObservableList<Dealer> dealerObservableList = FXCollections.observableArrayList();
     private final ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
+    private boolean allDealersSelected = false;
+
 
     /**
      * Initializes controller and sets up table bindings.
      */
     @FXML
     public void initialize() {
+        // Allow multiple dealer selections
+        dealerTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         // Dealer table bindings
         dealerIdColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
         dealerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         isBuyingColumn.setCellValueFactory(cellData -> cellData.getValue().isAcquisitionEnabledProperty());
-        dealerInventoryColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getVehicleCatalog().size()));
+        dealerInventoryColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(
+                cellData.getValue().getVehicleCatalog().size()
+        ));
 
-        // ✅ Vehicle table bindings
+        // Vehicle table bindings
+        vehicleDealerIdColumn.setCellValueFactory(new PropertyValueFactory<>("dealerId"));
         vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
         vehicleManufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
-        vehicleCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        vehicleTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
-        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentedOut"));
+        isRentedOutColumn.setCellValueFactory(new PropertyValueFactory<>("isRentedOut"));
 
-        // Load data into dealer table
+        // Load dealers into table
         loadData();
 
-        // Listen for selected dealer
+        // Listen for selection change in dealer table
         dealerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
+                if (allDealersSelected) {
+                    // Skip overriding selection when all are selected
+                    return;
+                }
+                allDealersSelected = false;
+                selectAllDealersButton.setText("Select All Dealers");
+
                 updateDealerDetailPane(newVal);
                 populateVehicleList(newVal);
+                addVehicleButton.setDisable(false);
             }
         });
 
+
+
         // Enable right-click delete only for dealers without vehicles
-        TableRightClickDelete.enableRightClickDelete(dealerTable, dealerObservableList, dealer -> dealer.getVehicleCatalog().isEmpty());
+        TableRightClickDelete.enableRightClickDelete(
+                dealerTable,
+                dealerObservableList,
+                dealer -> dealer.getVehicleCatalog().isEmpty()
+        );
     }
+
 
 
     /**
@@ -274,26 +299,58 @@ public class DealerController {
     }
 
     private void filterVehicles(String type) {
-        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
-        if (selectedDealer == null) {
-            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
-            return;
+        if (allDealersSelected) {
+            // All dealers: search across all vehicles
+            vehicleObservableList.setAll(
+                    DealerCatalog.getInstance()
+                            .getAllVehicles()
+                            .stream()
+                            .filter(v -> v.getType().equalsIgnoreCase(type))
+                            .toList()
+            );
+        } else {
+            Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+            if (selectedDealer != null) {
+                vehicleObservableList.setAll(
+                        selectedDealer.getVehicleCatalog()
+                                .values()
+                                .stream()
+                                .filter(v -> v.getType().equalsIgnoreCase(type))
+                                .toList()
+                );
+            } else {
+                showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
+                return;
+            }
         }
-        vehicleObservableList.setAll(DealerCatalog.getInstance().getVehiclesByType(type));
+
         vehicleTable.setItems(vehicleObservableList);
     }
+
 
     /**
      * Displays vehicles marked as rented out for selected dealer.
      */
     @FXML
-    public void getRentables(ActionEvent e) {
-        Dealer dealer = dealerTable.getSelectionModel().getSelectedItem();
-        if (dealer == null) {
-            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
-            return;
+    public void filterByRentedOut(ActionEvent e) {
+        List<Vehicle> rentedVehicles;
+
+        if (allDealersSelected) {
+            rentedVehicles = DealerCatalog.getInstance()
+                    .getAllVehicles()
+                    .stream()
+                    .filter(Vehicle::getIsRentedOut)
+                    .toList();
+        } else {
+            Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+            if (selectedDealer == null) {
+                showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to filter vehicles.");
+                return;
+            }
+            rentedVehicles = selectedDealer.getRentedOutVehicles();
         }
-        vehicleObservableList.setAll(dealer.getRentedOutVehicles());
+
+        vehicleObservableList.setAll(rentedVehicles);
         vehicleTable.setItems(vehicleObservableList);
     }
 
@@ -324,6 +381,81 @@ public class DealerController {
     private void openTransferVehicleWizard() {
         // Implementation coming soon
     }
+
+    @FXML
+    public void showAllVehicles(ActionEvent event) {
+        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+
+        if (allDealersSelected) {
+            vehicleObservableList.setAll(DealerCatalog.getInstance().getAllVehicles());
+        } else if (selectedDealer != null) {
+            vehicleObservableList.setAll(selectedDealer.getVehicleCatalog().values());
+        } else {
+            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to view their vehicles.");
+            return;
+        }
+
+        vehicleTable.setItems(vehicleObservableList);
+    }
+
+
+    /*
+    @FXML
+    public void selectAllDealers(ActionEvent e) {
+        allDealersSelected = true;
+
+        // Highlight all dealers
+        dealerTable.getSelectionModel().selectAll();
+
+        // Optional: Visual indicator
+        dealerIdTextField.setText("ALL");
+        dealerNameTextField.setText("All Dealers Selected");
+
+        // Disable Add Vehicle since it's not allowed when all are selected
+        addVehicleButton.setDisable(true);
+
+        // Show all vehicles across all dealers
+        vehicleObservableList.setAll(DealerCatalog.getInstance().getAllVehicles());
+        vehicleTable.setItems(vehicleObservableList);
+    }
+
+     */
+
+    @FXML
+    public void toggleDealerSelection(ActionEvent event) {
+        TableView.TableViewSelectionModel<Dealer> selectionModel = dealerTable.getSelectionModel();
+
+        if (!allDealersSelected) {
+            allDealersSelected = true;
+            selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
+            selectionModel.clearSelection();
+            selectionModel.selectAll();
+
+            dealerIdTextField.setText("ALL");
+            dealerNameTextField.setText("All Dealers Selected");
+
+            vehicleObservableList.setAll(DealerCatalog.getInstance().getAllVehicles());
+            vehicleTable.setItems(vehicleObservableList);
+
+            addVehicleButton.setDisable(true);
+            selectAllDealersButton.setText("Unselect All Dealers");
+        } else {
+            allDealersSelected = false;
+            selectionModel.clearSelection();
+
+            dealerIdTextField.clear();
+            dealerNameTextField.clear();
+
+            vehicleObservableList.clear();
+            vehicleTable.setItems(vehicleObservableList);
+
+            addVehicleButton.setDisable(false);
+            selectAllDealersButton.setText("Select All Dealers");
+        }
+    }
+
+
+
 
 
 }

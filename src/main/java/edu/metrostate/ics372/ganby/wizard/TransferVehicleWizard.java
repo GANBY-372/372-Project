@@ -38,7 +38,7 @@ public class TransferVehicleWizard {
         Label vehicleDetailLabel = new Label(vehicle.toString() != null ? vehicle.toString() : "No Vehicle Details Available");
 
         Label dealerLabel = new Label("Transfer To Dealer:");
-        ObservableList<Dealer> dealersBuying = FXCollections.observableArrayList(DealerCatalog.getInstance().getDealerWhoAreBuying());
+        ObservableList<Dealer> dealersBuying = FXCollections.observableArrayList(DealerCatalog.getInstance().getDealersWhoAreBuying());
         ComboBox<Dealer> dealerComboBox = new ComboBox<>(dealersBuying); // Populate ComboBox with dealers willing to buy
         dealerComboBox.setPromptText("Select Dealer");
 
