@@ -72,6 +72,7 @@ public class FXController {
     public Button importJsonButton;
     public Button importXmlButton;
     public Button exportDataButton;
+    public TableColumn vehicleModelColumn;
 
     private boolean allDealersSelected = false;
     private boolean suppressSelectionListener = false;

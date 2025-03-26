@@ -150,6 +150,7 @@
                     <TableColumn fx:id="vehicleDealerIdColumn" prefWidth="120.0" text="Dealer ID" />
                     <TableColumn fx:id="vehicleIdColumn" prefWidth="101.0" text="ID" />
                     <TableColumn fx:id="vehicleManufacturerColumn" prefWidth="99.0" text="Manufacturer" />
+                    <TableColumn fx:id="vehicleModelColumn" prefWidth="105.0" text="Model" />
                     <TableColumn fx:id="vehicleTypeColumn" prefWidth="155.0" text="Type" />
                     <TableColumn fx:id="vehiclePriceColumn" prefWidth="101.0" text="Price" />
                     <TableColumn fx:id="acquisitionDateColumn" prefWidth="159.0" text="Acquisition Date" />

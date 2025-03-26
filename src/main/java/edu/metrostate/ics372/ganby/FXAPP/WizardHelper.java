@@ -158,6 +158,9 @@ public class WizardHelper {
         Label makeLabel = new Label("Make:");
         TextField makeField = new TextField();
 
+        Label modelLabel = new Label("Model:");
+        TextField modelField = new TextField();
+
         Label priceLabel = new Label("Price:");
         TextField priceField = new TextField();
 
@@ -167,7 +170,7 @@ public class WizardHelper {
         Label acquisitionDateLabel = new Label("Acquisition Date:");
         DatePicker acquisitionDatePicker = new DatePicker();
 
-        Label rentableLabel = new Label("Is Rentable:");
+        Label rentableLabel = new Label("Is Rented Out:");
         CheckBox rentableCheckBox = new CheckBox();
 
         Button saveButton = new Button("Save");
@@ -179,10 +182,11 @@ public class WizardHelper {
         gridPane.setHgap(10);
         gridPane.addRow(0, idLabel, idField);
         gridPane.addRow(1, makeLabel, makeField);
-        gridPane.addRow(2, priceLabel, priceField);
-        gridPane.addRow(3, categoryLabel, categoryComboBox);
-        gridPane.addRow(4, acquisitionDateLabel, acquisitionDatePicker);
-        gridPane.addRow(5, rentableLabel, rentableCheckBox);
+        gridPane.addRow(2, modelLabel, modelField);
+        gridPane.addRow(3, priceLabel, priceField);
+        gridPane.addRow(4, categoryLabel, categoryComboBox);
+        gridPane.addRow(5, acquisitionDateLabel, acquisitionDatePicker);
+        gridPane.addRow(6, rentableLabel, rentableCheckBox);
 
         HBox buttonBox = new HBox(10, saveButton, cancelButton);
         VBox layout = new VBox(10, gridPane, buttonBox);
@@ -196,6 +200,7 @@ public class WizardHelper {
             try {
                 String id = idField.getText().trim();
                 String make = makeField.getText().trim();
+                String model = modelField.getText().trim();
                 String category = categoryComboBox.getValue();
                 String priceText = priceField.getText().trim();
                 LocalDateTime acquisitionDate = acquisitionDatePicker.getValue() != null

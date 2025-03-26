@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="" />
+    <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/FXAPP-View.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/FXAPP-View.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/WizardHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/WizardHelper.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,39 +50,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.JSONIOTester.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TerminalDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TestEnv.executor&quot;: &quot;Run&quot;,
-    &quot;Application.UserDriver.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.VehicleTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.VehicleTest.testToString.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [test].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [validate].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Yahya&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/abo_dawood/college/Semester 7 Spring 2025/ICS 372/Phase2_372&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FXDriver.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "Application.JSONIOTester.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.TerminalDriver.executor": "Run",
+    "Application.TestEnv.executor": "Run",
+    "Application.UserDriver.executor": "Run",
+    "JUnit.VehicleTest.executor": "Run",
+    "JUnit.VehicleTest.testToString.executor": "Run",
+    "Maven.FX_372_Project [clean].executor": "Run",
+    "Maven.FX_372_Project [compile].executor": "Run",
+    "Maven.FX_372_Project [test].executor": "Run",
+    "Maven.FX_372_Project [validate].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "Yahya",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/abo_dawood/college/Semester 7 Spring 2025/ICS 372/Phase2_372",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propCompiler",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/Resources" />
@@ -95,7 +102,7 @@
   <component name="RunManager" selected="Application.FXDriver">
     <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
-      <module name="FX_372_Project" />
+      <module name="ganby" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="edu.metrostate.ics372.ganby.*" />
@@ -235,5 +242,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Model to the GUI as well as in the add new vehcicle wizard TODO: Added model being added on import as well as when vehicle is being added manually" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Model to the GUI as well as in the add new vehcicle wizard TODO: Added model being added on import as well as when vehicle is being added manually" />
   </component>
 </project>
