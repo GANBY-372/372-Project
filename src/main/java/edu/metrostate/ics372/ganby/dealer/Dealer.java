@@ -120,7 +120,7 @@ public class Dealer {
      * @param vehicle Vehicle
      */
     public void addVehicle (Vehicle vehicle) {
-        vehicleCatalog.put(vehicle.getVehicleId(), vehicle);
+        vehicleCatalog.put(vehicle.getId(), vehicle);
     }
 
 
@@ -173,7 +173,7 @@ public class Dealer {
 
         for (Vehicle vehicle : vehicles) {
             if (!transferVehicle(vehicle, dealer)) {
-                System.out.println("Batch transfer to dealer: " + dealer.getName() + " failed at vehicleid " + vehicle.getVehicleId());
+                System.out.println("Batch transfer to dealer: " + dealer.getName() + " failed at vehicleid " + vehicle.getId());
                 return false;
             }
         }
@@ -197,18 +197,18 @@ public class Dealer {
             return false;
         }
 
-        if (this.vehicleCatalog.get(vehicle.getVehicleId()) == null) {
+        if (this.vehicleCatalog.get(vehicle.getId()) == null) {
             System.out.println("Cannot transfer a vehicle that is not owned by this dealer.");
             return false;
         }
 
-        this.vehicleCatalog.remove(vehicle.getVehicleId());
+        this.vehicleCatalog.remove(vehicle.getId());
 
         vehicle.setDealer(dealer);
-        dealer.getVehicleCatalog().put(vehicle.getVehicleId(), vehicle);
+        dealer.getVehicleCatalog().put(vehicle.getId(), vehicle);
 
 
-        System.out.println("Successfully transferred vehicle " + vehicle.getVehicleId()+ " to dealer " + dealer.getName());
-        return dealer.getVehicleCatalog().get(vehicle.getVehicleId()) != null;
+        System.out.println("Successfully transferred vehicle " + vehicle.getId()+ " to dealer " + dealer.getName());
+        return dealer.getVehicleCatalog().get(vehicle.getId()) != null;
     }
 }

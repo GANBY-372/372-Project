@@ -31,7 +31,7 @@ public class JSONObjectBuilder {
         JSONObject jsonObject = new JSONObject();
 
         // Add vehicle data to the JSON object
-        jsonObject.put("dealer_id", vehicle.getVehicleId());
+        jsonObject.put("dealer_id", vehicle.getId());
         jsonObject.put("vehicle_manufacturer", vehicle.getManufacturer());
         jsonObject.put("vehicle_type", vehicle.getClass().getSimpleName());
         jsonObject.put("vehicle_model", vehicle.getModel());

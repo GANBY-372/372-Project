@@ -39,7 +39,7 @@ public class Sedan extends Vehicle {
         if (object == this) return true;
         if (object == null) return false;
         if (object instanceof Sedan sedan) {
-            return id.equals(sedan.getVehicleId());
+            return id.equals(sedan.getId());
         }
         return false;
     }

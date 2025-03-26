@@ -1,6 +1,8 @@
 package edu.metrostate.ics372.ganby.dealer;
 
 import edu.metrostate.ics372.ganby.vehicle.VehicleCategory;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -39,10 +41,10 @@ public class DealerController {
     private TableColumn<Vehicle, String> vehicleIdColumn;
 
     @FXML
-    private TableColumn<Vehicle, String> vehicleMakeColumn;
+    private TableColumn<Vehicle, String> vehicleModelColumn;
 
     @FXML
-    private TableColumn<Vehicle, VehicleCategory> vehicleCategoryColumn;
+    private TableColumn<Vehicle, VehicleCategory> vehicleManufacturerColumn;
 
     @FXML
     private TableColumn<Vehicle, Double> vehiclePriceColumn;
@@ -202,6 +204,24 @@ public class DealerController {
         dealerInventoryColumn.setCellValueFactory(cellData ->
             new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getVehicleCatalog().size())
         );
+
+        // Listener for table row selection
+        dealerTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends Dealer> observable, Dealer oldValue, Dealer newValue) {
+                if (newValue != null) {
+                    updateDealerDetailPane(newValue);
+                    populateVehicleList(newValue); // Populate vehicle list when a dealer is selected
+                }
+            }
+        });
+
+        vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        vehicleModelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
+        vehicleManufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+        vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+//        acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
+//        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentable"));
     }
 
     private void loadData () {
@@ -211,7 +231,6 @@ public class DealerController {
             System.out.println(dealer.getName());
         }
         dealerTable.setItems(dealerObservableList);
-
         addDealerButton.setOnAction(event -> openAddDealerWizard());
     }
 
@@ -263,6 +282,28 @@ public class DealerController {
         alert.setHeaderText(null); // Optional: remove header for simplicity
         alert.setContentText(message);
         alert.showAndWait(); // Show the alert as a modal dialog
+    }
+
+    private void updateDealerDetailPane(Dealer selectedDealer) {
+        // Clear existing content in dealerDetailPane
+        dealerIdTextField.clear();
+        dealerNameTextField.clear();
+
+        // Add new content to dealerDetailPane
+        dealerIdTextField.setText(String.valueOf(selectedDealer.getId()));
+        dealerNameTextField.setText(selectedDealer.getName());
+    }
+
+    private void populateVehicleList(Dealer selectedDealer) {
+        // Clear any existing vehicles in the observable list
+        vehicleObservableList.clear();
+
+        // Add the vehicles for the selected dealer
+        for (Vehicle vehicle : selectedDealer.getVehicleCatalog().values()) {
+            System.out.println(vehicle.toString());
+        }
+        vehicleObservableList.addAll(selectedDealer.getVehicleCatalog().values());
+        vehicleTable.setItems(vehicleObservableList);
     }
 }
 //    public AnchorPane dealerDetailPane;
@@ -405,12 +446,12 @@ public class DealerController {
 //        });
 //        TableRightClickDelete.enableRightClickDelete(dealerTable, dealerObservableList, dealer -> dealer.getVehicleCatalog().isEmpty());
 //
-////        vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-////        vehicleCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-////        vehicleMakeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
-////        vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-////        acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
-////        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentable"));
+//        vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+//        vehicleCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+//        vehicleMakeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
+//        vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+//        acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
+//        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentable"));
 //////
 ////        vehicleTable.setItems(vehicleObservableList); // Set observable list
 //

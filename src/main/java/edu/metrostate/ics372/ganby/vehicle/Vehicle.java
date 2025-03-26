@@ -14,20 +14,20 @@ public abstract class Vehicle {
     protected final String id;    //id is string because some IDs may contain letters
     protected final String model;
     protected final String manufacturer;
-    protected double price;
+    protected Double price;
     protected String dealerId;
     protected LocalDateTime acquisitionDate;
     protected Boolean isRentedOut;
 
     //In the case rent status is not specified
-    public Vehicle(String id, String model, String manufacturer, double price, String dealerId,
+    public Vehicle(String id, String model, String manufacturer, Double price, String dealer,
                    LocalDateTime acquisitionDate) {
-        this(id, model, manufacturer, price, dealerId, acquisitionDate, null);
+        this(id, model, manufacturer, price, dealer, acquisitionDate, null);
     }
 
 
     //In the case rent status is specified
-    public Vehicle(String id, String model, String manufacturer, double price, String dealerId,
+    public Vehicle(String id, String model, String manufacturer, Double price, String dealerId,
                    LocalDateTime acquisitionDate, Boolean isRentedOut) {
         this.id = id;
         this.model = model;
@@ -44,7 +44,7 @@ public abstract class Vehicle {
         isRentedOut = rentedOut;
     }
 
-    public String getVehicleId() {
+    public String getId () {
         return id;
     }
 
@@ -68,7 +68,7 @@ public abstract class Vehicle {
         return acquisitionDate;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         if (price < 0) throw new IllegalArgumentException("Price cannot be negative");
         this.price = price;
     }
@@ -91,7 +91,7 @@ public abstract class Vehicle {
         if (object == this) return true;
         if (object == null) return false;
         if (object instanceof Vehicle vehicle) {
-            return id.equals(vehicle.getVehicleId());
+            return id.equals(vehicle.getId());
         }
         return false;
     }

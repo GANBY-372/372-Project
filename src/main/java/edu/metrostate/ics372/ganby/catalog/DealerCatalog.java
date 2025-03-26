@@ -72,27 +72,27 @@ public class DealerCatalog {
             System.out.println("Dealer does not exist. Dealer has been added.");
             //Adds the vehicle to that dealer's vehicle collection
             dealerCatalog.get(vehicle.getDealerId()).addVehicle(vehicle);
-            System.out.println("Vehicle id #" + vehicle.getVehicleId() + " added");
+            System.out.println("Vehicle id #" + vehicle.getId() + " added");
 
             //If dealer does exist then check if vehicle already exists in dealer's vehicle collection and check
             //if dealer's vehicle acquisition is enabled. This if statement handles the case when both conditions are
             //false.
-        } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCatalog().containsKey(vehicle.getVehicleId()) &&
+        } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCatalog().containsKey(vehicle.getId()) &&
                 !dealerCatalog.get(vehicle.getDealerId()).getIsBuying()) {
             System.out.println("Acquisition Disabled for dealer id #" + vehicle.getDealerId() +
-                    " and vehicle id #" + vehicle.getVehicleId() + ", already exists in the collection.");
+                    " and vehicle id #" + vehicle.getId() + ", already exists in the collection.");
 
             //Checks acquisition status, if false then vehicle will not be added. This if-statement handles the case
             //when the vehicle already exists in the dealer's vehicle collection
-        } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCatalog().containsKey(vehicle.getVehicleId())) {
-            System.out.println("Vehicle id #" + vehicle.getVehicleId() + " already exists in dealer's the collection.");
+        } else if (dealerCatalog.get(vehicle.getDealerId()).getVehicleCatalog().containsKey(vehicle.getId())) {
+            System.out.println("Vehicle id #" + vehicle.getId() + " already exists in dealer's the collection.");
         } else if (!dealerCatalog.get(vehicle.getDealerId()).getIsBuying()) {
             System.out.println("Acquisition Disabled for dealer id #" + vehicle.getDealerId());
             //All conditions are met and the vehicle is added
         } else {
             //adds vehicle to corresponding dealer
             dealerCatalog.get(vehicle.getDealerId()).addVehicle(vehicle);
-            System.out.println("Vehicle id #" + vehicle.getVehicleId() + " added");
+            System.out.println("Vehicle id #" + vehicle.getId() + " added");
         }
 
     }

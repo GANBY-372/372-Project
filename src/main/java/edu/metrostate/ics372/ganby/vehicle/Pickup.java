@@ -41,7 +41,7 @@ public class Pickup extends Vehicle {
         if (object == this) return true;
         if (object == null) return false;
         if (object instanceof Pickup pickup) {
-            return id.equals(pickup.getVehicleId());
+            return id.equals(pickup.getId());
         }
         return false;
     }

@@ -39,7 +39,7 @@ public class SUV extends Vehicle {
             if (object == this) return true;
             if (object == null) return false;
             if (object instanceof SUV suv) {
-                return this.id.equals(suv.getVehicleId());
+                return this.id.equals(suv.getId());
             }
             return false;
     }

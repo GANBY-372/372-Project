@@ -39,7 +39,7 @@ public class SportsCar extends Vehicle {
         if (object == this) return true;
         if (object == null) return false;
         if (object instanceof SportsCar sportsCar) {
-            return id.equals(sportsCar.getVehicleId());
+            return id.equals(sportsCar.getId());
         }
         return false;
     }

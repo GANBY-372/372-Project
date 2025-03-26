@@ -183,11 +183,11 @@
                         <TableView fx:id="vehicleTable" prefHeight="382.0" prefWidth="719.0">
                             <columns>
                                 <TableColumn fx:id="vehicleIdColumn" prefWidth="101.0" text="ID" />
-                                <TableColumn fx:id="vehicleMakeColumn" minWidth="0.0" prefWidth="99.0" text="Make" />
-                                <TableColumn fx:id="vehicleCategoryColumn" prefWidth="155.0" text="Type" />
+                                <TableColumn fx:id="vehicleModelColumn" minWidth="0.0" prefWidth="99.0" text="Model" />
+                                <TableColumn fx:id="vehicleManufacturerColumn" prefWidth="155.0" text="Manufacturer" />
                                 <TableColumn fx:id="vehiclePriceColumn" minWidth="0.0" prefWidth="101.0" text="Price" />
-                                <TableColumn fx:id="acquisitionDateColumn" minWidth="0.0" prefWidth="159.0" text="Acquisition Date" />
-                                <TableColumn fx:id="isRentableColumn" minWidth="0.0" prefWidth="159.0" text="Rentable" />
+<!--                                <TableColumn fx:id="acquisitionDateColumn" minWidth="0.0" prefWidth="159.0" text="Acquisition Date" />-->
+<!--                                <TableColumn fx:id="isRentableColumn" minWidth="0.0" prefWidth="159.0" text="Rentable" />-->
                             </columns>
                         </TableView>
                     </children>
