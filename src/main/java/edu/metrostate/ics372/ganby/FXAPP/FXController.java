@@ -435,6 +435,39 @@ public class FXController {
         populateVehicleList(selectedDealer);
     }
 
+    /**
+     * Opens a dialog to edit the selected dealer's name.
+     *
+     * @param event the ActionEvent triggered by the button click
+     */
+    @FXML
+    private void editDealerName(ActionEvent event) {
+        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+
+        if (selectedDealer == null) {
+            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
+            return;
+        }
+
+        TextInputDialog dialog = new TextInputDialog(selectedDealer.getName());
+        dialog.setTitle("Edit Dealer Name");
+        dialog.setHeaderText("Update name for Dealer ID: " + selectedDealer.getId());
+        dialog.setContentText("New Dealer Name:");
+
+        dialog.showAndWait().ifPresent(newName -> {
+            if (newName.trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Dealer name cannot be empty.");
+                return;
+            }
+
+            selectedDealer.setName(newName.trim());
+            dealerTable.refresh();
+            dealerNameTextField.setText(newName.trim());
+
+            showAlert(Alert.AlertType.INFORMATION, "Updated", "Dealer name successfully updated.");
+        });
+    }
+
 
 
 

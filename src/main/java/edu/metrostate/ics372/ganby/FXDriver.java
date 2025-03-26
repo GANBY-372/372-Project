@@ -27,9 +27,9 @@ public class FXDriver extends Application {
         if (autosaveFile.exists()) {
             try {
                 JSONFileImporter importer = new JSONFileImporter(autosavePath);
-                importer.processJSON(); // ✅ Import here
+                importer.processJSON(); // Import here
 
-                controller.loadData();  // ✅ Refresh UI with imported data
+                controller.loadData();  // Refresh UI with imported data
 
                 System.out.println("Successfully loaded JSON from: " + autosavePath);
                 System.out.println("Autosave data imported on boot.");

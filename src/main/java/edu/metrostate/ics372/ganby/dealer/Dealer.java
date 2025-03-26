@@ -204,4 +204,8 @@ public class Dealer {
         }
         return true;
     }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
 }
