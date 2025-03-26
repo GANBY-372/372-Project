@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/TestEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/TestEnv.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +57,7 @@
     "Application.TerminalDriver.executor": "Run",
     "Application.TestEnv.executor": "Run",
     "Application.UserDriver.executor": "Run",
+    "JUnit.DealerCatalogTest.executor": "Run",
     "JUnit.DealerTest.executor": "Run",
     "JUnit.VehicleTest.executor": "Run",
     "JUnit.VehicleTest.testToString.executor": "Run",
@@ -91,9 +94,9 @@
       <recent name="edu.metrostate.ics372.ganby.vehicle" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DealerTest">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.HelloApplication" />
+  <component name="RunManager" selected="JUnit.DealerCatalogTest">
+    <configuration name="TestEnv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.TestEnv" />
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
@@ -105,15 +108,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestEnv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.TestEnv" />
+    <configuration name="DealerCatalogTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.*" />
+          <option name="PATTERN" value="edu.metrostate.ics372.ganby.dealer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.dealer" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.dealer.DealerCatalogTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DealerTest" />
+        <item itemvalue="JUnit.DealerCatalogTest" />
         <item itemvalue="Application.TestEnv" />
+        <item itemvalue="JUnit.DealerTest" />
         <item itemvalue="JUnit.VehicleTest.testToString" />
         <item itemvalue="JUnit.VehicleTest" />
-        <item itemvalue="Application.HelloApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -219,7 +224,7 @@
       <workItem from="1742944925230" duration="1385000" />
       <workItem from="1742947304873" duration="1799000" />
       <workItem from="1742957686701" duration="2494000" />
-      <workItem from="1743007832754" duration="2803000" />
+      <workItem from="1743007832754" duration="4654000" />
     </task>
     <servers />
   </component>

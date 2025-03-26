@@ -340,4 +340,8 @@ public class DealerCatalog {
             this.getDealerCatalog().get(id).disableVehicleAcquisition(id);
         }
     }
+
+    public void clear() {
+        dealerCatalog.clear();
+    }
 }
