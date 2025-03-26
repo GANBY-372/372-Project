@@ -1,4 +1,4 @@
-package edu.metrostate.ics372.ganby.DataProcessing;
+package edu.metrostate.ics372.ganby.dataprocessing;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.dealer.DealerCatalog;

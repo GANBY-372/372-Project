@@ -1,8 +1,8 @@
 package edu.metrostate.ics372.ganby;
 
-import edu.metrostate.ics372.ganby.DataProcessing.DataExporter;
-import edu.metrostate.ics372.ganby.DataProcessing.JSONFileImporter;
-import edu.metrostate.ics372.ganby.dealer.DealerController;
+import edu.metrostate.ics372.ganby.dataprocessing.DataExporter;
+import edu.metrostate.ics372.ganby.dataprocessing.JSONFileImporter;
+import edu.metrostate.ics372.ganby.FXAPP.FXController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,16 +10,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class HelloApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("dealer-view-old.fxml"));
+
         Parent root = fxmlLoader.load();
-        DealerController controller = fxmlLoader.getController();
+        System.out.println("FXML file loaded successfully");
+
+        FXController controller = fxmlLoader.getController();
 
         String autosavePath = "src/main/resources/Auto_Save/dealer_catalog_autosave.json";
         File autosaveFile = new File(autosavePath);

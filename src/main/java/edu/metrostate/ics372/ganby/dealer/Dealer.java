@@ -131,6 +131,16 @@ public class Dealer {
     }
 
     /**
+     * Adds mutliple vehicles at once. Will be used for transferring vehicles from one dealer to another.
+     * @param vehicles arraylist containting vehicles
+     */
+    public void addVehicles(ArrayList<Vehicle> vehicles) {
+        for (Vehicle vehicle : vehicles) {
+            addVehicle(vehicle);
+        }
+    }
+
+    /**
      * Transfer a vehicle from this dealer to another
      */
     public boolean transferVehicle(Vehicle vehicle, Dealer dealer) {

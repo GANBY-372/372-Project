@@ -19,7 +19,7 @@
         prefWidth="1278.0"
         xmlns="http://javafx.com/javafx/18"
         xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="edu.metrostate.ics372.ganby.dealer.DealerController"
+        fx:controller="edu.metrostate.ics372.ganby.fx_controllers.FXController"
 >
     <TextField
             fx:id="dealerNameTextField"

@@ -1,6 +1,6 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
-import edu.metrostate.ics372.ganby.DataProcessing.JSONObjectBuilder;
+import edu.metrostate.ics372.ganby.dataprocessing.JSONObjectBuilder;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import javafx.beans.property.*;
 
@@ -18,6 +18,8 @@ public abstract class Vehicle {
     protected final StringProperty dealerId;
     protected final ObjectProperty<LocalDateTime> acquisitionDate;
     protected final BooleanProperty isRentedOut;
+    private final BooleanProperty selected = new SimpleBooleanProperty(false);
+
 
     // Constructor when rent status is specified
     public Vehicle(String id, String model, String manufacturer, double price, String dealerId,
@@ -59,14 +61,31 @@ public abstract class Vehicle {
         this.dealerId.set(dealer.getId());
     }
 
+    public void setDealerId(String dealerId) {
+        this.dealerId.set(dealerId);
+    }
+
     public void setAcquisitionDate(LocalDateTime newAcquisitionDate) {
         if (newAcquisitionDate == null)
             throw new IllegalArgumentException("New acquisition date cannot be null");
         this.acquisitionDate.set(newAcquisitionDate);
     }
 
-    public void setRentedStatus(Boolean rentedOut) {
+    public void setRentedOut(Boolean rentedOut) {
         this.isRentedOut.set(rentedOut);
+    }
+
+
+    public BooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 
     // JavaFX Properties for binding

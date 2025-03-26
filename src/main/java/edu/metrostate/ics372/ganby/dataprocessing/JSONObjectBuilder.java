@@ -3,7 +3,7 @@
  * @autor B, G
  * This class is for building JSON objects.
  */
-package edu.metrostate.ics372.ganby.DataProcessing;
+package edu.metrostate.ics372.ganby.dataprocessing;
 
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import org.json.simple.JSONObject;
