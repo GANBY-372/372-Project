@@ -1,6 +1,7 @@
 package edu.metrostate.ics372.ganby.dealer;
 
 import edu.metrostate.ics372.ganby.vehicle.VehicleCategory;
+import edu.metrostate.ics372.ganby.wizard.AddVehicleWizard;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -186,8 +187,8 @@ public class DealerController {
 //            showAlert(Alert.AlertType.INFORMATION, "Import Successful", "JSON file successfully imported!");
 
         } catch (Exception e) {
-            // Show error message on failure
-//            showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing JSON file: " + e.getMessage());
+//             Show error message on failure
+            showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing JSON file: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -208,7 +209,7 @@ public class DealerController {
         // Listener for table row selection
         dealerTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<>() {
             @Override
-            public void changed(ObservableValue<? extends Dealer> observable, Dealer oldValue, Dealer newValue) {
+            public void changed (ObservableValue<? extends Dealer> observable, Dealer oldValue, Dealer newValue) {
                 if (newValue != null) {
                     updateDealerDetailPane(newValue);
                     populateVehicleList(newValue); // Populate vehicle list when a dealer is selected
@@ -220,7 +221,7 @@ public class DealerController {
         vehicleModelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         vehicleManufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
         vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//        acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
+        acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
 //        isRentableColumn.setCellValueFactory(new PropertyValueFactory<>("isRentable"));
     }
 
@@ -232,6 +233,25 @@ public class DealerController {
         }
         dealerTable.setItems(dealerObservableList);
         addDealerButton.setOnAction(event -> openAddDealerWizard());
+    }
+
+    @FXML
+    private void openAddVehicleWizard() {
+        // Get the selected dealer
+        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+
+        // If no dealer is selected, show a warning
+        if (selectedDealer == null) {
+            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
+            return;
+        }
+
+        // Invoke the Add Vehicle Wizard
+        AddVehicleWizard addVehicleWizard = new AddVehicleWizard(selectedDealer);
+        addVehicleWizard.show();
+
+        // Refresh the vehicle table (if applicable)
+        vehicleObservableList.setAll(selectedDealer.getVehicleCatalog().values());
     }
 
     @FXML
@@ -276,7 +296,7 @@ public class DealerController {
         wizardStage.showAndWait();
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
+    private void showAlert (Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null); // Optional: remove header for simplicity
@@ -284,7 +304,7 @@ public class DealerController {
         alert.showAndWait(); // Show the alert as a modal dialog
     }
 
-    private void updateDealerDetailPane(Dealer selectedDealer) {
+    private void updateDealerDetailPane (Dealer selectedDealer) {
         // Clear existing content in dealerDetailPane
         dealerIdTextField.clear();
         dealerNameTextField.clear();
@@ -294,7 +314,7 @@ public class DealerController {
         dealerNameTextField.setText(selectedDealer.getName());
     }
 
-    private void populateVehicleList(Dealer selectedDealer) {
+    private void populateVehicleList (Dealer selectedDealer) {
         // Clear any existing vehicles in the observable list
         vehicleObservableList.clear();
 
@@ -306,6 +326,7 @@ public class DealerController {
         vehicleTable.setItems(vehicleObservableList);
     }
 }
+
 //    public AnchorPane dealerDetailPane;
 //
 //    public VBox vehicleListVBox;
@@ -669,21 +690,21 @@ public class DealerController {
 ////
 //    @FXML
 //    private void openAddVehicleWizard() {
-////        // Get the selected dealer
-////        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
-////
-////        // If no dealer is selected, show a warning
-////        if (selectedDealer == null) {
-////            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
-////            return;
-////        }
-////
-////        // Invoke the Add Vehicle Wizard
-////        AddVehicleWizard addVehicleWizard = new AddVehicleWizard(selectedDealer);
-////        addVehicleWizard.show();
-////
-////        // Refresh the vehicle table (if applicable)
-////        vehicleObservableList.setAll(selectedDealer.getVehicles());
+//        // Get the selected dealer
+//        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+//
+//        // If no dealer is selected, show a warning
+//        if (selectedDealer == null) {
+//            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
+//            return;
+//        }
+//
+//        // Invoke the Add Vehicle Wizard
+//        AddVehicleWizard addVehicleWizard = new AddVehicleWizard(selectedDealer);
+//        addVehicleWizard.show();
+//
+//        // Refresh the vehicle table (if applicable)
+//        vehicleObservableList.setAll(selectedDealer.getVehicles());
 //    }
 //
 //    @FXML
