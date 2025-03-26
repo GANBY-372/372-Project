@@ -144,10 +144,6 @@ public class DealerController {
     private final ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
 
     @FXML
-    public void openAddVehicleWizard (ActionEvent actionEvent) {
-    }
-
-    @FXML
     public void getRentables (ActionEvent actionEvent) {
     }
 
