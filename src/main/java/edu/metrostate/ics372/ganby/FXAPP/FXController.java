@@ -65,6 +65,8 @@ public class FXController {
     @FXML public Button sedanFilterButton;
     @FXML public Button suvFilterButton;
     @FXML public Button truckFilterButton;
+    @FXML public TableColumn<Vehicle, String> vehicleModelColumn;
+
 
     // --- Data Sources ---
     private final ObservableList<Dealer> dealerObservableList = FXCollections.observableArrayList();
@@ -72,7 +74,6 @@ public class FXController {
     public Button importJsonButton;
     public Button importXmlButton;
     public Button exportDataButton;
-    public TableColumn vehicleModelColumn;
 
     private boolean allDealersSelected = false;
     private boolean suppressSelectionListener = false;
@@ -95,6 +96,7 @@ public class FXController {
         vehicleDealerIdColumn.setCellValueFactory(new PropertyValueFactory<>("dealerId"));
         vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
         vehicleManufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+        vehicleModelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         vehicleTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
