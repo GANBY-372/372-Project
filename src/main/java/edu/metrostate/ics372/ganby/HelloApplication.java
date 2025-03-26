@@ -1,39 +1,57 @@
 package edu.metrostate.ics372.ganby;
 
+import edu.metrostate.ics372.ganby.DataProcessing.DataExporter;
+import edu.metrostate.ics372.ganby.DataProcessing.JSONFileImporter;
+import edu.metrostate.ics372.ganby.dealer.DealerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
     @Override
-    public void start(Stage stage) {
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("dealer-view-old.fxml"));
+        Parent root = fxmlLoader.load();
+        DealerController controller = fxmlLoader.getController();
 
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("dealer-view-old.fxml")); // Correct Path
+        String autosavePath = "src/main/resources/Auto_Save/dealer_catalog_autosave.json";
+        File autosaveFile = new File(autosavePath);
+        if (autosaveFile.exists()) {
+            try {
+                JSONFileImporter importer = new JSONFileImporter(autosavePath);
+                importer.processJSON(); // ✅ Import here
 
-            // Log to console in case the resource is not found
-            if (fxmlLoader == null) {
-                throw new RuntimeException("FXML file not found in the resources folder!");
+                controller.loadData();  // ✅ Refresh UI with imported data
+
+                System.out.println("Successfully loaded JSON from: " + autosavePath);
+                System.out.println("Autosave data imported on boot.");
+            } catch (Exception e) {
+                System.err.println("Error loading autosave data: " + e.getMessage());
             }
-
-            // Load FXML and set up scene
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Hello!");
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            System.err.println("Failed to load FXML file: " + e.getMessage());
-            e.printStackTrace();
-        } catch (RuntimeException e) {
-            System.err.println("Unexpected error: " + e.getMessage());
-            e.printStackTrace();
         }
+
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Hello!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
+    @Override
+    public void stop() {
+        DataExporter exporter = new DataExporter();
+
+        String filePath = "src/main/resources/Auto_Save/dealer_catalog_autosave.json";
+        exporter.saveStateToFile(filePath);
+
+        System.out.println("Dealer catalog autosaved to " + filePath + " on application exit.");
+    }
     public static void main(String[] args) {
         launch();
     }

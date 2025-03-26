@@ -1,5 +1,6 @@
 package edu.metrostate.ics372.ganby.dealer;
 
+import edu.metrostate.ics372.ganby.DataProcessing.DataExporter;
 import edu.metrostate.ics372.ganby.DataProcessing.XMLFileImporter;
 import edu.metrostate.ics372.ganby.contextmenu.TableRightClickDelete;
 import edu.metrostate.ics372.ganby.DataProcessing.JSONFileImporter;
@@ -19,10 +20,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -162,17 +165,11 @@ public class DealerController {
                 dealer -> dealer.getVehicleCatalog().isEmpty()
         );
     }
-
-
-
-
-
-
-
+    
     /**
      * Loads dealers from catalog to table.
      */
-    private void loadData() {
+    public void loadData() {
         dealerObservableList.setAll(DealerCatalog.getInstance().getDealers());
         dealerTable.setItems(dealerObservableList);
     }
@@ -309,9 +306,7 @@ public class DealerController {
         }
     }
 
-    public void exportData(ActionEvent actionEvent) {
-        System.out.println("Exporting...");
-    }
+
 
     // Vehicle filters below:
 
@@ -624,6 +619,13 @@ public class DealerController {
         vehicleTable.refresh();
         toggleRentStatusButton.setText(selectedVehicle.getIsRentedOut() ? "Set as Available" : "Set as Rented Out");
     }
+
+    @FXML
+    public void exportData(ActionEvent actionEvent) {
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        new DataExporter().promptAndExportCatalog(stage);
+    }
+
 
 
 }

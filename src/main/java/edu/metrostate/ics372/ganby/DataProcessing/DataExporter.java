@@ -3,13 +3,18 @@ package edu.metrostate.ics372.ganby.DataProcessing;
 import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import javafx.scene.control.Alert;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.ZoneId;
 
-public class JSONFileExporter {
+public class DataExporter {
 
     /**
      * Export dealer data to JSON file
@@ -135,11 +140,45 @@ public class JSONFileExporter {
 
     // TODO: Write the method
     /**
-     * Save the current state to a JSON file
-     * @param filePath String
+     * Save the current state of the dealer catalog (all dealers and vehicles)
+     * to a JSON file at the specified path.
+     *
+     * @param filePath the full file path to save to
      */
     public void saveStateToFile(String filePath) {
-        // Convert the dealer catalog to JSON
-        // This will also need to save the state of the dealers
+        try {
+            // Make sure the directory exists
+            File file = new File(filePath);
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs(); // create the folder if it doesn't exist
+            }
+
+            try (FileWriter writer = new FileWriter(file)) {
+                JSONObject fullCatalogJson = convertDealerCatalogToJSON();
+                writer.write(prettyPrintJson(fullCatalogJson.toJSONString()));
+                System.out.println("Dealer catalog successfully saved to " + filePath);
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving dealer catalog: " + filePath + " (" + e.getMessage() + ")");
+        }
+    }
+
+    public void promptAndExportCatalog(Stage owner) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export Dealer Catalog");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
+        fileChooser.setInitialFileName("dealer_catalog.json");
+
+        File file = fileChooser.showSaveDialog(owner);
+        if (file != null) {
+            saveStateToFile(file.getAbsolutePath());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Export Successful");
+            alert.setHeaderText(null);
+            alert.setContentText("Dealer catalog exported to:\n" + file.getAbsolutePath());
+            alert.showAndWait();
+        }
     }
 }

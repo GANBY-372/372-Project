@@ -79,6 +79,19 @@ public class JSONFileImporter {
         }
     }
 
+    public JSONFileImporter(String filePath) throws IOException, ParseException {
+        try {
+            this.reader = new FileReader(filePath);
+            this.jsonParser = new JSONParser();
+            this.jsonObject = (JSONObject) jsonParser.parse(reader);
+            this.jsonArray = (JSONArray) jsonObject.get("car_inventory");
+
+            System.out.println("Successfully loaded JSON from: " + filePath);
+        } catch (IOException | ParseException e) {
+            throw e;
+        }
+    }
+
     // TODO: Rename this method, it looks like a basic getter, but it seems to create a dealer for the object
     // TODO: THis method throws exception for non numeric - we decided id should be a string so need to edit
     /**
@@ -156,6 +169,21 @@ public class JSONFileImporter {
 
         for (Object object : jsonArray) {
             Vehicle vehicle = createVehicle((JSONObject) object);
+        }
+    }
+
+
+
+    public void importFromFile(String filePath) {
+        try (FileReader reader = new FileReader(filePath)) {
+            JSONParser parser = new JSONParser();
+            JSONArray jsonArray = (JSONArray) parser.parse(reader);
+
+            // Now pass it to your existing processor
+            this.jsonArray = jsonArray;  // set to your existing field
+            processJSON();
+        } catch (Exception e) {
+            System.err.println("Error importing from file: " + e.getMessage());
         }
     }
 
