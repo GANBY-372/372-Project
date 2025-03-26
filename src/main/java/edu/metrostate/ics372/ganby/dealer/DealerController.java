@@ -575,6 +575,7 @@ public class DealerController {
                     dealer.getVehicleCatalog().remove(selectedVehicle.getVehicleId());
                     vehicleObservableList.remove(selectedVehicle);
                     vehicleTable.refresh();
+                    dealerTable.refresh();
                     showAlert(Alert.AlertType.INFORMATION, "Deleted", "Vehicle deleted successfully.");
                 }
             }
