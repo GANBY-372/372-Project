@@ -1,4 +1,4 @@
-package edu.metrostate.ics372.ganby.contextmenu;
+package edu.metrostate.ics372.ganby.FXAPP;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;

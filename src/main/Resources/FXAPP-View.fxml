@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.cell.CheckBoxTableCell?>
+
+<AnchorPane
+        fx:id="rootPane"
+        maxHeight="-Infinity"
+        maxWidth="-Infinity"
+        minHeight="-Infinity"
+        minWidth="-Infinity"
+        prefHeight="866.0"
+        prefWidth="1278.0"
+        xmlns="http://javafx.com/javafx/18"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="edu.metrostate.ics372.ganby.FXAPP.FXController"
+>
+    <HBox layoutX="13.0" layoutY="20.0" spacing="10.0">
+        <Button
+                fx:id="importJsonButton"
+                text="Import JSON"
+                onAction="#importJSONFile"/>
+        <Button
+                fx:id="importXmlButton"
+                text="Import XML"
+                onAction="#importXMLFile"/>
+        <Button
+                fx:id="exportDataButton"
+                text="Export Data"
+                onAction="#exportData"/>
+    </HBox>
+
+    <HBox layoutX="13.0" layoutY="80.0" spacing="10.0">
+        <Button
+                fx:id="addDealerButton"
+                mnemonicParsing="false"
+                text="Add Dealer"
+                prefWidth="150.0"
+                onAction="#openAddDealerWizard"
+        />
+        <Button
+                fx:id="selectAllDealersButton"
+                text="Select All Dealers"
+                onAction="#toggleDealerSelection"
+        />
+    </HBox>
+
+    <TableView fx:id="dealerTable" layoutX="13.0" layoutY="129.0" prefHeight="663.0" prefWidth="478.0">
+        <columns>
+            <TableColumn
+                    fx:id="isBuyingColumn"
+                    prefWidth="183.0"
+                    text="Is Buying"
+            />
+            <TableColumn
+                    fx:id="dealerIdColumn"
+                    prefWidth="75.0"
+                    text="dealer ID"
+            />
+            <TableColumn
+                    fx:id="dealerNameColumn"
+                    prefWidth="183.0"
+                    text="dealer Name"
+            />
+            <TableColumn
+                    fx:id="dealerInventoryColumn"
+                    prefWidth="183.0"
+                    text="Inventory Size"
+            />
+        </columns>
+    </TableView>
+
+    <AnchorPane
+            fx:id="dealerDetailPane"
+            layoutX="506.0"
+            layoutY="127.0"
+            prefHeight="663.0"
+            prefWidth="719.0"
+    >
+        <Label
+                fx:id="dealerNameLabel"
+                layoutX="41.0"
+                layoutY="69.0"
+                prefHeight="25.0"
+                prefWidth="85.0"
+                text="Dealer Name"
+        />
+        <Label
+                fx:id="dealerIdLabel"
+                layoutX="41.0"
+                layoutY="117.0"
+                prefHeight="25.0"
+                prefWidth="85.0"
+                text="Dealer Id"
+        />
+        <TextField
+                fx:id="dealerNameTextField"
+                layoutX="138.0"
+                layoutY="66.0"
+                prefHeight="32.0"
+                prefWidth="223.0"
+                promptText="Dealer Name..."
+        />
+        <TextField
+                fx:id="dealerIdTextField"
+                layoutX="138.0"
+                layoutY="113.0"
+                prefHeight="32.0"
+                prefWidth="223.0"
+                promptText="123456..."
+        />
+        <VBox layoutX="423.0" layoutY="69.0" spacing="10.0">
+            <Button
+                    fx:id="toggleAcquisitionButton"
+                    text="Disable Acquisition"
+                    prefWidth="200.0"
+                    onAction="#toggleAcquisition"
+            />
+            <Button
+                    fx:id="deleteDealerButton"
+                    text="Delete Dealer"
+                    prefWidth="200.0"
+                    onAction="#deleteSelectedDealer"
+                    style="-fx-background-color: #d9534f; -fx-text-fill: white;"
+            />
+        </VBox>
+        <VBox fx:id="vehicleListVBox" layoutY="198.0" prefHeight="443.0" prefWidth="719.0"
+              spacing="10.0">
+            <VBox alignment="CENTER_LEFT" spacing="5.0">
+                <Label text="Edit Vehicle" style="-fx-font-weight: bold;"/>
+                <HBox alignment="CENTER" spacing="10.0">
+                    <Button fx:id="addVehicleButton" text="Add Vehicle" onAction="#openAddVehicleWizard" />
+                    <Button fx:id="deleteVehicleButton" text="Delete Vehicle" onAction="#deleteSelectedVehicle" />
+                    <Button fx:id="modifyPriceButton" text="Modify Price" onAction="#modifyVehiclePrice" />
+                    <Button fx:id="transferVehicleButton" text="Transfer to Dealer" onAction="#openTransferVehicleWizard" />
+                    <Button fx:id="toggleRentStatusButton" text="Set Rent Status" onAction="#toggleRentStatus" />
+                </HBox>
+            </VBox>
+
+            <Button fx:id="toggleSelectAllVehiclesButton"
+                    text="Select All Vehicles"
+                    onAction="#toggleSelectAllVehicles"
+            />
+
+            <TableView fx:id="vehicleTable" prefHeight="350.0" prefWidth="719.0">
+                <columns>
+                    <TableColumn fx:id="vehicleSelectColumn" prefWidth="40.0" />
+                    <TableColumn fx:id="vehicleDealerIdColumn" prefWidth="120.0" text="Dealer ID" />
+                    <TableColumn fx:id="vehicleIdColumn" prefWidth="101.0" text="ID" />
+                    <TableColumn fx:id="vehicleManufacturerColumn" prefWidth="99.0" text="Manufacturer" />
+                    <TableColumn fx:id="vehicleModelColumn" prefWidth="105.0" text="Model" />
+                    <TableColumn fx:id="vehicleTypeColumn" prefWidth="155.0" text="Type" />
+                    <TableColumn fx:id="vehiclePriceColumn" prefWidth="101.0" text="Price" />
+                    <TableColumn fx:id="acquisitionDateColumn" prefWidth="159.0" text="Acquisition Date" />
+                    <TableColumn fx:id="isRentedOutColumn" prefWidth="159.0" text="RentedOut" />
+                </columns>
+            </TableView>
+
+            <VBox alignment="CENTER_LEFT" spacing="5.0">
+                <Label text="Filter by:" style="-fx-font-weight: bold;" />
+                <HBox alignment="CENTER" spacing="10.0">
+                    <Button fx:id="allVehiclesButton" text="All Vehicles" onAction="#showAllVehicles" />
+                    <Button fx:id="rentedOutFilterButton" text="Rented Out" onAction="#filterByRentedOut" />
+                    <Button fx:id="sportsCarFilterButton" text="Sport Car" onAction="#filterBySportsCar" />
+                    <Button fx:id="suvFilterButton" text="SUV" onAction="#filterBySUV" />
+                    <Button fx:id="truckFilterButton" text="Pickup" onAction="#filterByPickup" />
+                    <Button fx:id="sedanFilterButton" text="Sedan" onAction="#filterBySedan" />
+                </HBox>
+            </VBox>
+
+        </VBox>
+
+    </AnchorPane>
+</AnchorPane>

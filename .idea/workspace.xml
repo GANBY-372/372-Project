@@ -4,6 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
+    <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="" />
+
     <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/PickupTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SedanTest.java" afterDir="false" />
@@ -11,6 +14,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" afterDir="false" />
     </list>
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -50,6 +54,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.FXDriver.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JSONIOTester.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TerminalDriver.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestEnv.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UserDriver.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleTest.testToString.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [validate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Yahya&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/abo_dawood/college/Semester 7 Spring 2025/ICS 372/Phase2_372&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+=======
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
@@ -82,8 +119,9 @@
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "project.propCompiler",
     "vue.rearranger.settings.migration": "true"
+
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/Resources" />
@@ -92,11 +130,19 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.metrostate.ics372.ganby" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="edu.metrostate.ics372.ganby.vehicle" />
       <recent name="edu.metrostate.ics372.ganby.dealer" />
     </key>
   </component>
+
+  <component name="RunManager" selected="Application.FXDriver">
+    <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
+
   <component name="RunManager" selected="JUnit.SUVTest">
     <configuration name="TestEnv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.TestEnv" />
@@ -173,19 +219,26 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FXDriver" />
+        <item itemvalue="JUnit.VehicleTest.testToString" />
+        <item itemvalue="JUnit.VehicleTest" />
+        <item itemvalue="Application.TestEnv" />
+        <item itemvalue="Application.UserDriver" />
+
         <item itemvalue="JUnit.SUVTest" />
         <item itemvalue="JUnit.SedanTest" />
         <item itemvalue="JUnit.PickupTest" />
         <item itemvalue="JUnit.DealerCatalogTest" />
         <item itemvalue="Application.TestEnv" />
+
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -223,6 +276,12 @@
       <workItem from="1742928880931" duration="101000" />
       <workItem from="1742929025149" duration="3000" />
       <workItem from="1742929046658" duration="2229000" />
+      <workItem from="1742944925230" duration="1184000" />
+      <workItem from="1742993466517" duration="6685000" />
+      <workItem from="1743000177172" duration="1366000" />
+      <workItem from="1743010194840" duration="8673000" />
+      <workItem from="1743020784019" duration="24000" />
+
       <workItem from="1742944925230" duration="1385000" />
       <workItem from="1742947304873" duration="1799000" />
       <workItem from="1742957686701" duration="2494000" />
@@ -243,5 +302,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Model to the GUI as well as in the add new vehcicle wizard TODO: Added model being added on import as well as when vehicle is being added manually" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Model to the GUI as well as in the add new vehcicle wizard TODO: Added model being added on import as well as when vehicle is being added manually" />
   </component>
 </project>

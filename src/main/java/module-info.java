@@ -8,8 +8,13 @@ module edu.metrostate.ics372.ganby {
     requires json.simple;
     requires java.desktop;
 
+    opens edu.metrostate.ics372.ganby.vehicle to javafx.base;
     opens edu.metrostate.ics372.ganby to javafx.fxml;
-    opens edu.metrostate.ics372.ganby.dealer to javafx.fxml; // Change to 'opens'
+    opens edu.metrostate.ics372.ganby.dealer to javafx.fxml;
     exports edu.metrostate.ics372.ganby;
-    exports edu.metrostate.ics372.ganby.dealer to javafx.fxml;  // Export the dealer package to javafx.fxml
+    exports edu.metrostate.ics372.ganby.vehicle;
+    exports edu.metrostate.ics372.ganby.dealer;
+    exports edu.metrostate.ics372.ganby.FXAPP;
+    opens edu.metrostate.ics372.ganby.FXAPP to javafx.fxml;
+
 }
