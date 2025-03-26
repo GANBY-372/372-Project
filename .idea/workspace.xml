@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/PickupTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SedanTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/TestEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/TestEnv.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +60,8 @@
     "Application.UserDriver.executor": "Run",
     "JUnit.DealerCatalogTest.executor": "Run",
     "JUnit.DealerTest.executor": "Run",
+    "JUnit.PickupTest.executor": "Run",
+    "JUnit.SedanTest.executor": "Run",
     "JUnit.VehicleTest.executor": "Run",
     "JUnit.VehicleTest.testToString.executor": "Run",
     "Maven.FX_372_Project [test].executor": "Run",
@@ -90,11 +93,11 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="edu.metrostate.ics372.ganby.dealer" />
       <recent name="edu.metrostate.ics372.ganby.vehicle" />
+      <recent name="edu.metrostate.ics372.ganby.dealer" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DealerCatalogTest">
+  <component name="RunManager" selected="JUnit.SUVTest">
     <configuration name="TestEnv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.TestEnv" />
       <module name="FX_372_Project" />
@@ -123,22 +126,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DealerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="FX_372_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.dealer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.dealer" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.dealer.DealerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="VehicleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PickupTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
@@ -147,13 +135,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.VehicleTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.PickupTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VehicleTest.testToString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SUVTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
@@ -162,20 +150,34 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.VehicleTest" />
-      <option name="METHOD_NAME" value="testToString" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.SUVTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SedanTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FX_372_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.metrostate.ics372.ganby.vehicle.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.SedanTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SUVTest" />
+        <item itemvalue="JUnit.SedanTest" />
+        <item itemvalue="JUnit.PickupTest" />
         <item itemvalue="JUnit.DealerCatalogTest" />
         <item itemvalue="Application.TestEnv" />
-        <item itemvalue="JUnit.DealerTest" />
-        <item itemvalue="JUnit.VehicleTest.testToString" />
-        <item itemvalue="JUnit.VehicleTest" />
       </list>
     </recent_temporary>
   </component>
@@ -224,7 +226,7 @@
       <workItem from="1742944925230" duration="1385000" />
       <workItem from="1742947304873" duration="1799000" />
       <workItem from="1742957686701" duration="2494000" />
-      <workItem from="1743007832754" duration="4654000" />
+      <workItem from="1743007832754" duration="6177000" />
     </task>
     <servers />
   </component>

@@ -7,15 +7,6 @@ public class SUV extends Vehicle {
 
     private final String type;
 
-   /*
-    public SUV(String id, String model, String manufacturer, double price, String dealerId, LocalDateTime acquisitionDate,
-        Boolean isRentedOut String type) {
-        super(id,model,manufacturer,price,dealerId,acquisitionDate);
-        this.type = "SUV";
-    }
-
-     */
-
     //In the case rent status is specified
     public SUV(String id, String model, String manufacturer, double price, String dealerId,
                LocalDateTime acquisitionDate,Boolean isRentedOut) {

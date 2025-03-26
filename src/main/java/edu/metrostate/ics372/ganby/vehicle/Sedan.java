@@ -7,15 +7,6 @@ public class Sedan extends Vehicle {
 
     private final String type;
 
-    /*
-    public Sedan(String id, String model, String manufacturer, double price, String dealerId, LocalDateTime acquisitionDate,
-        Boolean isRentedOut String type) {
-        super(id,model,manufacturer,price,dealerId,acquisitionDate);
-        this.type = "Sedan";
-    }
-
-     */
-
     //In the case rent status is specified
     public Sedan(String id, String model, String manufacturer, double price, String dealerId,
                  LocalDateTime acquisitionDate,Boolean isRentedOut) {

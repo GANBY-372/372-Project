@@ -7,16 +7,6 @@ public class Pickup extends Vehicle {
 
     private final String type;
 
-    //This is the case that category is not specified, but I imagine it's never going to be specified.
-     /*
-    public Pickup(String id, String model, String manufacturer, double price, String dealerId, LocalDateTime acquisitionDate,
-        Boolean isRentedOut String type) {
-        super(id,model,manufacturer,price,dealerId,acquisitionDate);
-        this.type = "Pickup";
-    }
-
-     */
-
     //In the case rent status is specified
     public Pickup(String id, String model, String manufacturer, double price, String dealerId,
                   LocalDateTime acquisitionDate,Boolean isRentedOut) {
@@ -45,7 +35,6 @@ public class Pickup extends Vehicle {
         }
         return false;
     }
-
 
     @Override
     public String toString () {
