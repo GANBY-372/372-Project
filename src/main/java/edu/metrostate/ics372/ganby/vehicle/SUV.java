@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Extends the {@link Vehicle} class with SUV-specific identification.
  */
 public class SUV extends Vehicle {
-  private final String type;
+  private final String type = "SUV";
   
    /**
      * Constructs an SUV with all attributes, including rent status.

@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * Represents a sports car, which cannot be rented out.
  */
 public class SportsCar extends Vehicle {
-    final private String type;
+    final private String type = "SPORTSCAR";
 
     /**
      * Constructs a new SportsCar with an explicit rent status, but always forces rent status to false.

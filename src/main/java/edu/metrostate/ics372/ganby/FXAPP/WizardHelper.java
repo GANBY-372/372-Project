@@ -72,7 +72,10 @@ public class WizardHelper {
                 dealerObservableList.add(newDealer);
 
                 wizardStage.close();
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Dealer added successfully!");
+
+                // Show success message with details
+                String msg = "Dealer '%s' (ID: %s) was successfully added.".formatted(dealerName, dealerId);
+                showAlert(Alert.AlertType.INFORMATION, "Success", msg);
             } catch (Exception e) {
                 showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
             }
@@ -141,6 +144,12 @@ public class WizardHelper {
      * @param selectedDealer        the dealer to add the vehicle to
      * @param vehicleObservableList the observable list to update the vehicle table
      */
+    /**
+     * Opens a modal wizard to add a new vehicle to the selected dealer.
+     *
+     * @param selectedDealer the dealer to add the vehicle to
+     * @param vehicleObservableList the observable list to refresh the vehicle table
+     */
     public static void openAddVehicleWizard(Dealer selectedDealer, ObservableList<Vehicle> vehicleObservableList) {
         if (selectedDealer == null) {
             showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
@@ -151,12 +160,12 @@ public class WizardHelper {
         wizardStage.initModality(Modality.APPLICATION_MODAL);
         wizardStage.setTitle("Add New Vehicle Wizard");
 
-        // Form fields
+        // Create form labels and input fields
         Label idLabel = new Label("Vehicle ID:");
         TextField idField = new TextField();
 
-        Label makeLabel = new Label("Make:");
-        TextField makeField = new TextField();
+        Label manufacturerLabel = new Label("Manufacturer:");
+        TextField manufacturerField = new TextField();
 
         Label modelLabel = new Label("Model:");
         TextField modelField = new TextField();
@@ -165,7 +174,8 @@ public class WizardHelper {
         TextField priceField = new TextField();
 
         Label categoryLabel = new Label("Category:");
-        ComboBox<String> categoryComboBox = new ComboBox<>(FXCollections.observableArrayList("SUV", "Sedan", "Pickup", "SportsCar"));
+        ComboBox<String> categoryComboBox = new ComboBox<>(
+                FXCollections.observableArrayList("SUV", "Sedan", "Pickup", "SportsCar"));
 
         Label acquisitionDateLabel = new Label("Acquisition Date:");
         DatePicker acquisitionDatePicker = new DatePicker();
@@ -176,12 +186,12 @@ public class WizardHelper {
         Button saveButton = new Button("Save");
         Button cancelButton = new Button("Cancel");
 
-        // Layout
+        // Layout setup
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
         gridPane.setHgap(10);
         gridPane.addRow(0, idLabel, idField);
-        gridPane.addRow(1, makeLabel, makeField);
+        gridPane.addRow(1, manufacturerLabel, manufacturerField);
         gridPane.addRow(2, modelLabel, modelField);
         gridPane.addRow(3, priceLabel, priceField);
         gridPane.addRow(4, categoryLabel, categoryComboBox);
@@ -192,14 +202,14 @@ public class WizardHelper {
         VBox layout = new VBox(10, gridPane, buttonBox);
         layout.setPadding(new Insets(10));
 
-        Scene scene = new Scene(layout, 400, 300);
+        Scene scene = new Scene(layout, 400, 350);
         wizardStage.setScene(scene);
 
         // Save action
         saveButton.setOnAction(event -> {
             try {
                 String id = idField.getText().trim();
-                String make = makeField.getText().trim();
+                String manufacturer = manufacturerField.getText().trim();
                 String model = modelField.getText().trim();
                 String category = categoryComboBox.getValue();
                 String priceText = priceField.getText().trim();
@@ -208,37 +218,44 @@ public class WizardHelper {
                         : null;
                 boolean isRentable = rentableCheckBox.isSelected();
 
-                if (id.isEmpty() || make.isEmpty() || category == null || acquisitionDate == null) {
+                // Validate input
+                if (id.isEmpty() || manufacturer.isEmpty() || model.isEmpty() || category == null || acquisitionDate == null) {
                     throw new IllegalArgumentException("All fields must be filled.");
                 }
 
                 double price;
                 try {
                     price = Double.parseDouble(priceText);
+                    if (price < 0) throw new NumberFormatException();
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Price must be a valid number.");
+                    throw new IllegalArgumentException("Price must be a valid non-negative number.");
                 }
 
-                // Instantiate vehicle based on category
+                // Instantiate the appropriate vehicle type
                 Vehicle newVehicle = switch (category) {
-                    case "SUV" -> new SUV(id, category, make, price, selectedDealer.getId(), acquisitionDate);
-                    case "Sedan" -> new Sedan(id, category, make, price, selectedDealer.getId(), acquisitionDate);
-                    case "Pickup" -> new Pickup(id, category, make, price, selectedDealer.getId(), acquisitionDate);
-                    case "SportsCar" -> new SportsCar(id, category, make, price, selectedDealer.getId(), acquisitionDate);
+                    case "SUV" -> new SUV(id, model, manufacturer, price, selectedDealer.getId(), acquisitionDate);
+                    case "Sedan" -> new Sedan(id, model, manufacturer, price, selectedDealer.getId(), acquisitionDate);
+                    case "Pickup" -> new Pickup(id, model, manufacturer, price, selectedDealer.getId(), acquisitionDate);
+                    case "SportsCar" -> new SportsCar(id, model, manufacturer, price, selectedDealer.getId(), acquisitionDate);
                     default -> throw new IllegalArgumentException("Invalid vehicle type selected.");
                 };
 
                 newVehicle.setRentedOut(isRentable);
 
-                // Add to catalog
+                // Add vehicle to catalog
                 Dealer dealer = DealerCatalog.getInstance().getDealerWithId(selectedDealer.getId());
                 dealer.addVehicle(newVehicle);
 
                 // Refresh UI list
                 vehicleObservableList.setAll(dealer.getVehicleCatalog().values());
 
+                // Show success alert with vehicle details
+                String msg = "%s %s (%s) was added to Dealer #%s".formatted(
+                        manufacturer, model, category, selectedDealer.getId()
+                );
+                showAlert(Alert.AlertType.INFORMATION, "Success", msg);
+
                 wizardStage.close();
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Vehicle successfully added!");
 
             } catch (Exception e) {
                 showAlert(Alert.AlertType.ERROR, "Error Adding Vehicle", e.getMessage());

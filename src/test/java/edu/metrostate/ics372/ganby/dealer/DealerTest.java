@@ -24,12 +24,12 @@ class DealerTest {
 
     @Test
     void getDealerId() {
-        assertEquals("123", dealer.getDealerId());
+        assertEquals("123", dealer.getId());
     }
 
     @Test
     void getDealerName() {
-        assertEquals("Test Dealer", dealer.getDealerName());
+        assertEquals("Test Dealer", dealer.getName());
     }
 
     @Test

@@ -4,307 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
-    <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="" />
-
-    <list default="true" id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/PickupTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SedanTest.java" afterDir="false" />
+    <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/WizardHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/WizardHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/TestEnv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/TestEnv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SUV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SUV.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SportsCar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SportsCar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" afterDir="false" />
     </list>
-
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JUnit5 Test Class" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;AbuDawood2&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/GANBY-372/372-Project.git&quot;,
-    &quot;accountId&quot;: &quot;12bc500f-7981-483b-bb37-7f71103fc8ba&quot;
-  }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="2seIy5wEqBvtYG8CxtvgL2sqSs9" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.FXDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.JSONIOTester.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TerminalDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TestEnv.executor&quot;: &quot;Run&quot;,
-    &quot;Application.UserDriver.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.VehicleTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.VehicleTest.testToString.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [test].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [validate].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Yahya&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/abo_dawood/college/Semester 7 Spring 2025/ICS 372/Phase2_372&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-=======
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "Application.JSONIOTester.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.TerminalDriver.executor": "Run",
+    "Application.FXDriver.executor": "Run",
     "Application.TestEnv.executor": "Run",
-    "Application.UserDriver.executor": "Run",
-    "JUnit.DealerCatalogTest.executor": "Run",
-    "JUnit.DealerTest.executor": "Run",
-    "JUnit.PickupTest.executor": "Run",
-    "JUnit.SedanTest.executor": "Run",
-    "JUnit.VehicleTest.executor": "Run",
-    "JUnit.VehicleTest.testToString.executor": "Run",
     "Maven.FX_372_Project [test].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/ggmacair2023/Desktop/372-02/GanbyRepo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propCompiler",
-    "vue.rearranger.settings.migration": "true"
-
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/Resources" />
-      <recent name="$PROJECT_DIR$/src/main/Resources/Views" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="edu.metrostate.ics372.ganby" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="edu.metrostate.ics372.ganby.vehicle" />
-      <recent name="edu.metrostate.ics372.ganby.dealer" />
-    </key>
-  </component>
-
-  <component name="RunManager" selected="Application.FXDriver">
-    <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
-
-  <component name="RunManager" selected="JUnit.SUVTest">
-    <configuration name="TestEnv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.TestEnv" />
-      <module name="FX_372_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DealerCatalogTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="FX_372_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.dealer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.dealer" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.dealer.DealerCatalogTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PickupTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="FX_372_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.vehicle.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.PickupTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SUVTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="FX_372_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.vehicle.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.SUVTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SedanTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="FX_372_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.vehicle.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.SedanTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.FXDriver" />
-        <item itemvalue="JUnit.VehicleTest.testToString" />
-        <item itemvalue="JUnit.VehicleTest" />
-        <item itemvalue="Application.TestEnv" />
-        <item itemvalue="Application.UserDriver" />
-
-        <item itemvalue="JUnit.SUVTest" />
-        <item itemvalue="JUnit.SedanTest" />
-        <item itemvalue="JUnit.PickupTest" />
-        <item itemvalue="JUnit.DealerCatalogTest" />
-        <item itemvalue="Application.TestEnv" />
-
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
-      </set>
-    </attachedChunks>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+}]]></component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="065ece77-bad7-47a4-be5e-e24ecf3d919e" name="Changes" comment="" />
-      <created>1738809864678</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1738809864678</updated>
-      <workItem from="1738809865724" duration="632000" />
-      <workItem from="1739048370553" duration="1195000" />
-      <workItem from="1739051328651" duration="5228000" />
-      <workItem from="1739064273927" duration="899000" />
-      <workItem from="1739215416140" duration="2258000" />
-      <workItem from="1739242064989" duration="21603000" />
-      <workItem from="1739286309628" duration="227000" />
-      <workItem from="1739286604941" duration="671000" />
-      <workItem from="1739287284415" duration="16271000" />
-      <workItem from="1739319584875" duration="4944000" />
-      <workItem from="1739379883429" duration="2525000" />
-      <workItem from="1740020884671" duration="390000" />
-      <workItem from="1741235376856" duration="7148000" />
-      <workItem from="1741277502384" duration="1510000" />
-      <workItem from="1742414403178" duration="3346000" />
-      <workItem from="1742595798720" duration="2460000" />
-      <workItem from="1742614981191" duration="1280000" />
-      <workItem from="1742658533593" duration="3082000" />
-      <workItem from="1742834559155" duration="282000" />
-      <workItem from="1742857105836" duration="790000" />
-      <workItem from="1742870395699" duration="324000" />
-      <workItem from="1742870726514" duration="304000" />
-      <workItem from="1742928513080" duration="362000" />
-      <workItem from="1742928880931" duration="101000" />
-      <workItem from="1742929025149" duration="3000" />
-      <workItem from="1742929046658" duration="2229000" />
-      <workItem from="1742944925230" duration="1184000" />
-      <workItem from="1742993466517" duration="6685000" />
-      <workItem from="1743000177172" duration="1366000" />
-      <workItem from="1743010194840" duration="8673000" />
-      <workItem from="1743020784019" duration="24000" />
-
-      <workItem from="1742944925230" duration="1385000" />
-      <workItem from="1742947304873" duration="1799000" />
-      <workItem from="1742957686701" duration="2494000" />
-      <workItem from="1743007832754" duration="6177000" />
-    </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added Model to the GUI as well as in the add new vehcicle wizard TODO: Added model being added on import as well as when vehicle is being added manually" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Model to the GUI as well as in the add new vehcicle wizard TODO: Added model being added on import as well as when vehicle is being added manually" />
   </component>
 </project>

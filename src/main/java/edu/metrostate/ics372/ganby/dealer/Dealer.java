@@ -174,7 +174,7 @@ public class Dealer {
 
     @Override
     public String toString() {
-        return String.format("| %-10s | %-20s |", getId(), getIsVehicleAcquisitionEnabled() ? "Yes" : "No");
+        return name.get();
     }
 
     public ArrayList<Vehicle> getRentedOutVehicles() {

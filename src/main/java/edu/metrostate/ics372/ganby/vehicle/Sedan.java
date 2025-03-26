@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Sedans can be rented out and are treated as regular vehicles in the system.
  */
 public class Sedan extends Vehicle {
-    private final String type;
+    private final String type = "SEDAN";
 
     /**
      * Constructs a Sedan with the specified parameters and explicit rent status.

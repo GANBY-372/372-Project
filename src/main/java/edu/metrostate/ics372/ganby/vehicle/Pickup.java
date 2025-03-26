@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * Inherits all standard behavior from the {@link Vehicle} superclass.
  */
 public class Pickup extends Vehicle {
-    private final String type;
+    private final String type = "PICKUP";
   
     /**
      * Constructs a Pickup with all attributes, including rent status.

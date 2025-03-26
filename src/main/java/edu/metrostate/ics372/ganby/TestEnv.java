@@ -69,8 +69,8 @@ public class TestEnv {
         d002.addVehicle(v004);
 
         // Add Dealers to DealerCatalog
-        dealerCatalog.getDealerCatalog().put(d001.getDealerId(), d001);
-        dealerCatalog.getDealerCatalog().put(d002.getDealerId(), d002);
+        dealerCatalog.getDealerCatalog().put(d001.getId(), d001);
+        dealerCatalog.getDealerCatalog().put(d002.getId(), d002);
 
         // Print DealerCatalog HashMap
         System.out.println("Current DealerCatalog:");
@@ -81,6 +81,7 @@ public class TestEnv {
         dealerCatalog.modifyVehiclePrice("V001", 20000.00);
         System.out.println("Updated Vehicle Price: " + v001.getPrice());
 
+        /*
         // Print all vehicles sorted by price
         dealerCatalog.printAllVehiclesByPrice();
 
@@ -99,4 +100,13 @@ public class TestEnv {
         // Print all vehicles of a dealer
         dealerCatalog.printAllVehiclesOfDealer("001");
     }
+    */
+
+    }
 }
+
+
+
+
+
+
