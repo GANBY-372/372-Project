@@ -234,4 +234,8 @@ public class DealerCatalog {
 
         this.getDealerCatalog().get(newDealerId).addVehicles(vehiclesToTransfer);
     }
+
+    public void clear() {
+        dealerCatalog.clear();
+    }
 }

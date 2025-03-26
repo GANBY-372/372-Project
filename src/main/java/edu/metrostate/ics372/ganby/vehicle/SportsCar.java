@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
  * Represents a sports car, which cannot be rented out.
  */
 public class SportsCar extends Vehicle {
+    final private String type;
 
     /**
      * Constructs a new SportsCar with an explicit rent status, but always forces rent status to false.
@@ -18,6 +19,7 @@ public class SportsCar extends Vehicle {
      * @param acquisitionDate  the date the vehicle was acquired
      * @param isRentedOut      ignored - SportsCar is never rented
      */
+    //In the case rent status is specified
     public SportsCar(String id, String model, String manufacturer, double price, String dealerId,
                      LocalDateTime acquisitionDate, Boolean isRentedOut) {
         super(id, model, manufacturer, price, dealerId, acquisitionDate, false);

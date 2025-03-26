@@ -7,8 +7,9 @@ import java.time.LocalDateTime;
  * Extends the {@link Vehicle} class with SUV-specific identification.
  */
 public class SUV extends Vehicle {
-
-    /**
+  private final String type;
+  
+   /**
      * Constructs an SUV with all attributes, including rent status.
      *
      * @param id              the unique vehicle ID
@@ -19,6 +20,7 @@ public class SUV extends Vehicle {
      * @param acquisitionDate the date the vehicle was acquired
      * @param isRentedOut     whether the vehicle is currently rented
      */
+    //In the case rent status is specified
     public SUV(String id, String model, String manufacturer, double price, String dealerId,
                LocalDateTime acquisitionDate, Boolean isRentedOut) {
         super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut);

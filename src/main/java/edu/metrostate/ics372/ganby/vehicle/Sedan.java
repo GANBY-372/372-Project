@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
  * Sedans can be rented out and are treated as regular vehicles in the system.
  */
 public class Sedan extends Vehicle {
+    private final String type;
 
     /**
      * Constructs a Sedan with the specified parameters and explicit rent status.
@@ -19,6 +20,7 @@ public class Sedan extends Vehicle {
      * @param acquisitionDate the date the vehicle was acquired
      * @param isRentedOut     whether the vehicle is currently rented out
      */
+    //In the case rent status is specified
     public Sedan(String id, String model, String manufacturer, double price, String dealerId,
                  LocalDateTime acquisitionDate, Boolean isRentedOut) {
         super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut);

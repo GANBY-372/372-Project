@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
  * Inherits all standard behavior from the {@link Vehicle} superclass.
  */
 public class Pickup extends Vehicle {
-
+    private final String type;
+  
     /**
      * Constructs a Pickup with all attributes, including rent status.
      *
@@ -19,6 +20,7 @@ public class Pickup extends Vehicle {
      * @param acquisitionDate the date the vehicle was acquired
      * @param isRentedOut     whether the vehicle is currently rented
      */
+    //In the case rent status is specified
     public Pickup(String id, String model, String manufacturer, double price, String dealerId,
                   LocalDateTime acquisitionDate, Boolean isRentedOut) {
         super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut);
@@ -65,6 +67,7 @@ public class Pickup extends Vehicle {
         }
         return false;
     }
+
 
     /**
      * Returns a string representation of this Pickup.
