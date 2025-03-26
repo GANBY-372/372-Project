@@ -7,6 +7,7 @@ import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import edu.metrostate.ics372.ganby.wizard.AddVehicleWizard;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -94,9 +95,8 @@ public class DealerController {
         dealerIdColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
         dealerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         isBuyingColumn.setCellValueFactory(cellData -> cellData.getValue().isAcquisitionEnabledProperty());
-        dealerInventoryColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(
-                cellData.getValue().getVehicleCatalog().size()
-        ));
+        dealerInventoryColumn.setCellValueFactory(cellData ->
+                new SimpleObjectProperty<>(cellData.getValue().getVehicleCatalog().size()));
 
         // Vehicle table bindings
         vehicleDealerIdColumn.setCellValueFactory(new PropertyValueFactory<>("dealerId"));
@@ -110,31 +110,40 @@ public class DealerController {
         // Load dealers into table
         loadData();
 
-        // Listen for selection change in dealer table
-        dealerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
-                if (allDealersSelected) {
-                    // Skip overriding selection when all are selected
-                    return;
-                }
-                allDealersSelected = false;
-                selectAllDealersButton.setText("Select All Dealers");
+        dealerTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<>() {
+            @Override
+            public void onChanged(Change<? extends Dealer> change) {
+                if (allDealersSelected &&
+                        dealerTable.getSelectionModel().getSelectedItems().size() < dealerObservableList.size()) {
 
+                    allDealersSelected = false;
+                    selectAllDealersButton.setText("Select All Dealers");
+
+                    addVehicleButton.setDisable(false);
+                    dealerIdTextField.clear();
+                    dealerNameTextField.clear();
+                }
+            }
+        });
+
+        // 🟦 Listen for dealer selection (for showing details + vehicles)
+        dealerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null && !allDealersSelected) {
                 updateDealerDetailPane(newVal);
                 populateVehicleList(newVal);
                 addVehicleButton.setDisable(false);
             }
         });
 
-
-
-        // Enable right-click delete only for dealers without vehicles
+        // ⚠️ Enable right-click delete only for dealers without vehicles
         TableRightClickDelete.enableRightClickDelete(
                 dealerTable,
                 dealerObservableList,
                 dealer -> dealer.getVehicleCatalog().isEmpty()
         );
     }
+
+
 
 
 
@@ -422,10 +431,11 @@ public class DealerController {
      */
 
     @FXML
-    public void toggleDealerSelection(ActionEvent event) {
+    private void toggleDealerSelection(ActionEvent event) {
         TableView.TableViewSelectionModel<Dealer> selectionModel = dealerTable.getSelectionModel();
 
         if (!allDealersSelected) {
+            // Selecting all dealers
             allDealersSelected = true;
             selectionModel.setSelectionMode(SelectionMode.MULTIPLE);
             selectionModel.clearSelection();
@@ -438,8 +448,9 @@ public class DealerController {
             vehicleTable.setItems(vehicleObservableList);
 
             addVehicleButton.setDisable(true);
-            selectAllDealersButton.setText("Unselect All Dealers");
+            selectAllDealersButton.setText("Unselect All Dealers"); // ✅ SET TO UNSELECT
         } else {
+            // Unselect all dealers
             allDealersSelected = false;
             selectionModel.clearSelection();
 
@@ -450,9 +461,10 @@ public class DealerController {
             vehicleTable.setItems(vehicleObservableList);
 
             addVehicleButton.setDisable(false);
-            selectAllDealersButton.setText("Select All Dealers");
+            selectAllDealersButton.setText("Select All Dealers"); // ✅ RESET TO SELECT
         }
     }
+
 
 
 
