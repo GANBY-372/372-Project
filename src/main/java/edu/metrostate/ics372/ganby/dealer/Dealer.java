@@ -26,7 +26,7 @@ public class Dealer {
      */
     public Dealer(String id) {
         this.id = new SimpleStringProperty(id);
-        this.name = new SimpleStringProperty("");
+        this.name = new SimpleStringProperty("Dealer id#" +id);
         this.isBuying = new SimpleBooleanProperty(true);
         this.vehicleCatalog = new HashMap<>();
     }

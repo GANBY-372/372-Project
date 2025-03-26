@@ -42,6 +42,11 @@ public class DealerController {
     @FXML public HBox radioButtonBox;
     @FXML public RadioButton isBuyingRadioButton;
     public Label isBuyingLabel;
+    public Button transferVehicleButton;
+    public Button toggleRentStatusButton;
+    public Button modifyPriceButton;
+    public Button deleteVehicleButton;
+    public Button allVehiclesButton;
 
     @FXML private TextField dealerIdTextField;
     @FXML private TextField dealerNameTextField;
@@ -541,8 +546,12 @@ public class DealerController {
     }
 
 
+    public void deleteSelectedVehicle(ActionEvent actionEvent) {
+    }
 
+    public void modifyVehiclePrice(ActionEvent actionEvent) {
+    }
 
-
-
+    public void toggleRentStatus(ActionEvent actionEvent) {
+    }
 }
