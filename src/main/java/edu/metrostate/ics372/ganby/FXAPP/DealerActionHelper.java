@@ -67,6 +67,23 @@ public class DealerActionHelper {
      */
     public static void renameDealer(TableView<Dealer> dealerTable, TextField dealerNameField) {
         Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+        List<Dealer> selectedDealers = dealerTable.getItems().stream()
+                .filter(Dealer::isSelected)
+                .toList();
+
+        if (selectedDealers.isEmpty()) {
+            showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
+            return;
+        }
+
+        for (Dealer dealer : selectedDealers) {
+            boolean current = dealer.getIsVehicleAcquisitionEnabled();
+            if (current) {
+                DealerCatalog.getInstance().disableDealerAcquisition(dealer.getId());
+            } else {
+                DealerCatalog.getInstance().enableDealerAcquisition(dealer.getId());
+            }
+        }
 
         if (selectedDealer == null) {
             showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
@@ -94,30 +111,27 @@ public class DealerActionHelper {
      * Enables or disables acquisition for the selected dealer.
      *
      * @param dealerTable TableView of dealers
-     * @param toggleButton Button to update text after toggle
-     * @param dealerIdField TextField to show dealer ID
-     * @param dealerNameField TextField to show dealer name
      */
-    public static void toggleAcquisitionStatus(TableView<Dealer> dealerTable,
-                                               Button toggleButton,
-                                               TextField dealerIdField,
-                                               TextField dealerNameField) {
-        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
-        if (selectedDealer != null) {
-            boolean current = selectedDealer.getIsVehicleAcquisitionEnabled();
-            if (current) {
-                DealerCatalog.getInstance().disableDealerAcquisition(selectedDealer.getId());
-            } else {
-                DealerCatalog.getInstance().enableDealerAcquisition(selectedDealer.getId());
-            }
+    public static void toggleAcquisitionStatus(TableView<Dealer> dealerTable) {
+        List<Dealer> selectedDealers = dealerTable.getItems().stream()
+                .filter(Dealer::isSelected)
+                .toList();
 
-            toggleButton.setText(current ? "Enable Acquisition" : "Disable Acquisition");
-            dealerIdField.setText(selectedDealer.getId());
-            dealerNameField.setText(selectedDealer.getName());
-            dealerTable.refresh();
-        } else {
-            showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to toggle acquisition status.");
+        if (selectedDealers.isEmpty()) {
+            showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
+            return;
         }
+
+        for (Dealer dealer : selectedDealers) {
+            boolean current = dealer.getIsVehicleAcquisitionEnabled();
+            if (current) {
+                DealerCatalog.getInstance().disableDealerAcquisition(dealer.getId());
+            } else {
+                DealerCatalog.getInstance().enableDealerAcquisition(dealer.getId());
+            }
+        }
+
+        dealerTable.refresh();
     }
 
     /**
