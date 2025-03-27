@@ -77,31 +77,10 @@ public class TestEnv {
         System.out.println(dealerCatalog.getDealerCatalog());
 
         // Modify Vehicle Price
+        System.out.println("Updated Vehicle Price: " + v001.getPrice());
         System.out.println("Modifying vehicle price for V001...");
         dealerCatalog.modifyVehiclePrice("V001", 20000.00);
         System.out.println("Updated Vehicle Price: " + v001.getPrice());
-
-        /*
-        // Print all vehicles sorted by price
-        dealerCatalog.printAllVehiclesByPrice();
-
-        // Print all vehicles in a price range
-        dealerCatalog.printVehiclesByPriceRange(18000.00, 30000.00);
-
-        // Print dealers by inventory range
-        dealerCatalog.printDealersByInventoryRange(1, 3);
-
-        // Print all dealers
-        dealerCatalog.printAllDealers();
-
-        // Print all vehicles by dealer ID
-        dealerCatalog.printAllVehiclesByDealerId();
-
-        // Print all vehicles of a dealer
-        dealerCatalog.printAllVehiclesOfDealer("001");
-    }
-    */
-
     }
 }
 

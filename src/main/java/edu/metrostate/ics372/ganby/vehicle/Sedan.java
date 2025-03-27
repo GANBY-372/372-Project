@@ -62,8 +62,8 @@ public class Sedan extends Vehicle {
     public boolean equals(Object object) {
         if (object == this) return true;
         if (object == null) return false;
-        if (object instanceof SUV suv) {
-            return this.id.get().equals(suv.getVehicleId());
+        if (object instanceof Sedan sedan) {
+            return this.id.get().equals(sedan.getVehicleId());
         }
         return false;
     }

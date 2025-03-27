@@ -1,15 +1,10 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class SedanTest {
+public class SedanTest {
 
     @Test
     void getType() {
@@ -32,7 +27,7 @@ class SedanTest {
     void testToString() {
         LocalDateTime now = LocalDateTime.now();
         Sedan sedan = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", now);
-        String expectedString = "Sedan " + sedan.toString().substring(6); // Skipping "Sedan " to match dynamic part
+        String expectedString = "Sedan " + sedan.toString().substring(6); // Ensuring consistent output
 
         assertEquals(expectedString, sedan.toString(), "toString() should return correct formatted string");
     }
