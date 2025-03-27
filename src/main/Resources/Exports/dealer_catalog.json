@@ -1,67 +1,85 @@
 {
   "car_inventory": [
     {
-      "price": 27500.0,
-      "vehicle_model": "CR-V",
-      "vehicle_type": "SUV",
-      "dealership_id": "123",
-      "vehicle_manufacturer": "Honda",
-      "vehicle_id": "67291",
-      "acquisition_date": 1615354694451
-    },
-    {
-      "price": 45320.0,
-      "vehicle_model": "3 Series",
-      "vehicle_type": "Sedan",
-      "dealership_id": "123",
-      "vehicle_manufacturer": "BMW",
-      "vehicle_id": "99234",
-      "acquisition_date": 1615354694451
-    },
-    {
-      "price": 1.2324565E7,
-      "vehicle_model": "Sedan",
-      "vehicle_type": "Sedan",
-      "dealership_id": "12513",
-      "vehicle_manufacturer": "32456",
-      "vehicle_id": "3245",
-      "acquisition_date": 1741669200000
-    },
-    {
       "price": 17000.0,
       "vehicle_model": "Range Rover",
       "vehicle_type": "SUV",
-      "dealership_id": "485",
+      "dealership_id": "12513",
       "vehicle_manufacturer": "Land Rover",
       "vehicle_id": "848432",
-      "acquisition_date": 1743015056217
+      "acquisition_date": 1743037416735
+    },
+    {
+      "price": 70444.0,
+      "vehicle_model": "Silverado",
+      "vehicle_type": "Pickup",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Chevy",
+      "vehicle_id": "89343883",
+      "acquisition_date": 1515354694451
     },
     {
       "price": 36600.0,
       "vehicle_model": "G70",
       "vehicle_type": "Sedan",
-      "dealership_id": "485",
+      "dealership_id": "12513",
       "vehicle_manufacturer": "Genesis",
       "vehicle_id": "151e5dde",
-      "acquisition_date": 1743015056217
+      "acquisition_date": 1743037416736
     },
     {
       "price": 22330.0,
       "vehicle_model": "Miata",
       "vehicle_type": "SportsCar",
-      "dealership_id": "485",
+      "dealership_id": "12513",
       "vehicle_manufacturer": "Mazda",
       "vehicle_id": "ern222",
-      "acquisition_date": 1743015056217
+      "acquisition_date": 1743037416736
+    },
+    {
+      "price": 50444.0,
+      "vehicle_model": "Model 3",
+      "vehicle_type": "Sedan",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Tesla",
+      "vehicle_id": "83883",
+      "acquisition_date": 1515354694451
+    },
+    {
+      "price": 49889.0,
+      "vehicle_model": "Supra",
+      "vehicle_type": "SportsCar",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Toyota",
+      "vehicle_id": "229393",
+      "acquisition_date": 1515354694451
     },
     {
       "price": 22600.0,
       "vehicle_model": "Tundra",
       "vehicle_type": "Pickup",
-      "dealership_id": "485",
+      "dealership_id": "12513",
       "vehicle_manufacturer": "Toyota",
       "vehicle_id": "52523",
-      "acquisition_date": 1743015056217
+      "acquisition_date": 1743037416736
+    },
+    {
+      "price": 20123.0,
+      "vehicle_model": "Explorer",
+      "vehicle_type": "SUV",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Ford",
+      "vehicle_id": "48934j",
+      "acquisition_date": 1515354694451
+    },
+    {
+      "price": 49889.0,
+      "vehicle_model": "Supra",
+      "vehicle_type": "SportsCar",
+      "dealership_id": "77338",
+      "vehicle_manufacturer": "Toyota",
+      "vehicle_id": "229393",
+      "acquisition_date": 1515354694451
     }
   ]
 }

@@ -1,13 +1,5 @@
 {
   "car_inventory": [
-    {
-      "price": 124536.0,
-      "vehicle_model": "1324536y4",
-      "vehicle_type": "SUV",
-      "dealership_id": "142536",
-      "vehicle_manufacturer": "132453",
-      "vehicle_id": "2132453",
-      "acquisition_date": 1740463200000
-    }
+    
   ]
 }

@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -57,15 +58,14 @@ public class FXController {
     @FXML public Button selectAllDealersButton;
     @FXML public Button toggleAcquisitionButton;
     @FXML public Button allVehiclesButton;
-    @FXML public Button exportJSONWizardButton;
-    @FXML public Button importJSONWizardButton;
-    @FXML public Button importXMLWizardButton;
     @FXML public Button rentedOutFilterButton;
     @FXML public Button sportsCarFilterButton;
     @FXML public Button sedanFilterButton;
     @FXML public Button suvFilterButton;
     @FXML public Button truckFilterButton;
     @FXML public TableColumn<Vehicle, String> vehicleModelColumn;
+    @FXML public TableColumn<Dealer, Boolean> dealerSelectColumn;
+
 
 
     // --- Data Sources ---
@@ -74,9 +74,11 @@ public class FXController {
     public Button importJsonButton;
     public Button importXmlButton;
     public Button exportDataButton;
+    public Button editDealerNameButton;
 
     private boolean allDealersSelected = false;
     private boolean suppressSelectionListener = false;
+
 
     /**
      * Initializes the controller. Sets up bindings and listeners.
@@ -84,15 +86,25 @@ public class FXController {
     @FXML
     public void initialize() {
         dealerTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        vehicleTable.setEditable(true); // Enable editing for checkboxes
+        dealerSelectColumn.setEditable(true);
+        dealerTable.setEditable(true);
 
-        // Bind dealer table columns
+        selectAllDealersButton.setOnAction(this::toggleSelectAllDealers);
+
+
+
+        // Dealer table bindings
+        dealerSelectColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
+        dealerSelectColumn.setCellFactory(CheckBoxTableCell.forTableColumn(dealerSelectColumn));
         dealerIdColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
         dealerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         isBuyingColumn.setCellValueFactory(cellData -> cellData.getValue().isAcquisitionEnabledProperty());
         dealerInventoryColumn.setCellValueFactory(cellData ->
                 new SimpleObjectProperty<>(cellData.getValue().getVehicleCatalog().size()));
 
-        // Bind vehicle table columns
+
+        // Vehicle table bindings
         vehicleDealerIdColumn.setCellValueFactory(new PropertyValueFactory<>("dealerId"));
         vehicleIdColumn.setCellValueFactory(new PropertyValueFactory<>("vehicleId"));
         vehicleManufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
@@ -102,9 +114,26 @@ public class FXController {
         acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
         isRentedOutColumn.setCellValueFactory(new PropertyValueFactory<>("isRentedOut"));
 
+        // ✅ Checkbox column setup for vehicle selection
+        vehicleSelectColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
+        vehicleSelectColumn.setCellFactory(CheckBoxTableCell.forTableColumn(vehicleSelectColumn));
+        vehicleSelectColumn.setEditable(true);
+
+        vehicleTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        vehicleTable.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Vehicle>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Vehicle v : change.getAddedSubList()) {
+                        v.setSelected(true);
+                    }
+                }
+            }
+        });
+
         loadData();
 
-        // Listener: dealer selection change
+        // Dealer selection listener
         dealerTable.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Dealer>) change -> {
             if (suppressSelectionListener) return;
             if (allDealersSelected &&
@@ -117,31 +146,33 @@ public class FXController {
             }
         });
 
-        // Listener: display dealer's vehicles on click
+        // Update dealer details on selection
         dealerTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null && !allDealersSelected) {
+                newVal.setSelected(true);
                 updateDealerDetailPane(newVal);
                 populateVehicleList(newVal);
                 addVehicleButton.setDisable(false);
             }
         });
 
-        // Listener: change rent status button label
+        // Update rent status button label
         vehicleTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
-                toggleRentStatusButton.setText(newVal.getIsRentedOut() ? "Set as Available" : "Set as Rented");
+                toggleRentStatusButton.setText( "Change Rent Status");
             } else {
                 toggleRentStatusButton.setText("Set Rent Status");
             }
         });
 
-        // Enable right-click delete for dealers with no vehicles
+        // Right-click delete for empty dealers
         TableRightClickDelete.enableRightClickDelete(
                 dealerTable,
                 dealerObservableList,
                 dealer -> dealer.getVehicleCatalog().isEmpty()
         );
     }
+
 
     /**
      * Populates dealer table from DealerCatalog.
@@ -166,6 +197,7 @@ public class FXController {
      * @param dealer the selected dealer
      */
     private void populateVehicleList(Dealer dealer) {
+        vehicleObservableList.clear(); // <--- Ensure clean slate
         vehicleObservableList.setAll(dealer.getVehicleCatalog().values());
         vehicleTable.setItems(vehicleObservableList);
     }
@@ -270,60 +302,25 @@ public class FXController {
      * @param event the ActionEvent triggered by the toggle button
      */
     @FXML
-    private void toggleDealerSelection(ActionEvent event) {
-        TableView.TableViewSelectionModel<Dealer> selectionModel = dealerTable.getSelectionModel();
-
-        if (!allDealersSelected) {
-            // Select all dealers
-            suppressSelectionListener = true;
-            allDealersSelected = true;
-            selectionModel.clearSelection();
-            selectionModel.selectAll();
-            suppressSelectionListener = false;
-
-            dealerIdTextField.setText("ALL");
-            dealerNameTextField.setText("All Dealers Selected");
-
-            vehicleObservableList.setAll(DealerCatalog.getInstance().getAllVehicles());
-            vehicleTable.setItems(vehicleObservableList);
-
-            addVehicleButton.setDisable(true);
-            selectAllDealersButton.setText("Unselect All Dealers");
-        } else {
-            // Unselect all
-            allDealersSelected = false;
-            suppressSelectionListener = true;
-            selectionModel.clearSelection();
-            suppressSelectionListener = false;
-
-            dealerIdTextField.clear();
-            dealerNameTextField.clear();
-
-            vehicleObservableList.clear();
-            vehicleTable.setItems(vehicleObservableList);
-
-            addVehicleButton.setDisable(false);
-            selectAllDealersButton.setText("Select All Dealers");
-        }
+    public void toggleSelectAllDealers(ActionEvent event) {
+        DealerActionHelper.toggleSelectAllDealers(
+                dealerTable,
+                vehicleTable,
+                dealerObservableList,
+                vehicleObservableList,
+                dealerIdTextField,
+                dealerNameTextField,
+                selectAllDealersButton,
+                addVehicleButton
+        );
     }
-
     /**
      * Enables or disables acquisition for selected dealer.
      */
     @FXML
-    private void toggleAcquisition() {
-        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
-        if (selectedDealer != null) {
-            boolean current = selectedDealer.getIsVehicleAcquisitionEnabled();
-            if (current) {
-                DealerCatalog.getInstance().disableDealerAcquisition(selectedDealer.getId());
-            } else {
-                DealerCatalog.getInstance().enableDealerAcquisition(selectedDealer.getId());
-            }
-
-            updateDealerDetailPane(selectedDealer);
-            dealerTable.refresh();
-        }
+    public void toggleAcquisitionStatus() {
+        DealerActionHelper.toggleAcquisitionStatus(dealerTable, toggleAcquisitionButton,
+                dealerIdTextField, dealerNameTextField);
     }
 
 
@@ -334,9 +331,18 @@ public class FXController {
      * @param event the ActionEvent triggered by delete button
      */
     @FXML
-    private void deleteSelectedDealer(ActionEvent event) {
-        Dealer selected = dealerTable.getSelectionModel().getSelectedItem();
-        DealerDeletionHelper.deleteDealer(selected, dealerObservableList, vehicleObservableList, dealerTable, vehicleTable);
+    private void deleteDealers(ActionEvent event) {
+        List<Dealer> selectedDealers = dealerTable.getItems().stream()
+                .filter(Dealer::isSelected)
+                .toList();
+
+        DealerActionHelper.deleteDealers(
+                selectedDealers,
+                dealerObservableList,
+                vehicleObservableList,
+                dealerTable,
+                vehicleTable
+        );
     }
 
 
@@ -349,7 +355,7 @@ public class FXController {
      */
     @FXML
     public void deleteSelectedVehicle(ActionEvent actionEvent) {
-        VehicleActionHelper.deleteSelectedVehicle(vehicleTable, dealerTable, vehicleObservableList);
+        VehicleActionHelper.deleteSelectedVehicles(vehicleTable, dealerTable, vehicleObservableList);
     }
 
     /**
@@ -442,30 +448,7 @@ public class FXController {
      */
     @FXML
     private void editDealerName(ActionEvent event) {
-        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
-
-        if (selectedDealer == null) {
-            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
-            return;
-        }
-
-        TextInputDialog dialog = new TextInputDialog(selectedDealer.getName());
-        dialog.setTitle("Edit Dealer Name");
-        dialog.setHeaderText("Update name for Dealer ID: " + selectedDealer.getId());
-        dialog.setContentText("New Dealer Name:");
-
-        dialog.showAndWait().ifPresent(newName -> {
-            if (newName.trim().isEmpty()) {
-                showAlert(Alert.AlertType.ERROR, "Invalid Input", "Dealer name cannot be empty.");
-                return;
-            }
-
-            selectedDealer.setName(newName.trim());
-            dealerTable.refresh();
-            dealerNameTextField.setText(newName.trim());
-
-            showAlert(Alert.AlertType.INFORMATION, "Updated", "Dealer name successfully updated.");
-        });
+        DealerActionHelper.renameDealer(dealerTable, dealerNameTextField);
     }
 
 
@@ -516,5 +499,6 @@ public class FXController {
         // Delegate the export logic to the DataIOHelper class
         DataIOHelper.exportData(stage);
     }
+
 
 }

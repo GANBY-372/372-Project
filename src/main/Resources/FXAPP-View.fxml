@@ -43,7 +43,7 @@
         <Button
                 fx:id="selectAllDealersButton"
                 text="Select All Dealers"
-                onAction="#toggleDealerSelection"
+                onAction="#toggleSelectAllDealers"
         />
         <Button
                 fx:id="editDealerNameButton"
@@ -54,26 +54,11 @@
 
     <TableView fx:id="dealerTable" layoutX="13.0" layoutY="129.0" prefHeight="663.0" prefWidth="478.0">
         <columns>
-            <TableColumn
-                    fx:id="isBuyingColumn"
-                    prefWidth="183.0"
-                    text="Is Buying"
-            />
-            <TableColumn
-                    fx:id="dealerIdColumn"
-                    prefWidth="75.0"
-                    text="dealer ID"
-            />
-            <TableColumn
-                    fx:id="dealerNameColumn"
-                    prefWidth="183.0"
-                    text="dealer Name"
-            />
-            <TableColumn
-                    fx:id="dealerInventoryColumn"
-                    prefWidth="183.0"
-                    text="Inventory Size"
-            />
+            <TableColumn fx:id="dealerSelectColumn" prefWidth="40.0" />
+            <TableColumn fx:id="isBuyingColumn" prefWidth="183.0" text="Is Buying" />
+            <TableColumn fx:id="dealerIdColumn" prefWidth="75.0" text="dealer ID" />
+            <TableColumn fx:id="dealerNameColumn" prefWidth="183.0" text="dealer Name" />
+            <TableColumn fx:id="dealerInventoryColumn" prefWidth="183.0" text="Inventory Size" />
         </columns>
     </TableView>
 
@@ -121,13 +106,13 @@
                     fx:id="toggleAcquisitionButton"
                     text="Disable Acquisition"
                     prefWidth="200.0"
-                    onAction="#toggleAcquisition"
+                    onAction="#toggleAcquisitionStatus"
             />
             <Button
                     fx:id="deleteDealerButton"
                     text="Delete Dealer"
                     prefWidth="200.0"
-                    onAction="#deleteSelectedDealer"
+                    onAction="#deleteDealers"
                     style="-fx-background-color: #d9534f; -fx-text-fill: white;"
             />
         </VBox>

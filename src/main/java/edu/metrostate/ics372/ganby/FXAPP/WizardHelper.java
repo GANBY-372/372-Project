@@ -95,12 +95,17 @@ public class WizardHelper {
      * @param dealerTable      TableView of dealers to refresh after transfer
      */
     public static void openTransferVehicleWizard(
-            List<Vehicle> selectedVehicles,
+            List<Vehicle> selected,
             Dealer currentDealer,
             ObservableList<Vehicle> vehicleList,
             TableView<Vehicle> vehicleTable,
             TableView<Dealer> dealerTable
     ) {
+        // Get vehicles that are checked (not just selected)
+        List<Vehicle> selectedVehicles = vehicleTable.getItems().stream()
+                .filter(Vehicle::isSelected)
+                .toList();
+
         if (selectedVehicles.isEmpty()) {
             showAlert(Alert.AlertType.WARNING, "No Vehicles Selected", "Please select vehicles to transfer.");
             return;
@@ -123,19 +128,24 @@ public class WizardHelper {
         dialog.showAndWait().ifPresent(destinationDealer -> {
             ArrayList<Vehicle> toTransfer = new ArrayList<>(selectedVehicles);
 
+            // Remove from current dealer
             for (Vehicle v : toTransfer) {
                 currentDealer.getVehicleCatalog().remove(v.getVehicleId());
             }
 
+            // Transfer to destination dealer
             DealerCatalog.getInstance().transferInventory(toTransfer, destinationDealer.getId());
 
+            // Refresh UI
             vehicleList.setAll(currentDealer.getVehicleCatalog().values());
             vehicleTable.refresh();
             dealerTable.refresh();
 
-            showAlert(Alert.AlertType.INFORMATION, "Transfer Complete", "Vehicles transferred to " + destinationDealer.getName());
+            showAlert(Alert.AlertType.INFORMATION, "Transfer Complete",
+                    "Vehicles transferred to " + destinationDealer.getName());
         });
     }
+
 
     /**
      * Opens a modal wizard to add a new vehicle to the selected dealer.
