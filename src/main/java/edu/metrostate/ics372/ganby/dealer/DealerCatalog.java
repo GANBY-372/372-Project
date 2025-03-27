@@ -120,21 +120,17 @@ public class DealerCatalog {
         if (dealer == null) {
             dealer = new Dealer(dealerId);
             addDealer(dealer);
-            System.out.println("Dealer does not exist. Dealer has been added.");
         }
 
         if (!dealer.getIsVehicleAcquisitionEnabled()) {
-            System.out.println("Acquisition Disabled for dealer id #" + dealerId);
             return;
         }
 
         if (dealer.getVehicleCatalog().containsKey(vehicle.getVehicleId())) {
-            System.out.println("Vehicle id #" + vehicle.getVehicleId() + " already exists in dealer's collection.");
             return;
         }
 
         dealer.addVehicle(vehicle);
-        System.out.println("Vehicle id #" + vehicle.getVehicleId() + " added");
     }
 
     /**

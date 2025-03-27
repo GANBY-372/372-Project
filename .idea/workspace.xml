@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.java" afterDir="false" />
+
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="">
+
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Resources/FXAPP-View.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/FXAPP-View.fxml" afterDir="false" />
@@ -36,12 +40,17 @@
   "keyToString": {
     "Application.FXDriver.executor": "Run",
     "Application.TestEnv.executor": "Run",
+    "Maven.FX_372_Project [compile].executor": "Run",
     "Maven.FX_372_Project [test].executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="TaskManager">
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merged with main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged with main" />
   </component>
 </project>

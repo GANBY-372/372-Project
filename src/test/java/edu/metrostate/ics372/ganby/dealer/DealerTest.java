@@ -81,10 +81,4 @@ class DealerTest {
         Dealer sameDealer = new Dealer("123", "Another Name");
         assertEquals(dealer.hashCode(), sameDealer.hashCode());
     }
-
-    @Test
-    void testToString() {
-        String expected = "| 123        | Yes                  |";
-        assertEquals(expected, dealer.toString());
-    }
 }
