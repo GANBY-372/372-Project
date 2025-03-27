@@ -189,7 +189,7 @@ public class FXController {
     private void updateDealerDetailPane(Dealer dealer) {
         dealerIdTextField.setText(dealer.getId());
         dealerNameTextField.setText(dealer.getName());
-        toggleAcquisitionButton.setText(dealer.getIsVehicleAcquisitionEnabled() ? "Disable Acquisition" : "Enable Acquisition");
+        toggleAcquisitionButton.setText("Change Acquisition Status");
     }
 
     /**
@@ -318,9 +318,8 @@ public class FXController {
      * Enables or disables acquisition for selected dealer.
      */
     @FXML
-    public void toggleAcquisitionStatus() {
-        DealerActionHelper.toggleAcquisitionStatus(dealerTable, toggleAcquisitionButton,
-                dealerIdTextField, dealerNameTextField);
+    private void toggleAcquisitionStatus() {
+        DealerActionHelper.toggleAcquisitionStatus(dealerTable);
     }
 
 
@@ -489,15 +488,13 @@ public class FXController {
      * Handles the action of exporting the current dealer catalog to a file.
      * This may prompt the user to choose between export formats (e.g., JSON, XML).
      *
-     * @param actionEvent the ActionEvent triggered by clicking the "Export Data" button
-     */
+     * @param event the ActionEvent triggered by clicking the "Export Data" button
     @FXML
-    public void exportData(ActionEvent actionEvent) {
-        // Get the current application window
-        Stage stage = (Stage) rootPane.getScene().getWindow();
+    **/
+    public void exportSelectedDealers(ActionEvent event) {
 
-        // Delegate the export logic to the DataIOHelper class
-        DataIOHelper.exportData(stage);
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        DataIOHelper.exportSelectedDealers(stage, dealerTable);
     }
 
 

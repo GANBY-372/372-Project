@@ -83,6 +83,6 @@ class DealerCatalogTest {
 
     @Test
     void amountOfAllVehicles() {
-        assertEquals(4, catalog.amountOfAllVehicles());
+        assertEquals(5, catalog.amountOfAllVehicles());
     }
 }

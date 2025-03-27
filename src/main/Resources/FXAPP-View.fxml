@@ -26,10 +26,9 @@
                 fx:id="importXmlButton"
                 text="Import XML"
                 onAction="#importXMLFile"/>
-        <Button
-                fx:id="exportDataButton"
-                text="Export Data"
-                onAction="#exportData"/>
+        <Button fx:id="exportSelectedDealersButton" text="Export Selected Dealers" onAction="#exportSelectedDealers" />
+
+
     </HBox>
 
     <HBox layoutX="13.0" layoutY="80.0" spacing="10.0">

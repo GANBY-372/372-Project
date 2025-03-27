@@ -12,6 +12,9 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Utility class for importing and exporting dealer/vehicle data from/to JSON and XML formats.
  */
@@ -71,8 +74,35 @@ public class DataIOHelper {
      *
      * @param stage the stage used for file selection
      */
-    public static void exportData(Stage stage) {
-        new DataExporter().promptAndExportCatalog(stage);
+    public static void exportData(Stage stage, TableView<Dealer> dealerTable) {
+        List<Dealer> allDealers = dealerTable.getItems();
+        new DataExporter().promptAndExportDealers(stage, allDealers);
+    }
+
+
+    /**
+     * Exports only the dealers that are selected (checkbox is checked).
+     *
+     * @param stage the stage used for file chooser dialog
+     * @param dealerTable the dealer TableView to check for selected dealers
+     */
+    public static void exportSelectedDealers(Stage stage, TableView<Dealer> dealerTable) {
+        List<Dealer> selectedDealers = dealerTable.getItems().stream()
+                .filter(Dealer::isSelected)
+                .collect(Collectors.toList());
+
+        if (selectedDealers.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "No Dealers Selected", "Please select dealer(s) to export.");
+            return;
+        }
+
+        try {
+            new DataExporter().promptAndExportDealers(stage, selectedDealers);
+            showAlert(Alert.AlertType.INFORMATION, "Export Successful", "Selected dealers exported successfully.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Export Failed", "Failed to export dealers:\n" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private static void showAlert(Alert.AlertType type, String title, String content) {
