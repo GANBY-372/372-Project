@@ -88,7 +88,7 @@ public class WizardHelper {
     /**
      * Opens wizard to transfer selected vehicles to another dealer.
      *
-     * @param selectedVehicles list of selected vehicles to transfer
+     * @param selected list of selected vehicles to transfer
      * @param currentDealer    current dealer from whom vehicles are being transferred
      * @param vehicleList      list to refresh after transfer
      * @param vehicleTable     TableView to refresh after transfer

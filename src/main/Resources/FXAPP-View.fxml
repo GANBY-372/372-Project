@@ -44,6 +44,12 @@
                 text="Select All Dealers"
                 onAction="#toggleSelectAllDealers"
         />
+        <Button
+                fx:id="editDealerNameButton"
+                text="Edit Dealer Name"
+                onAction="#editDealerName"
+        />
+
     </HBox>
 
     <TableView fx:id="dealerTable" layoutX="13.0" layoutY="129.0" prefHeight="663.0" prefWidth="478.0">

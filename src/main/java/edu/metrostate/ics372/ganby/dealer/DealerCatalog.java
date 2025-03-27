@@ -217,6 +217,16 @@ public class DealerCatalog {
         return result;
     }
 
+    public void updateDealer(Dealer updatedDealer) {
+        // Find the dealer in the catalog and update the name
+        for (Dealer dealer : getDealers()) {
+            if (dealer.getId().equals(updatedDealer.getId())) {
+                dealer.setName(updatedDealer.getName());
+                break;
+            }
+        }
+    }
+
     /**
      * Transfer Vehicles from one dealer to another
      * @param vehiclesToTransfer list of vehicles to transfer

@@ -68,6 +68,7 @@ public class FXController {
 
 
 
+
     // --- Data Sources ---
     private final ObservableList<Dealer> dealerObservableList = FXCollections.observableArrayList();
     private final ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
@@ -75,7 +76,6 @@ public class FXController {
     public Button importXmlButton;
     public Button exportDataButton;
     public Button editDealerNameButton;
-
     private boolean allDealersSelected = false;
     private boolean suppressSelectionListener = false;
 
@@ -215,6 +215,8 @@ public class FXController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+
 
 
 
@@ -387,6 +389,36 @@ public class FXController {
         VehicleActionHelper.toggleSelectAllVehicles(vehicleTable);
     }
 
+    /**
+     * Saves changes made to the selected dealer.
+     * This updates the dealer name and refreshes the dealer table.
+     */
+    @FXML
+    public void saveDealerChanges(ActionEvent event) {
+        // Get the selected dealer
+        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+
+        // Check if a dealer is selected and if the name field is not empty
+        if (selectedDealer != null && !dealerNameTextField.getText().trim().isEmpty()) {
+            // Update dealer name
+            String updatedName = dealerNameTextField.getText().trim();
+            selectedDealer.setName(updatedName);
+
+            // Optionally, update the dealer in the catalog (if needed)
+            DealerCatalog.getInstance().updateDealer(selectedDealer);
+
+            // Refresh the table to reflect the changes
+            dealerTable.refresh();
+
+            // Show success alert
+            showAlert(Alert.AlertType.INFORMATION, "Dealer Name Updated", "The dealer name has been updated successfully.");
+        } else {
+            // Show error alert if no dealer is selected or name is empty
+            showAlert(Alert.AlertType.WARNING, "Invalid Input", "Please select a dealer and enter a valid name.");
+        }
+    }
+
+
 
 
     //ADDING DEALER AND VEHICLE AND TRANSFERRING VEHICLES
@@ -445,6 +477,7 @@ public class FXController {
      *
      * @param event the ActionEvent triggered by the button click
      */
+
     @FXML
     private void editDealerName(ActionEvent event) {
         DealerActionHelper.renameDealer(dealerTable, dealerNameTextField);

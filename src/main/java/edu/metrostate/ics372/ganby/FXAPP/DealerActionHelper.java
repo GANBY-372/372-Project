@@ -76,7 +76,7 @@ public class DealerActionHelper {
             return;
         }
 
-        for (Dealer dealer : selectedDealers) {
+       /* for (Dealer dealer : selectedDealers) {
             boolean current = dealer.getIsVehicleAcquisitionEnabled();
             if (current) {
                 DealerCatalog.getInstance().disableDealerAcquisition(dealer.getId());
@@ -84,7 +84,7 @@ public class DealerActionHelper {
                 DealerCatalog.getInstance().enableDealerAcquisition(dealer.getId());
             }
         }
-
+        */
         if (selectedDealer == null) {
             showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
             return;
