@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
+import java.util.List;
+
 /**
  * Utility class to perform various vehicle-related operations such as delete, modify price,
  * toggle rent status, and toggle selection in the vehicle table.
@@ -14,35 +16,42 @@ import javafx.scene.control.Alert.AlertType;
 public class VehicleActionHelper {
 
     /**
-     * Deletes the selected vehicle from both UI and dealer catalog.
+     * Deletes all checkbox-selected vehicles from both UI and dealer catalog.
      *
-     * @param vehicleTable the vehicle table from which to delete
-     * @param dealerTable the dealer table for refreshing
-     * @param vehicleObservableList the observable list backing the vehicle table
+     * @param vehicleTable           the vehicle table
+     * @param dealerTable            the dealer table for refresh
+     * @param vehicleObservableList  the observable list backing the vehicle table
      */
-    public static void deleteSelectedVehicle(TableView<Vehicle> vehicleTable,
-                                             TableView<Dealer> dealerTable,
-                                             ObservableList<Vehicle> vehicleObservableList) {
-        Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
-        if (selectedVehicle == null) {
-            showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to delete.");
+    public static void deleteSelectedVehicles(TableView<Vehicle> vehicleTable,
+                                              TableView<Dealer> dealerTable,
+                                              ObservableList<Vehicle> vehicleObservableList) {
+        List<Vehicle> toDelete = vehicleTable.getItems().stream()
+                .filter(Vehicle::isSelected)
+                .toList();
+
+        if (toDelete.isEmpty()) {
+            showAlert(AlertType.WARNING, "No Vehicles Selected", "Please select vehicle(s) using the checkbox to delete.");
             return;
         }
 
         Alert confirm = new Alert(AlertType.CONFIRMATION);
-        confirm.setTitle("Confirm Vehicle Deletion");
-        confirm.setContentText("Are you sure you want to delete vehicle ID: " + selectedVehicle.getVehicleId() + "?");
+        confirm.setTitle("Confirm Deletion");
+        confirm.setHeaderText("Delete " + toDelete.size() + " vehicle(s)?");
+        confirm.setContentText("Are you sure you want to permanently delete the selected vehicles?");
 
         confirm.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                Dealer dealer = DealerCatalog.getInstance().getDealerWithId(selectedVehicle.getDealerId());
-                if (dealer != null) {
-                    dealer.getVehicleCatalog().remove(selectedVehicle.getVehicleId());
-                    vehicleObservableList.remove(selectedVehicle);
-                    vehicleTable.refresh();
-                    dealerTable.refresh();
-                    showAlert(AlertType.INFORMATION, "Deleted", "Vehicle deleted successfully.");
+                for (Vehicle vehicle : toDelete) {
+                    Dealer dealer = DealerCatalog.getInstance().getDealerWithId(vehicle.getDealerId());
+                    if (dealer != null) {
+                        dealer.getVehicleCatalog().remove(vehicle.getVehicleId());
+                    }
+                    vehicleObservableList.remove(vehicle);
                 }
+
+                vehicleTable.refresh();
+                dealerTable.refresh();
+                showAlert(AlertType.INFORMATION, "Deleted", "Selected vehicles deleted successfully.");
             }
         });
     }
@@ -85,26 +94,30 @@ public class VehicleActionHelper {
      * @param toggleButton the toggle button whose label should reflect current status
      */
     public static void toggleRentStatus(TableView<Vehicle> vehicleTable, Button toggleButton) {
-        Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
-        if (selectedVehicle == null) {
-            showAlert(Alert.AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to change rent status.");
+        List<Vehicle> selectedVehicles = vehicleTable.getItems().stream()
+                .filter(Vehicle::isSelected)
+                .toList();
+
+        if (selectedVehicles.isEmpty()) {
+            showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to change rent status.");
             return;
         }
 
-        // Attempt to toggle rent status
-        boolean newStatus = !selectedVehicle.getIsRentedOut();
-        String resultType = selectedVehicle.
-                setRentedOut(newStatus).trim().replaceAll("\\s+", "").toUpperCase();
+        for (Vehicle vehicle : selectedVehicles) {
+            String result = vehicle.setRentedOut(!vehicle.getIsRentedOut());
 
-        // If SportsCar, show warning and skip change
-        if ("SPORTSCAR".equals(resultType)) {
-            showAlert(Alert.AlertType.WARNING, "Not Allowed", "SportsCars cannot be rented.");
-            return;
+            // If it's a SportsCar, it should not be toggled
+            if (result.trim().replaceAll("\\s+", "").toUpperCase().equals("SPORTSCAR")) {
+                showAlert(AlertType.WARNING, "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
+                        "SportsCars cannot be rented.");
+            }
         }
 
-        // Refresh UI and update button label
         vehicleTable.refresh();
-        toggleButton.setText(selectedVehicle.getIsRentedOut() ? "Set as Available" : "Set as Rented Out");
+
+        // Optional: update button label based on the first selected vehicle
+        Vehicle first = selectedVehicles.get(0);
+        toggleButton.setText(first.getIsRentedOut() ? "Set as Available" : "Set as Rented");
     }
 
     /**
@@ -114,9 +127,13 @@ public class VehicleActionHelper {
      */
     public static void toggleSelectAllVehicles(TableView<Vehicle> vehicleTable) {
         boolean allSelected = vehicleTable.getItems().stream().allMatch(Vehicle::isSelected);
+
+        // Toggle each vehicle's checkbox value
         for (Vehicle vehicle : vehicleTable.getItems()) {
             vehicle.setSelected(!allSelected);
         }
+
+        // Force refresh of the TableView to reflect changes
         vehicleTable.refresh();
     }
 

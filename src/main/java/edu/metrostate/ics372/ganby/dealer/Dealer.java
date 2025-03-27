@@ -19,6 +19,9 @@ public class Dealer {
     private final StringProperty name; // Dealer name (optional)
     private final BooleanProperty isBuying; // Whether the dealer is buying vehicles
     private final HashMap<String, Vehicle> vehicleCatalog; // Dealer's vehicle inventory
+    private final BooleanProperty selected = new SimpleBooleanProperty(false);
+
+
 
     /**
      * Constructor for Dealer if name is not specified
@@ -203,5 +206,21 @@ public class Dealer {
             if (!transferVehicle(vehicle, dealer)) return false;
         }
         return true;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public BooleanProperty selectedProperty() {
+        return selected;
+    }
+
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected.set(selected);
     }
 }
