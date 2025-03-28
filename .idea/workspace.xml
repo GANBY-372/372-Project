@@ -6,16 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/TableRightClickDelete.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/WizardHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/TestEnv.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONObjectBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Vehicle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
