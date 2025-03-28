@@ -96,10 +96,10 @@ public class Dealer {
      */
     public void enableVehicleAcquisition(String dealerId) {
         if (isBuying.get()) {
-            System.out.println("Vehicle acquisition already enabled for dealer id #" + dealerId + ".");
+            //System.out.println("Vehicle acquisition already enabled for dealer id #" + dealerId + ".");
         } else {
             this.isBuying.set(true);
-            System.out.println("Successfully enabled vehicle acquisition for dealer id #" + dealerId + ".");
+            //System.out.println("Successfully enabled vehicle acquisition for dealer id #" + dealerId + ".");
         }
     }
 
@@ -109,10 +109,10 @@ public class Dealer {
      */
     public void disableVehicleAcquisition(String dealerId) {
         if (!isBuying.get()) {
-            System.out.println("Vehicle acquisition already disabled for dealer id #" + dealerId + ".");
+            // System.out.println("Vehicle acquisition already disabled for dealer id #" + dealerId + ".");
         } else {
             this.isBuying.set(false);
-            System.out.println("Successfully disabled vehicle acquisition for dealer id #" + dealerId + ".");
+            // System.out.println("Successfully disabled vehicle acquisition for dealer id #" + dealerId + ".");
         }
     }
 
