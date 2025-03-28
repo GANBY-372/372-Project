@@ -38,23 +38,26 @@ Following the success of the initial phase of the vehicle tracking application, 
 - `DealerCatalog`
 
 ### FXAPP
-- `DataOHelper`
+- `DataIOHelper`
 - `DealerActionHelper`
-- 'FXController`'
+- `VehicleActionHelper`
+- `FXController`
 
 ### Vehicle Management
 - `Vehicle`
-- `Vehicles`
-- `VehicleCatalog`
-- `VehicleCategory` (Pickup, Sedan, SportsCar, SUV)
+- `SUV`
+- `Sedan`
+- `SportsCar`
+- `Pickup`
 
 ### Data Handling
-- `JSONFileExporter`
 - `JSONFileImporter`
-- `JSONFileObjectBuilder`
+- `DataExporter.java`
+- `XMLFileImporter.java`
 
 ### Main Classes
-- `UserDriver`
+- `FXDriver`
+
 
 ## Notes
 - Use Java standard libraries where applicable.
