@@ -1,6 +1,5 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
-import edu.metrostate.ics372.ganby.dataprocessing.JSONObjectBuilder;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import javafx.beans.property.*;
 

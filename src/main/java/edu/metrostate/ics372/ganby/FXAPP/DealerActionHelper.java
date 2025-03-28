@@ -4,9 +4,16 @@ import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +64,71 @@ public class DealerActionHelper {
 
         dealerTable.refresh();
         vehicleTable.setItems(vehicleList);
+    }
+
+
+    /**
+     * Opens a modal wizard to create and add a new dealer.
+     *
+     * @param dealerObservableList list to update after adding
+     * @param ownerStage the parent window for modality
+     */
+    public static void openAddDealerWizard(ObservableList<Dealer> dealerObservableList, Stage ownerStage) {
+        Stage wizardStage = new Stage();
+        wizardStage.initModality(Modality.APPLICATION_MODAL);
+        wizardStage.initOwner(ownerStage);
+        wizardStage.setTitle("Add New Dealer");
+
+        Label nameLabel = new Label("Dealer Name:");
+        TextField nameField = new TextField();
+        Label idLabel = new Label("Dealer ID:");
+        TextField idField = new TextField();
+
+        Button saveButton = new Button("Save");
+        Button cancelButton = new Button("Cancel");
+
+        GridPane gridPane = new GridPane();
+        gridPane.setVgap(10);
+        gridPane.setHgap(10);
+        gridPane.addRow(0, idLabel, idField);
+        gridPane.addRow(1, nameLabel, nameField);
+
+        HBox buttonBox = new HBox(10, saveButton, cancelButton);
+        VBox layout = new VBox(10, gridPane, buttonBox);
+        layout.setPadding(new Insets(10));
+
+        Scene scene = new Scene(layout, 400, 200);
+        wizardStage.setScene(scene);
+
+        saveButton.setOnAction(event -> {
+            try {
+                String dealerId = idField.getText().trim();
+                String dealerName = nameField.getText().trim();
+
+                if (dealerId.isBlank() || dealerName.isBlank()) {
+                    throw new IllegalArgumentException("Dealer ID and Name cannot be empty.");
+                }
+
+                if (DealerCatalog.getInstance().getDealerWithId(dealerId) != null) {
+                    throw new IllegalArgumentException("Dealer with ID already exists.");
+                }
+
+                Dealer newDealer = new Dealer(dealerId, dealerName);
+                DealerCatalog.getInstance().addDealer(newDealer);
+                dealerObservableList.add(newDealer);
+
+                wizardStage.close();
+
+                // Show success message with details
+                String msg = "Dealer '%s' (ID: %s) was successfully added.".formatted(dealerName, dealerId);
+                showAlert(Alert.AlertType.INFORMATION, "Success", msg);
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+            }
+        });
+
+        cancelButton.setOnAction(e -> wizardStage.close());
+        wizardStage.showAndWait();
     }
 
     /**

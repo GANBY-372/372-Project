@@ -165,12 +165,6 @@ public class FXController {
             }
         });
 
-        // Right-click delete for empty dealers
-        TableRightClickDelete.enableRightClickDelete(
-                dealerTable,
-                dealerObservableList,
-                dealer -> dealer.getVehicleCatalog().isEmpty()
-        );
     }
 
 
@@ -228,7 +222,7 @@ public class FXController {
      */
     @FXML
     public void filterBySedan(ActionEvent e) {
-        VehicleFilter.filterByType("Sedan", dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
+        VehicleActionHelper.filterByType("Sedan", dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
         vehicleTable.setItems(vehicleObservableList);
     }
 
@@ -239,7 +233,7 @@ public class FXController {
      */
     @FXML
     public void filterBySportsCar(ActionEvent e) {
-        VehicleFilter.filterByType("SportsCar", dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
+        VehicleActionHelper.filterByType("SportsCar", dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
         vehicleTable.setItems(vehicleObservableList);
     }
 
@@ -250,7 +244,7 @@ public class FXController {
      */
     @FXML
     public void filterByPickup(ActionEvent e) {
-        VehicleFilter.filterByType("Pickup", dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
+        VehicleActionHelper.filterByType("Pickup", dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
         vehicleTable.setItems(vehicleObservableList);
     }
 
@@ -261,7 +255,7 @@ public class FXController {
      */
     @FXML
     public void filterBySUV(ActionEvent e) {
-        VehicleFilter.filterByType("SUV", dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
+        VehicleActionHelper.filterByType("SUV", dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
         vehicleTable.setItems(vehicleObservableList);
     }
 
@@ -272,7 +266,7 @@ public class FXController {
      */
     @FXML
     public void filterByRentedOut(ActionEvent e) {
-        VehicleFilter.filterByRented(dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
+        VehicleActionHelper.filterByRented(dealerTable.getSelectionModel().getSelectedItem(), allDealersSelected, vehicleObservableList);
         vehicleTable.setItems(vehicleObservableList);
     }
 
@@ -381,6 +375,7 @@ public class FXController {
 
     /**
      * Selects or unselects all vehicles in the table based on current state.
+     * Delegates logic to VehicleActionHelper
      *
      * @param actionEvent the ActionEvent triggered by the toggle button
      */
@@ -424,17 +419,17 @@ public class FXController {
     //ADDING DEALER AND VEHICLE AND TRANSFERRING VEHICLES
     /**
      * Opens the wizard to add a new dealer.
-     * Delegates the logic to the WizardHelper class.
+     * Delegates the logic to the DealerActionHelper class.
      */
     @FXML
     private void openAddDealerWizard() {
         // Launch dealer creation wizard
-        WizardHelper.openAddDealerWizard(dealerObservableList, (Stage) rootPane.getScene().getWindow());
+        DealerActionHelper.openAddDealerWizard(dealerObservableList, (Stage) rootPane.getScene().getWindow());
     }
 
     /**
      * Opens the wizard to transfer selected vehicles to a different dealer.
-     * Delegates the logic to the WizardHelper class.
+     * Delegates the logic to the VehicleActionHelper class.
      *
      * @param event the action event triggered by the Transfer button
      */
@@ -445,7 +440,7 @@ public class FXController {
         List<Vehicle> selected = vehicleTable.getSelectionModel().getSelectedItems();
 
         // Launch transfer wizard
-        WizardHelper.openTransferVehicleWizard(
+       VehicleActionHelper.openTransferVehicleWizard(
                 selected,
                 currentDealer,
                 vehicleObservableList,
@@ -456,7 +451,7 @@ public class FXController {
 
     /**
      * Opens the wizard to add a new vehicle to the selected dealer.
-     * Delegates the logic to the WizardHelper class and refreshes the vehicle list.
+     * Delegates the logic to the VehicleActionHelper class and refreshes the vehicle list.
      *
      * @param event the action event triggered by the Add Vehicle button
      */
@@ -466,7 +461,7 @@ public class FXController {
         Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
 
         // Launch vehicle creation wizard
-        WizardHelper.openAddVehicleWizard(selectedDealer, vehicleObservableList);
+        VehicleActionHelper.openAddVehicleWizard(selectedDealer, vehicleObservableList);
 
         // Refresh the table with new vehicle
         populateVehicleList(selectedDealer);
