@@ -55,6 +55,7 @@ public class DealerCatalogTest {
     void getDealerWithId() {
         assertEquals(d001, catalog.getDealerWithId("001"));
         assertEquals(d002, catalog.getDealerWithId("002"));
+        assertNotEquals(d001, catalog.getDealerWithId("003"));
     }
 
     @Test
@@ -77,20 +78,13 @@ public class DealerCatalogTest {
 
     @Test
     void amountOfAllVehicles() {
-        assertEquals(5, catalog.amountOfAllVehicles());
+        assertEquals(4, catalog.amountOfAllVehicles());
     }
 
     @Test
     void getAllVehicles() {
         ArrayList<Vehicle> vehicles = catalog.getAllVehicles();
         assertEquals(4, vehicles.size());
-    }
-
-    // TODO: Fix the method?
-    @Test
-    void getDealers() {
-//        ObservableList<Dealer> dealers = catalog.getDealers();
-//        assertEquals(2, dealers.size());
     }
 
     @Test

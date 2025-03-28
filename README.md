@@ -1,116 +1,93 @@
-# 372 Project
+# Vehicle Tracking System - Updated Version
 
-## Readme
+## Project Overview
+Following the success of the initial phase of the vehicle tracking application, the project has been expanded to include new features requested by the organization. These enhancements aim to improve functionality, usability, and reliability while ensuring smooth integration with new dealers. The development process will follow a structured approach, starting with defining use cases, requirements, and sequence diagrams, followed by implementation and testing.
 
-### Using This Program
-The `UserDriver` class file serves as the user interface. This is a terminal-based interface with a popup window interface for importing and exporting JSON files.  
-The menu screen shows numbered options for the user to type in the terminal.  
+### Development Timeline
+- **Sprint 1 (March 12, 2025):** Use cases, requirements, sequence diagrams
+- **Sprint 2 (March 26, 2025):** Full implementation and unit tests
 
-The program has the following options:  
-- Import JSON vehicle inventory file.  
-- Enable or disable vehicle acquisition.  
-- Export dealer inventory to JSON file.  
-- List all vehicles in the catalog.  
-- End Program.  
+## New Features & Requirements
+1. **Vehicle Loan Tracking**
+- Three new dealers have joined the platform.
+- Some dealers rent out cars temporarily and need to track which cars are on loan.
+- Sports cars are not allowed to be rented due to excessive joyriding.
+- The actual loaning process is managed by separate software (not part of this implementation).
 
-### Assignment  
-Build a tracking system for a company that owns multiple car dealerships. Admins will need to be able to record vehicles that arrive at the various dealers.  
+2. **Persistent Data Storage**
+- The system should retain dealer and vehicle data between program restarts.
 
-## Requirements  
-1. Read a file that is in JSON format.  
-2. Support 4 different types of vehicles in the input file: **suv, sedan, pickup, and sports car**.  
-3. Read and store the **vehicle ID, manufacturer, model, acquisition date, and price** for each entry and associate it with the specified dealer ID.  
-4. Read and store the associated metadata for each vehicle.  
-5. Support the following commands for each dealer:  
-6. Only allow adding incoming vehicles to a dealer that has enabled receiving vehicles.  
-7. Keep records for a dealer that has disabled receiving vehicles, but will not allow new incoming vehicles.  
-8. Be able to export all vehicles from a dealer into a single JSON file.  
-9. Show the list of current vehicles for each dealer.  
+3. **XML Data Import**
+- New dealers may use an XML format to store vehicle data.
+- The system should support importing vehicle data from XML files.
+- Dealer names should be included and editable in imported records.
+- The external XML data source may have inconsistencies or errors, so data validation is necessary.
 
-## Other  
-- Usage of the Java standard libraries or other libraries as part of your program is expected.  
-- Include external JAR files with your source when you submit it.  
-- Documentation of the software is expected.  
-- Include a class diagram & sequence diagram of the **add incoming vehicle** operation.  
+4. **Inventory Transfers**
+- Dealers should be able to transfer vehicles between one another.
 
-## Class Files  
+5. **Graphical User Interface (GUI)**
+- The system should include a user-friendly GUI for easier interaction.
 
-### Dealer Management  
-- `Dealer`  
-  - `private final id : int`  
-  - `private isVehicleAcquisitionEnabled : boolean`  
-- `Dealers`  
-  - `private final Set<Dealer>`  
-- `DealerCatalog`  
-  - `private final id : int`  
-  - `private final Dealers`  
+6. **Unit Testing**
+- Comprehensive unit tests should be implemented to validate code reliability and functionality.
 
-### Vehicle Management  
-- `Vehicle`  
-  - `getId : String`  
-  - `getModel : String`  
-  - `getManufacturer : String`  
-  - `getPrice : double`  
-  - `getDealer : Dealer`  
-  - `getAcquisitionDate : LocalDateTime`  
-- `Vehicles`  
-  - `private final Set<Vehicle>`  
-- `VehicleCatalog`  
-  - `private static VehicleCatalog`  
-  - `private final Vehicles`  
-- `VehicleCategory`  
-  - `Pickup`  
-  - `Sedan`  
-  - `SportsCar`  
-  - `SUV`  
+## System Components
+### Dealer Management
+- `Dealer`
+- `DealerCatalog`
 
-### JSON Processing  
-- `JSONFileExporter`  
-- `JSONFileImporter`  
-- `JSONFileObjectBuilder`  
+### FXAPP
+- `DataOHelper`
+- `DealerActionHelper`
+- 'FXController`'
 
-### Main Classes   
-- `UserDriver`  
+### Vehicle Management
+- `Vehicle`
+- `Vehicles`
+- `VehicleCatalog`
+- `VehicleCategory` (Pickup, Sedan, SportsCar, SUV)
 
-## Input Data Example - JSON File  
-```json
-{
-  "Car_inventory": [
-    {
-      "dealership_id": "12513",
-      "vehicle_type": "suv",
-      "vehicle_manufacturer": "Ford",
-      "vehicle_model": "Explorer",
-      "vehicle_id": "48934",
-      "price": 20123,
-      "acquisition_date": 1515354694451
-    },
-    {
-      "dealership_id": "12513",
-      "vehicle_type": "sedan",
-      "vehicle_manufacturer": "Tesla",
-      "vehicle_model": "Model 3",
-      "vehicle_id": "83883",
-      "price": 50444,
-      "acquisition_date": 1515354694451
-    },
-    {
-      "dealership_id": "12513",
-      "vehicle_type": "pickup",
-      "vehicle_manufacturer": "Chevy",
-      "vehicle_model": "Silverado",
-      "vehicle_id": "89343883",
-      "price": 70444,
-      "acquisition_date": 1515354694451
-    },
-    {
-      "dealership_id": "77338",
-      "vehicle_type": "sports car",
-      "vehicle_manufacturer": "Toyota",
-      "vehicle_model": "Supra",
-      "vehicle_id": "229393",
-      "price": 49889,
-      "acquisition_date": 1515354694451
-    }
-  ]
+### Data Handling
+- `JSONFileExporter`
+- `JSONFileImporter`
+- `JSONFileObjectBuilder`
+
+### Main Classes
+- `UserDriver`
+
+## Notes
+- Use Java standard libraries where applicable.
+- Includes external JAR files in the submission.
+
+## Example of new XML Data Structure for Vehicle Import
+```xml
+<Dealers>
+    <Dealer id="485">
+        <Name>Wacky Bob’s Automall</Name>
+        <Vehicle type="suv" id="848432">
+            <Price unit="pounds">17000</Price>
+            <Make>Land Rover</Make>
+            <Model>Range Rover</Model>
+        </Vehicle>
+        <Vehicle type="pickup" id="52523">
+            <Price unit="dollars">22600</Price>
+            <Make>Toyota</Make>
+            <Model>Tundra</Model>
+        </Vehicle>
+        <Vehicle type="sedan" id="151e5dde">
+            <Price unit="dollars">36600</Price>
+            <Make>Genesis</Make>
+            <Model>G70</Model>
+        </Vehicle>
+        <Vehicle type="sports car" id="ern222">
+            <Price unit="dollars">22330</Price>
+            <Make>Mazda</Make>
+            <Model>Miata</Model>
+        </Vehicle>
+    </Dealer>
+</Dealers>
+```
+
+
 }
