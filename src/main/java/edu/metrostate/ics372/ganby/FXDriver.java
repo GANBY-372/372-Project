@@ -1,58 +1,35 @@
 package edu.metrostate.ics372.ganby;
 
-import edu.metrostate.ics372.ganby.dataprocessing.DataExporter;
-import edu.metrostate.ics372.ganby.dataprocessing.JSONFileImporter;
 import edu.metrostate.ics372.ganby.FXAPP.FXController;
+import edu.metrostate.ics372.ganby.dataprocessing.PersistenceManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
-
 public class FXDriver extends Application {
+
+    private FXController controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXAPP-View.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXAPP-View.fxml"));
+        Parent root = loader.load();
 
-        Parent root = fxmlLoader.load();
-        System.out.println("FXML file loaded successfully");
+        controller = loader.getController();
+        PersistenceManager.loadAutosave(controller);  // Load saved data
 
-        FXController controller = fxmlLoader.getController();
-
-        String autosavePath = "src/main/resources/Auto_Save/dealer_catalog_autosave.json";
-        File autosaveFile = new File(autosavePath);
-        if (autosaveFile.exists()) {
-            try {
-                JSONFileImporter importer = new JSONFileImporter(autosavePath);
-                importer.processJSON(); //Import here
-
-                controller.loadData();  //Refresh UI with imported data
-
-                System.out.println("Successfully loaded JSON from: " + autosavePath);
-                System.out.println("Autosave data imported on boot.");
-            } catch (Exception e) {
-                System.err.println("Error loading autosave data: " + e.getMessage());
-            }
-        }
-
-        Scene scene = new Scene(root);
-        primaryStage.setTitle("Hello!");
-        primaryStage.setScene(scene);
+        primaryStage.setTitle("Vehicle Tracking System");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
     @Override
     public void stop() {
-        DataExporter exporter = new DataExporter();
-
-        String filePath = "src/main/resources/Auto_Save/dealer_catalog_autosave.json";
-        exporter.saveStateToFile(filePath);
-
-        System.out.println("Dealer catalog autosaved to " + filePath + " on application exit.");
+        PersistenceManager.saveAutosave();  // Save on exit
     }
+
     public static void main(String[] args) {
         launch();
     }

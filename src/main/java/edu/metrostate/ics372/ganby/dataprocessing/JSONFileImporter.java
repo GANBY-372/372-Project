@@ -82,6 +82,7 @@ public class JSONFileImporter {
 
     /**
      * Creates and adds a vehicle to the catalog.
+     * @param jsonObject json object that contains vehicle info
      */
     private Vehicle createVehicle(JSONObject jsonObject) {
         String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
