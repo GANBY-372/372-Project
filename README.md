@@ -122,26 +122,69 @@ This Java-based Vehicle Tracking System has been upgraded to include new dealer 
 
 ---
 
-## 🧪 Testing
+## 🧪 Tests
 
-To run tests:
+This project is thoroughly tested using **JUnit 5** to ensure all critical components work as intended. Unit tests are structured around core modules including vehicle types, the dealer catalog, and system behaviors like acquisition toggling and vehicle transfers.
+
+### ✅ Coverage Highlights
+
+#### `DealerCatalogTest`
+- Verifies:
+  - Singleton instantiation
+  - Dealer lookup and validation
+  - Vehicle addition and price modification
+  - Accurate dealer/vehicle counts
+  - Dealer acquisition toggling
+  - Vehicle retrieval by type and ID
+
+#### `DealerTest`
+- Validates:
+  - Dealer ID, name, and acquisition status
+  - Vehicle catalog integrity
+  - Adding and finding vehicles
+  - Dealer equality and hash code consistency
+
+#### `VehicleTest`
+- Tests:
+  - Accessors and mutators (ID, price, dealer, etc.)
+  - Validations (e.g., negative price throws exception)
+  - Vehicle equality and string representation
+  - Rented out logic and restrictions
+
+#### Specific Vehicle Type Tests
+- `SedanTest`, `PickupTest`, `SUVTest`, `SportsCarTest`
+  - Ensure each subclass:
+    - Returns correct type
+    - Properly implements `equals()` and `toString()`
+    - Handles rent status and restrictions (e.g., SportsCar cannot be rented)
+
+### 🧪 Run the Tests
+
+To run the tests, use your preferred IDE (like IntelliJ IDEA or Eclipse), or via Maven:
 
 ```bash
 mvn test
 ```
 
-Tests cover:
-- Dealer and Vehicle creation
-- Transfer logic
-- Rent restrictions
-- XML validation and import
+Tests are located under `src/test/java/edu/metrostate/ics372/ganby`.
 
 ---
 
-## 📦 External Dependencies
+## 🛠️ Technologies Used
+- Java 17+
+- JavaFX 21
+- ControlsFX & BootstrapFX for UI enhancement
+- JUnit 5 for unit testing
+- JSON-simple for file I/O
+- XML (DOM) Parsing for data import
 
-- JavaFX 21+
-- ControlsFX (for advanced GUI controls)
-- JSON-Simple (for JSON operations)
-- JUnit 4 (for testing)
+---
+## 👨‍💻 Authors
+- Developed by
+-Gil Gaitan
+-Abdirahman Hassan
+-Nick Babashov
+-Banji Lawal
+-Yahya Guler
+
 
