@@ -171,20 +171,20 @@ Tests are located under `src/test/java/edu/metrostate/ics372/ganby`.
 ---
 
 ## 🛠️ Technologies Used
-- Java 17+
-- JavaFX 21
-- ControlsFX & BootstrapFX for UI enhancement
-- JUnit 5 for unit testing
-- JSON-simple for file I/O
-- XML (DOM) Parsing for data import
+- `Java 17+`
+- `JavaFX 21`
+- `ControlsFX & BootstrapFX for UI enhancement`
+- `JUnit 5 for unit testing`
+- `JSON-simple for file I/O`
+- `XML (DOM) Parsing for data import`
 
 ---
 ## 👨‍💻 Authors
 - Developed by
--Gil Gaitan
--Abdirahman Hassan
--Nick Babashov
--Banji Lawal
--Yahya Guler
+-`Gil Gaitan`
+-`Abdirahman Hassan`
+-`Nick Babashov`
+-`Banji Lawal`
+-`Yahya Guler`
 
 
