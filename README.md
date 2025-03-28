@@ -73,6 +73,7 @@ This Java-based Vehicle Tracking System has been upgraded to include new dealer 
 - `JSONFileImporter`: Imports dealers from structured JSON.
 - `XMLFileImporter`: Parses XML based on the new dealer schema.
 - `DataExporter`: Handles exporting full or partial dealer data.
+- `PersistenceManager`: Handles persistency logic. Exports all dealership data when the program stops and imports it when the program boots up again.
 
 ### 🔹 Entry Point
 - `FXDriver`: JavaFX application launcher.
