@@ -1,5 +1,12 @@
 # 🚗 Vehicle Tracking System — Enhanced Edition
 
+## Project Deliverables:
+- **Zipped Project**
+- **Diagrams**:
+  - Sequence diagrams in /Documentation
+  - Use case diagrams in /Documentation
+  - UML class diagram in /Documentation
+
 ## 🔍 Overview
 
 This Java-based Vehicle Tracking System has been upgraded to include new dealer support, persistent data management, advanced inventory operations, and a feature-rich JavaFX GUI. The enhancements were driven by user feedback and organizational growth, prioritizing usability, scalability, and maintainability. The updated system provides seamless management of vehicle inventories, supports both JSON and XML data formats, and ensures data consistency across sessions.
