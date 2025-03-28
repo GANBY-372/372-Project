@@ -40,7 +40,7 @@ public class VehicleActionHelper {
                 .toList();
 
         if (toDelete.isEmpty()) {
-            showAlert(AlertType.WARNING, "No Vehicles Selected", "Please select vehicle(s) using the checkbox to delete.");
+            FXController.showAlert(AlertType.WARNING, "No Vehicles Selected", "Please select vehicle(s) using the checkbox to delete.");
             return;
         }
 
@@ -61,7 +61,7 @@ public class VehicleActionHelper {
 
                 vehicleTable.refresh();
                 dealerTable.refresh();
-                showAlert(AlertType.INFORMATION, "Deleted", "Selected vehicles deleted successfully.");
+                FXController.showAlert(AlertType.INFORMATION, "Deleted", "Selected vehicles deleted successfully.");
             }
         });
     }
@@ -74,7 +74,7 @@ public class VehicleActionHelper {
     public static void modifyVehiclePrice(TableView<Vehicle> vehicleTable) {
         Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
         if (selectedVehicle == null) {
-            showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to modify.");
+            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to modify.");
             return;
         }
 
@@ -89,9 +89,9 @@ public class VehicleActionHelper {
                 if (newPrice < 0) throw new NumberFormatException("Price must be non-negative.");
                 selectedVehicle.setPrice(newPrice);
                 vehicleTable.refresh();
-                showAlert(AlertType.INFORMATION, "Updated", "Price updated to $" + newPrice);
+                FXController.showAlert(AlertType.INFORMATION, "Updated", "Price updated to $" + newPrice);
             } catch (NumberFormatException e) {
-                showAlert(AlertType.ERROR, "Invalid Input", "Please enter a valid price.");
+                FXController.showAlert(AlertType.ERROR, "Invalid Input", "Please enter a valid price.");
             }
         });
     }
@@ -109,7 +109,7 @@ public class VehicleActionHelper {
                 .toList();
 
         if (selectedVehicles.isEmpty()) {
-            showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to change rent status.");
+            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to change rent status.");
             return;
         }
 
@@ -118,7 +118,7 @@ public class VehicleActionHelper {
 
             // If it's a SportsCar, it should not be toggled
             if (result.trim().replaceAll("\\s+", "").toUpperCase().equals("SPORTSCAR")) {
-                showAlert(AlertType.WARNING, "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
+                FXController.showAlert(AlertType.WARNING, "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
                         "SportsCars cannot be rented.");
             }
         }
@@ -162,7 +162,7 @@ public class VehicleActionHelper {
      */
     public static void openAddVehicleWizard(Dealer selectedDealer, ObservableList<Vehicle> vehicleObservableList) {
         if (selectedDealer == null) {
-            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
+            FXController.showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
             return;
         }
 
@@ -241,16 +241,13 @@ public class VehicleActionHelper {
                     throw new IllegalArgumentException("Price must be a valid non-negative number.");
                 }
 
-                // Instantiate the appropriate vehicle type
-                Vehicle newVehicle = switch (category) {
-                    case "SUV" -> new SUV(id, model, manufacturer, price, selectedDealer.getId(), acquisitionDate);
-                    case "Sedan" -> new Sedan(id, model, manufacturer, price, selectedDealer.getId(), acquisitionDate);
-                    case "Pickup" -> new Pickup(id, model, manufacturer, price, selectedDealer.getId(), acquisitionDate);
-                    case "SportsCar" -> new SportsCar(id, model, manufacturer, price, selectedDealer.getId(), acquisitionDate);
-                    default -> throw new IllegalArgumentException("Invalid vehicle type selected.");
-                };
+                // Use VehicleBuilder to create the vehicle
+                Vehicle newVehicle = VehicleBuilder.buildVehicle(id, model, manufacturer, price,
+                        selectedDealer.getId(), acquisitionDate, isRentable, category);
 
-                newVehicle.setRentedOut(isRentable);
+                if (newVehicle == null) {
+                    throw new IllegalArgumentException("Invalid vehicle type selected.");
+                }
 
                 // Add vehicle to catalog
                 Dealer dealer = DealerCatalog.getInstance().getDealerWithId(selectedDealer.getId());
@@ -263,12 +260,12 @@ public class VehicleActionHelper {
                 String msg = "%s %s (%s) was added to Dealer #%s".formatted(
                         manufacturer, model, category, selectedDealer.getId()
                 );
-                showAlert(Alert.AlertType.INFORMATION, "Success", msg);
+                FXController.showAlert(Alert.AlertType.INFORMATION, "Success", msg);
 
                 wizardStage.close();
 
             } catch (Exception e) {
-                showAlert(Alert.AlertType.ERROR, "Error Adding Vehicle", e.getMessage());
+                FXController.showAlert(Alert.AlertType.ERROR, "Error Adding Vehicle", e.getMessage());
             }
         });
 
@@ -277,6 +274,7 @@ public class VehicleActionHelper {
 
         wizardStage.showAndWait();
     }
+
 
     /**
      * Opens wizard to transfer selected vehicles to another dealer.
@@ -300,7 +298,7 @@ public class VehicleActionHelper {
                 .toList();
 
         if (selectedVehicles.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "No Vehicles Selected", "Please select vehicles to transfer.");
+            FXController.showAlert(Alert.AlertType.WARNING, "No Vehicles Selected", "Please select vehicles to transfer.");
             return;
         }
 
@@ -309,7 +307,7 @@ public class VehicleActionHelper {
                 .toList();
 
         if (otherDealers.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "No Other Dealers", "No available dealers to transfer to.");
+            FXController.showAlert(Alert.AlertType.WARNING, "No Other Dealers", "No available dealers to transfer to.");
             return;
         }
 
@@ -324,6 +322,7 @@ public class VehicleActionHelper {
             // Remove from current dealer
             for (Vehicle v : toTransfer) {
                 currentDealer.getVehicleCatalog().remove(v.getVehicleId());
+                v.setDealerId(destinationDealer.getId());  // Update the dealer ID
             }
 
             // Transfer to destination dealer
@@ -334,10 +333,11 @@ public class VehicleActionHelper {
             vehicleTable.refresh();
             dealerTable.refresh();
 
-            showAlert(Alert.AlertType.INFORMATION, "Transfer Complete",
+            FXController.showAlert(Alert.AlertType.INFORMATION, "Transfer Complete",
                     "Vehicles transferred to " + destinationDealer.getName());
         });
     }
+
 
 
     /**
@@ -387,21 +387,5 @@ public class VehicleActionHelper {
         }
 
         outputList.setAll(rentedVehicles);
-    }
-
-
-    /**
-     * Shows a popup alert with given parameters.
-     *
-     * @param alertType the alert type (e.g., WARNING, ERROR)
-     * @param title the alert dialog title
-     * @param message the content of the alert
-     */
-    private static void showAlert(AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

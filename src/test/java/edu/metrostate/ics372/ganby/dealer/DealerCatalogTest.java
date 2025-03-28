@@ -30,10 +30,10 @@ public class DealerCatalogTest {
         catalog.addDealer(d001);
         catalog.addDealer(d002);
 
-        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", now, false);
-        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001", now, false);
-        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", now, false);
-        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002", now, false);
+        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", "name1", now, false);
+        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001","name2", now, false);
+        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", "name3", now, false);
+        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002","name4", now, false);
 
         catalog.addVehicle(v001);
         catalog.addVehicle(v002);
@@ -60,7 +60,7 @@ public class DealerCatalogTest {
 
     @Test
     void addVehicle() {
-        Vehicle v005 = new Sedan("V005", "Civic", "Honda", 18000.00, "002", now, false);
+        Vehicle v005 = new Sedan("V005", "Civic", "Honda", 18000.00, "002", "name1", now, false);
         catalog.addVehicle(v005);
         assertNotNull(catalog.getDealerWithId("002").findVehicleById("V005"));
     }

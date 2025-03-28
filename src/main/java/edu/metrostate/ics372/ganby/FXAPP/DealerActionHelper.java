@@ -121,9 +121,9 @@ public class DealerActionHelper {
 
                 // Show success message with details
                 String msg = "Dealer '%s' (ID: %s) was successfully added.".formatted(dealerName, dealerId);
-                showAlert(Alert.AlertType.INFORMATION, "Success", msg);
+                FXController.showAlert(Alert.AlertType.INFORMATION, "Success", msg);
             } catch (Exception e) {
-                showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+                FXController.showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
             }
         });
 
@@ -144,7 +144,7 @@ public class DealerActionHelper {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
             return;
         }
 
@@ -158,7 +158,7 @@ public class DealerActionHelper {
         }
         */
         if (selectedDealer == null) {
-            showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
             return;
         }
 
@@ -169,12 +169,12 @@ public class DealerActionHelper {
 
         dialog.showAndWait().ifPresent(newName -> {
             if (newName.trim().isEmpty()) {
-                showAlert(AlertType.ERROR, "Invalid Input", "Dealer name cannot be empty.");
+                FXController.showAlert(AlertType.ERROR, "Invalid Input", "Dealer name cannot be empty.");
             } else {
                 selectedDealer.setName(newName.trim());
                 dealerTable.refresh();
                 dealerNameField.setText(newName.trim());
-                showAlert(AlertType.INFORMATION, "Updated", "Dealer name successfully updated.");
+                FXController.showAlert(AlertType.INFORMATION, "Updated", "Dealer name successfully updated.");
             }
         });
     }
@@ -190,7 +190,7 @@ public class DealerActionHelper {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
             return;
         }
 
@@ -225,7 +225,7 @@ public class DealerActionHelper {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            showAlert(AlertType.WARNING, "No Dealers Selected", "Please select dealers to delete.");
+            FXController.showAlert(AlertType.WARNING, "No Dealers Selected", "Please select dealers to delete.");
             return;
         }
 
@@ -255,7 +255,7 @@ public class DealerActionHelper {
                     finalizeDeletion(dealer, dealerObservableList, vehicleObservableList);
                 } else if (response == transferVehicles) {
                     if (otherDealers.isEmpty()) {
-                        showAlert(AlertType.ERROR, "No Available Dealers", "No other dealers to transfer vehicles to.");
+                        FXController.showAlert(AlertType.ERROR, "No Available Dealers", "No other dealers to transfer vehicles to.");
                         continue;
                     }
 
@@ -269,7 +269,7 @@ public class DealerActionHelper {
                         DealerCatalog.getInstance().transferInventory(toTransfer, destination.getId());
                         dealer.getVehicleCatalog().clear();
                         finalizeDeletion(dealer, dealerObservableList, vehicleObservableList);
-                        showAlert(AlertType.INFORMATION, "Transfer Complete",
+                        FXController.showAlert(AlertType.INFORMATION, "Transfer Complete",
                                 "Vehicles transferred to " + destination.getName() + ".");
                     });
                 }

@@ -10,14 +10,12 @@ import javafx.stage.Stage;
 
 public class FXDriver extends Application {
 
-    private FXController controller;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("FXAPP-View.fxml"));
         Parent root = loader.load();
 
-        controller = loader.getController();
+        FXController controller = loader.getController();
         PersistenceManager.loadAutosave(controller);  // Load saved data
 
         primaryStage.setTitle("Vehicle Tracking System");

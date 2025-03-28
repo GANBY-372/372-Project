@@ -170,7 +170,13 @@ public class DataExporter {
         }
     }
 
-    public void promptAndExportDealers(Stage stage, List<Dealer> selectedDealers) {
+    /**
+     * Prompts the user to export selected dealers to a single XML file.
+     *
+     * @param stage           the JavaFX window used for showing the save dialog
+     * @param selectedDealers the list of dealers to export
+     */
+    public void promptAndExportDealersAsJSON(Stage stage, List<Dealer> selectedDealers) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Export Selected Dealers");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
@@ -196,6 +202,28 @@ public class DataExporter {
             }
         }
     }
+
+
+    /**
+     * Prompts the user to export selected dealers to a single XML file.
+     *
+     * @param stage           the JavaFX window used for showing the save dialog
+     * @param selectedDealers the list of dealers to export
+     */
+    public void promptAndExportDealersAsXML(Stage stage, List<Dealer> selectedDealers) {
+        try {
+            XMLFileExporter xmlFileExporter = new XMLFileExporter();
+            xmlFileExporter.exportDealers(stage, selectedDealers); // Handles file dialog, XML creation, and writing
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Export Failed");
+            alert.setHeaderText("Could not export selected dealers");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            e.printStackTrace();
+        }
+    }
+
 
     private JSONObject convertDealersToJSON(List<Dealer> dealers) {
         JSONObject rootJson = new JSONObject();

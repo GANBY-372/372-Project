@@ -18,16 +18,19 @@
         fx:controller="edu.metrostate.ics372.ganby.FXAPP.FXController"
 >
     <HBox layoutX="13.0" layoutY="20.0" spacing="10.0">
-        <Button
-                fx:id="importJsonButton"
-                text="Import JSON"
-                onAction="#importJSONFile"/>
-        <Button
-                fx:id="importXmlButton"
-                text="Import XML"
-                onAction="#importXMLFile"/>
-        <Button fx:id="exportSelectedDealersButton" text="Export Selected Dealers" onAction="#exportSelectedDealers" />
+        <MenuButton text="Import">
+            <items>
+                <MenuItem fx:id="importJsonMenuItem" text="From JSON" onAction="#handleImport" />
+                <MenuItem fx:id="importXmlMenuItem" text="From XML" onAction="#handleImport" />
+            </items>
+        </MenuButton>
 
+        <MenuButton text="Export">
+            <items>
+                <MenuItem fx:id="exportJsonMenuItem" text="To JSON" onAction="#handleExport" />
+                <MenuItem fx:id="exportXmlMenuItem" text="To XML" onAction="#handleExport" />
+            </items>
+        </MenuButton>
 
     </HBox>
 

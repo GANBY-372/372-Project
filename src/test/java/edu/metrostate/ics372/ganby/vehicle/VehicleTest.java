@@ -18,10 +18,10 @@ class VehicleTest {
 
     @BeforeEach
     void setUp() {
-        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", LocalDateTime.now(), false);
-        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001", LocalDateTime.now(), false);
-        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", LocalDateTime.now(), false);
-        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002", LocalDateTime.now(), false);
+        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", "name1", LocalDateTime.now(), false);
+        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001", "name3", LocalDateTime.now(), false);
+        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", "name2", LocalDateTime.now(), false);
+        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002", "name4", LocalDateTime.now(), false);
     }
 
     @AfterEach
@@ -96,7 +96,7 @@ class VehicleTest {
 
     @Test
     void setDealer_ValidDealer() {
-        Dealer newDealer = new Dealer("003");
+        Dealer newDealer = new Dealer("003", null);
         v001.setDealer(newDealer);
         assertEquals("003", v001.getDealerId());
     }
@@ -127,7 +127,7 @@ class VehicleTest {
 
     @Test
     void testEquals_DifferentObjectSameId() {
-        Vehicle duplicate = new Sedan("V001", "Different Model", "Different Manufacturer", 20000.00, "005", LocalDateTime.now(), false);
+        Vehicle duplicate = new Sedan("V001", "Different Model", "Different Manufacturer", 20000.00, "005", "name5", LocalDateTime.now(), false);
         assertEquals(v001, duplicate);
     }
 

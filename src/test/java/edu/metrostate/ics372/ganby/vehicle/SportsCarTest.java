@@ -17,7 +17,7 @@ class SportsCarTest {
     @BeforeEach
     void setUp() {
         // Fresh setup before each test case
-        sportsCar = new SportsCar("123", "Model S", "Tesla", 100000, "dealer123", LocalDateTime.now());
+        sportsCar = new SportsCar("123", "Model S", "Tesla", 100000, "dealer123", "name1", LocalDateTime.now(), false);
     }
 
     @AfterEach
@@ -42,7 +42,7 @@ class SportsCarTest {
     @Test
     void testEquals() {
         // Create another SportsCar with the same ID
-        SportsCar anotherCar = new SportsCar("123", "Model S", "Tesla", 100000, "dealer123", LocalDateTime.now());
+        SportsCar anotherCar = new SportsCar("123", "Model S", "Tesla", 100000, "dealer123", "name2", LocalDateTime.now(), false);
 
         // Test that the two SportsCars are equal based on their ID
         assertEquals(sportsCar, anotherCar);
