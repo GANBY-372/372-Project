@@ -16,10 +16,10 @@ class DealerTest {
     @BeforeEach
     void setUp() {
         dealer = new Dealer("123", "Test Dealer");
-        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", "name1", LocalDateTime.now(), false);
-        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001","name2", LocalDateTime.now(), false);
-        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", "name3", LocalDateTime.now(), false);
-        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002", "name4", LocalDateTime.now(), false);
+        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", LocalDateTime.now(), false);
+        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001", LocalDateTime.now(), false);
+        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001",  LocalDateTime.now(), false);
+        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002",  LocalDateTime.now(), false);
     }
 
     @Test
