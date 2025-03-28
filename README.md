@@ -3,13 +3,40 @@
 ## Project Deliverables:
 - **Zipped Project**
 - **Diagrams**:
-  - Sequence diagrams in /Documentation
-  - Use case diagrams in /Documentation
+  - Sequence diagrams in /Documentation/Diagrams
+  - Use case diagrams in /Documentation/Use_Cases
   - UML class diagram in /Documentation
 
 ## 🔍 Overview
 
 This Java-based Vehicle Tracking System has been upgraded to include new dealer support, persistent data management, advanced inventory operations, and a feature-rich JavaFX GUI. The enhancements were driven by user feedback and organizational growth, prioritizing usability, scalability, and maintainability. The updated system provides seamless management of vehicle inventories, supports both JSON and XML data formats, and ensures data consistency across sessions.
+
+---
+
+## Requirements
+
+The software shall:
+
+1. Save an instance of the running program after quitting.
+2. Load the last saved instance from the resources folder during boot (if it exists).
+3. Track vehicle status as they are loaned out and returned.
+4. Prevent SportsCars from being rented (rent status remains false).
+5. Show an alert if a user attempts to set a SportsCar’s rent status to true.
+6. Allow a dealer to transfer inventory by selecting one or more vehicles and a destination dealer.
+7. Accept and import both XML and JSON files as valid data formats.
+8. Allow the user to choose between XML or JSON for importing data.
+9. Export selected dealer vehicle inventories to a file.
+10. Let users choose XML or JSON as the export format.
+11. Require dealerships to have a name when imported.
+12. Assign default names to any imported dealerships without a name.
+13. Enable editing of dealer names through the GUI.
+14. Allow removal of selected vehicle(s) from the dealership.
+15. Allow removal of selected dealer(s) from the catalog.
+16. Enable removal of all vehicles associated with a dealer.
+17. Allow specifying a different dealer to transfer vehicles before deleting a dealership.
+18. Enable users to modify the price of a given vehicle.
+
+---
 
 ## 🗓 Development Timeline
 
