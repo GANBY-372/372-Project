@@ -148,15 +148,6 @@ public class DealerActionHelper {
             return;
         }
 
-       /* for (Dealer dealer : selectedDealers) {
-            boolean current = dealer.getIsVehicleAcquisitionEnabled();
-            if (current) {
-                DealerCatalog.getInstance().disableDealerAcquisition(dealer.getId());
-            } else {
-                DealerCatalog.getInstance().enableDealerAcquisition(dealer.getId());
-            }
-        }
-        */
         if (selectedDealer == null) {
             FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
             return;
@@ -259,7 +250,7 @@ public class DealerActionHelper {
                         continue;
                     }
 
-                    ChoiceDialog<Dealer> dialog = new ChoiceDialog<>(otherDealers.get(0), otherDealers);
+                    ChoiceDialog<Dealer> dialog = new ChoiceDialog<>(otherDealers.getFirst(), otherDealers);
                     dialog.setTitle("Transfer Inventory");
                     dialog.setHeaderText("Transfer vehicles from " + dealer.getName());
                     dialog.setContentText("Transfer to:");
@@ -297,14 +288,4 @@ public class DealerActionHelper {
         vehicleObservableList.clear();
     }
 
-    /**
-     * Shows a JavaFX alert dialog.
-     */
-    private static void showAlert(AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 }

@@ -231,7 +231,6 @@ public class DealerCatalog {
      * Transfer Vehicles from one dealer to another
      * @param vehiclesToTransfer list of vehicles to transfer
      * @param newDealerId The id of the dealer to transfer vehicles to
-     * @return void
      */
     public void transferInventory(ArrayList<Vehicle> vehiclesToTransfer, String newDealerId){
         for(Vehicle vehicle : vehiclesToTransfer){

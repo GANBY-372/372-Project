@@ -51,17 +51,6 @@ public class SportsCar extends Vehicle {
     }
 
     /**
-     * Overrides rent status setter. SportsCars cannot be rented, so this does nothing but return type, which will be
-     * checked and then once found out to be SportsCar
-     *
-     * @param rentStatus the attempted rent status (ignored)
-     */
-    @Override
-    public String setRentedOut(Boolean rentStatus) {
-        return this.getType();
-    }
-
-    /**
      * Equality based on vehicle ID.
      *
      * @param object another object

@@ -12,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
+import java.util.logging.Logger;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
  * Provides support for user-interactive prompts and handles updates to JavaFX UI components.
  */
 public class DataIOHelper {
+    private static final Logger LOGGER = Logger.getLogger(DataIOHelper.class.getName());
 
     /**
      * Imports dealer and vehicle data from a JSON file.
@@ -37,8 +40,14 @@ public class DataIOHelper {
             dealerTable.setItems(dealerList);
             FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "JSON file successfully imported!");
         } catch (Exception e) {
-            FXController.showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing JSON: " + e.getMessage());
-            e.printStackTrace();
+            // Log the error message
+            LOGGER.severe("Error importing XML: " + e.getMessage());
+
+            // Optionally log the stack trace in a more controlled way
+            LOGGER.log(java.util.logging.Level.SEVERE, "Error Details", e);
+
+            // Show the alert with the error message
+            FXController.showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing JSON:\n" + e.getMessage());
         }
     }
 
@@ -69,9 +78,16 @@ public class DataIOHelper {
                 FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "XML file successfully imported!");
             }
         } catch (Exception e) {
+            // Log the error message
+            LOGGER.severe("Error importing XML: " + e.getMessage());
+
+            // Optionally log the stack trace in a more controlled way
+            LOGGER.log(java.util.logging.Level.SEVERE, "Error Details", e);
+
+            // Show the alert with the error message
             FXController.showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing XML:\n" + e.getMessage());
-            e.printStackTrace();
         }
+
     }
 
     /**
