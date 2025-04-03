@@ -1,6 +1,7 @@
 package edu.metrostate.ics372.ganby.dataprocessing;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
@@ -83,7 +84,7 @@ public class JSONFileExporter {
      * @param json the raw JSON string
      * @return a pretty-printed version of the input JSON
      */
-    private String prettyPrintJson(String json) {
+    private static String prettyPrintJson(String json) {
         StringBuilder formatted = new StringBuilder();
         int indent = 0;
         boolean inQuotes = false;
@@ -138,5 +139,48 @@ public class JSONFileExporter {
         alert.setHeaderText("Error exporting dealers");
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public static void saveStateToFile(String filePath) {
+        try {
+            // Make sure the directory exists
+            File file = new File(filePath);
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs(); // create the folder if it doesn't exist
+            }
+
+            try (FileWriter writer = new FileWriter(file)) {
+                JSONObject fullCatalogJson = convertDealerCatalogToJSON();
+                writer.write(prettyPrintJson(fullCatalogJson.toJSONString()));
+                System.out.println("Dealer catalog successfully saved to " + filePath);
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving dealer catalog: " + filePath + " (" + e.getMessage() + ")");
+        }
+    }
+
+    public static JSONObject convertDealerCatalogToJSON() {
+        JSONObject rootJson = new JSONObject();
+        JSONArray carInventoryJson = new JSONArray();
+
+        for (Dealer dealer : DealerCatalog.getInstance().getDealers()) {
+            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+                JSONObject vehicleJson = new JSONObject();
+                vehicleJson.put("dealership_id", dealer.getId());
+                vehicleJson.put("vehicle_type", vehicle.getType());
+                vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
+                vehicleJson.put("vehicle_model", vehicle.getModel());
+                vehicleJson.put("vehicle_id", vehicle.getVehicleId());
+                vehicleJson.put("price", vehicle.getPrice());
+                ZoneId zoneId = ZoneId.of("America/Chicago");
+                long epochMillis = vehicle.getAcquisitionDate().atZone(zoneId).toInstant().toEpochMilli();
+                vehicleJson.put("acquisition_date", epochMillis);
+
+                carInventoryJson.add(vehicleJson);
+            }
+        }
+        rootJson.put("car_inventory", carInventoryJson);
+        return rootJson;
     }
 }

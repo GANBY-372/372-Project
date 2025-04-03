@@ -1,8 +1,7 @@
 package edu.metrostate.ics372.ganby.dataprocessing;
 
-import edu.metrostate.ics372.ganby.dataprocessing.DataExporter;
-import edu.metrostate.ics372.ganby.dataprocessing.JSONFileImporter;
 import edu.metrostate.ics372.ganby.FXAPP.FXController;
+
 
 import java.io.File;
 
@@ -34,7 +33,7 @@ public class PersistenceManager {
      */
     public static void saveAutosave() {
         try {
-            new DataExporter().saveStateToFile(AUTOSAVE_PATH);
+            JSONFileExporter.saveStateToFile(AUTOSAVE_PATH); // Should be exporter instead, so put all the logic from
             System.out.println("💾 Dealer catalog autosaved to: " + AUTOSAVE_PATH);
         } catch (Exception e) {
             System.err.println("❌ Failed to autosave dealer catalog: " + e.getMessage());
