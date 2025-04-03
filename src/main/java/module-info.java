@@ -7,6 +7,7 @@ module edu.metrostate.ics372.ganby {
     requires org.kordamp.bootstrapfx.core;
     requires json.simple;
     requires java.desktop;
+    requires java.logging;
 
     opens edu.metrostate.ics372.ganby.vehicle to javafx.base;
     opens edu.metrostate.ics372.ganby to javafx.fxml;

@@ -198,9 +198,8 @@ public abstract class Vehicle {
      * @param rentedOut the new rent status
      * @return the vehicle type (can be used to restrict rental for certain types)
      */
-    public String setRentedOut(Boolean rentedOut) {
+    public void setRentedOut(Boolean rentedOut) {
         this.isRentedOut.set(rentedOut);
-        return this.getType();
     }
 
     // --- Selection Support ---
