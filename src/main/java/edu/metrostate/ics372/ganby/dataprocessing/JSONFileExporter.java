@@ -64,6 +64,7 @@ public class JSONFileExporter {
                 vehicleJson.put("vehicle_model", vehicle.getModel());
                 vehicleJson.put("vehicle_id", vehicle.getVehicleId());
                 vehicleJson.put("price", vehicle.getPrice());
+                vehicleJson.put("is_rented_out", vehicle.getIsRentedOut());
 
                 long epochMillis = vehicle.getAcquisitionDate()
                         .atZone(ZoneId.systemDefault())
@@ -176,6 +177,7 @@ public class JSONFileExporter {
                 ZoneId zoneId = ZoneId.of("America/Chicago");
                 long epochMillis = vehicle.getAcquisitionDate().atZone(zoneId).toInstant().toEpochMilli();
                 vehicleJson.put("acquisition_date", epochMillis);
+                vehicleJson.put("is_rented_out", vehicle.getIsRentedOut());
 
                 carInventoryJson.add(vehicleJson);
             }

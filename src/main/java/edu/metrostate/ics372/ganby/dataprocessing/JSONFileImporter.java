@@ -29,6 +29,8 @@ public class JSONFileImporter {
     public static final String VEHICLE_TYPE_KEY = "vehicle_type";
     public static final String PRICE_KEY = "price";
     public static final String ACQUISITION_DATE_KEY = "acquisition_date";
+    public static final String ACQUISITION_STATUS_KEY = "acquisition_status";
+    public static final String IS_RENTED_KEY = "is_rented_out";
 
     private JSONArray jsonArray;
 
@@ -91,6 +93,16 @@ public class JSONFileImporter {
         double price = Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
         String dealerId = jsonObject.get(DEALER_ID_KEY).toString();
         long epochMillis = Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
+
+        Object rentedOutObj = jsonObject.get(IS_RENTED_KEY);
+        boolean isRentedOut = false;
+        if (rentedOutObj!= null) {
+            isRentedOut = Boolean.parseBoolean(rentedOutObj.toString());
+            System.out.println(isRentedOut);
+        } else {
+
+            System.out.println("is_rented_out NOT found during import");
+        }
 
         LocalDateTime acquisitionDate = LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(epochMillis),

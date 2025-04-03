@@ -14,6 +14,8 @@ public class PersistenceManager {
      *
      * @param controller the FXController to update the UI
      */
+
+
     public static void loadAutosave(FXController controller) {
         File autosaveFile = new File(AUTOSAVE_PATH);
         if (autosaveFile.exists()) {
@@ -31,12 +33,16 @@ public class PersistenceManager {
     /**
      * Saves the current state of the dealer catalog to a persistent file.
      */
+
+
     public static void saveAutosave() {
         try {
-            JSONFileExporter.saveStateToFile(AUTOSAVE_PATH); // Should be exporter instead, so put all the logic from
+            JSONFileExporter.saveStateToFile(AUTOSAVE_PATH);
             System.out.println("💾 Dealer catalog autosaved to: " + AUTOSAVE_PATH);
         } catch (Exception e) {
             System.err.println("❌ Failed to autosave dealer catalog: " + e.getMessage());
         }
     }
 }
+
+
