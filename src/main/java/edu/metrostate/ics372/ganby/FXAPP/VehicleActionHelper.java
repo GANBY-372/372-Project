@@ -113,24 +113,33 @@ public class VehicleActionHelper {
             return;
         }
 
+        // Check if all selected vehicles are already rented out
+        boolean allRentedOut = true;
         for (Vehicle vehicle : selectedVehicles) {
-
-            // If it's a SportsCar, it should not be toggled
+            // If it's a SportsCar, show an alert and do not toggle
             if (vehicle.getType().trim().replaceAll("\\s+", "").equalsIgnoreCase("SportsCar")) {
                 FXController.showAlert(AlertType.WARNING, "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
                         "SportsCars cannot be rented.");
-            }else{
-                vehicle.setRentedOut(!vehicle.getIsRentedOut());
-
+                return; // Return early since the action is not allowed
             }
+            if (!vehicle.getIsRentedOut()) {
+                allRentedOut = false; // Found a vehicle that is not rented out
+                break; // No need to check further if we already found a non-rented vehicle
+            }
+        }
+
+        // Update the rent status for all selected vehicles
+        for (Vehicle vehicle : selectedVehicles) {
+            // Set all to "Available" or "Rented" based on the flag
+            vehicle.setRentedOut(!allRentedOut);  // Use the appropriate setter method here
         }
 
         vehicleTable.refresh();
 
-        // Optional: update button label based on the first selected vehicle
-        Vehicle first = selectedVehicles.getFirst();
-        toggleButton.setText(first.getIsRentedOut() ? "Set as Available" : "Set as Rented");
+        // Update the button text based on whether all vehicles were rented out or not
+        toggleButton.setText(allRentedOut ? "Set All as Available" : "Set All as Rented");
     }
+
 
     /**
      * Selects or unselects all vehicles in the table.
