@@ -1,0 +1,31 @@
+@startuml
+actor User
+participant FXController
+participant DealerActionHelper
+participant Vehicle
+participant Dealer
+participant DealerCatalog
+
+User -> FXController : clicks "Transfer to Dealer"
+FXController -> DealerActionHelper : transferInventory(vehiclesToTransfer, newDealerId)
+
+loop for each Vehicle in vehiclesToTransfer
+    DealerActionHelper -> Vehicle : setDealerId(newDealerId)
+    activate Vehicle
+    Vehicle -> Vehicle : this.dealerId.set(newDealerId)
+    deactivate Vehicle
+end
+
+DealerActionHelper -> DealerCatalog : get(newDealerId)
+activate DealerCatalog
+DealerCatalog --> DealerActionHelper : Dealer instance
+deactivate DealerCatalog
+
+DealerActionHelper -> Dealer : addVehicles(vehiclesToTransfer)
+
+loop for each Vehicle in vehiclesToTransfer
+    Dealer -> Dealer : addVehicle(vehicle)
+end
+
+@enduml
+
