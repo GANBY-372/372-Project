@@ -114,19 +114,21 @@ public class VehicleActionHelper {
         }
 
         for (Vehicle vehicle : selectedVehicles) {
-            String result = vehicle.setRentedOut(!vehicle.getIsRentedOut());
 
             // If it's a SportsCar, it should not be toggled
-            if (result.trim().replaceAll("\\s+", "").toUpperCase().equals("SPORTSCAR")) {
+            if (vehicle.getType().trim().replaceAll("\\s+", "").equalsIgnoreCase("SportsCar")) {
                 FXController.showAlert(AlertType.WARNING, "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
                         "SportsCars cannot be rented.");
+            }else{
+                vehicle.setRentedOut(!vehicle.getIsRentedOut());
+
             }
         }
 
         vehicleTable.refresh();
 
         // Optional: update button label based on the first selected vehicle
-        Vehicle first = selectedVehicles.get(0);
+        Vehicle first = selectedVehicles.getFirst();
         toggleButton.setText(first.getIsRentedOut() ? "Set as Available" : "Set as Rented");
     }
 
@@ -147,7 +149,7 @@ public class VehicleActionHelper {
         vehicleTable.refresh();
     }
 
-    /**
+    /*
      * Opens a modal wizard to add a new vehicle to the selected dealer.
      * Handles all input fields, validation, and updates the dealer's vehicle catalog.
      *
@@ -311,7 +313,7 @@ public class VehicleActionHelper {
             return;
         }
 
-        ChoiceDialog<Dealer> dialog = new ChoiceDialog<>(otherDealers.get(0), otherDealers);
+        ChoiceDialog<Dealer> dialog = new ChoiceDialog<>(otherDealers.getFirst(), otherDealers);
         dialog.setTitle("Transfer Vehicles");
         dialog.setHeaderText("Choose destination dealer:");
         dialog.setContentText("Dealer:");

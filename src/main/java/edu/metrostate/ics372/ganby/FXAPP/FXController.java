@@ -72,12 +72,8 @@ public class FXController {
     @FXML public TableColumn<Dealer, Boolean> dealerSelectColumn;
     private final ObservableList<Dealer> dealerObservableList = FXCollections.observableArrayList();
     private final ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
-    public Button importJsonButton;
-    public Button importXmlButton;
-    public Button exportDataButton;
     public Button editDealerNameButton;
     private boolean allDealersSelected = false;
-    private boolean suppressSelectionListener = false;
 
 
     @FXML
