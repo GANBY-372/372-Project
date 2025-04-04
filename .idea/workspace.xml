@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
+    <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main Issues # 6 Solved GUI&#10;                                   If you select all the vehicles the button will say &quot;Set as Available&quot;, but it really toggles the rental state, so if it wasn't rented before it will change to rented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +37,9 @@
     &quot;accountId&quot;: &quot;12bc500f-7981-483b-bb37-7f71103fc8ba&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -181,6 +185,15 @@
       <workItem from="1743643231102" duration="1115000" />
       <workItem from="1743701820980" duration="1886000" />
     </task>
+    <task id="LOCAL-00001" summary="Merged with main Issues # 6 Solved GUI&#10;                                   If you select all the vehicles the button will say &quot;Set as Available&quot;, but it really toggles the rental state, so if it wasn't rented before it will change to rented">
+      <option name="closed" value="true" />
+      <created>1743706497053</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1743706497053</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +201,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merged with main" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merged with main" />
+    <MESSAGE value="Merged with main Issues # 6 Solved GUI&#10;                                   If you select all the vehicles the button will say &quot;Set as Available&quot;, but it really toggles the rental state, so if it wasn't rented before it will change to rented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merged with main Issues # 6 Solved GUI&#10;                                   If you select all the vehicles the button will say &quot;Set as Available&quot;, but it really toggles the rental state, so if it wasn't rented before it will change to rented" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

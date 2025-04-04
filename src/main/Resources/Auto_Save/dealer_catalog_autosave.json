@@ -10,13 +10,22 @@
       "acquisition_date": 1515354694451
     },
     {
-      "price": 50444.0,
+      "price": 35000.0,
       "vehicle_model": "Model 3",
       "vehicle_type": "Sedan",
       "dealership_id": "12513",
       "vehicle_manufacturer": "Tesla",
       "vehicle_id": "83883",
-      "acquisition_date": 1515354694451
+      "acquisition_date": 1744779600000
+    },
+    {
+      "price": 54367.0,
+      "vehicle_model": "sdfgh",
+      "vehicle_type": "SUV",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "sdfh",
+      "vehicle_id": "gbhjk",
+      "acquisition_date": 1744174800000
     },
     {
       "price": 20123.0,
