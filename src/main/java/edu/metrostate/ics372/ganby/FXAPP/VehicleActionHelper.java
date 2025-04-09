@@ -27,6 +27,7 @@ public class VehicleActionHelper {
 
     /**
      * Deletes all checkbox-selected vehicles from both UI and dealer catalog.
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param vehicleTable           the vehicle table
      * @param dealerTable            the dealer table for refresh
@@ -68,6 +69,7 @@ public class VehicleActionHelper {
 
     /**
      * Modifies the price of the selected vehicle.
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param vehicleTable the vehicle table with selection
      */
@@ -158,13 +160,6 @@ public class VehicleActionHelper {
         vehicleTable.refresh();
     }
 
-    /*
-     * Opens a modal wizard to add a new vehicle to the selected dealer.
-     * Handles all input fields, validation, and updates the dealer's vehicle catalog.
-     *
-     * @param selectedDealer        the dealer to add the vehicle to
-     * @param vehicleObservableList the observable list to update the vehicle table
-     */
     /**
      * Opens a modal wizard to add a new vehicle to the selected dealer.
      *
