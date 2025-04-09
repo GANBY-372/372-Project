@@ -20,7 +20,7 @@ public class TestDriver {
         DealerCatalog dealerCatalog = new DealerCatalog();
 
         // Add a dealer to the catalog
-        Dealer dealer = new Dealer("D001", "Metro Auto");
+        Dealer dealer = new Dealer("X001", "Metro Auto");
         dealerCatalog.getDealers().add(dealer);
 
         // Print out the dealer information
@@ -42,21 +42,23 @@ public class TestDriver {
 
         // Print out the dealer's buying status
         System.out.println("Dealer Buying Status: " + dealer.getIsBuying());
+        System.out.println("Dealer Name: " + dealer.getName());
 
         // Add the vehicles to the dealer catalog
         DealerCatalog.getInstance().addVehicle(vehicle1);
         DealerCatalog.getInstance().addVehicle(vehicle2);
 
         // Print out the dealer catalog
+        // WHY IS DEALER NAME A DEFAULT NAME?
         HashMap<String, Dealer> catalog = DealerCatalog.getInstance().getDealerCatalog();
-
         for (Map.Entry<String, Dealer> entry : catalog.entrySet()) {
+            System.out.println("Dealer Name: " + dealer.getName());
             System.out.println("Dealer ID: " + entry.getKey() + ", Dealer Name: " + entry.getValue().getName());
         }
+        System.out.println("Dealer Name: " + dealer.getName());
 
-        // Print out the vehicles in the dealer catalog
-        for (Map.Entry<String, Vehicle> entry : dealer.getVehicleCatalog().entrySet()) {
-            System.out.println("Vehicle ID: " + entry.getKey() + ", Vehicle Model: " + entry.getValue().getModel());
-        }
+
+
+
     }
 }
