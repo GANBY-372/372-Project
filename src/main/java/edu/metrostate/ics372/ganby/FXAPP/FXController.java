@@ -20,6 +20,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -240,14 +243,16 @@ public class FXController {
      * Shows an alert dialog. Static because multiple classes use this method.
      * @param type the type of alert
      * @param title dialog title
-     * @param content dialog content
+     * @param message dialog content
      */
-    public static void showAlert(Alert.AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
+    public static void showAlert(Alert.AlertType type, String title, String message) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(type);
+            alert.setTitle(title);
+            alert.setHeaderText(null); // Ensure no blank header
+            alert.setContentText((message == null || message.trim().isEmpty()) ? "Operation completed successfully." : message);
+            alert.showAndWait();
+        });
     }
 
     //VEHICLE FILTERS:
@@ -441,7 +446,7 @@ public class FXController {
         List<Vehicle> selected = vehicleTable.getSelectionModel().getSelectedItems();
 
         // Launch transfer wizard
-       VehicleActionHelper.openTransferVehicleWizard(
+        VehicleActionHelper.openTransferVehicleWizard(
                 selected,
                 currentDealer,
                 vehicleObservableList,
@@ -502,10 +507,4 @@ public class FXController {
             DataIOHelper.exportXML(stage, dealerTable);
         }
     }
-
-
-
-
-
-
 }

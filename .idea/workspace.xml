@@ -159,8 +159,8 @@
       <list>
         <item itemvalue="Application.FXDriver" />
         <item itemvalue="JUnit.SportsCarTest" />
-        <item itemvalue="JUnit.DealerCatalogTest.getDealers" />
         <item itemvalue="JUnit.DealerCatalogTest.getDealerWithId" />
+        <item itemvalue="JUnit.DealerCatalogTest.getDealers" />
         <item itemvalue="Application.TestEnv" />
       </list>
     </recent_temporary>
