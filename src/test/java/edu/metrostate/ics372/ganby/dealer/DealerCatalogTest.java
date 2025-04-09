@@ -32,7 +32,7 @@ public class DealerCatalogTest {
 
         v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", now, false);
         v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001", now, false);
-        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", now, false);
+        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001",  now, false);
         v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002", now, false);
 
         catalog.addVehicle(v001);
@@ -55,6 +55,7 @@ public class DealerCatalogTest {
     void getDealerWithId() {
         assertEquals(d001, catalog.getDealerWithId("001"));
         assertEquals(d002, catalog.getDealerWithId("002"));
+        assertNotEquals(d001, catalog.getDealerWithId("003"));
     }
 
     @Test
@@ -84,13 +85,6 @@ public class DealerCatalogTest {
     void getAllVehicles() {
         ArrayList<Vehicle> vehicles = catalog.getAllVehicles();
         assertEquals(4, vehicles.size());
-    }
-
-    // TODO: Fix the method?
-    @Test
-    void getDealers() {
-//        ObservableList<Dealer> dealers = catalog.getDealers();
-//        assertEquals(2, dealers.size());
     }
 
     @Test

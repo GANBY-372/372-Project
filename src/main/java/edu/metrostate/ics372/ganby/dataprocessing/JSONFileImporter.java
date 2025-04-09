@@ -82,6 +82,7 @@ public class JSONFileImporter {
 
     /**
      * Creates and adds a vehicle to the catalog.
+     * @param jsonObject json object that contains vehicle info
      */
     private Vehicle createVehicle(JSONObject jsonObject) {
         String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
@@ -98,16 +99,8 @@ public class JSONFileImporter {
 
         String type = jsonObject.get(VEHICLE_TYPE_KEY).toString().trim();
 
-        Vehicle vehicle = switch (type.trim().replaceAll("\\s+", "").toUpperCase()) {
-            case "SUV" -> new SUV(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "SEDAN" -> new Sedan(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "PICKUP" -> new Pickup(id, model, manufacturer, price, dealerId, acquisitionDate);
-            case "SPORTSCAR" -> new SportsCar(id, model, manufacturer, price, dealerId, acquisitionDate);
-            default -> {
-                System.out.println("Unknown vehicle type: " + type);
-                yield null;
-            }
-        };
+
+        Vehicle vehicle = VehicleBuilder.buildVehicleFromJSON(jsonObject);
 
         if (vehicle != null) {
             DealerCatalog.getInstance().addVehicle(vehicle);

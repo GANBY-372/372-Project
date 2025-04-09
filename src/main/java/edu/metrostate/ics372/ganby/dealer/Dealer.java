@@ -95,12 +95,7 @@ public class Dealer {
      * @param dealerId String
      */
     public void enableVehicleAcquisition(String dealerId) {
-        if (isBuying.get()) {
-            System.out.println("Vehicle acquisition already enabled for dealer id #" + dealerId + ".");
-        } else {
-            this.isBuying.set(true);
-            System.out.println("Successfully enabled vehicle acquisition for dealer id #" + dealerId + ".");
-        }
+        this.isBuying.set(true);
     }
 
     /**
@@ -108,12 +103,7 @@ public class Dealer {
      * @param dealerId String
      */
     public void disableVehicleAcquisition(String dealerId) {
-        if (!isBuying.get()) {
-            System.out.println("Vehicle acquisition already disabled for dealer id #" + dealerId + ".");
-        } else {
-            this.isBuying.set(false);
-            System.out.println("Successfully disabled vehicle acquisition for dealer id #" + dealerId + ".");
-        }
+        this.isBuying.set(false);
     }
 
     /**
@@ -134,8 +124,8 @@ public class Dealer {
     }
 
     /**
-     * Adds mutliple vehicles at once. Will be used for transferring vehicles from one dealer to another.
-     * @param vehicles arraylist containting vehicles
+     * Adds multiple vehicles at once. Will be used for transferring vehicles from one dealer to another.
+     * @param vehicles arraylist containing vehicles
      */
     public void addVehicles(ArrayList<Vehicle> vehicles) {
         for (Vehicle vehicle : vehicles) {
@@ -166,7 +156,7 @@ public class Dealer {
     @Override
     public boolean equals(Object object) {
         if (object == this) return true;
-        if (object == null || !(object instanceof Dealer dealer)) return false;
+        if (!(object instanceof Dealer dealer)) return false;
         return getId().equals(dealer.getId());
     }
 

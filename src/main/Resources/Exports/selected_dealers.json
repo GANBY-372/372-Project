@@ -1,7 +1,7 @@
 {
   "car_inventory": [
     {
-      "price": 70444.0,
+      "price": 23.0,
       "vehicle_model": "Silverado",
       "vehicle_type": "Pickup",
       "dealership_id": "12513",
@@ -17,15 +17,6 @@
       "vehicle_manufacturer": "Tesla",
       "vehicle_id": "83883",
       "acquisition_date": 1515354694451
-    },
-    {
-      "price": 61200.0,
-      "vehicle_model": "1500",
-      "vehicle_type": "Pickup",
-      "dealership_id": "12513",
-      "vehicle_manufacturer": "Ram",
-      "vehicle_id": "784123",
-      "acquisition_date": 1615354694451
     },
     {
       "price": 20123.0,
@@ -44,24 +35,6 @@
       "vehicle_manufacturer": "Toyota",
       "vehicle_id": "229393",
       "acquisition_date": 1515354694451
-    },
-    {
-      "price": 27500.0,
-      "vehicle_model": "CR-V",
-      "vehicle_type": "SUV",
-      "dealership_id": "123",
-      "vehicle_manufacturer": "Honda",
-      "vehicle_id": "67291",
-      "acquisition_date": 1615354694451
-    },
-    {
-      "price": 45320.0,
-      "vehicle_model": "3 Series",
-      "vehicle_type": "Sedan",
-      "dealership_id": "123",
-      "vehicle_manufacturer": "BMW",
-      "vehicle_id": "99234",
-      "acquisition_date": 1615354694451
     }
   ]
 }

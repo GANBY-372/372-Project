@@ -1,0 +1,37 @@
+@startuml
+actor User
+participant FXController
+participant VehicleActionHelper
+participant "TableView<Vehicle>" as VehicleTable
+participant Vehicle
+participant SportsCar
+
+User -> FXController : clicks "Set Rent Status"
+FXController -> VehicleActionHelper : toggleRentStatus(vehicleTable, toggleButton)
+
+VehicleActionHelper -> VehicleTable : getItems()
+VehicleTable -> VehicleTable : stream().filter(Vehicle::isSelected)
+VehicleTable --> VehicleActionHelper : selectedVehicles
+
+loop for each Vehicle
+    VehicleActionHelper -> Vehicle : getIsRentedOut()
+    Vehicle -> Vehicle : isRentedOut
+
+    VehicleActionHelper -> Vehicle : setRentedOut(!currentStatus)
+    activate Vehicle
+    Vehicle --> VehicleActionHelper : vehicleType
+
+    alt vehicleType == "SportsCar"
+        VehicleActionHelper -> VehicleActionHelper : showAlert("SportsCars cannot be rented")
+    else
+        note right of Vehicle : Rent status updated
+    end
+    deactivate Vehicle
+end
+
+VehicleActionHelper -> VehicleTable : refresh()
+
+VehicleActionHelper -> Vehicle : getIsRentedOut()
+VehicleActionHelper -> toggleButton : setText("Set as Available" or "Set as Rented")
+@enduml
+

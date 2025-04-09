@@ -1,6 +1,5 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
-import edu.metrostate.ics372.ganby.dataprocessing.JSONObjectBuilder;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import javafx.beans.property.*;
 
@@ -25,6 +24,35 @@ public abstract class Vehicle {
     protected final ObjectProperty<LocalDateTime> acquisitionDate;
     protected final BooleanProperty isRentedOut;
     private final BooleanProperty selected = new SimpleBooleanProperty(false);
+    // --- JavaFX Bindable Properties ---
+
+    public StringProperty vehicleIdProperty() {
+        return id;
+    }
+
+    public StringProperty modelProperty() {
+        return model;
+    }
+
+    public StringProperty manufacturerProperty() {
+        return manufacturer;
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public StringProperty dealerIdProperty() {
+        return dealerId;
+    }
+
+    public ObjectProperty<LocalDateTime> acquisitionDateProperty() {
+        return acquisitionDate;
+    }
+
+    public BooleanProperty isRentedOutProperty() {
+        return isRentedOut;
+    }
 
     /**
      * Constructs a vehicle with rental status.
@@ -170,9 +198,8 @@ public abstract class Vehicle {
      * @param rentedOut the new rent status
      * @return the vehicle type (can be used to restrict rental for certain types)
      */
-    public String setRentedOut(Boolean rentedOut) {
+    public void setRentedOut(Boolean rentedOut) {
         this.isRentedOut.set(rentedOut);
-        return this.getType();
     }
 
     // --- Selection Support ---
@@ -202,34 +229,9 @@ public abstract class Vehicle {
         this.selected.set(selected);
     }
 
-    // --- JavaFX Bindable Properties ---
 
-    public StringProperty vehicleIdProperty() {
-        return id;
-    }
+    public void VehicleBuilderFromType(String type){
 
-    public StringProperty modelProperty() {
-        return model;
-    }
-
-    public StringProperty manufacturerProperty() {
-        return manufacturer;
-    }
-
-    public DoubleProperty priceProperty() {
-        return price;
-    }
-
-    public StringProperty dealerIdProperty() {
-        return dealerId;
-    }
-
-    public ObjectProperty<LocalDateTime> acquisitionDateProperty() {
-        return acquisitionDate;
-    }
-
-    public BooleanProperty isRentedOutProperty() {
-        return isRentedOut;
     }
 
     // --- Object Overrides ---

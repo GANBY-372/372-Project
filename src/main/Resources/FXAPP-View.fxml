@@ -18,18 +18,20 @@
         fx:controller="edu.metrostate.ics372.ganby.FXAPP.FXController"
 >
     <HBox layoutX="13.0" layoutY="20.0" spacing="10.0">
-        <Button
-                fx:id="importJsonButton"
-                text="Import JSON"
-                onAction="#importJSONFile"/>
-        <Button
-                fx:id="importXmlButton"
-                text="Import XML"
-                onAction="#importXMLFile"/>
-        <Button
-                fx:id="exportDataButton"
-                text="Export Data"
-                onAction="#exportData"/>
+        <MenuButton text="Import">
+            <items>
+                <MenuItem fx:id="importJsonMenuItem" text="From JSON" onAction="#handleImport" />
+                <MenuItem fx:id="importXmlMenuItem" text="From XML" onAction="#handleImport" />
+            </items>
+        </MenuButton>
+
+        <MenuButton text="Export">
+            <items>
+                <MenuItem fx:id="exportJsonMenuItem" text="To JSON" onAction="#handleExport" />
+                <MenuItem fx:id="exportXmlMenuItem" text="To XML" onAction="#handleExport" />
+            </items>
+        </MenuButton>
+
     </HBox>
 
     <HBox layoutX="13.0" layoutY="80.0" spacing="10.0">
@@ -45,6 +47,12 @@
                 text="Select All Dealers"
                 onAction="#toggleSelectAllDealers"
         />
+        <Button
+                fx:id="editDealerNameButton"
+                text="Edit Dealer Name"
+                onAction="#editDealerName"
+        />
+
     </HBox>
 
     <TableView fx:id="dealerTable" layoutX="13.0" layoutY="129.0" prefHeight="663.0" prefWidth="478.0">

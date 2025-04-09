@@ -4,9 +4,16 @@ import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +66,71 @@ public class DealerActionHelper {
         vehicleTable.setItems(vehicleList);
     }
 
+
+    /**
+     * Opens a modal wizard to create and add a new dealer.
+     *
+     * @param dealerObservableList list to update after adding
+     * @param ownerStage the parent window for modality
+     */
+    public static void openAddDealerWizard(ObservableList<Dealer> dealerObservableList, Stage ownerStage) {
+        Stage wizardStage = new Stage();
+        wizardStage.initModality(Modality.APPLICATION_MODAL);
+        wizardStage.initOwner(ownerStage);
+        wizardStage.setTitle("Add New Dealer");
+
+        Label nameLabel = new Label("Dealer Name:");
+        TextField nameField = new TextField();
+        Label idLabel = new Label("Dealer ID:");
+        TextField idField = new TextField();
+
+        Button saveButton = new Button("Save");
+        Button cancelButton = new Button("Cancel");
+
+        GridPane gridPane = new GridPane();
+        gridPane.setVgap(10);
+        gridPane.setHgap(10);
+        gridPane.addRow(0, idLabel, idField);
+        gridPane.addRow(1, nameLabel, nameField);
+
+        HBox buttonBox = new HBox(10, saveButton, cancelButton);
+        VBox layout = new VBox(10, gridPane, buttonBox);
+        layout.setPadding(new Insets(10));
+
+        Scene scene = new Scene(layout, 400, 200);
+        wizardStage.setScene(scene);
+
+        saveButton.setOnAction(event -> {
+            try {
+                String dealerId = idField.getText().trim();
+                String dealerName = nameField.getText().trim();
+
+                if (dealerId.isBlank() || dealerName.isBlank()) {
+                    throw new IllegalArgumentException("Dealer ID and Name cannot be empty.");
+                }
+
+                if (DealerCatalog.getInstance().getDealerWithId(dealerId) != null) {
+                    throw new IllegalArgumentException("Dealer with ID already exists.");
+                }
+
+                Dealer newDealer = new Dealer(dealerId, dealerName);
+                DealerCatalog.getInstance().addDealer(newDealer);
+                dealerObservableList.add(newDealer);
+
+                wizardStage.close();
+
+                // Show success message with details
+                String msg = "Dealer '%s' (ID: %s) was successfully added.".formatted(dealerName, dealerId);
+                FXController.showAlert(Alert.AlertType.INFORMATION, "Success", msg);
+            } catch (Exception e) {
+                FXController.showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+            }
+        });
+
+        cancelButton.setOnAction(e -> wizardStage.close());
+        wizardStage.showAndWait();
+    }
+
     /**
      * Renames the selected dealer using a dialog.
      *
@@ -67,9 +139,17 @@ public class DealerActionHelper {
      */
     public static void renameDealer(TableView<Dealer> dealerTable, TextField dealerNameField) {
         Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+        List<Dealer> selectedDealers = dealerTable.getItems().stream()
+                .filter(Dealer::isSelected)
+                .toList();
+
+        if (selectedDealers.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
+            return;
+        }
 
         if (selectedDealer == null) {
-            showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
             return;
         }
 
@@ -80,12 +160,12 @@ public class DealerActionHelper {
 
         dialog.showAndWait().ifPresent(newName -> {
             if (newName.trim().isEmpty()) {
-                showAlert(AlertType.ERROR, "Invalid Input", "Dealer name cannot be empty.");
+                FXController.showAlert(AlertType.ERROR, "Invalid Input", "Dealer name cannot be empty.");
             } else {
                 selectedDealer.setName(newName.trim());
                 dealerTable.refresh();
                 dealerNameField.setText(newName.trim());
-                showAlert(AlertType.INFORMATION, "Updated", "Dealer name successfully updated.");
+                FXController.showAlert(AlertType.INFORMATION, "Updated", "Dealer name successfully updated.");
             }
         });
     }
@@ -94,30 +174,27 @@ public class DealerActionHelper {
      * Enables or disables acquisition for the selected dealer.
      *
      * @param dealerTable TableView of dealers
-     * @param toggleButton Button to update text after toggle
-     * @param dealerIdField TextField to show dealer ID
-     * @param dealerNameField TextField to show dealer name
      */
-    public static void toggleAcquisitionStatus(TableView<Dealer> dealerTable,
-                                               Button toggleButton,
-                                               TextField dealerIdField,
-                                               TextField dealerNameField) {
-        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
-        if (selectedDealer != null) {
-            boolean current = selectedDealer.getIsVehicleAcquisitionEnabled();
-            if (current) {
-                DealerCatalog.getInstance().disableDealerAcquisition(selectedDealer.getId());
-            } else {
-                DealerCatalog.getInstance().enableDealerAcquisition(selectedDealer.getId());
-            }
+    public static void toggleAcquisitionStatus(TableView<Dealer> dealerTable) {
+        List<Dealer> selectedDealers = dealerTable.getItems().stream()
+                .filter(Dealer::isSelected)
+                .toList();
 
-            toggleButton.setText(current ? "Enable Acquisition" : "Disable Acquisition");
-            dealerIdField.setText(selectedDealer.getId());
-            dealerNameField.setText(selectedDealer.getName());
-            dealerTable.refresh();
-        } else {
-            showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to toggle acquisition status.");
+        if (selectedDealers.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
+            return;
         }
+
+        for (Dealer dealer : selectedDealers) {
+            boolean current = dealer.getIsVehicleAcquisitionEnabled();
+            if (current) {
+                DealerCatalog.getInstance().disableDealerAcquisition(dealer.getId());
+            } else {
+                DealerCatalog.getInstance().enableDealerAcquisition(dealer.getId());
+            }
+        }
+
+        dealerTable.refresh();
     }
 
     /**
@@ -139,7 +216,7 @@ public class DealerActionHelper {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            showAlert(AlertType.WARNING, "No Dealers Selected", "Please select dealers to delete.");
+            FXController.showAlert(AlertType.WARNING, "No Dealers Selected", "Please select dealers to delete.");
             return;
         }
 
@@ -169,11 +246,11 @@ public class DealerActionHelper {
                     finalizeDeletion(dealer, dealerObservableList, vehicleObservableList);
                 } else if (response == transferVehicles) {
                     if (otherDealers.isEmpty()) {
-                        showAlert(AlertType.ERROR, "No Available Dealers", "No other dealers to transfer vehicles to.");
+                        FXController.showAlert(AlertType.ERROR, "No Available Dealers", "No other dealers to transfer vehicles to.");
                         continue;
                     }
 
-                    ChoiceDialog<Dealer> dialog = new ChoiceDialog<>(otherDealers.get(0), otherDealers);
+                    ChoiceDialog<Dealer> dialog = new ChoiceDialog<>(otherDealers.getFirst(), otherDealers);
                     dialog.setTitle("Transfer Inventory");
                     dialog.setHeaderText("Transfer vehicles from " + dealer.getName());
                     dialog.setContentText("Transfer to:");
@@ -183,7 +260,7 @@ public class DealerActionHelper {
                         DealerCatalog.getInstance().transferInventory(toTransfer, destination.getId());
                         dealer.getVehicleCatalog().clear();
                         finalizeDeletion(dealer, dealerObservableList, vehicleObservableList);
-                        showAlert(AlertType.INFORMATION, "Transfer Complete",
+                        FXController.showAlert(AlertType.INFORMATION, "Transfer Complete",
                                 "Vehicles transferred to " + destination.getName() + ".");
                     });
                 }
@@ -211,14 +288,4 @@ public class DealerActionHelper {
         vehicleObservableList.clear();
     }
 
-    /**
-     * Shows a JavaFX alert dialog.
-     */
-    private static void showAlert(AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
 }
