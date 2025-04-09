@@ -47,6 +47,19 @@ public class Dealer {
     }
 
     /**
+     * Constructor for Dealer if name is specified
+     * @param id String
+     * @param name Name
+     * @param isBuying boolean
+     */
+    public Dealer(String id, String name, boolean isBuying) {
+        this.id = new SimpleStringProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.isBuying = new SimpleBooleanProperty(isBuying);
+        this.vehicleCatalog = new HashMap<>();
+    }
+
+    /**
      * Get the dealer id
      * @return String dealer id
      */
@@ -212,5 +225,13 @@ public class Dealer {
 
     public void setSelected(boolean selected) {
         this.selected.set(selected);
+    }
+
+    public void setIsBuying (boolean isBuying) {
+        this.isBuying.set(isBuying);
+    }
+
+    public boolean getIsBuying() {
+        return isBuying.get();
     }
 }

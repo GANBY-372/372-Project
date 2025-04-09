@@ -22,7 +22,7 @@ public class DealerCatalog {
     /**
      * Private constructor to prevent instantiation
      */
-    private DealerCatalog() {
+    public DealerCatalog() {
         dealerCatalog = new HashMap<>();
         dealerList = FXCollections.observableArrayList();
     }
@@ -243,4 +243,7 @@ public class DealerCatalog {
     public void clear() {
         dealerCatalog.clear();
     }
+
+
+
 }

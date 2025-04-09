@@ -2,9 +2,6 @@ package edu.metrostate.ics372.ganby.vehicle;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import javafx.beans.property.*;
-
-import org.json.simple.JSONObject;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 

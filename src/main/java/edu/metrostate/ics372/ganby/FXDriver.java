@@ -16,7 +16,7 @@ public class FXDriver extends Application {
         Parent root = loader.load();
 
         FXController controller = loader.getController();
-        PersistenceManager.loadAutosave(controller);  // Load saved data
+//        PersistenceManager.loadAutosave(controller);  // Load saved data
 
         primaryStage.setTitle("Vehicle Tracking System");
         primaryStage.setScene(new Scene(root));
@@ -25,7 +25,7 @@ public class FXDriver extends Application {
 
     @Override
     public void stop() {
-        PersistenceManager.saveAutosave();  // Save on exit
+//        PersistenceManager.saveAutosave();  // Save on exit
     }
 
     public static void main(String[] args) {
