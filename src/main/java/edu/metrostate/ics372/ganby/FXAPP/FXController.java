@@ -473,14 +473,17 @@ public class FXController {
      *
      * @param event the ActionEvent triggered by the button click
      */
-
     @FXML
     private void editDealerName(ActionEvent event) {
         DealerActionHelper.renameDealer(dealerTable, dealerNameTextField);
     }
 
 
-
+    /**
+     * Imports dealer and vehicle data from a JSON or XML file.
+     *
+     * @param event the ActionEvent triggered by the import menu item
+     */
     @FXML
     private void handleImport(ActionEvent event) {
         Stage stage = (Stage) rootPane.getScene().getWindow();
@@ -492,6 +495,11 @@ public class FXController {
         }
     }
 
+    /**
+     * Exports dealer and vehicle data to a JSON or XML file.
+     *
+     * @param event the ActionEvent triggered by the export menu item
+     */
     @FXML
     private void handleExport(ActionEvent event) {
         Stage stage = (Stage) rootPane.getScene().getWindow();
@@ -502,10 +510,4 @@ public class FXController {
             DataIOHelper.exportXML(stage, dealerTable);
         }
     }
-
-
-
-
-
-
 }
