@@ -14,8 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
 /**
- * Handles importing dealer and vehicle data from an XML file.
- * Uses JavaFX FileChooser for user file selection and delegates vehicle creation to VehicleBuilder.
+ * Importing dealer and vehicle data from an XML file.
  */
 public class XMLFileImporter {
 
