@@ -36,3 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### To no longer force a stash after running the project ###
+.idea/workspace.xml
+src/main/Resources/Auto_Save/
