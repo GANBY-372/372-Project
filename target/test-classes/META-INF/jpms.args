@@ -1,0 +1,4 @@
+--patch-module
+edu.metrostate.ics372.ganby=_
+--add-reads
+edu.metrostate.ics372.ganby=ALL-UNNAMED

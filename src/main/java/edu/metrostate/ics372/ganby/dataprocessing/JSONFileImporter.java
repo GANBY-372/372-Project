@@ -1,15 +1,13 @@
 package edu.metrostate.ics372.ganby.dataprocessing;
 
 import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
-import edu.metrostate.ics372.ganby.vehicle.*;
-
+import edu.metrostate.ics372.ganby.vehicle.Vehicle;
+import edu.metrostate.ics372.ganby.vehicle.VehicleBuilder;
+import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileReader;
@@ -21,7 +19,6 @@ import java.util.TimeZone;
 
 public class JSONFileImporter {
 
-    // JSON Keys
     public static final String DEALER_ID_KEY = "dealership_id";
     public static final String VEHICLE_ID_KEY = "vehicle_id";
     public static final String VEHICLE_MANUFACTURER_KEY = "vehicle_manufacturer";
@@ -31,17 +28,12 @@ public class JSONFileImporter {
     public static final String ACQUISITION_DATE_KEY = "acquisition_date";
     public static final String ACQUISITION_STATUS_KEY = "acquisition_status";
     public static final String IS_RENTED_KEY = "is_rented_out";
+    public static final String IS_RENTED_OUT_KEY = "is_rented_out";
 
     private JSONArray jsonArray;
 
-    /**
-     * GUI-based constructor that opens a file chooser.
-     */
     public JSONFileImporter(Stage primaryStage) throws IOException, ParseException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select a JSON File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
-        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        File selectedFile = FileSelector.chooseJsonOpenFile(primaryStage);
         if (selectedFile != null) {
             parseFile(selectedFile.getAbsolutePath());
         } else {
@@ -49,16 +41,10 @@ public class JSONFileImporter {
         }
     }
 
-    /**
-     * Constructor for headless usage (e.g. autosave import).
-     */
     public JSONFileImporter(String filePath) throws IOException, ParseException {
         parseFile(filePath);
     }
 
-    /**
-     * Parses a JSON file and stores the data internally.
-     */
     private void parseFile(String filePath) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         try (Reader reader = new FileReader(filePath)) {
@@ -67,9 +53,6 @@ public class JSONFileImporter {
         }
     }
 
-    /**
-     * Processes the parsed JSON and loads vehicles into the DealerCatalog.
-     */
     public void processJSON() {
         if (jsonArray == null || jsonArray.isEmpty()) return;
 
@@ -82,10 +65,6 @@ public class JSONFileImporter {
         }
     }
 
-    /**
-     * Creates and adds a vehicle to the catalog.
-     * @param jsonObject json object that contains vehicle info
-     */
     private Vehicle createVehicle(JSONObject jsonObject) {
         String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();
         String model = jsonObject.get(VEHICLE_MODEL_KEY).toString();
@@ -93,6 +72,7 @@ public class JSONFileImporter {
         double price = Double.parseDouble(jsonObject.get(PRICE_KEY).toString());
         String dealerId = jsonObject.get(DEALER_ID_KEY).toString();
         long epochMillis = Long.parseLong(jsonObject.get(ACQUISITION_DATE_KEY).toString());
+
 
         Object rentedOutObj = jsonObject.get(IS_RENTED_KEY);
         boolean isRentedOut = false;
@@ -108,9 +88,6 @@ public class JSONFileImporter {
                 Instant.ofEpochMilli(epochMillis),
                 TimeZone.getDefault().toZoneId()
         );
-
-        String type = jsonObject.get(VEHICLE_TYPE_KEY).toString().trim();
-
 
         Vehicle vehicle = VehicleBuilder.buildVehicleFromJSON(jsonObject);
 

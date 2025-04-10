@@ -4,36 +4,20 @@ import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import javafx.scene.control.Alert;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.util.List;
 
-/**
- * Utility class responsible for exporting dealer and vehicle data to a JSON file.
- * Supports exporting one or more dealers into a single structured JSON document.
- */
 public class JSONFileExporter {
 
-    /**
-     * Prompts the user with a file dialog to choose a save location,
-     * then exports the provided dealers and their vehicles into a JSON file.
-     *
-     * @param stage           the JavaFX stage to anchor the file dialog
-     * @param selectedDealers the list of dealers to export
-     */
     public void exportDealers(Stage stage, List<Dealer> selectedDealers) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Export Dealers as JSON");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON Files", "*.json"));
-        fileChooser.setInitialFileName("selected_dealers.json");
-
-        File file = fileChooser.showSaveDialog(stage);
+        File file = FileSelector.chooseJsonSaveFile(stage);
         if (file != null) {
             try (FileWriter writer = new FileWriter(file)) {
                 JSONObject json = convertDealersToJSON(selectedDealers);
@@ -45,12 +29,6 @@ public class JSONFileExporter {
         }
     }
 
-    /**
-     * Converts the provided list of dealers and their vehicles into a nested JSON structure.
-     *
-     * @param dealers the list of dealers to convert
-     * @return a JSONObject representing the car inventory
-     */
     private JSONObject convertDealersToJSON(List<Dealer> dealers) {
         JSONObject rootJson = new JSONObject();
         JSONArray carInventoryJson = new JSONArray();
@@ -79,12 +57,6 @@ public class JSONFileExporter {
         return rootJson;
     }
 
-    /**
-     * Formats a raw JSON string into indented and readable output.
-     *
-     * @param json the raw JSON string
-     * @return a pretty-printed version of the input JSON
-     */
     private static String prettyPrintJson(String json) {
         StringBuilder formatted = new StringBuilder();
         int indent = 0;
@@ -116,11 +88,6 @@ public class JSONFileExporter {
         return formatted.toString();
     }
 
-    /**
-     * Displays a confirmation alert when the export operation is successful.
-     *
-     * @param path the full path to the saved JSON file
-     */
     private void showSuccessAlert(String path) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Export Successful");
@@ -129,11 +96,6 @@ public class JSONFileExporter {
         alert.showAndWait();
     }
 
-    /**
-     * Displays an error alert when the export operation fails.
-     *
-     * @param message the error message to display
-     */
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Export Failed");
@@ -144,11 +106,10 @@ public class JSONFileExporter {
 
     public static void saveStateToFile(String filePath) {
         try {
-            // Make sure the directory exists
             File file = new File(filePath);
             File parentDir = file.getParentFile();
             if (parentDir != null && !parentDir.exists()) {
-                parentDir.mkdirs(); // create the folder if it doesn't exist
+                parentDir.mkdirs();
             }
 
             try (FileWriter writer = new FileWriter(file)) {

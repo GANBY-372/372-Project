@@ -3,19 +3,18 @@ package edu.metrostate.ics372.ganby.dataprocessing;
 import edu.metrostate.ics372.ganby.dealer.Dealer;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import javafx.scene.control.Alert;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.time.ZoneId;
 import java.util.List;
 
 /**
@@ -32,12 +31,8 @@ public class XMLFileExporter {
      * @param selectedDealers the list of dealers whose data will be exported
      */
     public void exportDealers(Stage stage, List<Dealer> selectedDealers) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Export Dealers as XML");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files", "*.xml"));
-        fileChooser.setInitialFileName("selected_dealers.xml");
+        File file = FileSelector.chooseXmlSaveFile(stage);  // ✅ Replaces manual FileChooser
 
-        File file = fileChooser.showSaveDialog(stage);
         if (file != null) {
             try {
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -79,12 +74,10 @@ public class XMLFileExporter {
         dealerElement.setAttribute("id", dealer.getId());
         parent.appendChild(dealerElement);
 
-        // Dealer name element
         Element nameElement = doc.createElement("Name");
         nameElement.appendChild(doc.createTextNode(dealer.getName()));
         dealerElement.appendChild(nameElement);
 
-        // Append each vehicle as a <Vehicle> element
         for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
             Element vehicleElement = doc.createElement("Vehicle");
             vehicleElement.setAttribute("type", vehicle.getType());
@@ -100,18 +93,18 @@ public class XMLFileExporter {
             Element model = doc.createElement("Model");
             model.appendChild(doc.createTextNode(vehicle.getModel()));
 
+            Element rentStatus = doc.createElement("is_rented_out");
+            rentStatus.appendChild(doc.createTextNode(String.valueOf(vehicle.getIsRentedOut())));
+
             vehicleElement.appendChild(price);
             vehicleElement.appendChild(make);
             vehicleElement.appendChild(model);
+            vehicleElement.appendChild(rentStatus);
             dealerElement.appendChild(vehicleElement);
+
         }
     }
 
-    /**
-     * Displays an information alert notifying the user that the export succeeded.
-     *
-     * @param filePath the full path to the exported XML file
-     */
     private void showSuccessAlert(String filePath) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Export Successful");
@@ -120,11 +113,6 @@ public class XMLFileExporter {
         alert.showAndWait();
     }
 
-    /**
-     * Displays an error alert indicating that the export process failed.
-     *
-     * @param message the error message to show
-     */
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Export Failed");
