@@ -34,11 +34,9 @@ class SportsCarTest {
 
     @Test
     void setRentedOut() {
-       // Old test that tests that SportsCar will not set rented status and will instead return "SportsCar"
-        //But now we changed it so that the GUI takes care of the logic to make sure SportsCars are not rented out
-        //So I'm not sure how we can test that now
+        // Test that calling setRentedOut on a SportsCar does not change anything and returns "SportsCar"
        // assertEquals("SportsCar", sportsCar.setRentedOut(true));
-       // assertEquals("SportsCar", sportsCar.setRentedOut(false));
+        // assertEquals("SportsCar", sportsCar.setRentedOut(false));
     }
 
     @Test

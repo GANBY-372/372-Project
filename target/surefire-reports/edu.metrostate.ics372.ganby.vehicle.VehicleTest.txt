@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: edu.metrostate.ics372.ganby.vehicle.VehicleTest
+-------------------------------------------------------------------------------
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.100 s -- in edu.metrostate.ics372.ganby.vehicle.VehicleTest
