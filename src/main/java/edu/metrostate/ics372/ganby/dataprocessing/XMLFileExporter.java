@@ -19,8 +19,7 @@ import java.time.ZoneId;
 import java.util.List;
 
 /**
- * Utility class to export dealer and vehicle data into an XML format file.
- * Allows exporting multiple dealers into a single structured XML document.
+ * Export dealer and vehicle data into an XML file.
  */
 public class XMLFileExporter {
 

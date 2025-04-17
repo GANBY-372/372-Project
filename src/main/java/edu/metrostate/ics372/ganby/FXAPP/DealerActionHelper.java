@@ -29,7 +29,7 @@ public class DealerActionHelper {
 
     /**
      * Toggles all checkboxes in the dealer table.
-     *
+     * TODO: Add comments to code that give the basics of what the code is doing, @param all of them in javadocs
      * @param dealerTable TableView containing dealers
      */
     public static void toggleSelectAllDealers(
@@ -69,6 +69,7 @@ public class DealerActionHelper {
 
     /**
      * Opens a modal wizard to create and add a new dealer.
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param dealerObservableList list to update after adding
      * @param ownerStage the parent window for modality
@@ -133,6 +134,7 @@ public class DealerActionHelper {
 
     /**
      * Renames the selected dealer using a dialog.
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param dealerTable TableView containing dealers
      * @param dealerNameField TextField to update the name in the detail pane
@@ -172,6 +174,7 @@ public class DealerActionHelper {
 
     /**
      * Enables or disables acquisition for the selected dealer.
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param dealerTable TableView of dealers
      */
@@ -199,6 +202,7 @@ public class DealerActionHelper {
 
     /**
      * Deletes selected dealers and handles optional vehicle transfer.
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param dealerTable TableView of dealers
      * @param dealerObservableList Dealer observable list
@@ -275,6 +279,7 @@ public class DealerActionHelper {
 
     /**
      * Finalizes the deletion of a dealer from catalog and UI.
+     * TODO: finish javadocs, @ param all of them
      */
     private static void finalizeDeletion(Dealer dealer,
                                          ObservableList<Dealer> dealerObservableList,

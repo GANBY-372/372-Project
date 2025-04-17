@@ -113,23 +113,50 @@ public class VehicleActionHelper {
             return;
         }
 
+        boolean allRentedOut = true;
+        boolean hasNonSportsCar = false;
+
+        // Determine if all non-sportscars are rented out
         for (Vehicle vehicle : selectedVehicles) {
+            String type = vehicle.getType().trim().replaceAll("\\s+", "");
+            boolean isSportsCar = type.equalsIgnoreCase("SportsCar");
 
-            // If it's a SportsCar, it should not be toggled
-            if (vehicle.getType().trim().replaceAll("\\s+", "").equalsIgnoreCase("SportsCar")) {
-                FXController.showAlert(AlertType.WARNING, "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
-                        "SportsCars cannot be rented.");
-            }else{
-                vehicle.setRentedOut(!vehicle.getIsRentedOut());
+            if (!isSportsCar && !vehicle.getIsRentedOut()) {
+                allRentedOut = false;
+            }
 
+            if (!isSportsCar) {
+                hasNonSportsCar = true;
             }
         }
 
-        vehicleTable.refresh();
+        // Determine the new status we want to set
+        boolean newRentStatus = !allRentedOut; // true = rent out, false = make available
 
-        // Optional: update button label based on the first selected vehicle
-        Vehicle first = selectedVehicles.getFirst();
-        toggleButton.setText(first.getIsRentedOut() ? "Set as Available" : "Set as Rented");
+        if (!hasNonSportsCar && newRentStatus) {
+            FXController.showAlert(AlertType.WARNING, "Action Not Allowed",
+                    "All selected vehicles are SportsCars, which cannot be rented.");
+            return;
+        }
+
+        // Update rent status
+        for (Vehicle vehicle : selectedVehicles) {
+            String type = vehicle.getType().trim().replaceAll("\\s+", "");
+            boolean isSportsCar = type.equalsIgnoreCase("SportsCar");
+
+            if (isSportsCar && newRentStatus) {
+                // Only show warning if we're trying to rent out a SportsCar
+                FXController.showAlert(AlertType.WARNING,
+                        "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
+                        "SportsCars cannot be rented.");
+                continue;
+            }
+
+            vehicle.setRentedOut(newRentStatus);
+        }
+
+        vehicleTable.refresh();
+        toggleButton.setText(newRentStatus ? "Set All as Available" : "Set All as Rented");
     }
 
     /**

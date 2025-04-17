@@ -21,7 +21,7 @@ public class Dealer {
     private final HashMap<String, Vehicle> vehicleCatalog; // Dealer's vehicle inventory
     private final BooleanProperty selected = new SimpleBooleanProperty(false);
 
-
+    // TODO: Javadocs missing on methods, add them
 
     /**
      * Constructor for Dealer if name is not specified
@@ -43,6 +43,19 @@ public class Dealer {
         this.id = new SimpleStringProperty(id);
         this.name = new SimpleStringProperty(name);
         this.isBuying = new SimpleBooleanProperty(true);
+        this.vehicleCatalog = new HashMap<>();
+    }
+
+    /**
+     * Constructor for Dealer if name and isBuying are specified
+     * @param id String
+     * @param name Name
+     * @param isBuying boolean
+     */
+    public Dealer(String id, String name, boolean isBuying) {
+        this.id = new SimpleStringProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.isBuying = new SimpleBooleanProperty(isBuying);
         this.vehicleCatalog = new HashMap<>();
     }
 
@@ -135,6 +148,8 @@ public class Dealer {
 
     /**
      * Transfer a vehicle from this dealer to another
+     * TODO: finish javadoc, add comments to code that give the basics of what the code is doing, @param and @return?
+     *
      */
     public boolean transferVehicle(Vehicle vehicle, Dealer dealer) {
         if (vehicle == null || dealer == null) return false;

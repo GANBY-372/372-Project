@@ -88,6 +88,7 @@ public class DealerCatalog {
         );
     }
 
+    // TODO: Add comments to code that give the basics of what the code is doing, Add Java docs to each method
     public ArrayList<Vehicle> getAllVehicles() {
         ArrayList<Vehicle> allVehicles = new ArrayList<>();
         for (Dealer dealer : dealerCatalog.values()) {
@@ -217,6 +218,7 @@ public class DealerCatalog {
         return result;
     }
 
+    // TODO: Rename more specifically, what does it update? complete the javadoc, add comments to code
     public void updateDealer(Dealer updatedDealer) {
         // Find the dealer in the catalog and update the name
         for (Dealer dealer : getDealers()) {
@@ -240,6 +242,9 @@ public class DealerCatalog {
         this.getDealerCatalog().get(newDealerId).addVehicles(vehiclesToTransfer);
     }
 
+    /**
+     * Clear the dealer catalog
+     */
     public void clear() {
         dealerCatalog.clear();
     }

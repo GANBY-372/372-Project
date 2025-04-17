@@ -19,6 +19,9 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
 
+/**
+ * Imports vehicle data from a JSON file into the DealerCatalog.
+ */
 public class JSONFileImporter {
 
     // JSON Keys
@@ -34,6 +37,7 @@ public class JSONFileImporter {
 
     /**
      * GUI-based constructor that opens a file chooser.
+     * TODO: complete the javadoc, add comments to code that give the basics of what the code is doing, @param if there are any
      */
     public JSONFileImporter(Stage primaryStage) throws IOException, ParseException {
         FileChooser fileChooser = new FileChooser();
@@ -49,6 +53,7 @@ public class JSONFileImporter {
 
     /**
      * Constructor for headless usage (e.g. autosave import).
+     * TODO: complete the javadoc, add comments to code that give the basics of what the code is doing, @param if there are any
      */
     public JSONFileImporter(String filePath) throws IOException, ParseException {
         parseFile(filePath);
@@ -56,6 +61,7 @@ public class JSONFileImporter {
 
     /**
      * Parses a JSON file and stores the data internally.
+     * TODO: complete the javadoc, add comments to code that give the basics of what the code is doing, @param if there are any
      */
     private void parseFile(String filePath) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
@@ -67,6 +73,7 @@ public class JSONFileImporter {
 
     /**
      * Processes the parsed JSON and loads vehicles into the DealerCatalog.
+     * TODO: complete the javadoc, add comments to code that give the basics of what the code is doing
      */
     public void processJSON() {
         if (jsonArray == null || jsonArray.isEmpty()) return;
@@ -83,6 +90,7 @@ public class JSONFileImporter {
     /**
      * Creates and adds a vehicle to the catalog.
      * @param jsonObject json object that contains vehicle info
+     * TODO: complete the javadoc, add comments to code that give the basics of what the code is doing, @return if there are any
      */
     private Vehicle createVehicle(JSONObject jsonObject) {
         String manufacturer = jsonObject.get(VEHICLE_MANUFACTURER_KEY).toString();

@@ -6,6 +6,8 @@ import edu.metrostate.ics372.ganby.FXAPP.FXController;
 import java.io.File;
 
 public class PersistenceManager {
+    // TODO: We need this class to save all of the dealers and vehicles, and load them back in WITH all state
+    //  attributes, UI side or backend?
 
     private static final String AUTOSAVE_PATH = "src/main/resources/Auto_Save/dealer_catalog_autosave.json";
 

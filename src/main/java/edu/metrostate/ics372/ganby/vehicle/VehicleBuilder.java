@@ -75,6 +75,20 @@ public class VehicleBuilder {
         return buildVehicle(id, model, manufacturer, price, dealerId, acquisitionDate, false, type);
     }
 
+    /**
+     * Creates a Vehicle object based on the provided parameters.
+     * This method determines the vehicle type and creates the appropriate instance.
+     *
+     * @param id              the unique ID of the vehicle
+     * @param model           the model of the vehicle
+     * @param manufacturer    the manufacturer of the vehicle
+     * @param price           the price of the vehicle
+     * @param dealerId        the ID of the dealer who owns the vehicle
+     * @param acquisitionDate the date the vehicle was acquired
+     * @param isRented        whether the vehicle is currently rented
+     * @param type            the type of vehicle (e.g., SUV, Sedan)
+     * @return a Vehicle instance or null if the type is unknown
+     */
     public static Vehicle buildVehicle(String id, String model, String manufacturer, double price, String dealerId, LocalDateTime acquisitionDate, boolean isRented, String type) {
         // Create the appropriate Vehicle based on type
         return switch (type.trim().replaceAll("\\s+", "").toUpperCase()) {

@@ -15,14 +15,13 @@ import java.time.ZoneId;
 import java.util.List;
 
 /**
- * Utility class responsible for exporting dealer and vehicle data to a JSON file.
- * Supports exporting one or more dealers into a single structured JSON document.
+ * Exporting dealers and their vehicles to a JSON file.
  */
 public class JSONFileExporter {
 
     /**
-     * Prompts the user with a file dialog to choose a save location,
-     * then exports the provided dealers and their vehicles into a JSON file.
+     * Export dealers and their vehicles to a JSON file. User selects the file path with popup window
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param stage           the JavaFX stage to anchor the file dialog
      * @param selectedDealers the list of dealers to export
@@ -47,6 +46,7 @@ public class JSONFileExporter {
 
     /**
      * Converts the provided list of dealers and their vehicles into a nested JSON structure.
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param dealers the list of dealers to convert
      * @return a JSONObject representing the car inventory
@@ -80,6 +80,7 @@ public class JSONFileExporter {
 
     /**
      * Formats a raw JSON string into indented and readable output.
+     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param json the raw JSON string
      * @return a pretty-printed version of the input JSON
@@ -141,6 +142,7 @@ public class JSONFileExporter {
         alert.showAndWait();
     }
 
+    // TODO: Add comments to code that give the basics of what the code is doing, Add Java docs to each method
     public static void saveStateToFile(String filePath) {
         try {
             // Make sure the directory exists
@@ -160,6 +162,7 @@ public class JSONFileExporter {
         }
     }
 
+    // TODO: Add comments to code that give the basics of what the code is doing, Add Java docs to each method
     public static JSONObject convertDealerCatalogToJSON() {
         JSONObject rootJson = new JSONObject();
         JSONArray carInventoryJson = new JSONArray();
