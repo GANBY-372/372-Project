@@ -29,15 +29,6 @@ public class JSONFileExporter {
         }
     }
 
-    private void runJsonPathImport() {
-        try {
-            System.out.println("\n[1] JSON import via file path:");
-            JSONFileImporter importer = new JSONFileImporter("src/main/resources/Imports/inventory.json");
-            importer.processJSON();
-        } catch (Exception e) {
-            System.err.println("JSON (path) import failed: " + e.getMessage());
-        }
-    }
 
     private JSONObject convertDealersToJSON(List<Dealer> dealers) {
         JSONObject rootJson = new JSONObject();

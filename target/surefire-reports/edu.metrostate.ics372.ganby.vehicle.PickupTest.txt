@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: edu.metrostate.ics372.ganby.vehicle.PickupTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.150 s -- in edu.metrostate.ics372.ganby.vehicle.PickupTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.075 s -- in edu.metrostate.ics372.ganby.vehicle.PickupTest

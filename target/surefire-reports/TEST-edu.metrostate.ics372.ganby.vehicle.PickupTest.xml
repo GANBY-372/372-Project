@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.15" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.075" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Users\Ahass\.jdks\openjdk-23.0.2\bin"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\Ahass\AppData\Local\Temp\surefire15637389754119307213 2025-04-09T12-17-08_902-jvmRun1 surefire-20250409121710534_1tmp surefire_0-20250409121710534_2tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\Ahass\AppData\Local\Temp\surefire13132959888718775986 2025-04-17T13-09-18_146-jvmRun1 surefire-20250417130918901_1tmp surefire_0-20250417130918901_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Ahass\372-Project\target\test-classes;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\Ahass\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Ahass\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Ahass\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ahass\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Ahass\.m2\repository\junit\junit\4.10\junit-4.10.jar;C:\Users\Ahass\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -60,7 +60,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testToString" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.124"/>
-  <testcase name="getType" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.005"/>
-  <testcase name="testEquals" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.004"/>
+  <testcase name="testToString" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.063"/>
+  <testcase name="getType" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.002"/>
+  <testcase name="testEquals" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.002"/>
 </testsuite>

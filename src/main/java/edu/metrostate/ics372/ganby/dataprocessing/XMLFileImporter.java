@@ -6,11 +6,18 @@ import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import edu.metrostate.ics372.ganby.vehicle.VehicleBuilder;
 import javafx.stage.Stage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 
 /**
  * Handles importing dealer and vehicle data from an XML file.
@@ -58,6 +65,19 @@ public class XMLFileImporter {
         }
     }
 
+
+    private void runXmlPathImport() {
+        try {
+            System.out.println("\n[3] XML import via file path:");
+            XMLFileImporter importer = new XMLFileImporter("src/main/resources/Imports/Dealer.xml");
+            Document doc = importer.getXmlDocument();
+            if (doc != null) {
+                importer.processXML(doc);
+            }
+        } catch (Exception e) {
+            System.err.println("XML (path) import failed: " + e.getMessage());
+        }
+    }
     /**
      * Loads the XML content from a file into xmlDocument.
      *
