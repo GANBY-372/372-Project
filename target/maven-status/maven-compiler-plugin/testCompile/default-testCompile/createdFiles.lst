@@ -1,7 +1,7 @@
-edu\metrostate\ics372\ganby\vehicle\SportsCarTest.class
-edu\metrostate\ics372\ganby\dealer\DealerTest.class
-edu\metrostate\ics372\ganby\vehicle\SUVTest.class
-edu\metrostate\ics372\ganby\vehicle\SedanTest.class
-edu\metrostate\ics372\ganby\dealer\DealerCatalogTest.class
-edu\metrostate\ics372\ganby\vehicle\PickupTest.class
-edu\metrostate\ics372\ganby\vehicle\VehicleTest.class
+edu/metrostate/ics372/ganby/vehicle/VehicleTest.class
+edu/metrostate/ics372/ganby/dealer/DealerTest.class
+edu/metrostate/ics372/ganby/vehicle/SUVTest.class
+edu/metrostate/ics372/ganby/vehicle/PickupTest.class
+edu/metrostate/ics372/ganby/vehicle/SportsCarTest.class
+edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.class
+edu/metrostate/ics372/ganby/vehicle/SedanTest.class

@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.075" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.002" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
-    <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Ahass\372-Project\target\test-classes;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\Ahass\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Ahass\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Ahass\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ahass\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Ahass\.m2\repository\junit\junit\4.10\junit-4.10.jar;C:\Users\Ahass\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/ggmacair2023/Desktop/372-02/GanbyRepo/target/test-classes:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/ggmacair2023/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/ggmacair2023/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/ggmacair2023/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/ggmacair2023/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/Users/ggmacair2023/.m2/repository/junit/junit/4.10/junit-4.10.jar:/Users/ggmacair2023/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="user.timezone" value="America/Chicago"/>
-    <property name="os.name" value="Windows 10"/>
+    <property name="os.name" value="Mac OS X"/>
     <property name="java.vm.specification.version" value="23"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
-    <property name="sun.boot.library.path" value="C:\Users\Ahass\.jdks\openjdk-23.0.2\bin"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\Ahass\AppData\Local\Temp\surefire13132959888718775986 2025-04-17T13-09-18_146-jvmRun1 surefire-20250417130918901_1tmp surefire_0-20250417130918901_2tmp"/>
+    <property name="sun.boot.library.path" value="/Users/ggmacair2023/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home/lib"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /Users/ggmacair2023/Desktop/372-02/GanbyRepo/target/surefire 2025-04-17T13-28-00_848-jvmRun1 surefire-20250417132800959_1tmp surefire_0-20250417132800959_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\Ahass\372-Project\target\test-classes;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\Ahass\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Ahass\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Ahass\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ahass\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Ahass\.m2\repository\junit\junit\4.10\junit-4.10.jar;C:\Users\Ahass\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;"/>
+    <property name="surefire.test.class.path" value="/Users/ggmacair2023/Desktop/372-02/GanbyRepo/target/test-classes:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/ggmacair2023/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/ggmacair2023/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/ggmacair2023/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/ggmacair2023/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/Users/ggmacair2023/.m2/repository/junit/junit/4.10/junit-4.10.jar:/Users/ggmacair2023/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\Ahass"/>
+    <property name="user.home" value="/Users/ggmacair2023"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="jdk.module.path" value="C:\Users\Ahass\372-Project\target\classes;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar;C:\Users\Ahass\.m2\repository\org\controlsfx\controlsfx\11.2.1\controlsfx-11.2.1.jar;C:\Users\Ahass\.m2\repository\com\dlsc\formsfx\formsfx-core\11.6.0\formsfx-core-11.6.0.jar;C:\Users\Ahass\.m2\repository\org\kordamp\bootstrapfx\bootstrapfx-core\0.4.0\bootstrapfx-core-0.4.0.jar;C:\Users\Ahass\.m2\repository\com\googlecode\json-simple\json-simple\1.1.1\json-simple-1.1.1.jar"/>
+    <property name="jdk.module.path" value="/Users/ggmacair2023/Desktop/372-02/GanbyRepo/target/classes:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-mac-aarch64.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-mac-aarch64.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-mac-aarch64.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-mac-aarch64.jar:/Users/ggmacair2023/.m2/repository/org/controlsfx/controlsfx/11.2.1/controlsfx-11.2.1.jar:/Users/ggmacair2023/.m2/repository/com/dlsc/formsfx/formsfx-core/11.6.0/formsfx-core-11.6.0.jar:/Users/ggmacair2023/.m2/repository/org/kordamp/bootstrapfx/bootstrapfx-core/0.4.0/bootstrapfx-core-0.4.0.jar:/Users/ggmacair2023/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar"/>
     <property name="java.version.date" value="2025-01-21"/>
-    <property name="java.home" value="C:\Users\Ahass\.jdks\openjdk-23.0.2"/>
-    <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\Ahass\372-Project"/>
-    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.home" value="/Users/ggmacair2023/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/ggmacair2023/Desktop/372-02/GanbyRepo"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Ahass\.m2\repository\org\apache\maven\surefire\surefire-booter\3.2.5\surefire-booter-3.2.5.jar;C:\Users\Ahass\.m2\repository\org\apache\maven\surefire\surefire-api\3.2.5\surefire-api-3.2.5.jar;C:\Users\Ahass\.m2\repository\org\apache\maven\surefire\surefire-logger-api\3.2.5\surefire-logger-api-3.2.5.jar;C:\Users\Ahass\.m2\repository\org\apache\maven\surefire\surefire-shared-utils\3.2.5\surefire-shared-utils-3.2.5.jar;C:\Users\Ahass\.m2\repository\org\apache\maven\surefire\surefire-extensions-spi\3.2.5\surefire-extensions-spi-3.2.5.jar;C:\Users\Ahass\372-Project\target\test-classes;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\Ahass\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar;C:\Users\Ahass\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Ahass\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Ahass\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Ahass\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Ahass\.m2\repository\junit\junit\4.10\junit-4.10.jar;C:\Users\Ahass\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;C:\Users\Ahass\.m2\repository\org\apache\maven\surefire\surefire-junit-platform\3.2.5\surefire-junit-platform-3.2.5.jar;C:\Users\Ahass\.m2\repository\org\apache\maven\surefire\common-java5\3.2.5\common-java5-3.2.5.jar;C:\Users\Ahass\.m2\repository\org\junit\platform\junit-platform-launcher\1.10.2\junit-platform-launcher-1.10.2.jar"/>
-    <property name="user.script" value=""/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/ggmacair2023/.m2/repository/org/apache/maven/surefire/surefire-booter/3.2.5/surefire-booter-3.2.5.jar:/Users/ggmacair2023/.m2/repository/org/apache/maven/surefire/surefire-api/3.2.5/surefire-api-3.2.5.jar:/Users/ggmacair2023/.m2/repository/org/apache/maven/surefire/surefire-logger-api/3.2.5/surefire-logger-api-3.2.5.jar:/Users/ggmacair2023/.m2/repository/org/apache/maven/surefire/surefire-shared-utils/3.2.5/surefire-shared-utils-3.2.5.jar:/Users/ggmacair2023/.m2/repository/org/apache/maven/surefire/surefire-extensions-spi/3.2.5/surefire-extensions-spi-3.2.5.jar:/Users/ggmacair2023/Desktop/372-02/GanbyRepo/target/test-classes:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/ggmacair2023/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/ggmacair2023/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/ggmacair2023/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/ggmacair2023/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/Users/ggmacair2023/.m2/repository/junit/junit/4.10/junit-4.10.jar:/Users/ggmacair2023/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:/Users/ggmacair2023/.m2/repository/org/apache/maven/surefire/surefire-junit-platform/3.2.5/surefire-junit-platform-3.2.5.jar:/Users/ggmacair2023/.m2/repository/org/apache/maven/surefire/common-java5/3.2.5/common-java5-3.2.5.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="23.0.2+7-58"/>
-    <property name="user.name" value="Ahass"/>
-    <property name="stdout.encoding" value="Cp1252"/>
-    <property name="path.separator" value=";"/>
-    <property name="os.version" value="10.0"/>
+    <property name="user.name" value="ggmacair2023"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="15.4.1"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="localRepository" value="C:\Users\Ahass\.m2\repository"/>
+    <property name="localRepository" value="/Users/ggmacair2023/.m2/repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\Ahass\AppData\Local\Temp\"/>
-    <property name="idea.version" value="2024.3.2.2"/>
+    <property name="java.io.tmpdir" value="/var/folders/8r/jqhhmvwd6hx9ns22fzf9jdww0000gn/T/"/>
+    <property name="idea.version" value="2024.3.5"/>
     <property name="java.version" value="23.0.2"/>
-    <property name="user.dir" value="C:\Users\Ahass\372-Project"/>
-    <property name="os.arch" value="amd64"/>
+    <property name="user.dir" value="/Users/ggmacair2023/Desktop/372-02/GanbyRepo"/>
+    <property name="os.arch" value="aarch64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="sun.os.patch.level" value=""/>
-    <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Users\Ahass\.jdks\openjdk-23.0.2\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\Program Files\nodejs\;C:\Users\Ahass\AppData\Local\Microsoft\WindowsApps;C:\Users\Ahass\.dotnet\tools;C:\Users\Ahass\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Ahass\AppData\Local\GitHubDesktop\bin;C:\Users\Ahass\AppData\Roaming\npm;C:\Users\Ahass\.lmstudio\bin;C:\Users\Ahass\AppData\Local\Programs\Ollama;."/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/ggmacair2023/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="stderr.encoding" value="UTF-8"/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="java.vm.version" value="23.0.2+7-58"/>
-    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testToString" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.063"/>
-  <testcase name="getType" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.002"/>
-  <testcase name="testEquals" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.002"/>
+  <testcase name="testToString" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.001"/>
+  <testcase name="getType" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.0"/>
+  <testcase name="testEquals" classname="edu.metrostate.ics372.ganby.vehicle.PickupTest" time="0.0"/>
 </testsuite>
