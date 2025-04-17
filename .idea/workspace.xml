@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/VehicleBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/VehicleBuilder.java" afterDir="false" />
-    </list>
+    <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,35 +54,35 @@
     <option name="showLibraryContents" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.FXDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TestEnv.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DealerCatalogTest.getDealerWithId.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DealerCatalogTest.getDealers.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SportsCarTest.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [test].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/abo_dawood/college/Semester 7 Spring 2025/ICS 372/Phase2_372&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FXDriver.executor": "Run",
+    "Application.TestEnv.executor": "Run",
+    "JUnit.DealerCatalogTest.getDealerWithId.executor": "Run",
+    "JUnit.DealerCatalogTest.getDealers.executor": "Run",
+    "JUnit.SportsCarTest.executor": "Run",
+    "Maven.FX_372_Project [clean].executor": "Run",
+    "Maven.FX_372_Project [compile].executor": "Run",
+    "Maven.FX_372_Project [test].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "abdi",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/abo_dawood/college/Semester 7 Spring 2025/ICS 372/Phase2_372",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.FXDriver">
     <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
-      <module name="ganby" />
+      <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="edu.metrostate.ics372.ganby.*" />
