@@ -27,7 +27,6 @@ public class VehicleActionHelper {
 
     /**
      * Deletes all checkbox-selected vehicles from both UI and dealer catalog.
-     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param vehicleTable           the vehicle table
      * @param dealerTable            the dealer table for refresh
@@ -69,7 +68,6 @@ public class VehicleActionHelper {
 
     /**
      * Modifies the price of the selected vehicle.
-     * TODO: Add comments to code that give the basics of what the code is doing
      *
      * @param vehicleTable the vehicle table with selection
      */
@@ -115,33 +113,51 @@ public class VehicleActionHelper {
             return;
         }
 
-        // Check if all selected vehicles are already rented out
         boolean allRentedOut = true;
+        boolean hasNonSportsCar = false;
+
+        // Determine if all non-sportscars are rented out
         for (Vehicle vehicle : selectedVehicles) {
-            // If it's a SportsCar, show an alert and do not toggle
-            if (vehicle.getType().trim().replaceAll("\\s+", "").equalsIgnoreCase("SportsCar")) {
-                FXController.showAlert(AlertType.WARNING, "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
-                        "SportsCars cannot be rented.");
-                return; // Return early since the action is not allowed
+            String type = vehicle.getType().trim().replaceAll("\\s+", "");
+            boolean isSportsCar = type.equalsIgnoreCase("SportsCar");
+
+            if (!isSportsCar && !vehicle.getIsRentedOut()) {
+                allRentedOut = false;
             }
-            if (!vehicle.getIsRentedOut()) {
-                allRentedOut = false; // Found a vehicle that is not rented out
-                break; // No need to check further if we already found a non-rented vehicle
+
+            if (!isSportsCar) {
+                hasNonSportsCar = true;
             }
         }
 
-        // Update the rent status for all selected vehicles
+        // Determine the new status we want to set
+        boolean newRentStatus = !allRentedOut; // true = rent out, false = make available
+
+        if (!hasNonSportsCar && newRentStatus) {
+            FXController.showAlert(AlertType.WARNING, "Action Not Allowed",
+                    "All selected vehicles are SportsCars, which cannot be rented.");
+            return;
+        }
+
+        // Update rent status
         for (Vehicle vehicle : selectedVehicles) {
-            // Set all to "Available" or "Rented" based on the flag
-            vehicle.setRentedOut(!allRentedOut);  // Use the appropriate setter method here
+            String type = vehicle.getType().trim().replaceAll("\\s+", "");
+            boolean isSportsCar = type.equalsIgnoreCase("SportsCar");
+
+            if (isSportsCar && newRentStatus) {
+                // Only show warning if we're trying to rent out a SportsCar
+                FXController.showAlert(AlertType.WARNING,
+                        "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
+                        "SportsCars cannot be rented.");
+                continue;
+            }
+
+            vehicle.setRentedOut(newRentStatus);
         }
 
         vehicleTable.refresh();
-
-        // Update the button text based on whether all vehicles were rented out or not
-        toggleButton.setText(allRentedOut ? "Set All as Available" : "Set All as Rented");
+        toggleButton.setText(newRentStatus ? "Set All as Available" : "Set All as Rented");
     }
-
 
     /**
      * Selects or unselects all vehicles in the table.
@@ -160,6 +176,13 @@ public class VehicleActionHelper {
         vehicleTable.refresh();
     }
 
+    /*
+     * Opens a modal wizard to add a new vehicle to the selected dealer.
+     * Handles all input fields, validation, and updates the dealer's vehicle catalog.
+     *
+     * @param selectedDealer        the dealer to add the vehicle to
+     * @param vehicleObservableList the observable list to update the vehicle table
+     */
     /**
      * Opens a modal wizard to add a new vehicle to the selected dealer.
      *
