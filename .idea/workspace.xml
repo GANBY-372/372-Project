@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/VehicleBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/VehicleBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,20 +197,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merged with main" />
     <option name="LAST_COMMIT_MESSAGE" value="Merged with main" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java</url>
-          <line>61</line>
-          <properties class="edu.metrostate.ics372.ganby.dealer.DealerCatalog" method="getDealerWithId">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
