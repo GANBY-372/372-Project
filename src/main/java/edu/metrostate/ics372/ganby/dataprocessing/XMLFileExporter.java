@@ -77,7 +77,7 @@ public class XMLFileExporter {
         nameElement.appendChild(doc.createTextNode(dealer.getName()));
         dealerElement.appendChild(nameElement);
 
-        for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+        for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
             Element vehicleElement = doc.createElement("Vehicle");
             vehicleElement.setAttribute("type", vehicle.getType());
             vehicleElement.setAttribute("id", vehicle.getVehicleId());

@@ -35,7 +35,7 @@ public class JSONFileExporter {
         JSONArray carInventoryJson = new JSONArray();
 
         for (Dealer dealer : dealers) {
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 JSONObject vehicleJson = new JSONObject();
                 vehicleJson.put("dealership_id", dealer.getId());
                 vehicleJson.put("vehicle_type", vehicle.getType());
@@ -128,7 +128,7 @@ public class JSONFileExporter {
         JSONArray carInventoryJson = new JSONArray();
 
         for (Dealer dealer : DealerCatalog.getInstance().getDealers()) {
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 JSONObject vehicleJson = new JSONObject();
                 vehicleJson.put("dealership_id", dealer.getId());
                 vehicleJson.put("vehicle_type", vehicle.getType());

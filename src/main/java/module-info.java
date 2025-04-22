@@ -8,6 +8,7 @@ module edu.metrostate.ics372.ganby {
     requires json.simple;
     requires java.desktop;
     requires java.logging;
+    requires kotlin.stdlib;
 
     opens edu.metrostate.ics372.ganby.vehicle to javafx.base;
     opens edu.metrostate.ics372.ganby to javafx.fxml;

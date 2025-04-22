@@ -31,9 +31,9 @@ class VehicleTest {
 
     @Test
     void getType() {
-        assertEquals("Sedan", v001.getType());
-        assertEquals("Pickup", v002.getType());
-        assertEquals("SportsCar", v003.getType());
+        assertEquals("Sedan", v001.type);
+        assertEquals("Pickup", v002.type);
+        assertEquals("SportsCar", v003.type);
     }
 
     @Test

@@ -189,7 +189,7 @@ public class DealerActionHelper {
         }
 
         for (Dealer dealer : selectedDealers) {
-            boolean current = dealer.getIsVehicleAcquisitionEnabled();
+            boolean current = dealer.isVehicleAcquisitionEnabled();
             if (current) {
                 DealerCatalog.getInstance().disableDealerAcquisition(dealer.getId());
             } else {
@@ -229,7 +229,7 @@ public class DealerActionHelper {
                     .filter(d -> !d.equals(dealer))
                     .toList();
 
-            int vehicleCount = dealer.getVehicleCatalog().size();
+            int vehicleCount = dealer.vehicleCatalog.size();
 
             if (vehicleCount > 0) {
                 Alert confirm = new Alert(AlertType.CONFIRMATION);
@@ -246,7 +246,7 @@ public class DealerActionHelper {
                 ButtonType response = confirm.showAndWait().orElse(cancel);
 
                 if (response == deleteVehicles) {
-                    dealer.getVehicleCatalog().clear();
+                    dealer.vehicleCatalog.clear();
                     finalizeDeletion(dealer, dealerObservableList, vehicleObservableList);
                 } else if (response == transferVehicles) {
                     if (otherDealers.isEmpty()) {
@@ -260,9 +260,9 @@ public class DealerActionHelper {
                     dialog.setContentText("Transfer to:");
 
                     dialog.showAndWait().ifPresent(destination -> {
-                        ArrayList<Vehicle> toTransfer = new ArrayList<>(dealer.getVehicleCatalog().values());
+                        ArrayList<Vehicle> toTransfer = new ArrayList<>(dealer.vehicleCatalog.values());
                         DealerCatalog.getInstance().transferInventory(toTransfer, destination.getId());
-                        dealer.getVehicleCatalog().clear();
+                        dealer.vehicleCatalog.clear();
                         finalizeDeletion(dealer, dealerObservableList, vehicleObservableList);
                         FXController.showAlert(AlertType.INFORMATION, "Transfer Complete",
                                 "Vehicles transferred to " + destination.getName() + ".");

@@ -54,7 +54,7 @@ public class VehicleActionHelper {
                 for (Vehicle vehicle : toDelete) {
                     Dealer dealer = DealerCatalog.getInstance().getDealerWithId(vehicle.getDealerId());
                     if (dealer != null) {
-                        dealer.getVehicleCatalog().remove(vehicle.getVehicleId());
+                        dealer.vehicleCatalog.remove(vehicle.getVehicleId());
                     }
                     vehicleObservableList.remove(vehicle);
                 }
@@ -283,7 +283,7 @@ public class VehicleActionHelper {
                 dealer.addVehicle(newVehicle);
 
                 // Refresh UI list
-                vehicleObservableList.setAll(dealer.getVehicleCatalog().values());
+                vehicleObservableList.setAll(dealer.vehicleCatalog.values());
 
                 // Show success alert with vehicle details
                 String msg = "%s %s (%s) was added to Dealer #%s".formatted(
@@ -350,7 +350,7 @@ public class VehicleActionHelper {
 
             // Remove from current dealer
             for (Vehicle v : toTransfer) {
-                currentDealer.getVehicleCatalog().remove(v.getVehicleId());
+                currentDealer.vehicleCatalog.remove(v.getVehicleId());
                 v.setDealerId(destinationDealer.getId());  // Update the dealer ID
             }
 
@@ -358,7 +358,7 @@ public class VehicleActionHelper {
             DealerCatalog.getInstance().transferInventory(toTransfer, destinationDealer.getId());
 
             // Refresh UI
-            vehicleList.setAll(currentDealer.getVehicleCatalog().values());
+            vehicleList.setAll(currentDealer.vehicleCatalog.values());
             vehicleTable.refresh();
             dealerTable.refresh();
 
@@ -387,7 +387,7 @@ public class VehicleActionHelper {
             );
         } else if (selectedDealer != null) {
             outputList.setAll(
-                    selectedDealer.getVehicleCatalog().values().stream()
+                    selectedDealer.vehicleCatalog.values().stream()
                             .filter(v -> v.getType().equalsIgnoreCase(type))
                             .toList()
             );

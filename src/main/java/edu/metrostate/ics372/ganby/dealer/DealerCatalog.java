@@ -83,7 +83,7 @@ public class DealerCatalog {
     public ObservableList<Dealer> getDealersWhoAreBuying() {
         return FXCollections.observableArrayList(
                 dealerList.stream()
-                        .filter(Dealer::getIsVehicleAcquisitionEnabled)
+                        .filter(Dealer::isVehicleAcquisitionEnabled)
                         .toList()
         );
     }
@@ -92,7 +92,7 @@ public class DealerCatalog {
     public ArrayList<Vehicle> getAllVehicles() {
         ArrayList<Vehicle> allVehicles = new ArrayList<>();
         for (Dealer dealer : dealerCatalog.values()) {
-            allVehicles.addAll(dealer.getVehicleCatalog().values());
+            allVehicles.addAll(dealer.vehicleCatalog.values());
         }
         return allVehicles;
     }
@@ -123,11 +123,11 @@ public class DealerCatalog {
             addDealer(dealer);
         }
 
-        if (!dealer.getIsVehicleAcquisitionEnabled()) {
+        if (!dealer.isVehicleAcquisitionEnabled()) {
             return;
         }
 
-        if (dealer.getVehicleCatalog().containsKey(vehicle.getVehicleId())) {
+        if (dealer.vehicleCatalog.containsKey(vehicle.getVehicleId())) {
             return;
         }
 
@@ -141,8 +141,8 @@ public class DealerCatalog {
      */
     public void modifyVehiclePrice(String vehicleId, double price) {
         for (Dealer dealer : dealerCatalog.values()) {
-            if (dealer.getVehicleCatalog().containsKey(vehicleId)) {
-                dealer.getVehicleCatalog().get(vehicleId).setPrice(price);
+            if (dealer.vehicleCatalog.containsKey(vehicleId)) {
+                dealer.vehicleCatalog.get(vehicleId).setPrice(price);
             }
         }
     }
@@ -161,7 +161,7 @@ public class DealerCatalog {
      */
     public int amountOfAllVehicles() {
         return dealerCatalog.values().stream()
-                .mapToInt(d -> d.getVehicleCatalog().size())
+                .mapToInt(d -> d.vehicleCatalog.size())
                 .sum();
     }
 
@@ -194,7 +194,7 @@ public class DealerCatalog {
     public ArrayList<String> getTypes() {
         Set<String> types = new HashSet<>();
         for (Dealer dealer : dealerCatalog.values()) {
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 types.add(vehicle.getType());
             }
         }
@@ -209,7 +209,7 @@ public class DealerCatalog {
     public ArrayList<Vehicle> getVehiclesByType(String type) {
         ArrayList<Vehicle> result = new ArrayList<>();
         for (Dealer dealer : dealerCatalog.values()) {
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 if (vehicle.getType().equalsIgnoreCase(type)) {
                     result.add(vehicle);
                 }

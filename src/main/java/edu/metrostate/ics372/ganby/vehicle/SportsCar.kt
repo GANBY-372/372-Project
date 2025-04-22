@@ -1,12 +1,18 @@
-package edu.metrostate.ics372.ganby.vehicle;
+package edu.metrostate.ics372.ganby.vehicle
 
-import java.time.LocalDateTime;
+import java.time.LocalDateTime
 
 /**
  * Represents a sports car, which cannot be rented out.
  */
-public class SportsCar extends Vehicle {
-    final private String type = "SPORTSCAR";
+class SportsCar : Vehicle {
+    override val type: String
+        /**
+         * Returns the vehicle type.
+         *
+         * @return "SportsCar"
+         */
+        get() = "SportsCar"
 
     /**
      * Constructs a new SportsCar with an explicit rent status, but always forces rent status to false.
@@ -20,10 +26,10 @@ public class SportsCar extends Vehicle {
      * @param isRentedOut      ignored - SportsCar is never rented
      */
     //In the case rent status is specified
-    public SportsCar(String id, String model, String manufacturer, double price, String dealerId,
-                     LocalDateTime acquisitionDate, Boolean isRentedOut) {
-        super(id, model, manufacturer, price, dealerId, acquisitionDate, false);
-    }
+    constructor(
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        acquisitionDate: LocalDateTime, isRentedOut: Boolean
+    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, false)
 
     /**
      * Constructs a new SportsCar, defaulting rent status to false.
@@ -35,20 +41,10 @@ public class SportsCar extends Vehicle {
      * @param dealerId        the dealer's ID who owns the vehicle
      * @param acquisitionDate the date the vehicle was acquired
      */
-    public SportsCar(String id, String model, String manufacturer, double price, String dealerId,
-                     LocalDateTime acquisitionDate) {
-        super(id, model, manufacturer, price, dealerId, acquisitionDate, false);
-    }
-
-    /**
-     * Returns the vehicle type.
-     *
-     * @return "SportsCar"
-     */
-    @Override
-    public String getType() {
-        return "SportsCar";
-    }
+    constructor(
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        acquisitionDate: LocalDateTime
+    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, false)
 
     /**
      * Equality based on vehicle ID.
@@ -56,24 +52,22 @@ public class SportsCar extends Vehicle {
      * @param object another object
      * @return true if same vehicle ID
      */
-    @Override
-    public boolean equals(Object object) {
-        if (object == this) return true;
-        if (object == null) return false;
-        if (object instanceof Vehicle vehicle) {
-            return this.id.get().equals(vehicle.getVehicleId());
+    override fun equals(`object`: Any?): Boolean {
+        if (`object` === this) return true
+        if (`object` == null) return false
+        if (`object` is Vehicle) {
+            return id.get() == `object`.vehicleId
         }
-        return false;
+        return false
     }
 
     /**
      * Returns String representation of object
      *
-     *  another object
+     * another object
      * @return String representation of object
      */
-    @Override
-    public String toString() {
-        return getType() + " " + super.toString();
+    override fun toString(): String {
+        return type + " " + super.toString()
     }
 }

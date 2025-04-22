@@ -95,7 +95,7 @@ public class FXController {
         dealerNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         isBuyingColumn.setCellValueFactory(cellData -> cellData.getValue().isAcquisitionEnabledProperty());
         dealerInventoryColumn.setCellValueFactory(cellData ->
-                new SimpleObjectProperty<>(cellData.getValue().getVehicleCatalog().size()));
+                new SimpleObjectProperty<>(cellData.getValue().vehicleCatalog.size()));
 
         // Vehicle table bindings
         vehicleDealerIdColumn.setCellValueFactory(new PropertyValueFactory<>("dealerId"));
@@ -186,7 +186,7 @@ public class FXController {
         // Loop through dealers to populate their vehicles
         dealerTable.getItems().stream()
                 .filter(Dealer::isSelected)  // Only selected dealers
-                .forEach(dealer -> vehicleObservableList.addAll(dealer.getVehicleCatalog().values()));
+                .forEach(dealer -> vehicleObservableList.addAll(dealer.vehicleCatalog.values()));
 
         // Update the vehicle table with the new data
         vehicleTable.setItems(vehicleObservableList);
@@ -201,8 +201,8 @@ public class FXController {
 
         // Loop through each selected dealer and add their vehicles to the list
         for (Dealer dealer : selectedDealers) {
-            if (dealer != null && dealer.getVehicleCatalog() != null) {
-                vehicleObservableList.addAll(dealer.getVehicleCatalog().values());
+            if (dealer != null && dealer.vehicleCatalog != null) {
+                vehicleObservableList.addAll(dealer.vehicleCatalog.values());
             }
         }
 
@@ -235,7 +235,7 @@ public class FXController {
      */
     private void populateVehicleList(Dealer dealer) {
         vehicleObservableList.clear(); // <--- Ensure clean slate
-        vehicleObservableList.setAll(dealer.getVehicleCatalog().values());
+        vehicleObservableList.setAll(dealer.vehicleCatalog.values());
         vehicleTable.setItems(vehicleObservableList);
     }
 
@@ -323,7 +323,7 @@ public class FXController {
         if (allDealersSelected) {
             vehicleObservableList.setAll(DealerCatalog.getInstance().getAllVehicles());
         } else if (selectedDealer != null) {
-            vehicleObservableList.setAll(selectedDealer.getVehicleCatalog().values());
+            vehicleObservableList.setAll(selectedDealer.vehicleCatalog.values());
         } else {
             showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to view their vehicles.");
             return;

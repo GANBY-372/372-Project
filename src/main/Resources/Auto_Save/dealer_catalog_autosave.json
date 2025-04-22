@@ -12,7 +12,7 @@
     },
     {
       "is_rented_out": false,
-      "price": 50444.0,
+      "price": 234.0,
       "vehicle_model": "Model 3",
       "vehicle_type": "Sedan",
       "dealership_id": "12513",
@@ -39,6 +39,56 @@
       "vehicle_manufacturer": "Toyota",
       "vehicle_id": "229393",
       "acquisition_date": 1515354694451
+    },
+    {
+      "is_rented_out": false,
+      "price": 17000.0,
+      "vehicle_model": "Range Rover",
+      "vehicle_type": "SUV",
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Land Rover",
+      "vehicle_id": "848432",
+      "acquisition_date": 1745352560457
+    },
+    {
+      "is_rented_out": false,
+      "price": 36600.0,
+      "vehicle_model": "G70",
+      "vehicle_type": "Sedan",
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Genesis",
+      "vehicle_id": "151e5dde",
+      "acquisition_date": 1745352560457
+    },
+    {
+      "is_rented_out": false,
+      "price": 22330.0,
+      "vehicle_model": "Miata",
+      "vehicle_type": "SportsCar",
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Mazda",
+      "vehicle_id": "ern222",
+      "acquisition_date": 1745352560457
+    },
+    {
+      "is_rented_out": false,
+      "price": 22600.0,
+      "vehicle_model": "Tundra",
+      "vehicle_type": "Pickup",
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Toyota",
+      "vehicle_id": "52523",
+      "acquisition_date": 1745352560457
+    },
+    {
+      "is_rented_out": false,
+      "price": 43.0,
+      "vehicle_model": "435we6r",
+      "vehicle_type": "Pickup",
+      "dealership_id": "345",
+      "vehicle_manufacturer": "345we6",
+      "vehicle_id": "23456",
+      "acquisition_date": 1743656400000
     }
   ]
 }

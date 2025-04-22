@@ -39,8 +39,8 @@ class DealerTest {
 
     @Test
     void getVehicleCatalog() {
-        assertNotNull(dealer.getVehicleCatalog());
-        assertTrue(dealer.getVehicleCatalog().isEmpty());
+        assertNotNull(dealer.vehicleCatalog);
+        assertTrue(dealer.vehicleCatalog.isEmpty());
     }
 
     @Test
@@ -64,7 +64,7 @@ class DealerTest {
     @Test
     void addVehicle() {
         dealer.addVehicle(v002);
-        assertEquals(v002, dealer.getVehicleCatalog().get("V002"));
+        assertEquals(v002, dealer.vehicleCatalog.get("V002"));
     }
 
     @Test

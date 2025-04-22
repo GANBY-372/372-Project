@@ -84,7 +84,7 @@ public class FilesTestDriver extends Application {
         System.out.println("\n Current DealerCatalog:");
         for (Dealer dealer : DealerCatalog.getInstance().getDealers()) {
             System.out.println("Dealer: " + dealer.getId() + " - " + dealer.getName());
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 System.out.printf("  ↳ Vehicle: %s (%s %s), $%.2f\n",
                         vehicle.getVehicleId(),
                         vehicle.getManufacturer(),
