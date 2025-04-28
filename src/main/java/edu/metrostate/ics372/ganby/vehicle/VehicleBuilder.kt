@@ -13,7 +13,7 @@ import java.util.*
 object VehicleBuilder {
 
     @JvmStatic
-    fun buildVehicleFromJSON(json: JSONObject): Vehicle? {
+    fun buildVehicleFromJSON(json: JSONObject, dealerName: String): Vehicle? {
         try {
             val manufacturer = json["vehicle_manufacturer"].toString()
             val model = json["vehicle_model"].toString()
@@ -21,7 +21,7 @@ object VehicleBuilder {
             val price = json["price"].toString().toDouble()
             val dealerId = json["dealership_id"].toString()
             val epochMillis = json["acquisition_date"].toString().toLong()
-            val dealerName = json["dealer_name"].toString()
+
             val acquisitionDate = LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(epochMillis),
                 TimeZone.getDefault().toZoneId()

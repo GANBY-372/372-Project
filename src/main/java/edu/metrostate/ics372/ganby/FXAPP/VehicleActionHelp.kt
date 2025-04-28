@@ -269,4 +269,8 @@ object VehicleActionHelper {
 
         wizardStage.showAndWait()
     }
+
+    fun openTransferVehicleWizard(selected: List<Vehicle?>, currentDealer: Dealer?, vehicleObservableList: ObservableList<Vehicle?>, vehicleTable: TableView<Vehicle?>, dealerTable: TableView<Dealer?>) {
+
+    }
 }

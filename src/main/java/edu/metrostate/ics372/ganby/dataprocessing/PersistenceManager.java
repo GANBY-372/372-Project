@@ -45,6 +45,6 @@ public class PersistenceManager {
             System.err.println("❌ Failed to autosave dealer catalog: " + e.getMessage());
         }
     }
-}
+ }
 
 
