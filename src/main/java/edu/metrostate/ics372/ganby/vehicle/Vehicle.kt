@@ -16,15 +16,17 @@ abstract class Vehicle @JvmOverloads constructor(
     manufacturer: String,
     price: Double,
     dealerId: String,
+    dealerName: String, // <-- ADD THIS
     acquisitionDate: LocalDateTime,
     isRentedOut: Boolean = false
 ) {
     // Properties for JavaFX bindings
-     val id: StringProperty = SimpleStringProperty(id)
+    val id: StringProperty = SimpleStringProperty(id)
     protected var model: StringProperty = SimpleStringProperty(model)
     protected var manufacturer: StringProperty = SimpleStringProperty(manufacturer)
     protected var price: DoubleProperty = SimpleDoubleProperty(price)
     protected var dealerId: StringProperty = SimpleStringProperty(dealerId)
+    protected var dealerName: StringProperty = SimpleStringProperty(dealerName) // <-- ADD THIS
     protected var acquisitionDate: ObjectProperty<LocalDateTime> = SimpleObjectProperty(acquisitionDate)
     val isRentedOutProperty: BooleanProperty = SimpleBooleanProperty(isRentedOut)
     private val selected: BooleanProperty = SimpleBooleanProperty(false)
@@ -40,6 +42,7 @@ abstract class Vehicle @JvmOverloads constructor(
     fun manufacturerProperty(): StringProperty = manufacturer
     fun priceProperty(): DoubleProperty = price
     fun dealerIdProperty(): StringProperty = dealerId
+    fun dealerNameProperty(): StringProperty = dealerName // <-- ADD THIS
     fun acquisitionDateProperty(): ObjectProperty<LocalDateTime> = acquisitionDate
 
     // Standard getters
@@ -48,6 +51,7 @@ abstract class Vehicle @JvmOverloads constructor(
     fun getManufacturer(): String = manufacturer.get()
     fun getPrice(): Double = price.get()
     fun getDealerId(): String = dealerId.get()
+    fun getDealerName(): String = dealerName.get() // <-- ADD THIS
     fun getAcquisitionDate(): LocalDateTime = acquisitionDate.get()
     fun getIsRentedOut(): Boolean = isRentedOutProperty.get()
 
@@ -59,10 +63,15 @@ abstract class Vehicle @JvmOverloads constructor(
 
     fun setDealer(dealer: Dealer) {
         dealerId.set(dealer.getId())
+        dealerName.set(dealer.getName()) // <-- ADD THIS
     }
 
     fun setDealerId(newDealerId: String) {
         dealerId.set(newDealerId)
+    }
+
+    fun setDealerName(newDealerName: String) { // <-- ADD THIS
+        dealerName.set(newDealerName)
     }
 
     fun setAcquisitionDate(newDate: LocalDateTime) {
@@ -88,6 +97,6 @@ abstract class Vehicle @JvmOverloads constructor(
     override fun hashCode(): Int = Objects.hash(id.get())
 
     override fun toString(): String {
-        return "${javaClass.simpleName} [id: $vehicleId, model: ${getModel()}, manufacturer: ${getManufacturer()}, price: ${getPrice()}, dealerId: ${getDealerId()}, acquisitionDate: ${getAcquisitionDate()}]"
+        return "${javaClass.simpleName} [id: $vehicleId, model: ${getModel()}, manufacturer: ${getManufacturer()}, price: ${getPrice()}, dealerId: ${getDealerId()}, dealerName: ${getDealerName()}, acquisitionDate: ${getAcquisitionDate()}]"
     }
 }

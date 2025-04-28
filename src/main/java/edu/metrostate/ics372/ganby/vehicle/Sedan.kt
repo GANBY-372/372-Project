@@ -23,14 +23,14 @@ class Sedan : Vehicle {
      * @param manufacturer    the vehicle manufacturer
      * @param price           the price of the vehicle
      * @param dealerId        the ID of the dealer owning this vehicle
+     * @param dealerName      the name of the dealer
      * @param acquisitionDate the date the vehicle was acquired
      * @param isRentedOut     whether the vehicle is currently rented out
      */
-    //In the case rent status is specified
     constructor(
-        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String, dealerName: String,
         acquisitionDate: LocalDateTime, isRentedOut: Boolean
-    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut)
+    ) : super(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate, isRentedOut)
 
     /**
      * Constructs a Sedan with the specified parameters and default rent status (false).
@@ -40,12 +40,13 @@ class Sedan : Vehicle {
      * @param manufacturer    the vehicle manufacturer
      * @param price           the price of the vehicle
      * @param dealerId        the ID of the dealer owning this vehicle
+     * @param dealerName      the name of the dealer
      * @param acquisitionDate the date the vehicle was acquired
      */
     constructor(
-        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String, dealerName: String,
         acquisitionDate: LocalDateTime
-    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate)
+    ) : super(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate)
 
     /**
      * Compares this Sedan to another object for equality.

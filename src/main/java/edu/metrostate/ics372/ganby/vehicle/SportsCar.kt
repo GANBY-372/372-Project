@@ -22,14 +22,14 @@ class SportsCar : Vehicle {
      * @param manufacturer     the manufacturer name
      * @param price            the price of the vehicle
      * @param dealerId         the dealer's ID who owns the vehicle
+     * @param dealerName       the dealer's name
      * @param acquisitionDate  the date the vehicle was acquired
      * @param isRentedOut      ignored - SportsCar is never rented
      */
-    //In the case rent status is specified
     constructor(
-        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String, dealerName: String,
         acquisitionDate: LocalDateTime, isRentedOut: Boolean
-    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, false)
+    ) : super(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate, false)
 
     /**
      * Constructs a new SportsCar, defaulting rent status to false.
@@ -39,12 +39,13 @@ class SportsCar : Vehicle {
      * @param manufacturer    the manufacturer name
      * @param price           the price of the vehicle
      * @param dealerId        the dealer's ID who owns the vehicle
+     * @param dealerName      the dealer's name
      * @param acquisitionDate the date the vehicle was acquired
      */
     constructor(
-        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String, dealerName: String,
         acquisitionDate: LocalDateTime
-    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, false)
+    ) : super(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate, false)
 
     /**
      * Equality based on vehicle ID.
@@ -64,7 +65,6 @@ class SportsCar : Vehicle {
     /**
      * Returns String representation of object
      *
-     * another object
      * @return String representation of object
      */
     override fun toString(): String {

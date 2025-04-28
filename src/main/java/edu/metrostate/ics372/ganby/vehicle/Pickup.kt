@@ -23,14 +23,14 @@ class Pickup : Vehicle {
      * @param manufacturer    the manufacturer of the vehicle
      * @param price           the price of the vehicle
      * @param dealerId        the ID of the dealer who owns the vehicle
+     * @param dealerName      the name of the dealer who owns the vehicle
      * @param acquisitionDate the date the vehicle was acquired
      * @param isRentedOut     whether the vehicle is currently rented
      */
-    //In the case rent status is specified
     constructor(
-        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String, dealerName: String,
         acquisitionDate: LocalDateTime, isRentedOut: Boolean
-    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut)
+    ) : super(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate, isRentedOut)
 
     /**
      * Constructs a Pickup with a default rent status of false.
@@ -40,12 +40,13 @@ class Pickup : Vehicle {
      * @param manufacturer    the manufacturer of the vehicle
      * @param price           the price of the vehicle
      * @param dealerId        the ID of the dealer who owns the vehicle
+     * @param dealerName      the name of the dealer who owns the vehicle
      * @param acquisitionDate the date the vehicle was acquired
      */
     constructor(
-        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String, dealerName: String,
         acquisitionDate: LocalDateTime
-    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate)
+    ) : super(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate)
 
     /**
      * Checks if another object is equal to this Pickup.
@@ -62,7 +63,6 @@ class Pickup : Vehicle {
         }
         return false
     }
-
 
     /**
      * Returns a string representation of this Pickup.

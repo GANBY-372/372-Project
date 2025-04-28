@@ -11,13 +11,7 @@ import java.util.*
  * This class provides methods to create Vehicle objects from both JSON and XML inputs.
  */
 object VehicleBuilder {
-    /**
-     * Creates a Vehicle object from the given JSON object.
-     * This method extracts the necessary attributes from the JSON and maps them to the corresponding vehicle type.
-     *
-     * @param json the JSON object containing vehicle data
-     * @return a Vehicle instance or null if the type is unknown or there was an error processing the data
-     */
+
     @JvmStatic
     fun buildVehicleFromJSON(json: JSONObject): Vehicle? {
         try {
@@ -27,34 +21,27 @@ object VehicleBuilder {
             val price = json["price"].toString().toDouble()
             val dealerId = json["dealership_id"].toString()
             val epochMillis = json["acquisition_date"].toString().toLong()
-
+            val dealerName = json["dealer_name"].toString()
             val acquisitionDate = LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(epochMillis),
                 TimeZone.getDefault().toZoneId()
             )
 
-            val type = json["vehicle_type"].toString().trim { it <= ' ' }.replace("\\s+".toRegex(), "")
+            val type = json["vehicle_type"].toString().trim { it <= ' ' }
+                .replace("\\s+".toRegex(), "")
                 .uppercase(Locale.getDefault())
 
-            return buildVehicle(id, model, manufacturer, price, dealerId, acquisitionDate, false, type)
+            return buildVehicle(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate, false, type)
         } catch (e: Exception) {
             System.err.println("Error creating vehicle from JSON: " + e.message)
             return null
         }
     }
 
-    /**
-     * Creates a Vehicle object from the given XML element representing a vehicle.
-     * This method extracts the necessary attributes from the XML and maps them to the corresponding vehicle type.
-     *
-     * @param vehicleElement the XML element containing the vehicle data
-     * @param dealerId       the dealer ID associated with this vehicle
-     * @return a Vehicle instance or null if the type is unknown or there was an error processing the data
-     * @throws IllegalArgumentException if the XML element is null
-     */
     @JvmStatic
     fun buildVehicleFromXML(vehicleElement: Element, dealerId: String?, dealerName: String?): Vehicle? {
         requireNotNull(vehicleElement) { "XML vehicle element is null." }
+        requireNotNull(dealerName) { "Dealer name cannot be null." }
 
         val manufacturer = vehicleElement.getElementsByTagName("Make").item(0).textContent
         val model = vehicleElement.getElementsByTagName("Model").item(0).textContent
@@ -67,25 +54,11 @@ object VehicleBuilder {
             return null
         }
 
-        val acquisitionDate = LocalDateTime.now() // Placeholder for now; can be improved later
+        val acquisitionDate = LocalDateTime.now() // You can improve this later if needed
 
-        return buildVehicle(id, model, manufacturer, price, dealerId, acquisitionDate, false, type)
+        return buildVehicle(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate, false, type)
     }
 
-    /**
-     * Creates a Vehicle object based on the provided parameters.
-     * This method determines the vehicle type and creates the appropriate instance.
-     *
-     * @param id              the unique ID of the vehicle
-     * @param model           the model of the vehicle
-     * @param manufacturer    the manufacturer of the vehicle
-     * @param price           the price of the vehicle
-     * @param dealerId        the ID of the dealer who owns the vehicle
-     * @param acquisitionDate the date the vehicle was acquired
-     * @param isRented        whether the vehicle is currently rented
-     * @param type            the type of vehicle (e.g., SUV, Sedan)
-     * @return a Vehicle instance or null if the type is unknown
-     */
     @JvmStatic
     fun buildVehicle(
         id: String?,
@@ -93,28 +66,28 @@ object VehicleBuilder {
         manufacturer: String?,
         price: Double,
         dealerId: String?,
+        dealerName: String?,
         acquisitionDate: LocalDateTime,
         isRented: Boolean,
         type: String?
     ): Vehicle? {
-        // Safely unwrap all nullable Strings before use
         val nonNullId = requireNotNull(id) { "Vehicle ID cannot be null" }
         val nonNullModel = requireNotNull(model) { "Vehicle model cannot be null" }
         val nonNullManufacturer = requireNotNull(manufacturer) { "Vehicle manufacturer cannot be null" }
         val nonNullDealerId = requireNotNull(dealerId) { "Dealer ID cannot be null" }
+        val nonNullDealerName = requireNotNull(dealerName) { "Dealer Name cannot be null" }
         val normalizedType = requireNotNull(type) { "Vehicle type cannot be null" }
             .trim().replace("\\s+".toRegex(), "").uppercase(Locale.getDefault())
 
         return when (normalizedType) {
-            "SUV" -> SUV(nonNullId, nonNullModel, nonNullManufacturer, price, nonNullDealerId, acquisitionDate, isRented)
-            "SEDAN" -> Sedan(nonNullId, nonNullModel, nonNullManufacturer, price, nonNullDealerId, acquisitionDate, isRented)
-            "PICKUP" -> Pickup(nonNullId, nonNullModel, nonNullManufacturer, price, nonNullDealerId, acquisitionDate, isRented)
-            "SPORTSCAR" -> SportsCar(nonNullId, nonNullModel, nonNullManufacturer, price, nonNullDealerId, acquisitionDate, isRented)
+            "SUV" -> SUV(nonNullId, nonNullModel, nonNullManufacturer, price, nonNullDealerId, nonNullDealerName, acquisitionDate, isRented)
+            "SEDAN" -> Sedan(nonNullId, nonNullModel, nonNullManufacturer, price, nonNullDealerId, nonNullDealerName, acquisitionDate, isRented)
+            "PICKUP" -> Pickup(nonNullId, nonNullModel, nonNullManufacturer, price, nonNullDealerId, nonNullDealerName, acquisitionDate, isRented)
+            "SPORTSCAR" -> SportsCar(nonNullId, nonNullModel, nonNullManufacturer, price, nonNullDealerId, nonNullDealerName, acquisitionDate, isRented)
             else -> {
                 println("Unknown vehicle type: $type")
                 null
             }
         }
     }
-
 }

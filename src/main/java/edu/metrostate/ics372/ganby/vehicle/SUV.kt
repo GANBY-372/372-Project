@@ -23,14 +23,14 @@ class SUV : Vehicle {
      * @param manufacturer    the vehicle's manufacturer
      * @param price           the price of the vehicle
      * @param dealerId        the ID of the dealer owning this vehicle
+     * @param dealerName      the name of the dealer
      * @param acquisitionDate the date the vehicle was acquired
      * @param isRentedOut     whether the vehicle is currently rented
      */
-    //In the case rent status is specified
     constructor(
-        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String, dealerName: String,
         acquisitionDate: LocalDateTime, isRentedOut: Boolean
-    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut)
+    ) : super(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate, isRentedOut)
 
     /**
      * Constructs an SUV with a default rent status of false.
@@ -40,12 +40,13 @@ class SUV : Vehicle {
      * @param manufacturer    the vehicle's manufacturer
      * @param price           the price of the vehicle
      * @param dealerId        the ID of the dealer owning this vehicle
+     * @param dealerName      the name of the dealer
      * @param acquisitionDate the date the vehicle was acquired
      */
     constructor(
-        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String, dealerName: String,
         acquisitionDate: LocalDateTime
-    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate)
+    ) : super(id, model, manufacturer, price, dealerId, dealerName, acquisitionDate)
 
     /**
      * Determines if another object is equal to this SUV.
