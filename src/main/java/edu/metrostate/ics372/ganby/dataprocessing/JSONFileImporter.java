@@ -126,7 +126,7 @@ public class JSONFileImporter {
         Vehicle vehicle = VehicleBuilder.buildVehicleFromJSON(jsonObject);
 
         if (vehicle != null) {
-            DealerCatalog.getInstance().addVehicle(vehicle);
+            DealerCatalog.getInstance().addVehicleFromFile(vehicle);
         }
 
         return vehicle;

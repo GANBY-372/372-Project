@@ -67,9 +67,13 @@ object VehicleBuilder {
             return null
         }
 
+        // ✅ Extract rent status
+        val isRentedNode = vehicleElement.getElementsByTagName("is_rented_out").item(0)
+        val isRented = isRentedNode?.textContent?.trim()?.toBooleanStrictOrNull() ?: false
+
         val acquisitionDate = LocalDateTime.now() // Placeholder for now; can be improved later
 
-        return buildVehicle(id, model, manufacturer, price, dealerId, acquisitionDate, false, type)
+        return buildVehicle(id, model, manufacturer, price, dealerId, acquisitionDate, isRented, type)
     }
 
     /**

@@ -87,9 +87,7 @@ public class XMLFileImporter {
                 Element dealerElement = (Element) dealerNode;
 
                 Dealer dealer = DealerBuilder.buildDealerFromXML(dealerElement);
-                if (dealer != null) {
-                    DealerCatalog.getInstance().addDealer(dealer);
-                }
+                DealerCatalog.getInstance().addDealer(dealer);
 
                 NodeList vehicleList = dealerElement.getElementsByTagName("Vehicle");
                 for (int j = 0; j < vehicleList.getLength(); j++) {
@@ -102,7 +100,7 @@ public class XMLFileImporter {
                         );
 
                         if (vehicle != null) {
-                            DealerCatalog.getInstance().addVehicle(vehicle);
+                            DealerCatalog.getInstance().addVehicleFromFile(vehicle);
                         }
                     }
                 }

@@ -135,6 +135,29 @@ public class DealerCatalog {
     }
 
     /**
+     * Add a vehicle and auto-create the dealer if necessary. This method does not check if dealer acquisition is enabled
+     * because it will be used by file importers.
+     * @param vehicle Vehicle
+     */
+    public void addVehicleFromFile(Vehicle vehicle) {
+        if (vehicle == null) return;
+
+        String dealerId = vehicle.getDealerId();
+        Dealer dealer = dealerCatalog.get(dealerId);
+
+        if (dealer == null) {
+            dealer = new Dealer(dealerId);
+            addDealer(dealer);
+        }
+
+        if (dealer.vehicleCatalog.containsKey(vehicle.getVehicleId())) {
+            return;
+        }
+
+        dealer.addVehicle(vehicle);
+    }
+
+    /**
      * Modify the price of a vehicle
      * @param vehicleId String
      * @param price double
