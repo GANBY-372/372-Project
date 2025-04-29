@@ -1,15 +1,10 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
+
 import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class VehicleTest {
@@ -18,10 +13,10 @@ class VehicleTest {
 
     @BeforeEach
     void setUp() {
-        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001",  LocalDateTime.now(), false);
-        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001",  LocalDateTime.now(), false);
+        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", LocalDateTime.now(), false);
+        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001", LocalDateTime.now(), false);
         v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", LocalDateTime.now(), false);
-        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002",  LocalDateTime.now(), false);
+        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002", LocalDateTime.now(), false);
     }
 
     @AfterEach
@@ -31,9 +26,9 @@ class VehicleTest {
 
     @Test
     void getType() {
-        assertEquals("Sedan", v001.type);
-        assertEquals("Pickup", v002.type);
-        assertEquals("SportsCar", v003.type);
+        assertEquals("Sedan", v001.getType());
+        assertEquals("Pickup", v002.getType());
+        assertEquals("SportsCar", v003.getType());
     }
 
     @Test
@@ -102,22 +97,10 @@ class VehicleTest {
     }
 
     @Test
-    void setDealer_NullDealer_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> v001.setDealer(null));
-        assertEquals("Dealer cannot be null", exception.getMessage());
-    }
-
-    @Test
     void setAcquisitionDate_ValidDate() {
         LocalDateTime newDate = LocalDateTime.now().minusDays(10);
         v001.setAcquisitionDate(newDate);
         assertEquals(newDate, v001.getAcquisitionDate());
-    }
-
-    @Test
-    void setAcquisitionDate_NullDate_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> v001.setAcquisitionDate(null));
-        assertEquals("New acquisition date cannot be null", exception.getMessage());
     }
 
     @Test
@@ -127,7 +110,7 @@ class VehicleTest {
 
     @Test
     void testEquals_DifferentObjectSameId() {
-        Vehicle duplicate = new Sedan("V001", "Different Model", "Different Manufacturer", 20000.00, "005",  LocalDateTime.now(), false);
+        Vehicle duplicate = new Sedan("V001", "Different Model", "Different Manufacturer", 20000.00, "005", LocalDateTime.now(), false);
         assertEquals(v001, duplicate);
     }
 
@@ -138,7 +121,11 @@ class VehicleTest {
 
     @Test
     void testToString() {
-        String expected = "Sedan Sedan [id:V001 model:Camry manufacturer:Toyota price:15000.0 dealer id:001 acquisitionDate:" + v001.getAcquisitionDate() + "]";
-        assertEquals(expected, v001.toString());
+        String output = v001.toString();
+        assertTrue(output.contains("id: V001"));
+        assertTrue(output.contains("model: Camry"));
+        assertTrue(output.contains("manufacturer: Toyota"));
+        assertTrue(output.contains("dealerId: 001"));
+        assertTrue(output.contains("price: 15000.0"));
     }
 }

@@ -59,7 +59,7 @@ class SUV : Vehicle {
         if (`object` == null || javaClass != `object`.javaClass) return false
 
         val suv = `object` as SUV
-        return id.get() == suv.vehicleId
+        return getVehicleId() == suv.getVehicleId()
     }
 
     /**

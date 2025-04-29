@@ -19,75 +19,76 @@ abstract class Vehicle @JvmOverloads constructor(
     acquisitionDate: LocalDateTime,
     isRentedOut: Boolean = false
 ) {
-    // Properties for JavaFX bindings
-     val id: StringProperty = SimpleStringProperty(id)
-    protected var model: StringProperty = SimpleStringProperty(model)
-    protected var manufacturer: StringProperty = SimpleStringProperty(manufacturer)
-    protected var price: DoubleProperty = SimpleDoubleProperty(price)
-    protected var dealerId: StringProperty = SimpleStringProperty(dealerId)
-    protected var acquisitionDate: ObjectProperty<LocalDateTime> = SimpleObjectProperty(acquisitionDate)
-    val isRentedOutProperty: BooleanProperty = SimpleBooleanProperty(isRentedOut)
-    private val selected: BooleanProperty = SimpleBooleanProperty(false)
+    // Backing properties (renamed to avoid name conflict with methods)
+    private val _id = SimpleStringProperty(id)
+    private val _model = SimpleStringProperty(model)
+    private val _manufacturer = SimpleStringProperty(manufacturer)
+    private val _price = SimpleDoubleProperty(price)
+    private val _dealerId = SimpleStringProperty(dealerId)
+    private val _acquisitionDate = SimpleObjectProperty(acquisitionDate)
+    private val _isRentedOut = SimpleBooleanProperty(isRentedOut)
+    private val _selected = SimpleBooleanProperty(false)
 
-    /**
-     * Abstract property representing the vehicle type.
-     */
+    // Abstract type
     abstract val type: String
 
     // JavaFX property accessors
-    fun vehicleIdProperty(): StringProperty = id
-    fun modelProperty(): StringProperty = model
-    fun manufacturerProperty(): StringProperty = manufacturer
-    fun priceProperty(): DoubleProperty = price
-    fun dealerIdProperty(): StringProperty = dealerId
-    fun acquisitionDateProperty(): ObjectProperty<LocalDateTime> = acquisitionDate
+    fun idProperty(): StringProperty = _id
+    fun modelProperty(): StringProperty = _model
+    fun manufacturerProperty(): StringProperty = _manufacturer
+    fun priceProperty(): DoubleProperty = _price
+    fun dealerIdProperty(): StringProperty = _dealerId
+    fun acquisitionDateProperty(): ObjectProperty<LocalDateTime> = _acquisitionDate
+    fun isRentedOutProperty(): BooleanProperty = _isRentedOut
+    fun selectedProperty(): BooleanProperty = _selected
 
     // Standard getters
-    val vehicleId: String get() = id.get()
-    fun getModel(): String = model.get()
-    fun getManufacturer(): String = manufacturer.get()
-    fun getPrice(): Double = price.get()
-    fun getDealerId(): String = dealerId.get()
-    fun getAcquisitionDate(): LocalDateTime = acquisitionDate.get()
-    fun getIsRentedOut(): Boolean = isRentedOutProperty.get()
+    fun getVehicleId(): String = _id.get()
+    fun getModel(): String = _model.get()
+    fun getManufacturer(): String = _manufacturer.get()
+    fun getPrice(): Double = _price.get()
+    fun getDealerId(): String = _dealerId.get()
+    fun getAcquisitionDate(): LocalDateTime = _acquisitionDate.get()
+    fun getIsRentedOut(): Boolean = _isRentedOut.get()
+    fun isSelected(): Boolean = _selected.get()
 
     // Setters
     fun setPrice(newPrice: Double) {
         require(newPrice >= 0) { "Price cannot be negative" }
-        price.set(newPrice)
+        _price.set(newPrice)
     }
 
     fun setDealer(dealer: Dealer) {
-        dealerId.set(dealer.getId())
+        dealer?.let {
+            _dealerId.set(it.getId())
+        } ?: throw IllegalArgumentException("Dealer cannot be null")
     }
 
     fun setDealerId(newDealerId: String) {
-        dealerId.set(newDealerId)
+        _dealerId.set(newDealerId)
     }
 
     fun setAcquisitionDate(newDate: LocalDateTime) {
-        acquisitionDate.set(newDate)
+        requireNotNull(newDate) { "New acquisition date cannot be null" }
+        _acquisitionDate.set(newDate)
     }
 
     fun setRentedOut(rentedOut: Boolean) {
-        isRentedOutProperty.set(rentedOut)
+        _isRentedOut.set(rentedOut)
     }
 
-    // Selection support
-    fun selectedProperty(): BooleanProperty = selected
-    fun isSelected(): Boolean = selected.get()
     fun setSelected(isSelected: Boolean) {
-        selected.set(isSelected)
+        _selected.set(isSelected)
     }
 
     // Object overrides
     override fun equals(other: Any?): Boolean {
-        return other is Vehicle && id.get() == other.id.get()
+        return other is Vehicle && _id.get() == other._id.get()
     }
 
-    override fun hashCode(): Int = Objects.hash(id.get())
+    override fun hashCode(): Int = Objects.hash(_id.get())
 
     override fun toString(): String {
-        return "${javaClass.simpleName} [id: $vehicleId, model: ${getModel()}, manufacturer: ${getManufacturer()}, price: ${getPrice()}, dealerId: ${getDealerId()}, acquisitionDate: ${getAcquisitionDate()}]"
+        return "${javaClass.simpleName} [id: ${getVehicleId()}, model: ${getModel()}, manufacturer: ${getManufacturer()}, price: ${getPrice()}, dealerId: ${getDealerId()}, acquisitionDate: ${getAcquisitionDate()}]"
     }
 }

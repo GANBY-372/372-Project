@@ -125,7 +125,7 @@ class Dealer {
      * @param vehicle Vehicle
      */
     fun addVehicle(vehicle: Vehicle) {
-        vehicleCatalog[vehicle.vehicleId] = vehicle
+        vehicleCatalog[vehicle.getVehicleId()] = vehicle
     }
 
     /**
@@ -145,13 +145,13 @@ class Dealer {
      */
     fun transferVehicle(vehicle: Vehicle?, dealer: Dealer?): Boolean {
         if (vehicle == null || dealer == null) return false
-        if (!vehicleCatalog.containsKey(vehicle.vehicleId)) return false
+        if (!vehicleCatalog.containsKey(vehicle.getVehicleId())) return false
 
-        vehicleCatalog.remove(vehicle.vehicleId)
+        vehicleCatalog.remove(vehicle.getVehicleId())
         vehicle.setDealer(dealer)
-        dealer.vehicleCatalog[vehicle.vehicleId] = vehicle
+        dealer.vehicleCatalog[vehicle.getVehicleId()] = vehicle
 
-        println("Transferred vehicle " + vehicle.vehicleId + " to dealer " + dealer.getName())
+        println("Transferred vehicle " + vehicle.getVehicleId() + " to dealer " + dealer.getName())
         return true
     }
 
@@ -189,7 +189,7 @@ class Dealer {
         val result = HashMap<String, Vehicle>()
         for (vehicle in vehicleCatalog.values) {
             if (vehicle.type.equals(type, ignoreCase = true)) {
-                result[vehicle.vehicleId] = vehicle
+                result[vehicle.getVehicleId()] = vehicle
             }
         }
         return result

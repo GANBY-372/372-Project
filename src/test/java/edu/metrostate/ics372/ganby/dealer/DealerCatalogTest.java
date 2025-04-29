@@ -96,9 +96,9 @@ public class DealerCatalogTest {
     @Test
     void enableDisableDealerAcquisition() {
         catalog.disableDealerAcquisition("001");
-        //assertFalse(catalog.getDealerWithId("001").getIsVehicleAcquisitionEnabled());
+        assertFalse(catalog.getDealerWithId("001").isVehicleAcquisitionEnabled());
 
         catalog.enableDealerAcquisition("001");
-        //assertTrue(catalog.getDealerWithId("001").getIsVehicleAcquisitionEnabled());
+        assertTrue(catalog.getDealerWithId("001").isVehicleAcquisitionEnabled());
     }
 }
