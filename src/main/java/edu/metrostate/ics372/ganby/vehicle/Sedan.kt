@@ -58,7 +58,7 @@ class Sedan : Vehicle {
         if (`object` === this) return true
         if (`object` == null) return false
         if (`object` is Sedan) {
-            return id.get() == `object`.vehicleId
+            return getVehicleId() == `object`.getVehicleId()
         }
         return false
     }

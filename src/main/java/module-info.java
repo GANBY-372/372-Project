@@ -1,4 +1,4 @@
-module edu.metrostate.ics372.ganby {
+    module edu.metrostate.ics372.ganby {
     requires javafx.controls;
     requires javafx.fxml;
 

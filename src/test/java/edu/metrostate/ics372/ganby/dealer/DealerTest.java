@@ -34,7 +34,7 @@ class DealerTest {
 
     @Test
     void getIsVehicleAcquisitionEnabled() {
-        assertTrue(dealer.getIsVehicleAcquisitionEnabled());
+        assertTrue(dealer.isVehicleAcquisitionEnabled());
     }
 
     @Test
@@ -46,13 +46,13 @@ class DealerTest {
     @Test
     void enableVehicleAcquisition() {
         dealer.enableVehicleAcquisition("123");
-        assertTrue(dealer.getIsVehicleAcquisitionEnabled());
+        assertTrue(dealer.isVehicleAcquisitionEnabled());
     }
 
     @Test
     void disableVehicleAcquisition() {
         dealer.disableVehicleAcquisition("123");
-        assertFalse(dealer.getIsVehicleAcquisitionEnabled());
+        assertFalse(dealer.isVehicleAcquisitionEnabled());
     }
 
     @Test

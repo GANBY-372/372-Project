@@ -6,12 +6,48 @@
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/XMLFileImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/XMLFileImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/VehicleBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/VehicleBuilder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/XMLFileImporter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/XMLFileImporter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/Dealer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/Dealer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Pickup.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SUV.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SUV.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Sedan.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SportsCar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/SportsCar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Vehicle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/vehicle/Vehicle.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/VehicleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/VehicleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/Pickup.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/Pickup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/SUV.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/SUV.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/Sedan.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/Sedan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/SportsCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/SportsCar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/Vehicle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/vehicle/Vehicle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerCatalogTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.PickupTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SUVTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SedanTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SportsCarTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.VehicleTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.dealer.DealerCatalogTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.dealer.DealerTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.PickupTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.SUVTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.SedanTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.SportsCarTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.VehicleTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/dealer/DealerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/dealer/DealerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/PickupTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/PickupTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/SUVTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/SUVTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/SedanTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/SedanTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/SportsCarTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/SportsCarTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/VehicleTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/vehicle/VehicleTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +71,12 @@
     &quot;assignee&quot;: &quot;Gil-Gaitan&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/GANBY-372/372-Project.git&quot;,
-    &quot;accountId&quot;: &quot;08c2acc0-30c9-4064-8d7b-f92af452b5a9&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/GANBY-372/372-Project.git",
+    "accountId": "12bc500f-7981-483b-bb37-7f71103fc8ba"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -54,35 +90,40 @@
     <option name="showLibraryContents" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.FXDriver.executor": "Run",
-    "Application.FilesTestDriver.executor": "Run",
-    "Application.TestEnv.executor": "Run",
-    "JUnit.DealerCatalogTest.getDealerWithId.executor": "Run",
-    "JUnit.DealerCatalogTest.getDealers.executor": "Run",
-    "JUnit.SportsCarTest.executor": "Run",
-    "Maven.FX_372_Project [clean].executor": "Run",
-    "Maven.FX_372_Project [compile].executor": "Run",
-    "Maven.FX_372_Project [test].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Yahya",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.FXDriver.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FilesTestDriver.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestEnv.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DealerCatalogTest.getDealerWithId.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DealerCatalogTest.getDealers.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SportsCarTest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [verify].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Yahya&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.FXDriver">
     <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
@@ -170,8 +211,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -190,6 +231,7 @@
       <workItem from="1743643231102" duration="1115000" />
       <workItem from="1743701820980" duration="1886000" />
       <workItem from="1744248207542" duration="948000" />
+      <workItem from="1745955936520" duration="1004000" />
     </task>
     <servers />
   </component>
