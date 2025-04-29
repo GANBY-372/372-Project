@@ -6,22 +6,15 @@ import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import edu.metrostate.ics372.ganby.vehicle.VehicleBuilder;
 import javafx.stage.Stage;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 
 /**
  * Handles importing dealer and vehicle data from an XML file.
- * Uses FileSelector for user file selection or accepts a direct path.
+ * Supports file selection or direct file path loading.
  */
 public class XMLFileImporter {
 
@@ -37,12 +30,12 @@ public class XMLFileImporter {
             File selectedFile = FileSelector.chooseXmlOpenFile(primaryStage);
             if (selectedFile != null) {
                 loadDocumentFromFile(selectedFile);
-                System.out.println("Successfully parsed XML file: " + selectedFile.getAbsolutePath());
+                System.out.println("✅ Successfully parsed XML file: " + selectedFile.getAbsolutePath());
             } else {
-                System.out.println("File selection cancelled.");
+                System.out.println("⚠️ File selection cancelled.");
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error loading XML file: " + e.getMessage(), e);
+            throw new RuntimeException("❌ Error loading XML file: " + e.getMessage(), e);
         }
     }
 
@@ -56,28 +49,15 @@ public class XMLFileImporter {
             File file = new File(filePath);
             if (file.exists()) {
                 loadDocumentFromFile(file);
-                System.out.println("Successfully parsed XML file: " + filePath);
+                System.out.println("✅ Successfully parsed XML file: " + filePath);
             } else {
-                System.out.println("File not found: " + filePath);
+                System.out.println("❌ File not found: " + filePath);
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error loading XML file: " + e.getMessage(), e);
+            throw new RuntimeException("❌ Error loading XML file: " + e.getMessage(), e);
         }
     }
 
-
-    private void runXmlPathImport() {
-        try {
-            System.out.println("\n[3] XML import via file path:");
-            XMLFileImporter importer = new XMLFileImporter("src/main/resources/Imports/Dealer.xml");
-            Document doc = importer.getXmlDocument();
-            if (doc != null) {
-                importer.processXML(doc);
-            }
-        } catch (Exception e) {
-            System.err.println("XML (path) import failed: " + e.getMessage());
-        }
-    }
     /**
      * Loads the XML content from a file into xmlDocument.
      *
@@ -92,20 +72,14 @@ public class XMLFileImporter {
     }
 
     /**
-     * Returns the loaded XML document.
-     *
-     * @return the parsed Document instance
-     */
-    public Document getXmlDocument() {
-        return xmlDocument;
-    }
-
-    /**
      * Processes the loaded XML document and adds data to the DealerCatalog.
-     *
-     * @param xmlDocument the parsed XML document
      */
-    public void processXML(Document xmlDocument) {
+    public void processXML() {
+        if (xmlDocument == null) {
+            System.err.println("❌ No XML document loaded to process.");
+            return;
+        }
+
         NodeList dealerList = xmlDocument.getElementsByTagName("Dealer");
         for (int i = 0; i < dealerList.getLength(); i++) {
             Node dealerNode = dealerList.item(i);
@@ -134,5 +108,16 @@ public class XMLFileImporter {
                 }
             }
         }
+
+        System.out.println("✅ XML import finished successfully!");
+    }
+
+    /**
+     * Returns the loaded XML document.
+     *
+     * @return the parsed Document instance
+     */
+    public Document getXmlDocument() {
+        return xmlDocument;
     }
 }

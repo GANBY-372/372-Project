@@ -73,7 +73,7 @@ public class FilesTestDriver extends Application {
             XMLFileImporter importer = new XMLFileImporter("src/main/resources/Imports/Dealer.xml");
             Document doc = importer.getXmlDocument();
             if (doc != null) {
-                importer.processXML(doc);
+                importer.processXML();
             }
         } catch (Exception e) {
             System.err.println("XML (path) import failed: " + e.getMessage());

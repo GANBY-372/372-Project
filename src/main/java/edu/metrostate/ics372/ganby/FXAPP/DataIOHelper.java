@@ -70,7 +70,7 @@ public class DataIOHelper {
             Document doc = xmlImporter.getXmlDocument();
 
             if (doc != null) {
-                xmlImporter.processXML(doc);
+                xmlImporter.processXML();
                 dealerList.setAll(DealerCatalog.getInstance().getDealers());
                 dealerTable.setItems(dealerList);
                 vehicleList.clear();

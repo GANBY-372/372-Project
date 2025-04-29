@@ -2,6 +2,7 @@ package edu.metrostate.ics372.ganby.dealer;
 
 import org.w3c.dom.Element;
 import org.json.simple.JSONObject;
+import org.w3c.dom.Node;
 
 /**
  * Utility class for building Dealer instances from XML input.
@@ -41,11 +42,17 @@ public class DealerBuilder {
             throw new IllegalArgumentException("Dealer XML element is null.");
         }
 
-        // Extracting dealer attributes from XML
         String dealerId = dealerElement.getAttribute("id");
-        String dealerName = dealerElement.getElementsByTagName("Name").item(0).getTextContent();
+        String dealerName = dealerElement.getElementsByTagName("Name").item(0).getTextContent().trim();
 
-        // Creating a new Dealer instance from the extracted data and returning it
-        return new Dealer(dealerId, dealerName);
+        Node acquisitionNode = dealerElement.getElementsByTagName("Acquisition_Status").item(0);
+
+        if (acquisitionNode != null) {
+            String acquisitionText = acquisitionNode.getTextContent().trim();
+            boolean acquisitionStatus = Boolean.parseBoolean(acquisitionText);
+            return new Dealer(dealerId, dealerName, acquisitionStatus);
+        } else {
+            return new Dealer(dealerId, dealerName);
+        }
     }
 }

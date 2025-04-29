@@ -12,7 +12,7 @@
     },
     {
       "is_rented_out": false,
-      "price": 234.0,
+      "price": 9999.0,
       "vehicle_model": "Model 3",
       "vehicle_type": "Sedan",
       "dealership_id": "12513",
@@ -32,7 +32,7 @@
     },
     {
       "is_rented_out": false,
-      "price": 49889.0,
+      "price": 563446.0,
       "vehicle_model": "Supra",
       "vehicle_type": "SportsCar",
       "dealership_id": "77338",

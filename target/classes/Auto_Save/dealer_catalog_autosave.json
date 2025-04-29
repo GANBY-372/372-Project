@@ -12,7 +12,7 @@
     },
     {
       "is_rented_out": false,
-      "price": 234.0,
+      "price": 9999.0,
       "vehicle_model": "Model 3",
       "vehicle_type": "Sedan",
       "dealership_id": "12513",
@@ -32,7 +32,7 @@
     },
     {
       "is_rented_out": false,
-      "price": 49889.0,
+      "price": 563446.0,
       "vehicle_model": "Supra",
       "vehicle_type": "SportsCar",
       "dealership_id": "77338",
@@ -41,7 +41,7 @@
       "acquisition_date": 1515354694451
     },
     {
-      "is_rented_out": true,
+      "is_rented_out": false,
       "price": 17000.0,
       "vehicle_model": "Range Rover",
       "vehicle_type": "SUV",
@@ -51,7 +51,7 @@
       "acquisition_date": 1745352560457
     },
     {
-      "is_rented_out": true,
+      "is_rented_out": false,
       "price": 36600.0,
       "vehicle_model": "G70",
       "vehicle_type": "Sedan",
@@ -71,7 +71,7 @@
       "acquisition_date": 1745352560457
     },
     {
-      "is_rented_out": true,
+      "is_rented_out": false,
       "price": 22600.0,
       "vehicle_model": "Tundra",
       "vehicle_type": "Pickup",
@@ -81,7 +81,7 @@
       "acquisition_date": 1745352560457
     },
     {
-      "is_rented_out": true,
+      "is_rented_out": false,
       "price": 43.0,
       "vehicle_model": "435we6r",
       "vehicle_type": "Pickup",

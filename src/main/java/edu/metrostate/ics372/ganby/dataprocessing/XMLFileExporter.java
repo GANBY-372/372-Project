@@ -1,6 +1,7 @@
 package edu.metrostate.ics372.ganby.dataprocessing;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
+import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
@@ -22,60 +23,66 @@ import java.util.List;
  */
 public class XMLFileExporter {
 
-    /**
-     * Prompts the user to choose a file location and exports the provided dealers
-     * and their vehicle inventories to a single XML file.
-     *
-     * @param stage           the parent JavaFX window, used for file chooser dialog
-     * @param selectedDealers the list of dealers whose data will be exported
-     */
     public void exportDealers(Stage stage, List<Dealer> selectedDealers) {
-        File file = FileSelector.chooseXmlSaveFile(stage);  // ✅ Replaces manual FileChooser
+        File file = FileSelector.chooseXmlSaveFile(stage);
 
         if (file != null) {
-            try {
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder = factory.newDocumentBuilder();
-                Document doc = builder.newDocument();
+            exportToFile(file, selectedDealers, true);
+        }
+    }
 
-                // Root <Dealers> element
-                Element dealersElement = doc.createElement("Dealers");
-                doc.appendChild(dealersElement);
+    // ✨ New method for saving WITHOUT asking user (for autosave)
+    public static void exportToFile(File file, List<Dealer> dealers, boolean showAlert) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.newDocument();
 
-                for (Dealer dealer : selectedDealers) {
-                    appendDealerToDocument(doc, dealersElement, dealer);
-                }
+            // Root <Dealers> element
+            Element dealersElement = doc.createElement("Dealers");
+            doc.appendChild(dealersElement);
 
-                // Write the final XML document to the selected file
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            for (Dealer dealer : dealers) {
+                appendDealerToDocument(doc, dealersElement, dealer);
+            }
 
-                transformer.transform(new DOMSource(doc), new StreamResult(file));
+            // Write the final XML document to the file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+            transformer.transform(new DOMSource(doc), new StreamResult(file));
+
+            if (showAlert) {
                 showSuccessAlert(file.getAbsolutePath());
+            }
 
-            } catch (Exception e) {
+        } catch (Exception e) {
+            if (showAlert) {
                 showErrorAlert(e.getMessage());
+            } else {
+                System.err.println("❌ Autosave export failed: " + e.getMessage());
             }
         }
     }
 
-    /**
-     * Appends a single <Dealer> element and its nested <Vehicle> elements to the XML document.
-     *
-     * @param doc    the XML document being built
-     * @param parent the root <Dealers> element to which this dealer will be appended
-     * @param dealer the dealer whose data will be written
-     */
-    private void appendDealerToDocument(Document doc, Element parent, Dealer dealer) {
+    private static void appendDealerToDocument(Document doc, Element parent, Dealer dealer) {
+
+        //Get Dealer id tag
         Element dealerElement = doc.createElement("Dealer");
         dealerElement.setAttribute("id", dealer.getId());
         parent.appendChild(dealerElement);
 
+        //Get Dealer Name tag
         Element nameElement = doc.createElement("Name");
         nameElement.appendChild(doc.createTextNode(dealer.getName()));
         dealerElement.appendChild(nameElement);
+
+        //Get Dealer Acquisition Status Tag
+        Element acquisitionStatus = doc.createElement("Acquisition_Status");
+        acquisitionStatus.appendChild(doc.createTextNode(String.valueOf(dealer.isVehicleAcquisitionEnabled())));
+        dealerElement.appendChild(acquisitionStatus);
 
         for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
             Element vehicleElement = doc.createElement("Vehicle");
@@ -100,11 +107,10 @@ public class XMLFileExporter {
             vehicleElement.appendChild(model);
             vehicleElement.appendChild(rentStatus);
             dealerElement.appendChild(vehicleElement);
-
         }
     }
 
-    private void showSuccessAlert(String filePath) {
+    private static void showSuccessAlert(String filePath) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Export Successful");
         alert.setHeaderText(null);
@@ -112,7 +118,7 @@ public class XMLFileExporter {
         alert.showAndWait();
     }
 
-    private void showErrorAlert(String message) {
+    private static void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Export Failed");
         alert.setHeaderText("Error exporting dealers");
