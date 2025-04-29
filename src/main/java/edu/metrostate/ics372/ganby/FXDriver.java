@@ -1,5 +1,7 @@
 package edu.metrostate.ics372.ganby;
 
+import edu.metrostate.ics372.ganby.FXAPP.FXController;
+import edu.metrostate.ics372.ganby.dataprocessing.PersistenceManager;
 import edu.metrostate.ics372.ganby.user.UserManager;
 import javafx.application.Application;
 
@@ -25,6 +27,8 @@ public class FXDriver extends Application {
             primaryStage.setTitle("Create User");
         }
 
+        FXController controller = loader.getController();
+        PersistenceManager.loadAutosave(controller);
         root = loader.load();
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
@@ -36,6 +40,11 @@ public class FXDriver extends Application {
         stage.setTitle("Vehicle Tracking System");
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    @Override
+    public void stop() {
+        PersistenceManager.saveAutosave();  // Save on exit
     }
 
     public static void main(String[] args) {
