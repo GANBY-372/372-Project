@@ -24,13 +24,18 @@ public class XMLFileExporter {
 
     public boolean exportDealers(Stage stage, List<Dealer> selectedDealers) {
         File file = FileSelector.chooseXmlSaveFile(stage);
-
-        if (file != null) {
-            exportToFile(file, selectedDealers, true);
+        if (file == null) {
+            return false; // ❌ User cancelled
         }
-        return false;
-    }
 
+        try {
+            exportToFile(file, selectedDealers, true);
+            return true; // ✅ Success
+        } catch (Exception e) {
+            showErrorAlert(e.getMessage());
+            return false; // ❌ Failure
+        }
+    }
     // ✨ New method for saving WITHOUT asking user (for autosave)
     public static void exportToFile(File file, List<Dealer> dealers, boolean showAlert) {
         try {

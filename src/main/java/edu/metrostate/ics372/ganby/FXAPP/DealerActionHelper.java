@@ -80,10 +80,15 @@ public class DealerActionHelper {
         wizardStage.initOwner(ownerStage);
         wizardStage.setTitle("Add New Dealer");
 
-        Label nameLabel = new Label("Dealer Name:");
-        TextField nameField = new TextField();
         Label idLabel = new Label("Dealer ID:");
         TextField idField = new TextField();
+
+        Label nameLabel = new Label("Dealer Name:");
+        TextField nameField = new TextField();
+
+        Label acquisitionLabel = new Label("Acquisition Enabled:");
+        CheckBox acquisitionCheckBox = new CheckBox(); // defaults to true
+        acquisitionCheckBox.setSelected(true);
 
         Button saveButton = new Button("Save");
         Button cancelButton = new Button("Cancel");
@@ -93,35 +98,36 @@ public class DealerActionHelper {
         gridPane.setHgap(10);
         gridPane.addRow(0, idLabel, idField);
         gridPane.addRow(1, nameLabel, nameField);
+        gridPane.addRow(2, acquisitionLabel, acquisitionCheckBox);
 
         HBox buttonBox = new HBox(10, saveButton, cancelButton);
         VBox layout = new VBox(10, gridPane, buttonBox);
         layout.setPadding(new Insets(10));
 
-        Scene scene = new Scene(layout, 400, 200);
+        Scene scene = new Scene(layout, 400, 220);
         wizardStage.setScene(scene);
 
         saveButton.setOnAction(event -> {
             try {
                 String dealerId = idField.getText().trim();
                 String dealerName = nameField.getText().trim();
+                boolean isBuying = acquisitionCheckBox.isSelected();
 
-                if (dealerId.isBlank() || dealerName.isBlank()) {
-                    throw new IllegalArgumentException("Dealer ID and Name cannot be empty.");
+                if (dealerId.isBlank()) {
+                    throw new IllegalArgumentException("Dealer ID cannot be empty.");
                 }
 
                 if (DealerCatalog.getInstance().getDealerWithId(dealerId) != null) {
                     throw new IllegalArgumentException("Dealer with ID already exists.");
                 }
 
-                Dealer newDealer = new Dealer(dealerId, dealerName);
+                Dealer newDealer = new Dealer(dealerId, dealerName.isBlank() ? null : dealerName, isBuying);
                 DealerCatalog.getInstance().addDealer(newDealer);
                 dealerObservableList.add(newDealer);
 
                 wizardStage.close();
 
-                // Show success message with details
-                String msg = "Dealer '%s' (ID: %s) was successfully added.".formatted(dealerName, dealerId);
+                String msg = "Dealer '%s' (ID: %s) was successfully added.".formatted(newDealer.getName(), dealerId);
                 FXController.showAlert(Alert.AlertType.INFORMATION, "Success", msg);
             } catch (Exception e) {
                 FXController.showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
@@ -131,6 +137,7 @@ public class DealerActionHelper {
         cancelButton.setOnAction(e -> wizardStage.close());
         wizardStage.showAndWait();
     }
+
 
     public static void renameDealer(TableView<Dealer> dealerTable, TextField dealerNameField) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()

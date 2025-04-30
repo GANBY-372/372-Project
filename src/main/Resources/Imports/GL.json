@@ -10,7 +10,7 @@
       "dealership_id": "123",
       "vehicle_manufacturer": "Honda",
       "vehicle_id": "67291",
-      "acquisition_date": 1746049845150
+      "acquisition_date": 1746049315156
     },
     {
       "is_rented_out": false,
@@ -22,7 +22,7 @@
       "dealership_id": "123",
       "vehicle_manufacturer": "BMW",
       "vehicle_id": "99234",
-      "acquisition_date": 1746049845150
+      "acquisition_date": 1746049315157
     }
   ]
 }

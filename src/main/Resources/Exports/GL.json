@@ -1,28 +1,28 @@
 {
   "car_inventory": [
     {
-      "is_rented_out": false,
+      "is_rented_out": true,
       "price": 27500.0,
       "vehicle_model": "CR-V",
       "dealer_name": "GL",
       "vehicle_type": "SUV",
-      "acquisition_status": true,
+      "acquisition_status": false,
       "dealership_id": "123",
       "vehicle_manufacturer": "Honda",
       "vehicle_id": "67291",
-      "acquisition_date": 1746049845150
+      "acquisition_date": 1746049315156
     },
     {
-      "is_rented_out": false,
+      "is_rented_out": true,
       "price": 45320.0,
       "vehicle_model": "3 Series",
       "dealer_name": "GL",
       "vehicle_type": "Sedan",
-      "acquisition_status": true,
+      "acquisition_status": false,
       "dealership_id": "123",
       "vehicle_manufacturer": "BMW",
       "vehicle_id": "99234",
-      "acquisition_date": 1746049845150
+      "acquisition_date": 1746049315157
     }
   ]
 }

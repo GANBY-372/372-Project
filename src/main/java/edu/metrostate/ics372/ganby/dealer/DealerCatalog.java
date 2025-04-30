@@ -208,7 +208,7 @@ public class DealerCatalog {
     public void enableDealerAcquisition(String id) {
         Dealer dealer = dealerCatalog.get(id);
         if (dealer != null) {
-            dealer.enableVehicleAcquisition(id);
+            dealer.enableVehicleAcquisition();
         }
     }
 
@@ -220,7 +220,7 @@ public class DealerCatalog {
     public void disableDealerAcquisition(String id) {
         Dealer dealer = dealerCatalog.get(id);
         if (dealer != null) {
-            dealer.disableVehicleAcquisition(id);
+            dealer.disableVehicleAcquisition();
         }
     }
 

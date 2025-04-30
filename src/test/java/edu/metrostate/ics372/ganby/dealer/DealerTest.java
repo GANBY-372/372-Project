@@ -58,14 +58,14 @@ class DealerTest {
 
     @Test
     void enableVehicleAcquisition() {
-        dealer.disableVehicleAcquisition("123");
-        dealer.enableVehicleAcquisition("123");
+        dealer.disableVehicleAcquisition();
+        dealer.enableVehicleAcquisition();
         assertTrue(dealer.isVehicleAcquisitionEnabled());
     }
 
     @Test
     void disableVehicleAcquisition() {
-        dealer.disableVehicleAcquisition("123");
+        dealer.disableVehicleAcquisition();
         assertFalse(dealer.isVehicleAcquisitionEnabled());
     }
 
@@ -125,7 +125,7 @@ class DealerTest {
         dealer.addVehicle(rentedSedan); // rented
         List<Vehicle> rented = dealer.getRentedOutVehicles();
         assertEquals(1, rented.size());
-        assertEquals(rentedSedan, rented.get(0));
+        assertEquals(rentedSedan, rented.getFirst());
     }
 
     // === Selection State ===

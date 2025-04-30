@@ -36,14 +36,14 @@ public class DataIOHelper {
         try {
             JSONFileImporter importer = new JSONFileImporter(stage);
 
-            // Check if the process was canceled
-            boolean isCanceled = !importer.processJSON();  // Assuming processJSON() returns false if canceled
-            if (isCanceled) {
-                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Canceled", "JSON import was canceled.");
+            // Check if the process was cancelled
+            boolean isCancelled = !importer.processJSON();  // Assuming processJSON() returns false if canceled
+            if (isCancelled) {
+                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Cancelled", "JSON import was canceled.");
                 return;
             }
 
-            // If not canceled, proceed with the import
+            // If not cancelled, proceed with the import
             dealerList.setAll(DealerCatalog.getInstance().getDealers());
             dealerTable.setItems(dealerList);
             FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "JSON file successfully imported!");
@@ -78,7 +78,7 @@ public class DataIOHelper {
             Document doc = xmlImporter.getXmlDocument();
 
             if (doc == null) {
-                // User canceled the file selection, show cancellation message
+                // User cancelled the file selection, show cancellation message
                 FXController.showAlert(Alert.AlertType.INFORMATION, "Import Cancelled", "XML import was cancelled.");
                 return;
             }
