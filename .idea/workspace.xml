@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
+      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/user/UserManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/dealer/DealerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/dealer/DealerTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +61,7 @@
     "Application.TestEnv.executor": "Run",
     "JUnit.All in FX_372_Project.executor": "Coverage",
     "JUnit.DealerBuilderTest.executor": "Run",
-    "JUnit.DealerCatalogTest.executor": "Run",
+    "JUnit.DealerCatalogTest.executor": "Coverage",
     "JUnit.DealerCatalogTest.getDealerWithId.executor": "Run",
     "JUnit.DealerCatalogTest.getDealers.executor": "Run",
     "JUnit.DealerTest.executor": "Coverage",
@@ -105,6 +102,7 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="edu.metrostate.ics372.ganby.user" />
       <recent name="edu.metrostate.ics372.ganby.vehicle" />
       <recent name="edu.metrostate.ics372.ganby.controllers" />
       <recent name="edu.metrostate.ics372.ganby.dealer" />
@@ -149,16 +147,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VehicleBuilderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.vehicle.*" />
+          <option name="PATTERN" value="edu.metrostate.ics372.ganby.user.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.VehicleBuilderTest" />
+      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.user" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.user.UserManagerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -182,10 +180,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in FX_372_Project" />
+        <item itemvalue="JUnit.UserManagerTest" />
         <item itemvalue="JUnit.DealerCatalogTest" />
         <item itemvalue="JUnit.DealerTest" />
         <item itemvalue="JUnit.VehicleTest" />
-        <item itemvalue="JUnit.VehicleBuilderTest" />
       </list>
     </recent_temporary>
   </component>
@@ -226,7 +224,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="Merged with main" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$All_in_FX_372_Project.ic" NAME="All in FX_372_Project Coverage Results" MODIFIED="1746047196855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$All_in_FX_372_Project.ic" NAME="All in FX_372_Project Coverage Results" MODIFIED="1746048228047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$PickupTest.ic" NAME="PickupTest Coverage Results" MODIFIED="1746045860703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>edu.metrostate.ics372.ganby.vehicle.*</FILTER>
     </SUITE>
@@ -239,7 +237,7 @@
     <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerTest.ic" NAME="DealerTest Coverage Results" MODIFIED="1746047516270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerCatalogTest.ic" NAME="DealerCatalogTest Coverage Results" MODIFIED="1746039975609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerCatalogTest.ic" NAME="DealerCatalogTest Coverage Results" MODIFIED="1746048184546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$edu_metrostate_ics372_ganby_dealer_in_FX_372_Project.ic" NAME="edu.metrostate.ics372.ganby.dealer in FX_372_Project Coverage Results" MODIFIED="1746038318896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
