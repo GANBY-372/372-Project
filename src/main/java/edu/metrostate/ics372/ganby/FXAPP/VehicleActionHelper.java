@@ -97,66 +97,50 @@ public class VehicleActionHelper {
     }
 
     /**
-     * Toggles the rent status of the selected vehicle.
-     * Prevents rent status changes for SportsCars and displays a warning.
-     *
-     * @param vehicleTable the TableView displaying vehicles
-     * @param toggleButton the toggle button whose label should reflect current status
+     * Sets rent status to true (rented) for all selected vehicles, excluding SportsCars.
      */
-    public static void toggleRentStatus(TableView<Vehicle> vehicleTable, Button toggleButton) {
+    public static void setAsRented(TableView<Vehicle> vehicleTable) {
         List<Vehicle> selectedVehicles = vehicleTable.getItems().stream()
                 .filter(Vehicle::isSelected)
                 .toList();
 
         if (selectedVehicles.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to change rent status.");
+            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to mark as rented.");
             return;
         }
 
-        boolean allRentedOut = true;
-        boolean hasNonSportsCar = false;
-
-        // Determine if all non-sportscars are rented out
         for (Vehicle vehicle : selectedVehicles) {
             String type = vehicle.getType().trim().replaceAll("\\s+", "");
-            boolean isSportsCar = type.equalsIgnoreCase("SportsCar");
-
-            if (!isSportsCar && !vehicle.getIsRentedOut()) {
-                allRentedOut = false;
-            }
-
-            if (!isSportsCar) {
-                hasNonSportsCar = true;
-            }
-        }
-
-        // Determine the new status we want to set
-        boolean newRentStatus = !allRentedOut; // true = rent out, false = make available
-
-        if (!hasNonSportsCar && newRentStatus) {
-            FXController.showAlert(AlertType.WARNING, "Action Not Allowed",
-                    "All selected vehicles are SportsCars, which cannot be rented.");
-            return;
-        }
-
-        // Update rent status
-        for (Vehicle vehicle : selectedVehicles) {
-            String type = vehicle.getType().trim().replaceAll("\\s+", "");
-            boolean isSportsCar = type.equalsIgnoreCase("SportsCar");
-
-            if (isSportsCar && newRentStatus) {
-                // Only show warning if we're trying to rent out a SportsCar
+            if (type.equalsIgnoreCase("SportsCar")) {
                 FXController.showAlert(AlertType.WARNING,
                         "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
                         "SportsCars cannot be rented.");
                 continue;
             }
-
-            vehicle.setRentedOut(newRentStatus);
+            vehicle.setRentedOut(true);
         }
 
         vehicleTable.refresh();
-        toggleButton.setText(newRentStatus ? "Set All as Available" : "Set All as Rented");
+    }
+
+    /**
+     * Sets rent status to false (available) for all selected vehicles.
+     */
+    public static void setAsAvailable(TableView<Vehicle> vehicleTable) {
+        List<Vehicle> selectedVehicles = vehicleTable.getItems().stream()
+                .filter(Vehicle::isSelected)
+                .toList();
+
+        if (selectedVehicles.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to mark as available.");
+            return;
+        }
+
+        for (Vehicle vehicle : selectedVehicles) {
+            vehicle.setRentedOut(false);
+        }
+
+        vehicleTable.refresh();
     }
 
     /**

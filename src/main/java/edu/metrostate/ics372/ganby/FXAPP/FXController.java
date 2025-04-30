@@ -67,6 +67,9 @@ public class FXController {
     @FXML public Button sedanFilterButton;
     @FXML public Button suvFilterButton;
     @FXML public Button truckFilterButton;
+    public Button setAsAvailableButton;
+    public Button setAsRentedButton;
+    public Button toggleSelectAllVehiclesButton;
     @FXML private MenuItem importJsonMenuItem;
     @FXML private MenuItem importXmlMenuItem;
     @FXML private MenuItem exportJsonMenuItem;
@@ -388,14 +391,14 @@ public class FXController {
         VehicleActionHelper.modifyVehiclePrice(vehicleTable);
     }
 
-    /**
-     * Toggles rent status of the selected vehicle and updates the label accordingly.
-     *
-     * @param event the ActionEvent triggered by the toggle button
-     */
     @FXML
-    public void toggleRentStatus(ActionEvent event) {
-        VehicleActionHelper.toggleRentStatus(vehicleTable, toggleRentStatusButton);
+    private void setAsRented(ActionEvent event) {
+        VehicleActionHelper.setAsRented(vehicleTable);
+    }
+
+    @FXML
+    private void setAsAvailable(ActionEvent event) {
+        VehicleActionHelper.setAsAvailable(vehicleTable);
     }
 
     /**

@@ -128,7 +128,8 @@
                     <Button fx:id="deleteVehicleButton" text="Delete Vehicle" onAction="#deleteSelectedVehicle" />
                     <Button fx:id="modifyPriceButton" text="Modify Price" onAction="#modifyVehiclePrice" />
                     <Button fx:id="transferVehicleButton" text="Transfer to Dealer" onAction="#openTransferVehicleWizard" />
-                    <Button fx:id="toggleRentStatusButton" text="Set Rent Status" onAction="#toggleRentStatus" />
+                    <Button fx:id="setAsRentedButton" text="Set as Rented" onAction="#setAsRented" />
+                    <Button fx:id="setAsAvailableButton" text="Set as Available" onAction="#setAsAvailable" />
                 </HBox>
             </VBox>
 
