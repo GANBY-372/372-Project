@@ -113,29 +113,54 @@ public class FXController {
         vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
         isRentedOutColumn.setCellValueFactory(new PropertyValueFactory<>("isRentedOut"));
-
         vehicleSelectColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
         vehicleSelectColumn.setCellFactory(CheckBoxTableCell.forTableColumn(vehicleSelectColumn));
 
         // Load data from catalog
         loadData();
 
-        // React to checkbox selection on dealer rows
-        dealerTable.getItems().forEach(dealer -> {
-            dealer.selectedProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue) {
-                    updateDealerDetailPane(dealer);
-                    populateVehicleList();
-                } else {
-                    populateVehicleList();
-                }
+        // Initial listener on existing dealers
+        dealerObservableList.forEach(dealer -> {
+            dealer.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                populateVehicleList();
+                updateDealerDetailPaneIfSingleSelected();
             });
         });
 
-        // ✅ Disable row selection for both tables
+        // Listener for newly added dealers
+        dealerObservableList.addListener((ListChangeListener<Dealer>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Dealer dealer : change.getAddedSubList()) {
+                        dealer.selectedProperty().addListener((obs, oldVal, newVal) -> {
+                            populateVehicleList();
+                            updateDealerDetailPaneIfSingleSelected();
+                        });
+                    }
+                }
+            }
+        });
+
+        // Disable row selection visuals
         disableRowSelection(dealerTable);
         disableRowSelection(vehicleTable);
     }
+
+    /**
+     * Updates the dealer info panel only if one dealer is selected.
+     */
+    private void updateDealerDetailPaneIfSingleSelected() {
+        List<Dealer> selectedDealers = dealerObservableList.stream()
+                .filter(Dealer::isSelected)
+                .toList();
+        if (selectedDealers.size() == 1) {
+            updateDealerDetailPane(selectedDealers.getFirst());
+        } else {
+            dealerIdTextField.clear();
+            dealerNameTextField.clear();
+        }
+    }
+
 
     /**
      * Prevents row selection and click-based highlighting. Enables checkbox-only selection.
@@ -453,14 +478,24 @@ public class FXController {
      */
     @FXML
     public void openAddVehicleWizard(ActionEvent event) {
-        // Get currently selected dealer
-        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
+        // Get dealers with checkboxes selected
+        List<Dealer> selectedDealers = dealerTable.getItems().stream()
+                .filter(Dealer::isSelected)
+                .toList();
 
-        // Launch vehicle creation wizard
+        if (selectedDealers.isEmpty()) {
+            FXController.showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
+            return;
+        }
+
+        if (selectedDealers.size() > 1) {
+            FXController.showAlert(Alert.AlertType.WARNING, "Multiple Dealers Selected", "Please select only one dealer to add a vehicle.");
+            return;
+        }
+
+        Dealer selectedDealer = selectedDealers.getFirst();
         VehicleActionHelper.openAddVehicleWizard(selectedDealer, vehicleObservableList);
-
-        // Refresh the table with new vehicle
-        populateVehicleList(selectedDealer);
+        populateVehicleList(selectedDealer);  // Refresh after adding
     }
 
     /**
