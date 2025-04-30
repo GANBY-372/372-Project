@@ -121,4 +121,37 @@ class VehicleTest {
         assertTrue(str.contains("price: 15000.0"));
         assertTrue(str.contains("dealerId: D001"));
     }
+
+    @Test
+    void testEquals_UsesVehicleEqualsImplementation() {
+        Vehicle v1 = new Sedan("V999", "Civic", "Honda", 19000, "D1", LocalDateTime.now(), false);
+        Vehicle v2 = new Sedan("V999", "Accord", "Honda", 22000, "D2", LocalDateTime.now(), false);
+
+        assertEquals(v1, v2, "Two Vehicles with same ID should be equal");
+    }
+
+    @Test
+    void testEquals_BaseClassIsDirectlyInvoked() {
+        Vehicle v1 = new TestVehicle("ID123");
+        Vehicle v2 = new TestVehicle("ID123");
+        Vehicle v3 = new TestVehicle("DIFFERENT");
+
+        assertEquals(v1, v2);
+        assertNotEquals(v1, v3);
+        assertNotEquals(v1, null);
+        assertNotEquals(v1, "not a vehicle");
+    }
+
+    // Minimal concrete class to instantiate abstract Vehicle
+    private static class TestVehicle extends Vehicle {
+        TestVehicle(String id) {
+            super(id, "model", "maker", 12345.0, "dealer", LocalDateTime.now());
+        }
+
+        @Override
+        public String getType() {
+            return "TestType";
+        }
+    }
+
 }

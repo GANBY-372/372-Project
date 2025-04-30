@@ -1,14 +1,10 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class SportsCarTest {
 
@@ -16,47 +12,45 @@ class SportsCarTest {
 
     @BeforeEach
     void setUp() {
-        // Fresh setup before each test case
-        sportsCar = new SportsCar("123", "Model S", "Tesla", 100000, "dealer123", LocalDateTime.now(), false);
+        sportsCar = new SportsCar("123", "Model S", "Tesla", 100000, "dealer123", LocalDateTime.now(), true);
     }
 
     @AfterEach
     void tearDown() {
-        // Cleanup after each test case (if necessary)
-        sportsCar = null;  // Explicitly nullifying the object to clean up
+        sportsCar = null;
     }
 
     @Test
     void getType() {
-        // Verify that the type of SportsCar is "SportsCar"
         assertEquals("SportsCar", sportsCar.getType());
     }
 
     @Test
-    void setRentedOut() {
-        // Test that calling setRentedOut on a SportsCar does not change anything and returns "SportsCar"
-       // assertEquals("SportsCar", sportsCar.setRentedOut(true));
-        // assertEquals("SportsCar", sportsCar.setRentedOut(false));
+    void defaultRentStatusIsFalseEvenIfTruePassedToConstructor() {
+        assertFalse(sportsCar.getIsRentedOut(), "Constructor should always set rented out to false");
+    }
+
+    @Test
+    void setRentedOutWorksLikeVehicle() {
+        sportsCar.setRentedOut(true);
+        assertTrue(sportsCar.getIsRentedOut(), "setRentedOut(true) should succeed");
+
+        sportsCar.setRentedOut(false);
+        assertFalse(sportsCar.getIsRentedOut(), "setRentedOut(false) should succeed");
     }
 
     @Test
     void testEquals() {
-        // Create another SportsCar with the same ID
-        SportsCar anotherCar = new SportsCar("123", "Model S", "Tesla", 100000, "dealer123",  LocalDateTime.now(), false);
+        SportsCar duplicate = new SportsCar("123", "Model S", "Tesla", 99999, "otherDealer", LocalDateTime.now());
+        assertEquals(sportsCar, duplicate);
 
-        // Test that the two SportsCars are equal based on their ID
-        assertEquals(sportsCar, anotherCar);
-
-        // Test that a SportsCar is not equal to null
         assertNotEquals(null, sportsCar);
-
-        // Test that a SportsCar is not equal to a different object type
-        assertNotEquals(new Object(), sportsCar);
+        assertNotEquals("not a car", sportsCar);
     }
 
     @Test
     void testToString() {
-        // Test that the toString method returns the correct string representation
-        assertTrue(sportsCar.toString().startsWith("SportsCar"));
+        String str = sportsCar.toString();
+        assertTrue(str.startsWith("SportsCar SportsCar [id: 123"), "toString() should start with 'SportsCar'");
     }
 }
