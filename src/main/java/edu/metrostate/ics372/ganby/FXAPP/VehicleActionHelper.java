@@ -377,51 +377,73 @@ public class VehicleActionHelper {
 
 
     /**
-     * Filters vehicles by their type (e.g., SUV, Sedan, Pickup) based on the dealer selection.
+     * Filters and populates the given vehicle list with vehicles of the specified type
+     * from all checkbox-selected dealers.
      *
-     * @param type                 the vehicle type to filter (e.g., "SUV")
-     * @param selectedDealer       the currently selected dealer
-     * @param allDealersSelected  true if all dealers are selected
-     * @param outputList          the observable list to populate with filtered vehicles
+     * @param type          the vehicle type to filter by (e.g., "SUV", "Sedan", "Pickup", "SportsCar")
+     * @param selectedDealers a list of dealers whose checkboxes are selected
+     * @param outputList    the observable list to populate with matching vehicles
      */
-    public static void filterByType(String type, Dealer selectedDealer, boolean allDealersSelected,
-                                    ObservableList<Vehicle> outputList) {
-        if (allDealersSelected) {
-            outputList.setAll(
-                    DealerCatalog.getInstance().getAllVehicles().stream()
-                            .filter(v -> v.getType().equalsIgnoreCase(type))
-                            .toList()
-            );
-        } else if (selectedDealer != null) {
-            outputList.setAll(
-                    selectedDealer.vehicleCatalog.values().stream()
-                            .filter(v -> v.getType().equalsIgnoreCase(type))
-                            .toList()
-            );
-        }
-    }
-
-    /**
-     * Filters and returns all rented-out vehicles based on dealer selection.
-     *
-     * @param selectedDealer       the currently selected dealer
-     * @param allDealersSelected   true if all dealers are selected
-     * @param outputList           the observable list to populate with rented vehicles
-     */
-    public static void filterByRented(Dealer selectedDealer, boolean allDealersSelected,
-                                      ObservableList<Vehicle> outputList) {
-        List<Vehicle> rentedVehicles;
-
-        if (allDealersSelected) {
-            rentedVehicles = DealerCatalog.getInstance().getAllVehicles().stream()
-                    .filter(Vehicle::getIsRentedOut)
-                    .toList();
-        } else if (selectedDealer != null) {
-            rentedVehicles = selectedDealer.getRentedOutVehicles();
-        } else {
+    public static void filterByType(String type, List<Dealer> selectedDealers, ObservableList<Vehicle> outputList) {
+        if (selectedDealers == null || selectedDealers.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select at least one dealer.");
             return;
         }
 
-        outputList.setAll(rentedVehicles);
+        List<Vehicle> filtered = new ArrayList<>();
+        for (Dealer dealer : selectedDealers) {
+            filtered.addAll(
+                    dealer.vehicleCatalog.values().stream()
+                            .filter(v -> v.getType().equalsIgnoreCase(type))
+                            .toList()
+            );
+        }
+
+        outputList.setAll(filtered);
+    }
+
+    /**
+     * Filters and populates the given vehicle list with rented-out vehicles
+     * from all checkbox-selected dealers.
+     *
+     * @param selectedDealers a list of dealers whose checkboxes are selected
+     * @param outputList      the observable list to populate with rented vehicles
+     */
+    public static void filterByRented(List<Dealer> selectedDealers, ObservableList<Vehicle> outputList) {
+        if (selectedDealers == null || selectedDealers.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select at least one dealer.");
+            return;
+        }
+
+        List<Vehicle> filtered = new ArrayList<>();
+        for (Dealer dealer : selectedDealers) {
+            filtered.addAll(
+                    dealer.vehicleCatalog.values().stream()
+                            .filter(Vehicle::getIsRentedOut)
+                            .toList()
+            );
+        }
+
+        outputList.setAll(filtered);
+    }
+
+    /**
+     * Shows all vehicles (of any type or rental status) from all checkbox-selected dealers.
+     *
+     * @param selectedDealers a list of dealers whose checkboxes are selected
+     * @param outputList      the observable list to populate with all vehicles
+     */
+    public static void showAllVehiclesFromSelectedDealers(List<Dealer> selectedDealers, ObservableList<Vehicle> outputList) {
+        if (selectedDealers == null || selectedDealers.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select at least one dealer.");
+            return;
+        }
+
+        List<Vehicle> allVehicles = new ArrayList<>();
+        for (Dealer dealer : selectedDealers) {
+            allVehicles.addAll(dealer.vehicleCatalog.values());
+        }
+
+        outputList.setAll(allVehicles);
     }
 }
