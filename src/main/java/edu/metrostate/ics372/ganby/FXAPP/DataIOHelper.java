@@ -62,11 +62,11 @@ public class DataIOHelper {
     /**
      * Imports dealer and vehicle data from an XML file.
      *
-     * @param stage         the JavaFX stage used for file chooser
-     * @param dealerList    the observable list of dealers to update
-     * @param dealerTable   the TableView to update
-     * @param vehicleList   the observable list of vehicles to clear
-     * @param vehicleTable  the TableView to clear
+     * @param stage        the JavaFX stage used for file chooser
+     * @param dealerList   the observable list of dealers to update
+     * @param dealerTable  the TableView to update
+     * @param vehicleList  the observable list of vehicles to clear
+     * @param vehicleTable the TableView to clear
      */
     public static void importXML(Stage stage,
                                  ObservableList<Dealer> dealerList,
@@ -119,15 +119,14 @@ public class DataIOHelper {
             return;
         }
 
-        new JSONFileExporter().exportDealers(stage, selectedDealers);
+        JSONFileExporter jsonExporter = new JSONFileExporter();
+        boolean exportSuccessful = jsonExporter.exportDealers(stage, selectedDealers);
+
+        if (!exportSuccessful) {
+            FXController.showAlert(Alert.AlertType.INFORMATION, "Export Cancelled", "JSON export was cancelled.");
+        }
     }
 
-    /**
-     * Exports selected dealers as an XML file using XMLFileExporter.
-     *
-     * @param stage       the JavaFX stage used for file dialog
-     * @param dealerTable the TableView containing selected dealers
-     */
     public static void exportXML(Stage stage, TableView<Dealer> dealerTable) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
                 .filter(Dealer::isSelected)
@@ -138,6 +137,11 @@ public class DataIOHelper {
             return;
         }
 
-        new XMLFileExporter().exportDealers(stage, selectedDealers);
+        XMLFileExporter xmlExporter = new XMLFileExporter();
+        boolean exportSuccessful = xmlExporter.exportDealers(stage, selectedDealers);
+
+        if (!exportSuccessful) {
+            FXController.showAlert(Alert.AlertType.INFORMATION, "Export Cancelled", "XML export was cancelled.");
+        }
     }
 }
