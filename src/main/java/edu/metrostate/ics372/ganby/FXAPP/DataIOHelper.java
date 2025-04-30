@@ -35,13 +35,21 @@ public class DataIOHelper {
     public static void importJSON(Stage stage, ObservableList<Dealer> dealerList, TableView<Dealer> dealerTable) {
         try {
             JSONFileImporter importer = new JSONFileImporter(stage);
-            importer.processJSON();
+
+            // Check if the process was canceled
+            boolean isCanceled = !importer.processJSON();  // Assuming processJSON() returns false if canceled
+            if (isCanceled) {
+                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Canceled", "JSON import was canceled.");
+                return;
+            }
+
+            // If not canceled, proceed with the import
             dealerList.setAll(DealerCatalog.getInstance().getDealers());
             dealerTable.setItems(dealerList);
             FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "JSON file successfully imported!");
         } catch (Exception e) {
             // Log the error message
-            LOGGER.severe("Error importing XML: " + e.getMessage());
+            LOGGER.severe("Error importing JSON: " + e.getMessage());
 
             // Optionally log the stack trace in a more controlled way
             LOGGER.log(java.util.logging.Level.SEVERE, "Error Details", e);

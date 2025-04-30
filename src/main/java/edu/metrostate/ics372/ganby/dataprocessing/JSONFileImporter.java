@@ -82,9 +82,11 @@ public class JSONFileImporter {
 
     /**
      * Processes the loaded JSON array, creating and registering vehicles from its contents.
+     *
+     * @return
      */
-    public void processJSON() {
-        if (jsonArray == null || jsonArray.isEmpty()) return;
+    public boolean processJSON() {
+        if (jsonArray == null || jsonArray.isEmpty()) return false;
 
         for (Object obj : jsonArray) {
             try {
@@ -93,6 +95,7 @@ public class JSONFileImporter {
                 System.err.println("Skipping invalid vehicle: " + e.getMessage());
             }
         }
+        return false;
     }
 
     /**
