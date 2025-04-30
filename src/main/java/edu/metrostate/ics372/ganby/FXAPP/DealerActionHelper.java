@@ -132,28 +132,22 @@ public class DealerActionHelper {
         wizardStage.showAndWait();
     }
 
-    /**
-     * Renames the selected dealer using a dialog.
-     * TODO: Add comments to code that give the basics of what the code is doing
-     *
-     * @param dealerTable TableView containing dealers
-     * @param dealerNameField TextField to update the name in the detail pane
-     */
     public static void renameDealer(TableView<Dealer> dealerTable, TextField dealerNameField) {
-        Dealer selectedDealer = dealerTable.getSelectionModel().getSelectedItem();
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
                 .filter(Dealer::isSelected)
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
-            return;
-        }
-
-        if (selectedDealer == null) {
             FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
             return;
         }
+
+        if (selectedDealers.size() > 1) {
+            FXController.showAlert(AlertType.WARNING, "Multiple Dealers Selected", "Please select only one dealer to edit.");
+            return;
+        }
+
+        Dealer selectedDealer = selectedDealers.getFirst();
 
         TextInputDialog dialog = new TextInputDialog(selectedDealer.getName());
         dialog.setTitle("Edit Dealer Name");
