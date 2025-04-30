@@ -449,26 +449,30 @@ public class FXController {
     }
 
     /**
-     * Opens the wizard to transfer selected vehicles to a different dealer.
-     * Delegates the logic to the VehicleActionHelper class.
+     * Opens the wizard to transfer checkbox-selected vehicles to a different dealer.
+     * Requires exactly one dealer selected (checkbox) as the source.
      *
      * @param event the action event triggered by the Transfer button
      */
     @FXML
     private void openTransferVehicleWizard(ActionEvent event) {
-        // Get currently selected dealer and vehicles
-        Dealer currentDealer = dealerTable.getSelectionModel().getSelectedItem();
-        List<Vehicle> selected = vehicleTable.getSelectionModel().getSelectedItems();
+        List<Vehicle> selectedVehicles = vehicleTable.getItems().stream()
+                .filter(Vehicle::isSelected)
+                .toList();
 
-        // Launch transfer wizard
+        if (selectedVehicles.isEmpty()) {
+            FXController.showAlert(Alert.AlertType.WARNING, "No Vehicles Selected", "Please select vehicle(s) to transfer.");
+            return;
+        }
+
         VehicleActionHelper.openTransferVehicleWizard(
-                selected,
-                currentDealer,
+                selectedVehicles,
                 vehicleObservableList,
                 vehicleTable,
                 dealerTable
         );
     }
+
 
     /**
      * Opens the wizard to add a new vehicle to the selected dealer.
