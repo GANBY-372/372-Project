@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DataIOHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DataIOHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +90,7 @@
   <component name="RunManager" selected="Application.FXDriver">
     <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
-      <module name="FX_372_Project" />
+      <module name="ganby" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="edu.metrostate.ics372.ganby.*" />

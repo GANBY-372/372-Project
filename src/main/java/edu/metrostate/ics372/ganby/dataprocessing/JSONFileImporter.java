@@ -83,6 +83,7 @@ public class JSONFileImporter {
     /**
      * Processes the loaded JSON array, creating and registering vehicles from its contents.
      *
+     *
      * @return
      */
     public boolean processJSON() {

@@ -77,14 +77,19 @@ public class DataIOHelper {
             XMLFileImporter xmlImporter = new XMLFileImporter(stage);
             Document doc = xmlImporter.getXmlDocument();
 
-            if (doc != null) {
-                xmlImporter.processXML();
-                dealerList.setAll(DealerCatalog.getInstance().getDealers());
-                dealerTable.setItems(dealerList);
-                vehicleList.clear();
-                vehicleTable.setItems(vehicleList);
-                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "XML file successfully imported!");
+            if (doc == null) {
+                // User canceled the file selection, show cancellation message
+                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Cancelled", "XML import was cancelled.");
+                return;
             }
+
+            // If XML file is valid, proceed with import
+            xmlImporter.processXML();
+            dealerList.setAll(DealerCatalog.getInstance().getDealers());
+            dealerTable.setItems(dealerList);
+            vehicleList.clear();
+            vehicleTable.setItems(vehicleList);
+            FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "XML file successfully imported!");
         } catch (Exception e) {
             // Log the error message
             LOGGER.severe("Error importing XML: " + e.getMessage());
@@ -95,8 +100,8 @@ public class DataIOHelper {
             // Show the alert with the error message
             FXController.showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing XML:\n" + e.getMessage());
         }
-
     }
+
 
     /**
      * Exports selected dealers as a JSON file using JSONFileExporter.
