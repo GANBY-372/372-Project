@@ -111,6 +111,21 @@ public class FXController {
         vehicleModelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         vehicleTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         vehiclePriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        // Format price to always show last two decimal places
+        vehiclePriceColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                super.updateItem(price, empty);
+                if (empty || price == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f", price));
+                }
+            }
+        });
+
+
         acquisitionDateColumn.setCellValueFactory(new PropertyValueFactory<>("acquisitionDate"));
         isRentedOutColumn.setCellValueFactory(new PropertyValueFactory<>("isRentedOut"));
         vehicleSelectColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
