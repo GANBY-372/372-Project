@@ -195,6 +195,13 @@ public class VehicleActionHelper {
             return;
         }
 
+        // 🔒 Acquisition check
+        if (!selectedDealer.isVehicleAcquisitionEnabled()) {
+            FXController.showAlert(Alert.AlertType.ERROR, "Acquisition Disabled",
+                    "Vehicle acquisition is disabled for Dealer #%s. Enable acquisition first.".formatted(selectedDealer.getId()));
+            return;
+        }
+
         Stage wizardStage = new Stage();
         wizardStage.initModality(Modality.APPLICATION_MODAL);
         wizardStage.setTitle("Add New Vehicle Wizard");

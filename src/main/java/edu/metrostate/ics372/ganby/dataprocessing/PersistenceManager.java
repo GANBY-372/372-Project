@@ -18,7 +18,7 @@ public class PersistenceManager {
         if (autosaveFile.exists()) {
             try {
                 XMLFileImporter importer = new XMLFileImporter(AUTOSAVE_PATH);
-                importer.processXML();
+                importer.processXML(true); //pass in true to indicate we want to ignore acquisition status
                 controller.loadData();  // Refresh the UI
                 System.out.println("✅ Autosave data loaded from: " + AUTOSAVE_PATH);
             } catch (Exception e) {

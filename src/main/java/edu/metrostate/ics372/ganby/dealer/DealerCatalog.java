@@ -136,10 +136,10 @@ public class DealerCatalog {
 
     /**
      * Add a vehicle and auto-create the dealer if necessary. This method does not check if dealer acquisition is enabled
-     * because it will be used by file importers.
+     * because it will be used to load the autosave file
      * @param vehicle Vehicle
      */
-    public void addVehicleFromFile(Vehicle vehicle) {
+    public void addVehicleFromAutosave(Vehicle vehicle) {
         if (vehicle == null) return;
 
         String dealerId = vehicle.getDealerId();
