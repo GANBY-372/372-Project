@@ -97,66 +97,50 @@ public class VehicleActionHelper {
     }
 
     /**
-     * Toggles the rent status of the selected vehicle.
-     * Prevents rent status changes for SportsCars and displays a warning.
-     *
-     * @param vehicleTable the TableView displaying vehicles
-     * @param toggleButton the toggle button whose label should reflect current status
+     * Sets rent status to true (rented) for all selected vehicles, excluding SportsCars.
      */
-    public static void toggleRentStatus(TableView<Vehicle> vehicleTable, Button toggleButton) {
+    public static void setAsRented(TableView<Vehicle> vehicleTable) {
         List<Vehicle> selectedVehicles = vehicleTable.getItems().stream()
                 .filter(Vehicle::isSelected)
                 .toList();
 
         if (selectedVehicles.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to change rent status.");
+            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to mark as rented.");
             return;
         }
 
-        boolean allRentedOut = true;
-        boolean hasNonSportsCar = false;
-
-        // Determine if all non-sportscars are rented out
         for (Vehicle vehicle : selectedVehicles) {
             String type = vehicle.getType().trim().replaceAll("\\s+", "");
-            boolean isSportsCar = type.equalsIgnoreCase("SportsCar");
-
-            if (!isSportsCar && !vehicle.getIsRentedOut()) {
-                allRentedOut = false;
-            }
-
-            if (!isSportsCar) {
-                hasNonSportsCar = true;
-            }
-        }
-
-        // Determine the new status we want to set
-        boolean newRentStatus = !allRentedOut; // true = rent out, false = make available
-
-        if (!hasNonSportsCar && newRentStatus) {
-            FXController.showAlert(AlertType.WARNING, "Action Not Allowed",
-                    "All selected vehicles are SportsCars, which cannot be rented.");
-            return;
-        }
-
-        // Update rent status
-        for (Vehicle vehicle : selectedVehicles) {
-            String type = vehicle.getType().trim().replaceAll("\\s+", "");
-            boolean isSportsCar = type.equalsIgnoreCase("SportsCar");
-
-            if (isSportsCar && newRentStatus) {
-                // Only show warning if we're trying to rent out a SportsCar
+            if (type.equalsIgnoreCase("SportsCar")) {
                 FXController.showAlert(AlertType.WARNING,
                         "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
                         "SportsCars cannot be rented.");
                 continue;
             }
-
-            vehicle.setRentedOut(newRentStatus);
+            vehicle.setRentedOut(true);
         }
 
         vehicleTable.refresh();
-        toggleButton.setText(newRentStatus ? "Set All as Available" : "Set All as Rented");
+    }
+
+    /**
+     * Sets rent status to false (available) for all selected vehicles.
+     */
+    public static void setAsAvailable(TableView<Vehicle> vehicleTable) {
+        List<Vehicle> selectedVehicles = vehicleTable.getItems().stream()
+                .filter(Vehicle::isSelected)
+                .toList();
+
+        if (selectedVehicles.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to mark as available.");
+            return;
+        }
+
+        for (Vehicle vehicle : selectedVehicles) {
+            vehicle.setRentedOut(false);
+        }
+
+        vehicleTable.refresh();
     }
 
     /**
@@ -315,64 +299,71 @@ public class VehicleActionHelper {
     /**
      * Opens wizard to transfer selected vehicles to another dealer.
      *
-     * @param selected list of selected vehicles to transfer
-     * @param currentDealer    current dealer from whom vehicles are being transferred
-     * @param vehicleList      list to refresh after transfer
-     * @param vehicleTable     TableView to refresh after transfer
-     * @param dealerTable      TableView of dealers to refresh after transfer
+     * @param selectedVehicles  list of selected vehicles to transfer
+     * @param vehicleList       list to refresh after transfer
+     * @param vehicleTable      TableView to refresh after transfer
+     * @param dealerTable       TableView of dealers to refresh after transfer
      */
     public static void openTransferVehicleWizard(
-            List<Vehicle> selected,
-            Dealer currentDealer,
+            List<Vehicle> selectedVehicles,
             ObservableList<Vehicle> vehicleList,
             TableView<Vehicle> vehicleTable,
             TableView<Dealer> dealerTable
     ) {
-        // Get vehicles that are checked (not just selected)
-        List<Vehicle> selectedVehicles = vehicleTable.getItems().stream()
-                .filter(Vehicle::isSelected)
-                .toList();
-
-        if (selectedVehicles.isEmpty()) {
-            FXController.showAlert(Alert.AlertType.WARNING, "No Vehicles Selected", "Please select vehicles to transfer.");
+        if (selectedVehicles == null || selectedVehicles.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Vehicles Selected", "Please select vehicle(s) to transfer.");
             return;
         }
 
-        List<Dealer> otherDealers = DealerCatalog.getInstance().getDealers().stream()
-                .filter(dealer -> !dealer.equals(currentDealer))
+        // Get all dealers EXCEPT the ones owning selected vehicles
+        List<String> sourceDealerIds = selectedVehicles.stream()
+                .map(Vehicle::getDealerId)
+                .distinct()
                 .toList();
 
-        if (otherDealers.isEmpty()) {
-            FXController.showAlert(Alert.AlertType.WARNING, "No Other Dealers", "No available dealers to transfer to.");
+        List<Dealer> destinationOptions = DealerCatalog.getInstance().getDealers();
+
+        if (destinationOptions.isEmpty()) {
+            FXController.showAlert(AlertType.WARNING, "No Valid Destination", "No other dealers available for transfer.");
             return;
         }
 
-        ChoiceDialog<Dealer> dialog = new ChoiceDialog<>(otherDealers.getFirst(), otherDealers);
+        // Show dialog
+        ChoiceDialog<Dealer> dialog = new ChoiceDialog<>(destinationOptions.getFirst(), destinationOptions);
         dialog.setTitle("Transfer Vehicles");
         dialog.setHeaderText("Choose destination dealer:");
         dialog.setContentText("Dealer:");
 
         dialog.showAndWait().ifPresent(destinationDealer -> {
-            ArrayList<Vehicle> toTransfer = new ArrayList<>(selectedVehicles);
+            for (Vehicle v : selectedVehicles) {
+                // Remove from original owner
+                Dealer originalDealer = DealerCatalog.getInstance().getDealerWithId(v.getDealerId());
+                if (originalDealer != null) {
+                    originalDealer.vehicleCatalog.remove(v.getVehicleId());
+                }
 
-            // Remove from current dealer
-            for (Vehicle v : toTransfer) {
-                currentDealer.vehicleCatalog.remove(v.getVehicleId());
-                v.setDealerId(destinationDealer.getId());  // Update the dealer ID
+                // Set new dealer ID
+                v.setDealerId(destinationDealer.getId());
             }
 
-            // Transfer to destination dealer
-            DealerCatalog.getInstance().transferInventory(toTransfer, destinationDealer.getId());
+            // Perform transfer (requires ArrayList, not just List)
+            DealerCatalog.getInstance().transferInventory(new ArrayList<>(selectedVehicles), destinationDealer.getId());
 
             // Refresh UI
-            vehicleList.setAll(currentDealer.vehicleCatalog.values());
+            vehicleList.clear();
+            dealerTable.getItems().stream()
+                    .filter(Dealer::isSelected)
+                    .forEach(d -> vehicleList.addAll(d.vehicleCatalog.values()));
+
             vehicleTable.refresh();
             dealerTable.refresh();
 
-            FXController.showAlert(Alert.AlertType.INFORMATION, "Transfer Complete",
-                    "Vehicles transferred to " + destinationDealer.getName());
+            FXController.showAlert(AlertType.INFORMATION, "Transfer Complete",
+                    selectedVehicles.size() + " vehicle(s) transferred to " + destinationDealer.getName());
         });
     }
+
+
 
 
 

@@ -35,13 +35,21 @@ public class DataIOHelper {
     public static void importJSON(Stage stage, ObservableList<Dealer> dealerList, TableView<Dealer> dealerTable) {
         try {
             JSONFileImporter importer = new JSONFileImporter(stage);
-            importer.processJSON();
+
+            // Check if the process was canceled
+            boolean isCanceled = !importer.processJSON();  // Assuming processJSON() returns false if canceled
+            if (isCanceled) {
+                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Canceled", "JSON import was canceled.");
+                return;
+            }
+
+            // If not canceled, proceed with the import
             dealerList.setAll(DealerCatalog.getInstance().getDealers());
             dealerTable.setItems(dealerList);
             FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "JSON file successfully imported!");
         } catch (Exception e) {
             // Log the error message
-            LOGGER.severe("Error importing XML: " + e.getMessage());
+            LOGGER.severe("Error importing JSON: " + e.getMessage());
 
             // Optionally log the stack trace in a more controlled way
             LOGGER.log(java.util.logging.Level.SEVERE, "Error Details", e);
@@ -54,11 +62,11 @@ public class DataIOHelper {
     /**
      * Imports dealer and vehicle data from an XML file.
      *
-     * @param stage         the JavaFX stage used for file chooser
-     * @param dealerList    the observable list of dealers to update
-     * @param dealerTable   the TableView to update
-     * @param vehicleList   the observable list of vehicles to clear
-     * @param vehicleTable  the TableView to clear
+     * @param stage        the JavaFX stage used for file chooser
+     * @param dealerList   the observable list of dealers to update
+     * @param dealerTable  the TableView to update
+     * @param vehicleList  the observable list of vehicles to clear
+     * @param vehicleTable the TableView to clear
      */
     public static void importXML(Stage stage,
                                  ObservableList<Dealer> dealerList,
@@ -69,14 +77,19 @@ public class DataIOHelper {
             XMLFileImporter xmlImporter = new XMLFileImporter(stage);
             Document doc = xmlImporter.getXmlDocument();
 
-            if (doc != null) {
-                xmlImporter.processXML();
-                dealerList.setAll(DealerCatalog.getInstance().getDealers());
-                dealerTable.setItems(dealerList);
-                vehicleList.clear();
-                vehicleTable.setItems(vehicleList);
-                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "XML file successfully imported!");
+            if (doc == null) {
+                // User canceled the file selection, show cancellation message
+                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Cancelled", "XML import was cancelled.");
+                return;
             }
+
+            // If XML file is valid, proceed with import
+            xmlImporter.processXML();
+            dealerList.setAll(DealerCatalog.getInstance().getDealers());
+            dealerTable.setItems(dealerList);
+            vehicleList.clear();
+            vehicleTable.setItems(vehicleList);
+            FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "XML file successfully imported!");
         } catch (Exception e) {
             // Log the error message
             LOGGER.severe("Error importing XML: " + e.getMessage());
@@ -87,8 +100,8 @@ public class DataIOHelper {
             // Show the alert with the error message
             FXController.showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing XML:\n" + e.getMessage());
         }
-
     }
+
 
     /**
      * Exports selected dealers as a JSON file using JSONFileExporter.
@@ -106,15 +119,14 @@ public class DataIOHelper {
             return;
         }
 
-        new JSONFileExporter().exportDealers(stage, selectedDealers);
+        JSONFileExporter jsonExporter = new JSONFileExporter();
+        boolean exportSuccessful = jsonExporter.exportDealers(stage, selectedDealers);
+
+        if (!exportSuccessful) {
+            FXController.showAlert(Alert.AlertType.INFORMATION, "Export Cancelled", "JSON export was cancelled.");
+        }
     }
 
-    /**
-     * Exports selected dealers as an XML file using XMLFileExporter.
-     *
-     * @param stage       the JavaFX stage used for file dialog
-     * @param dealerTable the TableView containing selected dealers
-     */
     public static void exportXML(Stage stage, TableView<Dealer> dealerTable) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
                 .filter(Dealer::isSelected)
@@ -125,6 +137,11 @@ public class DataIOHelper {
             return;
         }
 
-        new XMLFileExporter().exportDealers(stage, selectedDealers);
+        XMLFileExporter xmlExporter = new XMLFileExporter();
+        boolean exportSuccessful = xmlExporter.exportDealers(stage, selectedDealers);
+
+        if (!exportSuccessful) {
+            FXController.showAlert(Alert.AlertType.INFORMATION, "Export Cancelled", "XML export was cancelled.");
+        }
     }
 }

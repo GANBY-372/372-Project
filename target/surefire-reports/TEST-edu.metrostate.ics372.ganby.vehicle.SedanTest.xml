@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/Users/ggmacair2023/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/ggmacair2023/Desktop/372-02/Ganby-Kotlin-Final/target/surefire/surefirebooter-20250430151944593_3.jar /Users/ggmacair2023/Desktop/372-02/Ganby-Kotlin-Final/target/surefire 2025-04-30T15-19-44_551-jvmRun1 surefire-20250430151944593_1tmp surefire_0-20250430151944593_2tmp"/>
+    <property name="sun.java.command" value="/Users/ggmacair2023/Desktop/372-02/Ganby-Kotlin-Final/target/surefire/surefirebooter-20250430153300657_3.jar /Users/ggmacair2023/Desktop/372-02/Ganby-Kotlin-Final/target/surefire 2025-04-30T15-33-00_617-jvmRun1 surefire-20250430153300657_1tmp surefire_0-20250430153300657_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/ggmacair2023/Desktop/372-02/Ganby-Kotlin-Final/target/test-classes:/Users/ggmacair2023/Desktop/372-02/Ganby-Kotlin-Final/target/classes:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-controls/21/javafx-controls-21-mac-aarch64.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-graphics/21/javafx-graphics-21-mac-aarch64.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-base/21/javafx-base-21-mac-aarch64.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar:/Users/ggmacair2023/.m2/repository/org/openjfx/javafx-fxml/21/javafx-fxml-21-mac-aarch64.jar:/Users/ggmacair2023/.m2/repository/org/controlsfx/controlsfx/11.2.1/controlsfx-11.2.1.jar:/Users/ggmacair2023/.m2/repository/com/dlsc/formsfx/formsfx-core/11.6.0/formsfx-core-11.6.0.jar:/Users/ggmacair2023/.m2/repository/org/kordamp/bootstrapfx/bootstrapfx-core/0.4.0/bootstrapfx-core-0.4.0.jar:/Users/ggmacair2023/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/Users/ggmacair2023/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/Users/ggmacair2023/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/ggmacair2023/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/Users/ggmacair2023/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/Users/ggmacair2023/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar:/Users/ggmacair2023/.m2/repository/junit/junit/4.10/junit-4.10.jar:/Users/ggmacair2023/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar:/Users/ggmacair2023/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.9.24/kotlin-stdlib-jdk8-1.9.24.jar:/Users/ggmacair2023/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.9.24/kotlin-stdlib-1.9.24.jar:/Users/ggmacair2023/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/Users/ggmacair2023/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.9.24/kotlin-stdlib-jdk7-1.9.24.jar:/Users/ggmacair2023/.m2/repository/org/jetbrains/kotlin/kotlin-test/1.9.24/kotlin-test-1.9.24.jar:"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/ggmacair2023/Desktop/372-02/Ganby-Kotlin-Final/target/surefire/surefirebooter-20250430151944593_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/ggmacair2023/Desktop/372-02/Ganby-Kotlin-Final/target/surefire/surefirebooter-20250430153300657_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="23.0.2+7-58"/>
@@ -59,7 +59,7 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testToString" classname="edu.metrostate.ics372.ganby.vehicle.SedanTest" time="0.001"/>
+  <testcase name="testToString" classname="edu.metrostate.ics372.ganby.vehicle.SedanTest" time="0.0"/>
   <testcase name="getType" classname="edu.metrostate.ics372.ganby.vehicle.SedanTest" time="0.0"/>
   <testcase name="testEquals" classname="edu.metrostate.ics372.ganby.vehicle.SedanTest" time="0.0"/>
 </testsuite>

@@ -1,0 +1,84 @@
+{
+  "car_inventory": [
+    {
+      "is_rented_out": false,
+      "price": 17000.0,
+      "vehicle_model": "Range Rover",
+      "vehicle_type": "SUV",
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Land Rover",
+      "vehicle_id": "848432",
+      "acquisition_date": 1746038983555
+    },
+    {
+      "is_rented_out": false,
+      "price": 36600.0,
+      "vehicle_model": "G70",
+      "vehicle_type": "Sedan",
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Genesis",
+      "vehicle_id": "151e5dde",
+      "acquisition_date": 1746038983556
+    },
+    {
+      "is_rented_out": false,
+      "price": 22330.0,
+      "vehicle_model": "Miata",
+      "vehicle_type": "SportsCar",
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Mazda",
+      "vehicle_id": "ern222",
+      "acquisition_date": 1746038983556
+    },
+    {
+      "is_rented_out": false,
+      "price": 22600.0,
+      "vehicle_model": "Tundra",
+      "vehicle_type": "Pickup",
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Toyota",
+      "vehicle_id": "52523",
+      "acquisition_date": 1746038983557
+    },
+    {
+      "is_rented_out": true,
+      "price": 70444.0,
+      "vehicle_model": "Silverado",
+      "vehicle_type": "Pickup",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Chevy",
+      "vehicle_id": "89343883",
+      "acquisition_date": 1746038983557
+    },
+    {
+      "is_rented_out": true,
+      "price": 50444.0,
+      "vehicle_model": "Model 3",
+      "vehicle_type": "Sedan",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Tesla",
+      "vehicle_id": "83883",
+      "acquisition_date": 1746038983557
+    },
+    {
+      "is_rented_out": false,
+      "price": 49889.0,
+      "vehicle_model": "Supra",
+      "vehicle_type": "SportsCar",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Toyota",
+      "vehicle_id": "229393",
+      "acquisition_date": 1746038983557
+    },
+    {
+      "is_rented_out": true,
+      "price": 20123.0,
+      "vehicle_model": "Explorer",
+      "vehicle_type": "SUV",
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Ford",
+      "vehicle_id": "48934j",
+      "acquisition_date": 1746038983557
+    }
+  ]
+}

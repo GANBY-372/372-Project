@@ -16,7 +16,7 @@ import java.util.List;
 
 public class JSONFileExporter {
 
-    public void exportDealers(Stage stage, List<Dealer> selectedDealers) {
+    public boolean exportDealers(Stage stage, List<Dealer> selectedDealers) {
         File file = FileSelector.chooseJsonSaveFile(stage);
         if (file != null) {
             try (FileWriter writer = new FileWriter(file)) {
@@ -27,6 +27,7 @@ public class JSONFileExporter {
                 showErrorAlert(e.getMessage());
             }
         }
+        return false;
     }
 
 

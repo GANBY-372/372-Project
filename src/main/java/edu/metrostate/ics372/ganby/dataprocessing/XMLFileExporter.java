@@ -1,7 +1,6 @@
 package edu.metrostate.ics372.ganby.dataprocessing;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
-import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
@@ -23,12 +22,13 @@ import java.util.List;
  */
 public class XMLFileExporter {
 
-    public void exportDealers(Stage stage, List<Dealer> selectedDealers) {
+    public boolean exportDealers(Stage stage, List<Dealer> selectedDealers) {
         File file = FileSelector.chooseXmlSaveFile(stage);
 
         if (file != null) {
             exportToFile(file, selectedDealers, true);
         }
+        return false;
     }
 
     // ✨ New method for saving WITHOUT asking user (for autosave)
