@@ -1,7 +1,8 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
 import edu.metrostate.ics372.ganby.dealer.Dealer;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
@@ -9,123 +10,115 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VehicleTest {
 
-    private Vehicle v001, v002, v003, v004;
+    private Vehicle sedan;
+    private Vehicle pickup;
 
     @BeforeEach
     void setUp() {
-        v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", LocalDateTime.now(), false);
-        v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "001", LocalDateTime.now(), false);
-        v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "001", LocalDateTime.now(), false);
-        v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "002", LocalDateTime.now(), false);
-    }
-
-    @AfterEach
-    void tearDown() {
-        v001 = v002 = v003 = v004 = null;
+        sedan = new Sedan("V001", "Camry", "Toyota", 15000.0, "D001", LocalDateTime.now(), false);
+        pickup = new Pickup("V002", "F-150", "Ford", 25000.0, "D002", LocalDateTime.now(), true);
     }
 
     @Test
-    void getType() {
-        assertEquals("Sedan", v001.getType());
-        assertEquals("Pickup", v002.getType());
-        assertEquals("SportsCar", v003.getType());
+    void testJavaFXProperties() {
+        assertEquals("V001", sedan.idProperty().get());
+        assertEquals("Camry", sedan.modelProperty().get());
+        assertEquals("Toyota", sedan.manufacturerProperty().get());
+        assertEquals(15000.0, sedan.priceProperty().get());
+        assertEquals("D001", sedan.dealerIdProperty().get());
+        assertNotNull(sedan.acquisitionDateProperty().get());
+        assertFalse(sedan.isRentedOutProperty().get());
+        assertFalse(sedan.selectedProperty().get());
     }
 
     @Test
-    void setRentedOut() {
-        v001.setRentedOut(true);
-        assertTrue(v001.getIsRentedOut());
-
-        v001.setRentedOut(false);
-        assertFalse(v001.getIsRentedOut());
+    void testStandardGetters() {
+        assertEquals("V001", sedan.getVehicleId());
+        assertEquals("Camry", sedan.getModel());
+        assertEquals("Toyota", sedan.getManufacturer());
+        assertEquals(15000.0, sedan.getPrice());
+        assertEquals("D001", sedan.getDealerId());
+        assertNotNull(sedan.getAcquisitionDate());
+        assertFalse(sedan.getIsRentedOut());
+        assertFalse(sedan.isSelected());
     }
 
     @Test
-    void getIsRentedOut() {
-        assertFalse(v001.getIsRentedOut());
-        v001.setRentedOut(true);
-        assertTrue(v001.getIsRentedOut());
+    void testSetSelected() {
+        sedan.setSelected(true);
+        assertTrue(sedan.isSelected());
+        sedan.setSelected(false);
+        assertFalse(sedan.isSelected());
     }
 
     @Test
-    void getVehicleId() {
-        assertEquals("V001", v001.getVehicleId());
+    void testSetDealerId() {
+        sedan.setDealerId("NEW_ID");
+        assertEquals("NEW_ID", sedan.getDealerId());
     }
 
     @Test
-    void getModel() {
-        assertEquals("Camry", v001.getModel());
+    void testSetDealerValid() {
+        Dealer d = new Dealer("123", "Dealer");
+        sedan.setDealer(d);
+        assertEquals("123", sedan.getDealerId());
     }
 
     @Test
-    void getManufacturer() {
-        assertEquals("Toyota", v001.getManufacturer());
+    void testSetDealer_NullThrowsNPE() {
+        assertThrows(NullPointerException.class, () -> sedan.setDealer(null));
     }
 
     @Test
-    void getPrice() {
-        assertEquals(15000.00, v001.getPrice());
+    void testSetAcquisitionDateValid() {
+        LocalDateTime newDate = LocalDateTime.now().minusDays(3);
+        sedan.setAcquisitionDate(newDate);
+        assertEquals(newDate, sedan.getAcquisitionDate());
     }
 
     @Test
-    void setPrice_ValidValue() {
-        v001.setPrice(18000.00);
-        assertEquals(18000.00, v001.getPrice());
+    void testSetAcquisitionDate_NullThrowsNPE() {
+        assertThrows(NullPointerException.class, () -> sedan.setAcquisitionDate(null));
     }
 
     @Test
-    void setPrice_NegativeValue_ThrowsException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> v001.setPrice(-5000.00));
-        assertEquals("Price cannot be negative", exception.getMessage());
+    void testSetPriceValid() {
+        sedan.setPrice(19999.99);
+        assertEquals(19999.99, sedan.getPrice());
     }
 
     @Test
-    void getDealerId() {
-        assertEquals("001", v001.getDealerId());
+    void testSetPriceNegativeThrows() {
+        Exception e = assertThrows(IllegalArgumentException.class, () -> sedan.setPrice(-1.0));
+        assertEquals("Price cannot be negative", e.getMessage());
     }
 
     @Test
-    void getAcquisitionDate() {
-        assertNotNull(v001.getAcquisitionDate());
+    void testSetRentedOut() {
+        sedan.setRentedOut(true);
+        assertTrue(sedan.getIsRentedOut());
+        sedan.setRentedOut(false);
+        assertFalse(sedan.getIsRentedOut());
     }
 
     @Test
-    void setDealer_ValidDealer() {
-        Dealer newDealer = new Dealer("003", null);
-        v001.setDealer(newDealer);
-        assertEquals("003", v001.getDealerId());
-    }
+    void testEqualsAndHashCode() {
+        Vehicle sameId = new Sedan("V001", "Other", "Other", 9999.0, "D999", LocalDateTime.now(), false);
+        assertEquals(sedan, sameId);
+        assertEquals(sedan.hashCode(), sameId.hashCode());
 
-    @Test
-    void setAcquisitionDate_ValidDate() {
-        LocalDateTime newDate = LocalDateTime.now().minusDays(10);
-        v001.setAcquisitionDate(newDate);
-        assertEquals(newDate, v001.getAcquisitionDate());
-    }
-
-    @Test
-    void testEquals_SameObject() {
-        assertEquals(v001, v001);
-    }
-
-    @Test
-    void testEquals_DifferentObjectSameId() {
-        Vehicle duplicate = new Sedan("V001", "Different Model", "Different Manufacturer", 20000.00, "005", LocalDateTime.now(), false);
-        assertEquals(v001, duplicate);
-    }
-
-    @Test
-    void testEquals_NullObject() {
-        assertNotEquals(v001, null);
+        assertNotEquals(sedan, pickup);
+        assertNotEquals(sedan, null);
+        assertNotEquals(sedan, "Not a Vehicle");
     }
 
     @Test
     void testToString() {
-        String output = v001.toString();
-        assertTrue(output.contains("id: V001"));
-        assertTrue(output.contains("model: Camry"));
-        assertTrue(output.contains("manufacturer: Toyota"));
-        assertTrue(output.contains("dealerId: 001"));
-        assertTrue(output.contains("price: 15000.0"));
+        String str = sedan.toString();
+        assertTrue(str.contains("id: V001"));
+        assertTrue(str.contains("model: Camry"));
+        assertTrue(str.contains("manufacturer: Toyota"));
+        assertTrue(str.contains("price: 15000.0"));
+        assertTrue(str.contains("dealerId: D001"));
     }
 }
