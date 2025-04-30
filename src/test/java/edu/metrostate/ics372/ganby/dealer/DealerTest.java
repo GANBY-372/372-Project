@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DealerTest {
     private Dealer dealer;
-    private Vehicle v001, v002, v003, v004;
+    private Vehicle v001, v002, v003;
 
     @BeforeEach
     void setUp() {
@@ -22,7 +22,6 @@ class DealerTest {
         v001 = new Sedan("V001", "Camry", "Toyota", 15000.00, "123", LocalDateTime.now(), false);
         v002 = new Pickup("V002", "F-150", "Ford", 25000.00, "123", LocalDateTime.now(), false);
         v003 = new SportsCar("V003", "Corvette", "Chevrolet", 50000.00, "123", LocalDateTime.now(), true);
-        //v004 = new Sedan("V004", "Accord", "Honda", 20000.00, "123", LocalDateTime.now(), false);
     }
 
     // === Constructors and basic properties ===
@@ -75,6 +74,15 @@ class DealerTest {
         dealer.setName("Updated Name");
         assertEquals("Updated Name", dealer.getName());
         assertEquals("Updated Name", dealer.toString());
+    }
+
+    @Test
+    void testJavaFXPropertyAccessors() {
+        assertEquals("123", dealer.idProperty().get());
+        assertEquals("Test Dealer", dealer.nameProperty().get());
+
+        dealer.selectedProperty().set(true);
+        assertTrue(dealer.isSelected());
     }
 
     // === Vehicle Management ===
