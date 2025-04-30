@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Dealers>
+    <Dealer id="485">
+        <Name>Gil</Name>
+        <Acquisition_Status>true</Acquisition_Status>
+        <Vehicle id="848432" type="SUV">
+            <Price unit="dollars">17000.0</Price>
+            <Make>Land Rover</Make>
+            <Model>Range Rover</Model>
+            <is_rented_out>false</is_rented_out>
+        </Vehicle>
+        <Vehicle id="151e5dde" type="Sedan">
+            <Price unit="dollars">36600.0</Price>
+            <Make>Genesis</Make>
+            <Model>G70</Model>
+            <is_rented_out>false</is_rented_out>
+        </Vehicle>
+        <Vehicle id="ern222" type="SportsCar">
+            <Price unit="dollars">22330.0</Price>
+            <Make>Mazda</Make>
+            <Model>Miata</Model>
+            <is_rented_out>false</is_rented_out>
+        </Vehicle>
+        <Vehicle id="52523" type="Pickup">
+            <Price unit="dollars">22600.0</Price>
+            <Make>Toyota</Make>
+            <Model>Tundra</Model>
+            <is_rented_out>false</is_rented_out>
+        </Vehicle>
+    </Dealer>
+    <Dealer id="77338">
+        <Name>Dealer id#77338</Name>
+        <Acquisition_Status>true</Acquisition_Status>
+    </Dealer>
+    <Dealer id="12513">
+        <Name>Dealer id#12513</Name>
+        <Acquisition_Status>true</Acquisition_Status>
+        <Vehicle id="89343883" type="Pickup">
+            <Price unit="dollars">70444.0</Price>
+            <Make>Chevy</Make>
+            <Model>Silverado</Model>
+            <is_rented_out>true</is_rented_out>
+        </Vehicle>
+        <Vehicle id="83883" type="Sedan">
+            <Price unit="dollars">50444.0</Price>
+            <Make>Tesla</Make>
+            <Model>Model 3</Model>
+            <is_rented_out>true</is_rented_out>
+        </Vehicle>
+        <Vehicle id="229393" type="SportsCar">
+            <Price unit="dollars">49889.0</Price>
+            <Make>Toyota</Make>
+            <Model>Supra</Model>
+            <is_rented_out>false</is_rented_out>
+        </Vehicle>
+        <Vehicle id="48934j" type="SUV">
+            <Price unit="dollars">20123.0</Price>
+            <Make>Ford</Make>
+            <Model>Explorer</Model>
+            <is_rented_out>true</is_rented_out>
+        </Vehicle>
+    </Dealer>
+</Dealers>

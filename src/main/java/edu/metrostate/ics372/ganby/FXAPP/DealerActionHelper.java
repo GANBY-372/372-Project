@@ -167,27 +167,26 @@ public class DealerActionHelper {
     }
 
     /**
-     * Enables or disables acquisition for the selected dealer.
-     * TODO: Add comments to code that give the basics of what the code is doing
+     * Sets acquisition status (enabled or disabled) for selected dealers.
      *
      * @param dealerTable TableView of dealers
+     * @param enable true to enable acquisition, false to disable
      */
-    public static void toggleAcquisitionStatus(TableView<Dealer> dealerTable) {
+    public static void setAcquisitionStatus(TableView<Dealer> dealerTable, boolean enable) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
                 .filter(Dealer::isSelected)
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer to toggle acquisition.");
+            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer.");
             return;
         }
 
         for (Dealer dealer : selectedDealers) {
-            boolean current = dealer.isVehicleAcquisitionEnabled();
-            if (current) {
-                DealerCatalog.getInstance().disableDealerAcquisition(dealer.getId());
-            } else {
+            if (enable) {
                 DealerCatalog.getInstance().enableDealerAcquisition(dealer.getId());
+            } else {
+                DealerCatalog.getInstance().disableDealerAcquisition(dealer.getId());
             }
         }
 

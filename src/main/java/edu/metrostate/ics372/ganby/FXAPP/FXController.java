@@ -38,8 +38,6 @@ public class FXController {
     @FXML public TableView<Vehicle> vehicleTable;
     @FXML public TextField dealerIdTextField;
     @FXML public TextField dealerNameTextField;
-    @FXML public Label dealerIdLabel;
-    @FXML public Label dealerNameLabel;
     @FXML public TableColumn<Dealer, String> dealerIdColumn;
     @FXML public TableColumn<Dealer, String> dealerNameColumn;
     @FXML public TableColumn<Dealer, Boolean> isBuyingColumn;
@@ -56,7 +54,6 @@ public class FXController {
     @FXML public Button addVehicleButton;
     @FXML public Button deleteDealerButton;
     @FXML public Button deleteVehicleButton;
-    @FXML public Button toggleRentStatusButton;
     @FXML public Button modifyPriceButton;
     @FXML public Button transferVehicleButton;
     @FXML public Button selectAllDealersButton;
@@ -381,12 +378,14 @@ public class FXController {
                 addVehicleButton
         );
     }
-    /**
-     * Enables or disables acquisition for selected dealer.
-     */
     @FXML
-    private void toggleAcquisitionStatus() {
-        DealerActionHelper.toggleAcquisitionStatus(dealerTable);
+    private void enableAcquisitionStatus() {
+        DealerActionHelper.setAcquisitionStatus(dealerTable, true);
+    }
+
+    @FXML
+    private void disableAcquisitionStatus() {
+        DealerActionHelper.setAcquisitionStatus(dealerTable, false);
     }
 
     /**
