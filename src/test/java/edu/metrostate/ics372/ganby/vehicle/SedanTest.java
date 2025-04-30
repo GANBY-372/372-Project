@@ -1,34 +1,58 @@
 package edu.metrostate.ics372.ganby.vehicle;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
 import java.time.LocalDateTime;
 
-public class SedanTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class SedanTest {
 
     @Test
-    void getType() {
-        Sedan sedan = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", LocalDateTime.now(), false);
-        assertEquals("Sedan", sedan.getType(), "getType() should return 'Sedan'");
+    void testConstructorAndProperties() {
+        LocalDateTime date = LocalDateTime.now();
+        Sedan sedan = new Sedan("S001", "Camry", "Toyota", 22000.00, "D001", date);
+
+        assertEquals("S001", sedan.getVehicleId());
+        assertEquals("Camry", sedan.getModel());
+        assertEquals("Toyota", sedan.getManufacturer());
+        assertEquals(22000.00, sedan.getPrice());
+        assertEquals("D001", sedan.getDealerId());
+        assertEquals(date, sedan.getAcquisitionDate());
+        assertFalse(sedan.getIsRentedOut(), "Default rented out should be false");
     }
 
     @Test
-    void testEquals() {
-        LocalDateTime now = LocalDateTime.now();
-        Sedan sedan1 = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", LocalDateTime.now(), false);
-        Sedan sedan2 = new Sedan("V001", "Accord", "Honda", 20000.00, "002", LocalDateTime.now(), false);
-        Sedan sedan3 = new Sedan("V002", "Corolla", "Toyota", 18000.00, "001",  LocalDateTime.now(), false);
-
-        assertEquals(sedan1, sedan2, "Sedans with the same ID should be equal");
-        assertNotEquals(sedan1, sedan3, "Sedans with different IDs should not be equal");
+    void testTypeReturnsSedan() {
+        Sedan sedan = new Sedan("S002", "Accord", "Honda", 23000.00, "D002", LocalDateTime.now());
+        assertEquals("Sedan", sedan.getType());
     }
 
     @Test
-    void testToString() {
+    void testEquals_SameId() {
         LocalDateTime now = LocalDateTime.now();
-        Sedan sedan = new Sedan("V001", "Camry", "Toyota", 15000.00, "001", LocalDateTime.now(), false);
-        String expectedString = "Sedan " + sedan.toString().substring(6); // Ensuring consistent output
+        Sedan a = new Sedan("S003", "ModelA", "MakerA", 21000.00, "D003", now);
+        Sedan b = new Sedan("S003", "ModelB", "MakerB", 29000.00, "D004", now);
+        assertEquals(a, b);
+    }
 
-        assertEquals(expectedString, sedan.toString(), "toString() should return correct formatted string");
+    @Test
+    void testEquals_DifferentId() {
+        Sedan a = new Sedan("S004", "Fusion", "Ford", 20000.00, "D004", LocalDateTime.now());
+        Sedan b = new Sedan("S005", "Fusion", "Ford", 20000.00, "D004", LocalDateTime.now());
+        assertNotEquals(a, b);
+    }
+
+    @Test
+    void testEquals_NullAndDifferentType() {
+        Sedan sedan = new Sedan("S006", "Altima", "Nissan", 21000.00, "D005", LocalDateTime.now());
+        assertNotEquals(sedan, null);
+        assertNotEquals(sedan, "Not a sedan");
+    }
+
+    @Test
+    void testToStringIncludesType() {
+        Sedan sedan = new Sedan("S007", "Impreza", "Subaru", 25000.00, "D006", LocalDateTime.now());
+        assertTrue(sedan.toString().startsWith("Sedan Sedan [id:"));
     }
 }
