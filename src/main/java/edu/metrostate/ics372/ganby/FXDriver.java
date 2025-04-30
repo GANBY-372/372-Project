@@ -1,10 +1,6 @@
 package edu.metrostate.ics372.ganby;
 
-import edu.metrostate.ics372.ganby.FXAPP.FXController;
 import edu.metrostate.ics372.ganby.dataprocessing.PersistenceManager;
-import edu.metrostate.ics372.ganby.user.UserManager;
-import javafx.application.Application;
-
 import edu.metrostate.ics372.ganby.user.UserManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,15 +17,14 @@ public class FXDriver extends Application {
 
         if (UserManager.userExists()) {
             loader = new FXMLLoader(getClass().getClassLoader().getResource("LoginView.fxml"));
+            root = loader.load();
             primaryStage.setTitle("User Login");
         } else {
             loader = new FXMLLoader(getClass().getClassLoader().getResource("CreateUserView.fxml"));
+            root = loader.load();
             primaryStage.setTitle("Create User");
         }
 
-        FXController controller = loader.getController();
-        PersistenceManager.loadAutosave(controller);
-        root = loader.load();
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -37,6 +32,13 @@ public class FXDriver extends Application {
     public static void launchMainApp(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(FXDriver.class.getClassLoader().getResource("FXAPP-View.fxml"));
         Parent root = loader.load();
+
+        // ✅ Only here is FXController valid
+        edu.metrostate.ics372.ganby.FXAPP.FXController controller = loader.getController();
+        if (controller != null) {
+            PersistenceManager.loadAutosave(controller);
+        }
+
         stage.setTitle("Vehicle Tracking System");
         stage.setScene(new Scene(root));
         stage.show();
