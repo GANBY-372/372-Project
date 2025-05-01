@@ -73,7 +73,7 @@ public class FilesTestDriver extends Application {
             XMLFileImporter importer = new XMLFileImporter("src/main/resources/Imports/Dealer.xml");
             Document doc = importer.getXmlDocument();
             if (doc != null) {
-                importer.processXML(doc);
+                importer.processXML();
             }
         } catch (Exception e) {
             System.err.println("XML (path) import failed: " + e.getMessage());
@@ -84,7 +84,7 @@ public class FilesTestDriver extends Application {
         System.out.println("\n Current DealerCatalog:");
         for (Dealer dealer : DealerCatalog.getInstance().getDealers()) {
             System.out.println("Dealer: " + dealer.getId() + " - " + dealer.getName());
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 System.out.printf("  ↳ Vehicle: %s (%s %s), $%.2f\n",
                         vehicle.getVehicleId(),
                         vehicle.getManufacturer(),

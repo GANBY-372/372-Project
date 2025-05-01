@@ -29,6 +29,7 @@ public class DealerCatalog {
 
     /**
      * Method to get the instance of the DealerCatalog
+     *
      * @return instance of DealerCatalog
      */
     public static DealerCatalog getInstance() {
@@ -40,6 +41,7 @@ public class DealerCatalog {
 
     /**
      * Get all dealers as an observable list
+     *
      * @return ObservableList of dealers
      */
     public ObservableList<Dealer> getDealers() {
@@ -48,6 +50,7 @@ public class DealerCatalog {
 
     /**
      * Get the internal map of dealers
+     *
      * @return dealerCatalog HashMap
      */
     public HashMap<String, Dealer> getDealerCatalog() {
@@ -56,6 +59,7 @@ public class DealerCatalog {
 
     /**
      * Get a dealer by ID
+     *
      * @param id String
      * @return Dealer or null
      */
@@ -65,6 +69,7 @@ public class DealerCatalog {
 
     /**
      * Get a dealer by name
+     *
      * @param name String
      * @return Dealer or null
      */
@@ -78,12 +83,13 @@ public class DealerCatalog {
 
     /**
      * Get all dealers who are actively acquiring vehicles
+     *
      * @return ObservableList of dealers
      */
     public ObservableList<Dealer> getDealersWhoAreBuying() {
         return FXCollections.observableArrayList(
                 dealerList.stream()
-                        .filter(Dealer::getIsVehicleAcquisitionEnabled)
+                        .filter(Dealer::isVehicleAcquisitionEnabled)
                         .toList()
         );
     }
@@ -92,13 +98,14 @@ public class DealerCatalog {
     public ArrayList<Vehicle> getAllVehicles() {
         ArrayList<Vehicle> allVehicles = new ArrayList<>();
         for (Dealer dealer : dealerCatalog.values()) {
-            allVehicles.addAll(dealer.getVehicleCatalog().values());
+            allVehicles.addAll(dealer.vehicleCatalog.values());
         }
         return allVehicles;
     }
 
     /**
      * Add a dealer to the catalog
+     *
      * @param dealer Dealer
      */
     public void addDealer(Dealer dealer) {
@@ -110,6 +117,7 @@ public class DealerCatalog {
 
     /**
      * Add a vehicle and auto-create the dealer if necessary
+     *
      * @param vehicle Vehicle
      */
     public void addVehicle(Vehicle vehicle) {
@@ -123,11 +131,35 @@ public class DealerCatalog {
             addDealer(dealer);
         }
 
-        if (!dealer.getIsVehicleAcquisitionEnabled()) {
+        if (!dealer.isVehicleAcquisitionEnabled()) {
             return;
         }
 
-        if (dealer.getVehicleCatalog().containsKey(vehicle.getVehicleId())) {
+        if (dealer.vehicleCatalog.containsKey(vehicle.getVehicleId())) {
+            return;
+        }
+
+        dealer.addVehicle(vehicle);
+    }
+
+    /**
+     * Add a vehicle and auto-create the dealer if necessary. This method does not check if dealer acquisition is enabled
+     * because it will be used to load the autosave file
+     *
+     * @param vehicle Vehicle
+     */
+    public void addVehicleFromAutosave(Vehicle vehicle) {
+        if (vehicle == null) return;
+
+        String dealerId = vehicle.getDealerId();
+        Dealer dealer = dealerCatalog.get(dealerId);
+
+        if (dealer == null) {
+            dealer = new Dealer(dealerId);
+            addDealer(dealer);
+        }
+
+        if (dealer.vehicleCatalog.containsKey(vehicle.getVehicleId())) {
             return;
         }
 
@@ -136,19 +168,21 @@ public class DealerCatalog {
 
     /**
      * Modify the price of a vehicle
+     *
      * @param vehicleId String
-     * @param price double
+     * @param price     double
      */
     public void modifyVehiclePrice(String vehicleId, double price) {
         for (Dealer dealer : dealerCatalog.values()) {
-            if (dealer.getVehicleCatalog().containsKey(vehicleId)) {
-                dealer.getVehicleCatalog().get(vehicleId).setPrice(price);
+            if (dealer.vehicleCatalog.containsKey(vehicleId)) {
+                dealer.vehicleCatalog.get(vehicleId).setPrice(price);
             }
         }
     }
 
     /**
      * Get total dealer count
+     *
      * @return int
      */
     public int amountOfAllDealers() {
@@ -157,44 +191,48 @@ public class DealerCatalog {
 
     /**
      * Get total vehicle count
+     *
      * @return int
      */
     public int amountOfAllVehicles() {
         return dealerCatalog.values().stream()
-                .mapToInt(d -> d.getVehicleCatalog().size())
+                .mapToInt(d -> d.vehicleCatalog.size())
                 .sum();
     }
 
     /**
      * Enable dealer acquisition by ID
+     *
      * @param id dealer id
      */
     public void enableDealerAcquisition(String id) {
         Dealer dealer = dealerCatalog.get(id);
         if (dealer != null) {
-            dealer.enableVehicleAcquisition(id);
+            dealer.enableVehicleAcquisition();
         }
     }
 
     /**
      * Disable dealer acquisition by ID
+     *
      * @param id dealer id
      */
     public void disableDealerAcquisition(String id) {
         Dealer dealer = dealerCatalog.get(id);
         if (dealer != null) {
-            dealer.disableVehicleAcquisition(id);
+            dealer.disableVehicleAcquisition();
         }
     }
 
     /**
      * Get all unique vehicle types in the system
+     *
      * @return ArrayList<String>
      */
     public ArrayList<String> getTypes() {
         Set<String> types = new HashSet<>();
         for (Dealer dealer : dealerCatalog.values()) {
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 types.add(vehicle.getType());
             }
         }
@@ -203,13 +241,14 @@ public class DealerCatalog {
 
     /**
      * Get all vehicles by a specified type
+     *
      * @param type String
      * @return ArrayList<Vehicle>
      */
     public ArrayList<Vehicle> getVehiclesByType(String type) {
         ArrayList<Vehicle> result = new ArrayList<>();
         for (Dealer dealer : dealerCatalog.values()) {
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 if (vehicle.getType().equalsIgnoreCase(type)) {
                     result.add(vehicle);
                 }
@@ -231,11 +270,12 @@ public class DealerCatalog {
 
     /**
      * Transfer Vehicles from one dealer to another
+     *
      * @param vehiclesToTransfer list of vehicles to transfer
-     * @param newDealerId The id of the dealer to transfer vehicles to
+     * @param newDealerId        The id of the dealer to transfer vehicles to
      */
-    public void transferInventory(ArrayList<Vehicle> vehiclesToTransfer, String newDealerId){
-        for(Vehicle vehicle : vehiclesToTransfer){
+    public void transferInventory(ArrayList<Vehicle> vehiclesToTransfer, String newDealerId) {
+        for (Vehicle vehicle : vehiclesToTransfer) {
             vehicle.setDealerId(newDealerId);
         }
 
@@ -247,5 +287,6 @@ public class DealerCatalog {
      */
     public void clear() {
         dealerCatalog.clear();
+        dealerList.clear(); // <-- ✅ Fix the leak!
     }
 }

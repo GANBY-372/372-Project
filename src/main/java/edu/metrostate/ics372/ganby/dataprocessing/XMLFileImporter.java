@@ -6,22 +6,15 @@ import edu.metrostate.ics372.ganby.dealer.DealerCatalog;
 import edu.metrostate.ics372.ganby.vehicle.Vehicle;
 import edu.metrostate.ics372.ganby.vehicle.VehicleBuilder;
 import javafx.stage.Stage;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 
 /**
  * Handles importing dealer and vehicle data from an XML file.
- * Uses FileSelector for user file selection or accepts a direct path.
+ * Supports file selection or direct file path loading.
  */
 public class XMLFileImporter {
 
@@ -37,12 +30,12 @@ public class XMLFileImporter {
             File selectedFile = FileSelector.chooseXmlOpenFile(primaryStage);
             if (selectedFile != null) {
                 loadDocumentFromFile(selectedFile);
-                System.out.println("Successfully parsed XML file: " + selectedFile.getAbsolutePath());
+                System.out.println("✅ Successfully parsed XML file: " + selectedFile.getAbsolutePath());
             } else {
-                System.out.println("File selection cancelled.");
+                System.out.println("⚠️ File selection cancelled.");
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error loading XML file: " + e.getMessage(), e);
+            throw new RuntimeException("❌ Error loading XML file: " + e.getMessage(), e);
         }
     }
 
@@ -56,28 +49,15 @@ public class XMLFileImporter {
             File file = new File(filePath);
             if (file.exists()) {
                 loadDocumentFromFile(file);
-                System.out.println("Successfully parsed XML file: " + filePath);
+                System.out.println("✅ Successfully parsed XML file: " + filePath);
             } else {
-                System.out.println("File not found: " + filePath);
+                System.out.println("❌ File not found: " + filePath);
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error loading XML file: " + e.getMessage(), e);
+            throw new RuntimeException("❌ Error loading XML file: " + e.getMessage(), e);
         }
     }
 
-
-    private void runXmlPathImport() {
-        try {
-            System.out.println("\n[3] XML import via file path:");
-            XMLFileImporter importer = new XMLFileImporter("src/main/resources/Imports/Dealer.xml");
-            Document doc = importer.getXmlDocument();
-            if (doc != null) {
-                importer.processXML(doc);
-            }
-        } catch (Exception e) {
-            System.err.println("XML (path) import failed: " + e.getMessage());
-        }
-    }
     /**
      * Loads the XML content from a file into xmlDocument.
      *
@@ -91,21 +71,31 @@ public class XMLFileImporter {
         this.xmlDocument.getDocumentElement().normalize();
     }
 
-    /**
-     * Returns the loaded XML document.
-     *
-     * @return the parsed Document instance
-     */
-    public Document getXmlDocument() {
-        return xmlDocument;
-    }
 
     /**
-     * Processes the loaded XML document and adds data to the DealerCatalog.
+     * Method to process XML documents and create the dealers and vehicles
+     * This method will be used in either of two ways:
+     *      1.  Loading the autosave file upon booting
+     *      2.  Loading any file imported during the runtime of the program
+     * Generally speaking, if a dealer's acquisition status is false, it should not accept any vehicles,
+     * but this doesn't apply to loading the autosave file because some dealers might have their status as false but
+     * still have vehicles.
+     * Therefore the persistence manager, when loading the autosave file, will call this method with true as the parameter,
+     * and the method will check whether the boolean passed is true or not. If true, it will call addVehicleFromAutosave()
+     * method in DealerCatalog, which adds vehicles to dealers without checking their acquisition statuses. However if the
+     * boolean is false then the normal addVehicle() method will be used which checks acquisition status.
      *
-     * @param xmlDocument the parsed XML document
+     * However if we don't want to require to pass in a true or false, so there is another method with the same name as
+     * this that has no parameters. If it has no parameters, we can assume that we are not loading from autosave file and
+     * we can then call this method and pass false as the value.
+     * @param ignoreAcquisitionCheck boolean to know whether to take into account acquisition status or not
      */
-    public void processXML(Document xmlDocument) {
+    public void processXML(boolean ignoreAcquisitionCheck) {
+        if (xmlDocument == null) {
+            System.err.println("❌ No XML document loaded to process.");
+            return;
+        }
+
         NodeList dealerList = xmlDocument.getElementsByTagName("Dealer");
         for (int i = 0; i < dealerList.getLength(); i++) {
             Node dealerNode = dealerList.item(i);
@@ -113,9 +103,7 @@ public class XMLFileImporter {
                 Element dealerElement = (Element) dealerNode;
 
                 Dealer dealer = DealerBuilder.buildDealerFromXML(dealerElement);
-                if (dealer != null) {
-                    DealerCatalog.getInstance().addDealer(dealer);
-                }
+                DealerCatalog.getInstance().addDealer(dealer);
 
                 NodeList vehicleList = dealerElement.getElementsByTagName("Vehicle");
                 for (int j = 0; j < vehicleList.getLength(); j++) {
@@ -128,11 +116,36 @@ public class XMLFileImporter {
                         );
 
                         if (vehicle != null) {
-                            DealerCatalog.getInstance().addVehicle(vehicle);
+                            if (ignoreAcquisitionCheck) {
+                                DealerCatalog.getInstance().addVehicleFromAutosave(vehicle);
+                            } else {
+                                DealerCatalog.getInstance().addVehicle(vehicle);
+                            }
                         }
                     }
                 }
             }
         }
+
+        System.out.println("✅ XML import finished successfully!");
+    }
+
+    /**
+     * Processes any loaded XML document other than the autosave file
+     */
+    public void processXML() {
+        //If processXML() method is called, that means we are not reading the autosave file
+        //So we will call the processXML(boolean ignoreAcquisitionCheck) method with false
+        processXML(false);
+    }
+
+
+    /**
+     * Returns the loaded XML document.
+     *
+     * @return the parsed Document instance
+     */
+    public Document getXmlDocument() {
+        return xmlDocument;
     }
 }

@@ -5,32 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/FileSelector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/FilesTestDriver.java" afterDir="false" />
+<<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/user/UserManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Auto_Save/dealer_catalog_autosave.json" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/Exports/selected_dealers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Exports/selected_dealers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DataIOHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DataIOHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileExporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/XMLFileExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/XMLFileExporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/XMLFileImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/XMLFileImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/Dealer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/Dealer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/PickupTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/PickupTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SUVTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SUVTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SedanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SedanTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SportsCarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/SportsCarTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/VehicleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/vehicle/VehicleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileExporter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileExporter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/Dealer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/Dealer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/DealerBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/DealerBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/DealerCatalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/DealerCatalog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerCatalogTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerCatalogTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.PickupTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.PickupTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SUVTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SUVTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SedanTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SedanTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SportsCarTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.SportsCarTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.VehicleTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.vehicle.VehicleTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.dealer.DealerCatalogTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.dealer.DealerCatalogTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.dealer.DealerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.dealer.DealerTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.PickupTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.PickupTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.VehicleTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.VehicleTest.txt" afterDir="false" />
+>>>>>>> 2c09b6a (Fixed JSONFileimporter and Exporter to account for dealername, dealeracquisitionstatus, and vehicle rent status. It was Abdi's work but he couldn't push it. Also the import and export cancelled messages work now and don't show when import and export are successfull.)
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="1" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="FxmlFile" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -46,7 +68,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/GANBY-372/372-Project.git&quot;,
-    &quot;accountId&quot;: &quot;08c2acc0-30c9-4064-8d7b-f92af452b5a9&quot;
+    &quot;accountId&quot;: &quot;12bc500f-7981-483b-bb37-7f71103fc8ba&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -62,31 +84,64 @@
     <option name="showLibraryContents" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.FXDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.FilesTestDriver.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TestEnv.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DealerCatalogTest.getDealerWithId.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DealerCatalogTest.getDealers.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SportsCarTest.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FX_372_Project [test].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Application.FXDriver.executor": "Run",
+    "Application.FilesTestDriver.executor": "Run",
+    "Application.TestEnv.executor": "Run",
+    "JUnit.All in FX_372_Project.executor": "Run",
+    "JUnit.DealerBuilderTest.executor": "Run",
+    "JUnit.DealerCatalogTest.executor": "Coverage",
+    "JUnit.DealerCatalogTest.getDealerWithId.executor": "Run",
+    "JUnit.DealerCatalogTest.getDealers.executor": "Run",
+    "JUnit.DealerTest.executor": "Coverage",
+    "JUnit.PickupTest.executor": "Coverage",
+    "JUnit.SportsCarTest.executor": "Run",
+    "JUnit.VehicleBuilderTest.executor": "Run",
+    "JUnit.VehicleTest.executor": "Run",
+    "JUnit.edu.metrostate.ics372.ganby.dealer in FX_372_Project.executor": "Coverage",
+    "Maven.FX_372_Project [clean].executor": "Run",
+    "Maven.FX_372_Project [compile].executor": "Run",
+    "Maven.FX_372_Project [test].executor": "Run",
+    "Maven.FX_372_Project [validate].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "Yahya",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/Resources" />
+      <recent name="$PROJECT_DIR$/src/main/Resources/FXAPP" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="edu.metrostate.ics372.ganby.user" />
+      <recent name="edu.metrostate.ics372.ganby.vehicle" />
+      <recent name="edu.metrostate.ics372.ganby.controllers" />
+      <recent name="edu.metrostate.ics372.ganby.dealer" />
+    </key>
+  </component>
+<<<<<<< HEAD
+  <component name="RunManager" selected="JUnit.All in FX_372_Project">
+=======
   <component name="RunManager" selected="Application.FXDriver">
     <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
@@ -101,20 +156,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestEnv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.TestEnv" />
+>>>>>>> 2c09b6a (Fixed JSONFileimporter and Exporter to account for dealername, dealeracquisitionstatus, and vehicle rent status. It was Abdi's work but he couldn't push it. Also the import and export cancelled messages work now and don't show when import and export are successfull.)
+    <configuration name="All in FX_372_Project" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.metrostate.ics372.ganby.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DealerCatalogTest.getDealerWithId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DealerCatalogTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
@@ -124,13 +175,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.dealer" />
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.dealer.DealerCatalogTest" />
-      <option name="METHOD_NAME" value="getDealerWithId" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DealerCatalogTest.getDealers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DealerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
@@ -139,14 +189,28 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.dealer" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.dealer.DealerCatalogTest" />
-      <option name="METHOD_NAME" value="getDealers" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.dealer.DealerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SportsCarTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FX_372_Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.metrostate.ics372.ganby.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.user" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.user.UserManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VehicleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
       <extension name="coverage">
         <pattern>
@@ -155,7 +219,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.metrostate.ics372.ganby.vehicle" />
-      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.SportsCarTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.vehicle.VehicleTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,18 +228,24 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.FXDriver" />
-        <item itemvalue="JUnit.SportsCarTest" />
-        <item itemvalue="JUnit.DealerCatalogTest.getDealers" />
-        <item itemvalue="JUnit.DealerCatalogTest.getDealerWithId" />
-        <item itemvalue="Application.TestEnv" />
+        <item itemvalue="JUnit.All in FX_372_Project" />
+        <item itemvalue="JUnit.UserManagerTest" />
+        <item itemvalue="JUnit.DealerCatalogTest" />
+        <item itemvalue="JUnit.DealerTest" />
+        <item itemvalue="JUnit.VehicleTest" />
+<<<<<<< HEAD
+=======
+        <item itemvalue="JUnit.VehicleBuilderTest" />
+        <item itemvalue="JUnit.PickupTest" />
+>>>>>>> 2c09b6a (Fixed JSONFileimporter and Exporter to account for dealername, dealeracquisitionstatus, and vehicle rent status. It was Abdi's work but he couldn't push it. Also the import and export cancelled messages work now and don't show when import and export are successfull.)
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.23654.189" />
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-IU-243.23654.189" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -194,6 +264,9 @@
       <workItem from="1743643231102" duration="1115000" />
       <workItem from="1743701820980" duration="1886000" />
       <workItem from="1744248207542" duration="948000" />
+      <workItem from="1745978548181" duration="1459000" />
+      <workItem from="1746032889602" duration="2692000" />
+      <workItem from="1746039314110" duration="4306000" />
     </task>
     <servers />
   </component>
@@ -204,19 +277,25 @@
     <MESSAGE value="Merged with main" />
     <option name="LAST_COMMIT_MESSAGE" value="Merged with main" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java</url>
-          <line>61</line>
-          <properties class="edu.metrostate.ics372.ganby.dealer.DealerCatalog" method="getDealerWithId">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$All_in_FX_372_Project.ic" NAME="All in FX_372_Project Coverage Results" MODIFIED="1746048228047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$PickupTest.ic" NAME="PickupTest Coverage Results" MODIFIED="1746045860703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.vehicle.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$VehicleTest.ic" NAME="VehicleTest Coverage Results" MODIFIED="1746047010596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.vehicle.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerBuilderTest.ic" NAME="DealerBuilderTest Coverage Results" MODIFIED="1746040895728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerTest.ic" NAME="DealerTest Coverage Results" MODIFIED="1746047516270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerCatalogTest.ic" NAME="DealerCatalogTest Coverage Results" MODIFIED="1746048184546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$edu_metrostate_ics372_ganby_dealer_in_FX_372_Project.ic" NAME="edu.metrostate.ics372.ganby.dealer in FX_372_Project Coverage Results" MODIFIED="1746038318896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
+    </SUITE>
   </component>
 </project>

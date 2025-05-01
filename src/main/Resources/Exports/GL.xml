@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Dealers>
+    <Dealer id="123">
+        <Name>GL</Name>
+        <Acquisition_Status>true</Acquisition_Status>
+        <Vehicle id="67291" type="SUV">
+            <Price unit="dollars">27500.0</Price>
+            <Make>Honda</Make>
+            <Model>CR-V</Model>
+            <is_rented_out>false</is_rented_out>
+        </Vehicle>
+        <Vehicle id="99234" type="Sedan">
+            <Price unit="dollars">45320.0</Price>
+            <Make>BMW</Make>
+            <Model>3 Series</Model>
+            <is_rented_out>false</is_rented_out>
+        </Vehicle>
+    </Dealer>
+</Dealers>

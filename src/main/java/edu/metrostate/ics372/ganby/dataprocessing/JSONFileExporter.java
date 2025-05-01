@@ -16,16 +16,20 @@ import java.util.List;
 
 public class JSONFileExporter {
 
-    public void exportDealers(Stage stage, List<Dealer> selectedDealers) {
+    public boolean exportDealers(Stage stage, List<Dealer> selectedDealers) {
         File file = FileSelector.chooseJsonSaveFile(stage);
-        if (file != null) {
-            try (FileWriter writer = new FileWriter(file)) {
-                JSONObject json = convertDealersToJSON(selectedDealers);
-                writer.write(prettyPrintJson(json.toJSONString()));
-                showSuccessAlert(file.getAbsolutePath());
-            } catch (IOException e) {
-                showErrorAlert(e.getMessage());
-            }
+        if (file == null) {
+            return false; // ❌ User cancelled
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            JSONObject json = convertDealersToJSON(selectedDealers);
+            writer.write(prettyPrintJson(json.toJSONString()));
+            showSuccessAlert(file.getAbsolutePath());
+            return true; // ✅ Success
+        } catch (IOException e) {
+            showErrorAlert(e.getMessage());
+            return false; // ❌ Failed to write
         }
     }
 
@@ -35,9 +39,12 @@ public class JSONFileExporter {
         JSONArray carInventoryJson = new JSONArray();
 
         for (Dealer dealer : dealers) {
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 JSONObject vehicleJson = new JSONObject();
                 vehicleJson.put("dealership_id", dealer.getId());
+                vehicleJson.put("dealer_name", dealer.getName()); // ✅ added dealer_name
+                vehicleJson.put("acquisition_status", dealer.isVehicleAcquisitionEnabled()); // ✅ added acquisition_status
+
                 vehicleJson.put("vehicle_type", vehicle.getType());
                 vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
                 vehicleJson.put("vehicle_model", vehicle.getModel());
@@ -57,6 +64,7 @@ public class JSONFileExporter {
         rootJson.put("car_inventory", carInventoryJson);
         return rootJson;
     }
+
 
     private static String prettyPrintJson(String json) {
         StringBuilder formatted = new StringBuilder();
@@ -128,23 +136,29 @@ public class JSONFileExporter {
         JSONArray carInventoryJson = new JSONArray();
 
         for (Dealer dealer : DealerCatalog.getInstance().getDealers()) {
-            for (Vehicle vehicle : dealer.getVehicleCatalog().values()) {
+            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 JSONObject vehicleJson = new JSONObject();
                 vehicleJson.put("dealership_id", dealer.getId());
+                vehicleJson.put("dealer_name", dealer.getName()); // ✅ added dealer_name
+                vehicleJson.put("acquisition_status", dealer.isVehicleAcquisitionEnabled()); // ✅ added acquisition_status
+
                 vehicleJson.put("vehicle_type", vehicle.getType());
                 vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
                 vehicleJson.put("vehicle_model", vehicle.getModel());
                 vehicleJson.put("vehicle_id", vehicle.getVehicleId());
                 vehicleJson.put("price", vehicle.getPrice());
+
                 ZoneId zoneId = ZoneId.of("America/Chicago");
                 long epochMillis = vehicle.getAcquisitionDate().atZone(zoneId).toInstant().toEpochMilli();
                 vehicleJson.put("acquisition_date", epochMillis);
-                vehicleJson.put("is_rented_out", vehicle.getIsRentedOut()); //added isRented
+                vehicleJson.put("is_rented_out", vehicle.getIsRentedOut());
 
                 carInventoryJson.add(vehicleJson);
             }
         }
+
         rootJson.put("car_inventory", carInventoryJson);
         return rootJson;
     }
+
 }

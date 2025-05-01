@@ -1,13 +1,19 @@
-package edu.metrostate.ics372.ganby.vehicle;
+package edu.metrostate.ics372.ganby.vehicle
 
-import java.time.LocalDateTime;
+import java.time.LocalDateTime
 
 /**
- * Represents a Sedan vehicle. A subclass of {@link Vehicle}.
+ * Represents a Sedan vehicle. A subclass of [Vehicle].
  * Sedans can be rented out and are treated as regular vehicles in the system.
  */
-public class Sedan extends Vehicle {
-    private final String type = "SEDAN";
+class Sedan : Vehicle {
+    override val type: String
+        /**
+         * Returns the vehicle type.
+         *
+         * @return a string indicating the type of this vehicle ("Sedan")
+         */
+        get() = "Sedan"
 
     /**
      * Constructs a Sedan with the specified parameters and explicit rent status.
@@ -21,10 +27,10 @@ public class Sedan extends Vehicle {
      * @param isRentedOut     whether the vehicle is currently rented out
      */
     //In the case rent status is specified
-    public Sedan(String id, String model, String manufacturer, double price, String dealerId,
-                 LocalDateTime acquisitionDate, Boolean isRentedOut) {
-        super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut);
-    }
+    constructor(
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        acquisitionDate: LocalDateTime, isRentedOut: Boolean
+    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut)
 
     /**
      * Constructs a Sedan with the specified parameters and default rent status (false).
@@ -36,20 +42,10 @@ public class Sedan extends Vehicle {
      * @param dealerId        the ID of the dealer owning this vehicle
      * @param acquisitionDate the date the vehicle was acquired
      */
-    public Sedan(String id, String model, String manufacturer, double price, String dealerId,
-                 LocalDateTime acquisitionDate) {
-        super(id, model, manufacturer, price, dealerId, acquisitionDate);
-    }
-
-    /**
-     * Returns the vehicle type.
-     *
-     * @return a string indicating the type of this vehicle ("Sedan")
-     */
-    @Override
-    public String getType() {
-        return "Sedan";
-    }
+    constructor(
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        acquisitionDate: LocalDateTime
+    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate)
 
     /**
      * Compares this Sedan to another object for equality.
@@ -58,14 +54,13 @@ public class Sedan extends Vehicle {
      * @param object the object to compare
      * @return true if the object is a Sedan with the same ID; false otherwise
      */
-    @Override
-    public boolean equals(Object object) {
-        if (object == this) return true;
-        if (object == null) return false;
-        if (object instanceof Sedan sedan) {
-            return this.id.get().equals(sedan.getVehicleId());
+    override fun equals(`object`: Any?): Boolean {
+        if (`object` === this) return true
+        if (`object` == null) return false
+        if (`object` is Sedan) {
+            return getVehicleId() == `object`.getVehicleId()
         }
-        return false;
+        return false
     }
 
     /**
@@ -73,8 +68,7 @@ public class Sedan extends Vehicle {
      *
      * @return a string containing the vehicle type and details
      */
-    @Override
-    public String toString() {
-        return getType() + " " + super.toString();
+    override fun toString(): String {
+        return type + " " + super.toString()
     }
 }

@@ -1,15 +1,21 @@
-package edu.metrostate.ics372.ganby.vehicle;
+package edu.metrostate.ics372.ganby.vehicle
 
-import java.time.LocalDateTime;
+import java.time.LocalDateTime
 
 /**
  * Represents an SUV vehicle in the system.
- * Extends the {@link Vehicle} class with SUV-specific identification.
+ * Extends the [Vehicle] class with SUV-specific identification.
  */
-public class SUV extends Vehicle {
-  private final String type = "SUV";
-  
-   /**
+class SUV : Vehicle {
+    override val type: String
+        /**
+         * Returns the type of this vehicle.
+         *
+         * @return "SUV"
+         */
+        get() = "SUV"
+
+    /**
      * Constructs an SUV with all attributes, including rent status.
      *
      * @param id              the unique vehicle ID
@@ -21,10 +27,10 @@ public class SUV extends Vehicle {
      * @param isRentedOut     whether the vehicle is currently rented
      */
     //In the case rent status is specified
-    public SUV(String id, String model, String manufacturer, double price, String dealerId,
-               LocalDateTime acquisitionDate, Boolean isRentedOut) {
-        super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut);
-    }
+    constructor(
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        acquisitionDate: LocalDateTime, isRentedOut: Boolean
+    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate, isRentedOut)
 
     /**
      * Constructs an SUV with a default rent status of false.
@@ -36,20 +42,10 @@ public class SUV extends Vehicle {
      * @param dealerId        the ID of the dealer owning this vehicle
      * @param acquisitionDate the date the vehicle was acquired
      */
-    public SUV(String id, String model, String manufacturer, double price, String dealerId,
-               LocalDateTime acquisitionDate) {
-        super(id, model, manufacturer, price, dealerId, acquisitionDate);
-    }
-
-    /**
-     * Returns the type of this vehicle.
-     *
-     * @return "SUV"
-     */
-    @Override
-    public String getType() {
-        return "SUV";
-    }
+    constructor(
+        id: String, model: String, manufacturer: String, price: Double, dealerId: String,
+        acquisitionDate: LocalDateTime
+    ) : super(id, model, manufacturer, price, dealerId, acquisitionDate)
 
     /**
      * Determines if another object is equal to this SUV.
@@ -58,13 +54,12 @@ public class SUV extends Vehicle {
      * @param object the object to compare
      * @return true if the object is an SUV with the same ID, false otherwise
      */
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+    override fun equals(`object`: Any?): Boolean {
+        if (this === `object`) return true
+        if (`object` == null || javaClass != `object`.javaClass) return false
 
-        SUV suv = (SUV) object;
-        return this.id.get().equals(suv.getVehicleId());
+        val suv = `object` as SUV
+        return getVehicleId() == suv.getVehicleId()
     }
 
     /**
@@ -72,8 +67,7 @@ public class SUV extends Vehicle {
      *
      * @return a formatted string with vehicle type and core details
      */
-    @Override
-    public String toString() {
-        return getType() + " " + super.toString();
+    override fun toString(): String {
+        return type + " " + super.toString()
     }
 }
