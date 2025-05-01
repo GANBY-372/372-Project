@@ -17,25 +17,28 @@ This Java-based Vehicle Tracking System has been upgraded to include new dealer 
 
 The software shall:
 
-1. Save an instance of the running program after quitting.
-2. Load the last saved instance from the resources folder during boot (if it exists).
-3. Track vehicle status as they are loaned out and returned.
-4. Prevent SportsCars from being rented (rent status remains false).
-5. Show an alert if a user attempts to set a SportsCar’s rent status to true.
-6. Allow a dealer to transfer inventory by selecting one or more vehicles and a destination dealer.
-7. Accept and import both XML and JSON files as valid data formats.
-8. Allow the user to choose between XML or JSON for importing data.
-9. Export selected dealer vehicle inventories to a file.
-10. Let users choose XML or JSON as the export format.
-11. Require dealerships to have a name when imported.
-12. Assign default names to any imported dealerships without a name.
-13. Enable editing of dealer names through the GUI.
-14. Allow removal of selected vehicle(s) from the dealership.
-15. Allow removal of selected dealer(s) from the catalog.
-16. Enable removal of all vehicles associated with a dealer.
-17. Allow specifying a different dealer to transfer vehicles before deleting a dealership.
-18. Enable users to modify the price of a given vehicle.
-19. Include use of the Kotlin programming language.
+1. Include use of the Kotlin programming language.
+2. Save Dealer name when exporting data
+3. Save Dealer acquisition status when exporting data
+4. Save Vehicle rent status when exporting data
+5. Save an instance of the running program after quitting program
+6. Load last saved instance if it exists in the resource folder during boot
+7. Track vehicle status as they are loaned out and returned.
+8. Have SportsCars rent status remain False
+9. Show Alert should user try to set sportscar rent status to true
+10. Allow dealer to transfer dealership inventory in the system by selecting one or multiple vehicles and the dealer to be transferred to. 
+11. Accept and successfully import both XML and JSON files as data format.
+12. Allow user to select XML or JSON files as input
+13. Export vehicle inventory of dealer(s) to a file
+14. Allow users to select XML or JSON format when importing and exporting.
+15. Require dealerships to have a name when imported
+16. Modify any current dealerships with no names by adding default names
+17. Allow user to edit dealer name
+18. Allow user to remove a vehicle(s) from the dealership
+19. Allow user to remove dealer(s) from catalog
+20. Allow user to remove all vehicles with the dealer
+21. Allow user to specify another dealer to transfer dealer’s vehicle inventory before removing it. 
+22. Allow user to modify given vehicle’s price
 
 ---
 
