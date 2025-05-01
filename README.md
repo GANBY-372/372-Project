@@ -35,6 +35,7 @@ The software shall:
 16. Enable removal of all vehicles associated with a dealer.
 17. Allow specifying a different dealer to transfer vehicles before deleting a dealership.
 18. Enable users to modify the price of a given vehicle.
+19. Include use of the Kotlin programming language.
 
 ---
 
