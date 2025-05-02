@@ -254,9 +254,6 @@ public class FXController {
     private void updateDealerDetailPane(Dealer dealer) {
         if (dealerIdTextField != null) dealerIdTextField.setText(dealer.getId());
         if (dealerNameTextField != null) dealerNameTextField.setText(dealer.getName());
-        //dealerIdTextField.setText(dealer.getId());
-        //dealerNameTextField.setText(dealer.getName());
-        toggleAcquisitionButton.setText("Change Acquisition Status");
     }
 
     /**
@@ -457,7 +454,17 @@ public class FXController {
      */
     @FXML
     public void toggleSelectAllVehicles(ActionEvent actionEvent) {
-        VehicleActionHelper.toggleSelectAllVehicles(vehicleTable);
+        Button sourceButton = (Button) actionEvent.getSource();
+        boolean allSelected = vehicleTable.getItems().stream().allMatch(Vehicle::isSelected);
+
+        for (Vehicle vehicle : vehicleTable.getItems()) {
+            vehicle.setSelected(!allSelected);
+        }
+
+        // Toggle button text accordingly
+        sourceButton.setText(allSelected ? "Select All Vehicles" : "Unselect All Vehicles");
+
+        vehicleTable.refresh();
     }
 
     //ADDING DEALER AND VEHICLE AND TRANSFERRING VEHICLES
