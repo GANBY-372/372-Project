@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
+      <change afterPath="$PROJECT_DIR$/Documentation/Use_Cases/UserLoginUseCase.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/FXController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/FXController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +44,7 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2uvXVK9a7ZKcgjq0D2byemZAo8s" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -82,7 +81,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Yahya",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/abo_dawood/Phase3_372",
     "node.js.detected.package.eslint": "true",
@@ -240,24 +239,25 @@
     <option name="LAST_COMMIT_MESSAGE" value="Merged with main" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$All_in_FX_372_Project.ic" NAME="All in FX_372_Project Coverage Results" MODIFIED="1746048228047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$PickupTest.ic" NAME="PickupTest Coverage Results" MODIFIED="1746045860703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>edu.metrostate.ics372.ganby.vehicle.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$VehicleTest.ic" NAME="VehicleTest Coverage Results" MODIFIED="1746047010596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>edu.metrostate.ics372.ganby.vehicle.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerBuilderTest.ic" NAME="DealerBuilderTest Coverage Results" MODIFIED="1746040895728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$All_in_FX_372_Project.ic" NAME="All in FX_372_Project Coverage Results" MODIFIED="1746048228047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Ganby_kotlin$All_in_FX_372_Project.ic" NAME="All in FX_372_Project Coverage Results" MODIFIED="1746154178566" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerTest.ic" NAME="DealerTest Coverage Results" MODIFIED="1746047516270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$edu_metrostate_ics372_ganby_dealer_in_FX_372_Project.ic" NAME="edu.metrostate.ics372.ganby.dealer in FX_372_Project Coverage Results" MODIFIED="1746038318896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$DealerCatalogTest.ic" NAME="DealerCatalogTest Coverage Results" MODIFIED="1746048184546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$edu_metrostate_ics372_ganby_dealer_in_FX_372_Project.ic" NAME="edu.metrostate.ics372.ganby.dealer in FX_372_Project Coverage Results" MODIFIED="1746038318896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>edu.metrostate.ics372.ganby.dealer.*</FILTER>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$VehicleTest.ic" NAME="VehicleTest Coverage Results" MODIFIED="1746047010596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.vehicle.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ganby_Kotlin_Final$PickupTest.ic" NAME="PickupTest Coverage Results" MODIFIED="1746045860703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>edu.metrostate.ics372.ganby.vehicle.*</FILTER>
     </SUITE>
   </component>
 </project>
