@@ -39,6 +39,8 @@ The software shall:
 20. Allow user to remove all vehicles with the dealer
 21. Allow user to specify another dealer to transfer dealer’s vehicle inventory before removing it. 
 22. Allow user to modify given vehicle’s price
+23. Allow user to create a username and password when first run
+24. Allow user to login with username and password
 
 ---
 
@@ -87,6 +89,11 @@ The software shall:
 ### 6. **Unit Testing**
 - Includes JUnit tests for core logic.
 - Focused coverage on vehicle creation, rent toggling, transfers, and catalog operations.
+
+### 7. **User Authentication**
+- User authentication added for secure access.
+- Username and password are required on first run.
+- Credentials are stored locally and checked on subsequent runs.
 
 ---
 
