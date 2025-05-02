@@ -139,7 +139,7 @@ class DealerCatalogTest {
     @Test
     void updateDealer_shouldChangeName() {
         Dealer updated = new Dealer("001", "New Toyota Name");
-        catalog.updateDealer(updated);
+        catalog.updateDealerName(updated);
         assertEquals("New Toyota Name", catalog.getDealerWithId("001").getName());
     }
 

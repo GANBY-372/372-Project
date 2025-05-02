@@ -78,6 +78,16 @@ public class FXController {
     private final ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
     public Button editDealerNameButton;
 
+    /**
+     * Initializes the JavaFX GUI after the FXML components are loaded.
+     *
+     * This method sets up:
+     * - Editable behavior for dealer and vehicle tables.
+     * - Column bindings and formatting.
+     * - Checkbox listeners for dealer selection to update the UI dynamically.
+     * - Suppression of row selection visuals (blue highlights).
+     * - Data loading from the DealerCatalog into the dealer table.
+     */
     @FXML
     public void initialize() {
         // Setup selection and editing behavior
@@ -303,6 +313,14 @@ public class FXController {
         vehicleTable.setItems(vehicleObservableList);
     }
 
+    /**
+     * Filters and displays only SUV vehicles from the currently selected dealers.
+     *
+     * This method uses the checkboxes in the dealer table to determine the selection.
+     * It updates the vehicle table to show only SUVs from the selected dealers.
+     *
+     * @param e the ActionEvent triggered by clicking the "SUV" filter button
+     */
     @FXML
     public void filterBySUV(ActionEvent e) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
@@ -312,6 +330,15 @@ public class FXController {
         vehicleTable.setItems(vehicleObservableList);
     }
 
+
+    /**
+     * Filters and displays only vehicles that are currently rented out from the selected dealers.
+     *
+     * This method relies on the checkbox selection in the dealer table to determine the scope.
+     * It updates the vehicle table to show only rented-out vehicles.
+     *
+     * @param e the ActionEvent triggered by clicking the "Rented Out" filter button
+     */
     @FXML
     public void filterByRentedOut(ActionEvent e) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()

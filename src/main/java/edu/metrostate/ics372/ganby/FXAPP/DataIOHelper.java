@@ -127,6 +127,18 @@ public class DataIOHelper {
         }
     }
 
+
+
+    /**
+     * Exports the data of selected dealers (and their vehicles) to an XML file.
+     * This method filters the dealer table for selected dealers, prompts the user
+     * to choose a save location using a file dialog, and exports the data to XML format
+     * using {@link XMLFileExporter}. If no dealers are selected, a warning is shown.
+     * If the export is cancelled by the user, a success alert is shown with a cancellation message.
+     *
+     * @param stage       the JavaFX stage used for displaying the file chooser dialog
+     * @param dealerTable the TableView containing dealer data and selection checkboxes
+     */
     public static void exportXML(Stage stage, TableView<Dealer> dealerTable) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
                 .filter(Dealer::isSelected)

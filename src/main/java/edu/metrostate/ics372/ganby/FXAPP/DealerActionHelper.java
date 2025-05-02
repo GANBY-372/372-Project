@@ -29,9 +29,17 @@ import java.util.Optional;
 public class DealerActionHelper {
 
     /**
-     * Toggles all checkboxes in the dealer table.
-     * TODO: Add comments to code that give the basics of what the code is doing, @param all of them in javadocs
-     * @param dealerTable TableView containing dealers
+     * Toggles checkbox selection of all dealers in the table.
+     * Updates associated UI elements and vehicle list.
+     *
+     * @param dealerTable TableView containing dealer rows
+     * @param vehicleTable TableView for displaying vehicles
+     * @param dealerList list of all dealers
+     * @param vehicleList observable list for vehicle updates
+     * @param dealerIdField TextField showing selected dealer ID
+     * @param dealerNameField TextField showing selected dealer name
+     * @param selectAllDealersButton the toggle button itself
+     * @param addVehicleButton button that adds a vehicle (disabled when all dealers are selected)
      */
     public static void toggleSelectAllDealers(
             TableView<Dealer> dealerTable,
@@ -67,13 +75,12 @@ public class DealerActionHelper {
         vehicleTable.setItems(vehicleList);
     }
 
-
     /**
-     * Opens a modal wizard to create and add a new dealer.
-     * TODO: Add comments to code that give the basics of what the code is doing
+     * Opens a modal wizard for creating and adding a new dealer.
+     * Ensures the dealer ID is unique and inputs are valid before adding.
      *
-     * @param dealerObservableList list to update after adding
-     * @param ownerStage the parent window for modality
+     * @param dealerObservableList the observable list to update with the new dealer
+     * @param ownerStage the parent stage for modal blocking
      */
     public static void openAddDealerWizard(ObservableList<Dealer> dealerObservableList, Stage ownerStage) {
         Stage wizardStage = new Stage();
@@ -81,6 +88,7 @@ public class DealerActionHelper {
         wizardStage.initOwner(ownerStage);
         wizardStage.setTitle("Add New Dealer");
 
+        // Form inputs
         Label idLabel = new Label("Dealer ID:");
         TextField idField = new TextField();
 
@@ -88,12 +96,13 @@ public class DealerActionHelper {
         TextField nameField = new TextField();
 
         Label acquisitionLabel = new Label("Acquisition Enabled:");
-        CheckBox acquisitionCheckBox = new CheckBox(); // defaults to true
+        CheckBox acquisitionCheckBox = new CheckBox();
         acquisitionCheckBox.setSelected(true);
 
         Button saveButton = new Button("Save");
         Button cancelButton = new Button("Cancel");
 
+        // Layout
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
         gridPane.setHgap(10);
@@ -108,6 +117,7 @@ public class DealerActionHelper {
         Scene scene = new Scene(layout, 400, 220);
         wizardStage.setScene(scene);
 
+        // Save logic
         saveButton.setOnAction(event -> {
             try {
                 String dealerId = idField.getText().trim();
@@ -139,7 +149,13 @@ public class DealerActionHelper {
         wizardStage.showAndWait();
     }
 
-
+    /**
+     * Prompts user to rename a selected dealer.
+     * Validates that exactly one dealer is selected and updates the name.
+     *
+     * @param dealerTable the dealer TableView to query selected dealer from
+     * @param dealerNameField the UI text field to update with the new name
+     */
     public static void renameDealer(TableView<Dealer> dealerTable, TextField dealerNameField) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
                 .filter(Dealer::isSelected)
@@ -175,10 +191,10 @@ public class DealerActionHelper {
     }
 
     /**
-     * Sets acquisition status (enabled or disabled) for selected dealers.
+     * Sets acquisition status for all selected dealers.
      *
-     * @param dealerTable TableView of dealers
-     * @param enable true to enable acquisition, false to disable
+     * @param dealerTable TableView containing dealers
+     * @param enable true to enable acquisition, false to disable it
      */
     public static void setAcquisitionStatus(TableView<Dealer> dealerTable, boolean enable) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
@@ -202,13 +218,13 @@ public class DealerActionHelper {
     }
 
     /**
-     * Deletes selected dealers and handles optional vehicle transfer.
-     * TODO: Add comments to code that give the basics of what the code is doing
+     * Deletes selected dealers. If a dealer has vehicles, user can delete or transfer them.
      *
-     * @param dealerTable TableView of dealers
-     * @param dealerObservableList Dealer observable list
-     * @param vehicleObservableList Vehicle observable list
-     * @param vehicleTable Vehicle TableView
+     * @param selectedDealers list of dealers selected for deletion
+     * @param dealerObservableList the observable dealer list (UI)
+     * @param vehicleObservableList the observable vehicle list (UI)
+     * @param dealerTable the dealer TableView
+     * @param vehicleTable the vehicle TableView
      */
     public static void deleteDealers(List<Dealer> selectedDealers,
                                      ObservableList<Dealer> dealerObservableList,
@@ -221,7 +237,7 @@ public class DealerActionHelper {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            AlertHelper.showWarning( "No Dealers Selected", "Please select dealers to delete.");
+            AlertHelper.showWarning("No Dealers Selected", "Please select dealers to delete.");
             return;
         }
 
@@ -277,8 +293,11 @@ public class DealerActionHelper {
     }
 
     /**
-     * Finalizes the deletion of a dealer from catalog and UI.
-     * TODO: finish javadocs, @ param all of them
+     * Finalizes the deletion of a dealer from catalog and observable lists.
+     *
+     * @param dealer the dealer to remove
+     * @param dealerObservableList observable list of dealers (UI)
+     * @param vehicleObservableList observable list of vehicles (UI)
      */
     private static void finalizeDeletion(Dealer dealer,
                                          ObservableList<Dealer> dealerObservableList,
@@ -288,8 +307,7 @@ public class DealerActionHelper {
         DealerCatalog.getInstance().getDealerCatalog().remove(dealer.getId());
         dealerObservableList.remove(dealer);
 
-        // Clear vehicles if they belonged to the deleted dealer
+        // Clear vehicle list from UI
         vehicleObservableList.clear();
     }
-
 }

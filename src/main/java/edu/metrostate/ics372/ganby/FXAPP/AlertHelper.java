@@ -12,26 +12,47 @@ import java.util.Optional;
  */
 public class AlertHelper {
 
+
+    /**
+     * Displays an informational success alert with the given title and message.
+     *
+     * @param title   the title of the alert window
+     * @param message the message to show (or default if null/empty)
+     */
     public static void showSuccess(String title, String message) {
         showAlert(Alert.AlertType.INFORMATION, title, message);
     }
 
+
+    /**
+     * Displays an error alert with the given title and message.
+     *
+     * @param title   the title of the alert window
+     * @param message the message to show (or default if null/empty)
+     */
     public static void showError(String title, String message) {
         showAlert(Alert.AlertType.ERROR, title, message);
     }
 
+
+    /**
+     * Displays a warning alert with the given title and message.
+     *
+     * @param title   the title of the alert window
+     * @param message the message to show (or default if null/empty)
+     */
     public static void showWarning(String title, String message) {
         showAlert(Alert.AlertType.WARNING, title, message);
     }
 
     /**
-     * Shows a confirmation dialog with custom button options.
+     * Displays a confirmation dialog with custom buttons and returns the user's choice.
      *
      * @param title   the dialog title
-     * @param header  the header text
-     * @param content the message content
-     * @param buttons the buttons to display
-     * @return the button the user clicked
+     * @param header  the header text (shown above the content)
+     * @param content the body content text
+     * @param buttons the custom buttons to show (e.g., YES, NO, CANCEL)
+     * @return an Optional containing the ButtonType the user clicked
      */
     public static Optional<ButtonType> showConfirmation(String title, String header, String content, ButtonType... buttons) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -42,6 +63,15 @@ public class AlertHelper {
         return alert.showAndWait();
     }
 
+
+    /**
+     * Displays an alert of the specified type with a title and message.
+     * If not on the JavaFX Application Thread, the alert is run on the UI thread.
+     *
+     * @param type    the AlertType (e.g., INFORMATION, ERROR)
+     * @param title   the title of the alert window
+     * @param message the message to display (defaults if null or empty)
+     */
     private static void showAlert(Alert.AlertType type, String title, String message) {
         // Ensure we are on JavaFX thread
         if (Platform.isFxApplicationThread()) {

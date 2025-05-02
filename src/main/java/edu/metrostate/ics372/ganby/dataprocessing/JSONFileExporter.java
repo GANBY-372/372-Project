@@ -14,26 +14,42 @@ import java.io.IOException;
 import java.time.ZoneId;
 import java.util.List;
 
+/**
+ * Utility class for exporting dealer and vehicle data to a JSON file.
+ * Supports exporting selected dealers interactively and saving the entire catalog programmatically.
+ */
 public class JSONFileExporter {
 
+    /**
+     * Launches a FileChooser dialog to save a JSON export of selected dealers and their vehicles.
+     *
+     * @param stage           the parent JavaFX stage
+     * @param selectedDealers the dealers selected for export
+     * @return true if export was successful, false otherwise
+     */
     public boolean exportDealers(Stage stage, List<Dealer> selectedDealers) {
         File file = FileSelector.chooseJsonSaveFile(stage);
         if (file == null) {
-            return false; // ❌ User cancelled
+            return false; // User cancelled
         }
 
         try (FileWriter writer = new FileWriter(file)) {
             JSONObject json = convertDealersToJSON(selectedDealers);
             writer.write(prettyPrintJson(json.toJSONString()));
             showSuccessAlert(file.getAbsolutePath());
-            return true; // ✅ Success
+            return true;
         } catch (IOException e) {
             showErrorAlert(e.getMessage());
-            return false; // ❌ Failed to write
+            return false;
         }
     }
 
-
+    /**
+     * Converts a list of dealers and their vehicle inventories into a JSON object.
+     *
+     * @param dealers the list of dealers to include in the JSON
+     * @return a JSONObject representing the serialized data
+     */
     private JSONObject convertDealersToJSON(List<Dealer> dealers) {
         JSONObject rootJson = new JSONObject();
         JSONArray carInventoryJson = new JSONArray();
@@ -42,9 +58,8 @@ public class JSONFileExporter {
             for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
                 JSONObject vehicleJson = new JSONObject();
                 vehicleJson.put("dealership_id", dealer.getId());
-                vehicleJson.put("dealer_name", dealer.getName()); // ✅ added dealer_name
-                vehicleJson.put("acquisition_status", dealer.isVehicleAcquisitionEnabled()); // ✅ added acquisition_status
-
+                vehicleJson.put("dealer_name", dealer.getName());
+                vehicleJson.put("acquisition_status", dealer.isVehicleAcquisitionEnabled());
                 vehicleJson.put("vehicle_type", vehicle.getType());
                 vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
                 vehicleJson.put("vehicle_model", vehicle.getModel());
@@ -54,7 +69,8 @@ public class JSONFileExporter {
 
                 long epochMillis = vehicle.getAcquisitionDate()
                         .atZone(ZoneId.systemDefault())
-                        .toInstant().toEpochMilli();
+                        .toInstant()
+                        .toEpochMilli();
                 vehicleJson.put("acquisition_date", epochMillis);
 
                 carInventoryJson.add(vehicleJson);
@@ -66,6 +82,12 @@ public class JSONFileExporter {
     }
 
 
+    /**
+     * Pretty-prints raw JSON string with indentation and spacing.
+     *
+     * @param json the compact JSON string
+     * @return formatted JSON string for readability
+     */
     private static String prettyPrintJson(String json) {
         StringBuilder formatted = new StringBuilder();
         int indent = 0;
@@ -97,6 +119,11 @@ public class JSONFileExporter {
         return formatted.toString();
     }
 
+    /**
+     * Displays a success alert dialog with the export path.
+     *
+     * @param path the file path where export was saved
+     */
     private void showSuccessAlert(String path) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Export Successful");
@@ -105,6 +132,11 @@ public class JSONFileExporter {
         alert.showAndWait();
     }
 
+    /**
+     * Displays an error alert dialog with the provided message.
+     *
+     * @param message the error message to show
+     */
     private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Export Failed");
@@ -112,53 +144,4 @@ public class JSONFileExporter {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    public static void saveStateToFile(String filePath) {
-        try {
-            File file = new File(filePath);
-            File parentDir = file.getParentFile();
-            if (parentDir != null && !parentDir.exists()) {
-                parentDir.mkdirs();
-            }
-
-            try (FileWriter writer = new FileWriter(file)) {
-                JSONObject fullCatalogJson = convertDealerCatalogToJSON();
-                writer.write(prettyPrintJson(fullCatalogJson.toJSONString()));
-                System.out.println("Dealer catalog successfully saved to " + filePath);
-            }
-        } catch (IOException e) {
-            System.out.println("Error saving dealer catalog: " + filePath + " (" + e.getMessage() + ")");
-        }
-    }
-
-    public static JSONObject convertDealerCatalogToJSON() {
-        JSONObject rootJson = new JSONObject();
-        JSONArray carInventoryJson = new JSONArray();
-
-        for (Dealer dealer : DealerCatalog.getInstance().getDealers()) {
-            for (Vehicle vehicle : dealer.vehicleCatalog.values()) {
-                JSONObject vehicleJson = new JSONObject();
-                vehicleJson.put("dealership_id", dealer.getId());
-                vehicleJson.put("dealer_name", dealer.getName()); // ✅ added dealer_name
-                vehicleJson.put("acquisition_status", dealer.isVehicleAcquisitionEnabled()); // ✅ added acquisition_status
-
-                vehicleJson.put("vehicle_type", vehicle.getType());
-                vehicleJson.put("vehicle_manufacturer", vehicle.getManufacturer());
-                vehicleJson.put("vehicle_model", vehicle.getModel());
-                vehicleJson.put("vehicle_id", vehicle.getVehicleId());
-                vehicleJson.put("price", vehicle.getPrice());
-
-                ZoneId zoneId = ZoneId.of("America/Chicago");
-                long epochMillis = vehicle.getAcquisitionDate().atZone(zoneId).toInstant().toEpochMilli();
-                vehicleJson.put("acquisition_date", epochMillis);
-                vehicleJson.put("is_rented_out", vehicle.getIsRentedOut());
-
-                carInventoryJson.add(vehicleJson);
-            }
-        }
-
-        rootJson.put("car_inventory", carInventoryJson);
-        return rootJson;
-    }
-
 }
