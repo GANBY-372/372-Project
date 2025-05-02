@@ -139,7 +139,7 @@ class DealerCatalogTest {
     @Test
     void updateDealer_shouldChangeName() {
         Dealer updated = new Dealer("001", "New Toyota Name");
-        catalog.updateDealer(updated);
+        catalog.updateDealerName(updated);
         assertEquals("New Toyota Name", catalog.getDealerWithId("001").getName());
     }
 
@@ -176,7 +176,7 @@ class DealerCatalogTest {
         catalog.addVehicle(v1);
         catalog.addVehicle(v1); // duplicate
 
-        freshDealer.disableVehicleAcquisition("001");
+        freshDealer.disableVehicleAcquisition();
         catalog.addVehicle(v2); // should be ignored
 
         assertEquals(1, catalog.getDealerWithId("001").vehicleCatalog.size());

@@ -39,14 +39,14 @@ public class DataIOHelper {
             // Check if the process was cancelled
             boolean isCancelled = !importer.processJSON();  // Assuming processJSON() returns false if canceled
             if (isCancelled) {
-                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Cancelled", "JSON import was canceled.");
+                AlertHelper.showSuccess( "Import Cancelled", "JSON import was canceled.");
                 return;
             }
 
             // If not cancelled, proceed with the import
             dealerList.setAll(DealerCatalog.getInstance().getDealers());
             dealerTable.setItems(dealerList);
-            FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "JSON file successfully imported!");
+            AlertHelper.showSuccess("Import Successful", "JSON file successfully imported!");
         } catch (Exception e) {
             // Log the error message
             LOGGER.severe("Error importing JSON: " + e.getMessage());
@@ -55,7 +55,7 @@ public class DataIOHelper {
             LOGGER.log(java.util.logging.Level.SEVERE, "Error Details", e);
 
             // Show the alert with the error message
-            FXController.showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing JSON:\n" + e.getMessage());
+            AlertHelper.showError( "Import Failed", "Error importing JSON:\n" + e.getMessage());
         }
     }
 
@@ -79,7 +79,7 @@ public class DataIOHelper {
 
             if (doc == null) {
                 // User cancelled the file selection, show cancellation message
-                FXController.showAlert(Alert.AlertType.INFORMATION, "Import Cancelled", "XML import was cancelled.");
+                AlertHelper.showSuccess("Import Cancelled", "XML import was cancelled.");
                 return;
             }
 
@@ -89,7 +89,7 @@ public class DataIOHelper {
             dealerTable.setItems(dealerList);
             vehicleList.clear();
             vehicleTable.setItems(vehicleList);
-            FXController.showAlert(Alert.AlertType.INFORMATION, "Import Successful", "XML file successfully imported!");
+            AlertHelper.showSuccess("Import Successful", "XML file successfully imported!");
         } catch (Exception e) {
             // Log the error message
             LOGGER.severe("Error importing XML: " + e.getMessage());
@@ -98,7 +98,7 @@ public class DataIOHelper {
             LOGGER.log(java.util.logging.Level.SEVERE, "Error Details", e);
 
             // Show the alert with the error message
-            FXController.showAlert(Alert.AlertType.ERROR, "Import Failed", "Error importing XML:\n" + e.getMessage());
+            AlertHelper.showError( "Import Failed", "Error importing XML:\n" + e.getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ public class DataIOHelper {
                 .collect(Collectors.toList());
 
         if (selectedDealers.isEmpty()) {
-            FXController.showAlert(Alert.AlertType.WARNING, "No Dealers Selected", "Please select dealer(s) to export.");
+            AlertHelper.showWarning("No Dealers Selected", "Please select dealer(s) to export.");
             return;
         }
 
@@ -123,17 +123,29 @@ public class DataIOHelper {
         boolean exportSuccessful = jsonExporter.exportDealers(stage, selectedDealers);
 
         if (!exportSuccessful) {
-            FXController.showAlert(Alert.AlertType.INFORMATION, "Export Cancelled", "JSON export was cancelled.");
+            AlertHelper.showSuccess( "Export Cancelled", "JSON export was cancelled.");
         }
     }
 
+
+
+    /**
+     * Exports the data of selected dealers (and their vehicles) to an XML file.
+     * This method filters the dealer table for selected dealers, prompts the user
+     * to choose a save location using a file dialog, and exports the data to XML format
+     * using {@link XMLFileExporter}. If no dealers are selected, a warning is shown.
+     * If the export is cancelled by the user, a success alert is shown with a cancellation message.
+     *
+     * @param stage       the JavaFX stage used for displaying the file chooser dialog
+     * @param dealerTable the TableView containing dealer data and selection checkboxes
+     */
     public static void exportXML(Stage stage, TableView<Dealer> dealerTable) {
         List<Dealer> selectedDealers = dealerTable.getItems().stream()
                 .filter(Dealer::isSelected)
                 .collect(Collectors.toList());
 
         if (selectedDealers.isEmpty()) {
-            FXController.showAlert(Alert.AlertType.WARNING, "No Dealers Selected", "Please select dealer(s) to export.");
+            AlertHelper.showWarning("No Dealers Selected", "Please select dealer(s) to export.");
             return;
         }
 
@@ -141,7 +153,7 @@ public class DataIOHelper {
         boolean exportSuccessful = xmlExporter.exportDealers(stage, selectedDealers);
 
         if (!exportSuccessful) {
-            FXController.showAlert(Alert.AlertType.INFORMATION, "Export Cancelled", "XML export was cancelled.");
+            AlertHelper.showSuccess("Export Cancelled", "XML export was cancelled.");
         }
     }
 }

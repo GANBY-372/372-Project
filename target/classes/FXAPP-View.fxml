@@ -55,6 +55,13 @@
             </columns>
         </TableView>
 
+        <HBox spacing="10" alignment="CENTER">
+            <Label text="Dealer ID:" />
+            <TextField fx:id="dealerIdTextField" promptText="Dealer ID" editable="false" />
+            <Label text="Dealer Name:" />
+            <TextField fx:id="dealerNameTextField" promptText="Dealer Name" editable="false" />
+        </HBox>
+
         <!-- Vehicle Table Label -->
         <Label text="Vehicle Table" style="-fx-font-size: 16px; -fx-font-weight: bold;" alignment="CENTER" />
 

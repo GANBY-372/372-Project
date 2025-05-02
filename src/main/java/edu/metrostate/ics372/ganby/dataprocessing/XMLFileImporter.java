@@ -14,7 +14,7 @@ import java.io.File;
 
 /**
  * Handles importing dealer and vehicle data from an XML file.
- * Supports file selection or direct file path loading.
+ * Supports both interactive file selection (via dialog) and direct file path loading.
  */
 public class XMLFileImporter {
 
@@ -23,7 +23,7 @@ public class XMLFileImporter {
     /**
      * Constructor: Opens a file chooser dialog and loads the selected XML file.
      *
-     * @param primaryStage the JavaFX stage to anchor the file chooser
+     * @param primaryStage the JavaFX Stage used to anchor the file chooser dialog
      */
     public XMLFileImporter(Stage primaryStage) {
         try {
@@ -40,9 +40,9 @@ public class XMLFileImporter {
     }
 
     /**
-     * Constructor: Loads an XML file from a given file path.
+     * Constructor: Loads and parses an XML file from the specified path.
      *
-     * @param filePath path to the XML file
+     * @param filePath the absolute file path to the XML file
      */
     public XMLFileImporter(String filePath) {
         try {
@@ -59,10 +59,10 @@ public class XMLFileImporter {
     }
 
     /**
-     * Loads the XML content from a file into xmlDocument.
+     * Loads and parses the XML content from a file.
      *
-     * @param file the XML file to parse
-     * @throws Exception if parsing fails
+     * @param file the XML file to load
+     * @throws Exception if XML parsing fails
      */
     private void loadDocumentFromFile(File file) throws Exception {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -71,24 +71,10 @@ public class XMLFileImporter {
         this.xmlDocument.getDocumentElement().normalize();
     }
 
-
     /**
-     * Method to process XML documents and create the dealers and vehicles
-     * This method will be used in either of two ways:
-     *      1.  Loading the autosave file upon booting
-     *      2.  Loading any file imported during the runtime of the program
-     * Generally speaking, if a dealer's acquisition status is false, it should not accept any vehicles,
-     * but this doesn't apply to loading the autosave file because some dealers might have their status as false but
-     * still have vehicles.
-     * Therefore the persistence manager, when loading the autosave file, will call this method with true as the parameter,
-     * and the method will check whether the boolean passed is true or not. If true, it will call addVehicleFromAutosave()
-     * method in DealerCatalog, which adds vehicles to dealers without checking their acquisition statuses. However if the
-     * boolean is false then the normal addVehicle() method will be used which checks acquisition status.
+     * Processes the loaded XML file by parsing all dealers and their vehicles.
      *
-     * However if we don't want to require to pass in a true or false, so there is another method with the same name as
-     * this that has no parameters. If it has no parameters, we can assume that we are not loading from autosave file and
-     * we can then call this method and pass false as the value.
-     * @param ignoreAcquisitionCheck boolean to know whether to take into account acquisition status or not
+     * @param ignoreAcquisitionCheck if true, allows adding vehicles even if acquisition is disabled (used for autosave)
      */
     public void processXML(boolean ignoreAcquisitionCheck) {
         if (xmlDocument == null) {
@@ -97,25 +83,33 @@ public class XMLFileImporter {
         }
 
         NodeList dealerList = xmlDocument.getElementsByTagName("Dealer");
+
         for (int i = 0; i < dealerList.getLength(); i++) {
             Node dealerNode = dealerList.item(i);
+
             if (dealerNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element dealerElement = (Element) dealerNode;
 
+                // Build dealer from XML and add to catalog
                 Dealer dealer = DealerBuilder.buildDealerFromXML(dealerElement);
                 DealerCatalog.getInstance().addDealer(dealer);
 
+                // Parse all <Vehicle> elements under this <Dealer>
                 NodeList vehicleList = dealerElement.getElementsByTagName("Vehicle");
+
                 for (int j = 0; j < vehicleList.getLength(); j++) {
                     Node vehicleNode = vehicleList.item(j);
+
                     if (vehicleNode.getNodeType() == Node.ELEMENT_NODE) {
                         Element vehicleElement = (Element) vehicleNode;
 
+                        // Create vehicle from XML element
                         Vehicle vehicle = VehicleBuilder.buildVehicleFromXML(
                                 vehicleElement, dealer.getId(), dealer.getName()
                         );
 
                         if (vehicle != null) {
+                            // Decide how to add vehicle based on acquisition check flag
                             if (ignoreAcquisitionCheck) {
                                 DealerCatalog.getInstance().addVehicleFromAutosave(vehicle);
                             } else {
@@ -131,19 +125,17 @@ public class XMLFileImporter {
     }
 
     /**
-     * Processes any loaded XML document other than the autosave file
+     * Convenience method for processing XML normally (not during autosave).
+     * Automatically sets ignoreAcquisitionCheck to false.
      */
     public void processXML() {
-        //If processXML() method is called, that means we are not reading the autosave file
-        //So we will call the processXML(boolean ignoreAcquisitionCheck) method with false
         processXML(false);
     }
 
-
     /**
-     * Returns the loaded XML document.
+     * Gets the parsed XML document (for testing or debugging).
      *
-     * @return the parsed Document instance
+     * @return the loaded org.w3c.dom.Document
      */
     public Document getXmlDocument() {
         return xmlDocument;

@@ -1,28 +1,124 @@
 {
   "car_inventory": [
     {
+      "is_rented_out": true,
+      "price": 9999999.0,
+      "vehicle_model": "Range Rover",
+      "dealer_name": "Wacky",
+      "vehicle_type": "SUV",
+      "acquisition_status": false,
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Land Rover",
+      "vehicle_id": "848432",
+      "acquisition_date": 1746149711120
+    },
+    {
+      "is_rented_out": true,
+      "price": 36600.0,
+      "vehicle_model": "G70",
+      "dealer_name": "Wacky",
+      "vehicle_type": "Sedan",
+      "acquisition_status": false,
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Genesis",
+      "vehicle_id": "151e5dde",
+      "acquisition_date": 1746149711121
+    },
+    {
       "is_rented_out": false,
+      "price": 22330.0,
+      "vehicle_model": "Miata",
+      "dealer_name": "Wacky",
+      "vehicle_type": "SportsCar",
+      "acquisition_status": false,
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Mazda",
+      "vehicle_id": "ern222",
+      "acquisition_date": 1746149711121
+    },
+    {
+      "is_rented_out": true,
+      "price": 22600.0,
+      "vehicle_model": "Tundra",
+      "dealer_name": "Wacky",
+      "vehicle_type": "Pickup",
+      "acquisition_status": false,
+      "dealership_id": "485",
+      "vehicle_manufacturer": "Toyota",
+      "vehicle_id": "52523",
+      "acquisition_date": 1746149711121
+    },
+    {
+      "is_rented_out": true,
       "price": 27500.0,
       "vehicle_model": "CR-V",
       "dealer_name": "GL",
       "vehicle_type": "SUV",
-      "acquisition_status": true,
+      "acquisition_status": false,
       "dealership_id": "123",
       "vehicle_manufacturer": "Honda",
       "vehicle_id": "67291",
-      "acquisition_date": 1746049845150
+      "acquisition_date": 1746149711122
     },
     {
-      "is_rented_out": false,
+      "is_rented_out": true,
       "price": 45320.0,
       "vehicle_model": "3 Series",
       "dealer_name": "GL",
       "vehicle_type": "Sedan",
-      "acquisition_status": true,
+      "acquisition_status": false,
       "dealership_id": "123",
       "vehicle_manufacturer": "BMW",
       "vehicle_id": "99234",
-      "acquisition_date": 1746049845150
+      "acquisition_date": 1746149711122
+    },
+    {
+      "is_rented_out": false,
+      "price": 49889.0,
+      "vehicle_model": "Supra",
+      "dealer_name": "Dealer id#77338",
+      "vehicle_type": "SportsCar",
+      "acquisition_status": true,
+      "dealership_id": "77338",
+      "vehicle_manufacturer": "Toyota",
+      "vehicle_id": "229393",
+      "acquisition_date": 1746149711122
+    },
+    {
+      "is_rented_out": false,
+      "price": 70444.0,
+      "vehicle_model": "Silverado",
+      "dealer_name": "Dealer id#12513",
+      "vehicle_type": "Pickup",
+      "acquisition_status": false,
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Chevy",
+      "vehicle_id": "89343883",
+      "acquisition_date": 1746149711122
+    },
+    {
+      "is_rented_out": false,
+      "price": 50444.0,
+      "vehicle_model": "Model 3",
+      "dealer_name": "Dealer id#12513",
+      "vehicle_type": "Sedan",
+      "acquisition_status": false,
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Tesla",
+      "vehicle_id": "83883",
+      "acquisition_date": 1746149711122
+    },
+    {
+      "is_rented_out": false,
+      "price": 20123.0,
+      "vehicle_model": "Explorer",
+      "dealer_name": "Dealer id#12513",
+      "vehicle_type": "SUV",
+      "acquisition_status": false,
+      "dealership_id": "12513",
+      "vehicle_manufacturer": "Ford",
+      "vehicle_id": "48934j",
+      "acquisition_date": 1746149711122
     }
   ]
 }

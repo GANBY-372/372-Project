@@ -257,8 +257,8 @@ public class DealerCatalog {
         return result;
     }
 
-    // TODO: Rename more specifically, what does it update? complete the javadoc, add comments to code
-    public void updateDealer(Dealer updatedDealer) {
+    // TODO: Rename more specific   ally, what does it update? complete the javadoc, add comments to code
+    public void updateDealerName(Dealer updatedDealer) {
         // Find the dealer in the catalog and update the name
         for (Dealer dealer : getDealers()) {
             if (dealer.getId().equals(updatedDealer.getId())) {
