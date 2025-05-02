@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -162,9 +163,12 @@ public class FXController {
      * Updates the dealer info panel only if one dealer is selected.
      */
     private void updateDealerDetailPaneIfSingleSelected() {
+        if (dealerIdTextField == null || dealerNameTextField == null) return;
+
         List<Dealer> selectedDealers = dealerObservableList.stream()
                 .filter(Dealer::isSelected)
                 .toList();
+
         if (selectedDealers.size() == 1) {
             updateDealerDetailPane(selectedDealers.getFirst());
         } else {
@@ -172,7 +176,6 @@ public class FXController {
             dealerNameTextField.clear();
         }
     }
-
 
     /**
      * Prevents row selection and click-based highlighting. Enables checkbox-only selection.
@@ -182,16 +185,8 @@ public class FXController {
     private <T> void disableRowSelection(TableView<T> table) {
         table.setRowFactory(tv -> {
             TableRow<T> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                // Delay to avoid selection collision with internal JavaFX state
-                Platform.runLater(() -> table.getSelectionModel().clearSelection());
-                event.consume();
-            });
-            row.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
-                if (isNowSelected) {
-                    table.getSelectionModel().clearSelection();
-                }
-            });
+            // Prevent JavaFX from processing the row click
+            row.setOnMouseClicked(Event::consume);
             return row;
         });
     }
@@ -247,8 +242,10 @@ public class FXController {
      * @param dealer the dealer to show in the UI
      */
     private void updateDealerDetailPane(Dealer dealer) {
-        dealerIdTextField.setText(dealer.getId());
-        dealerNameTextField.setText(dealer.getName());
+        if (dealerIdTextField != null) dealerIdTextField.setText(dealer.getId());
+        if (dealerNameTextField != null) dealerNameTextField.setText(dealer.getName());
+        //dealerIdTextField.setText(dealer.getId());
+        //dealerNameTextField.setText(dealer.getName());
         toggleAcquisitionButton.setText("Change Acquisition Status");
     }
 
@@ -262,21 +259,6 @@ public class FXController {
         vehicleTable.setItems(vehicleObservableList);
     }
 
-    /**
-     * Shows an alert dialog. Static because multiple classes use this method.
-     * @param type the type of alert
-     * @param title dialog title
-     * @param message dialog content
-     */
-    public static void showAlert(Alert.AlertType type, String title, String message) {
-        Platform.runLater(() -> {
-            Alert alert = new Alert(type);
-            alert.setTitle(title);
-            alert.setHeaderText(null); // Ensure no blank header
-            alert.setContentText((message == null || message.trim().isEmpty()) ? "Operation completed successfully." : message);
-            alert.showAndWait();
-        });
-    }
 
     //VEHICLE FILTERS:
     /**
@@ -351,7 +333,7 @@ public class FXController {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select at least one dealer to view vehicles.");
+            AlertHelper.showWarning( "No Dealer Selected", "Please select at least one dealer to view vehicles.");
             return;
         }
 
@@ -475,7 +457,7 @@ public class FXController {
                 .toList();
 
         if (selectedVehicles.isEmpty()) {
-            FXController.showAlert(Alert.AlertType.WARNING, "No Vehicles Selected", "Please select vehicle(s) to transfer.");
+            AlertHelper.showWarning("No Vehicles Selected", "Please select vehicle(s) to transfer.");
             return;
         }
 
@@ -502,12 +484,12 @@ public class FXController {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            FXController.showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
+            AlertHelper.showWarning("No Dealer Selected", "Please select a dealer to add a vehicle.");
             return;
         }
 
         if (selectedDealers.size() > 1) {
-            FXController.showAlert(Alert.AlertType.WARNING, "Multiple Dealers Selected", "Please select only one dealer to add a vehicle.");
+            AlertHelper.showWarning("Multiple Dealers Selected", "Please select only one dealer to add a vehicle.");
             return;
         }
 

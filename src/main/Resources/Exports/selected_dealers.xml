@@ -2,7 +2,7 @@
 <Dealers>
     <Dealer id="123">
         <Name>GL</Name>
-        <Acquisition_Status>true</Acquisition_Status>
+        <Acquisition_Status>false</Acquisition_Status>
         <Vehicle id="67291" type="SUV">
             <Price unit="dollars">27500.0</Price>
             <Make>Honda</Make>

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Utility class for handling dealer-related actions such as:
@@ -128,9 +129,9 @@ public class DealerActionHelper {
                 wizardStage.close();
 
                 String msg = "Dealer '%s' (ID: %s) was successfully added.".formatted(newDealer.getName(), dealerId);
-                FXController.showAlert(Alert.AlertType.INFORMATION, "Success", msg);
+                AlertHelper.showSuccess("Success", msg);
             } catch (Exception e) {
-                FXController.showAlert(Alert.AlertType.ERROR, "Error", e.getMessage());
+                AlertHelper.showError("Error", e.getMessage());
             }
         });
 
@@ -145,12 +146,12 @@ public class DealerActionHelper {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select a dealer to edit.");
+            AlertHelper.showWarning("No Dealer Selected", "Please select a dealer to edit.");
             return;
         }
 
         if (selectedDealers.size() > 1) {
-            FXController.showAlert(AlertType.WARNING, "Multiple Dealers Selected", "Please select only one dealer to edit.");
+            AlertHelper.showWarning("Multiple Dealers Selected", "Please select only one dealer to edit.");
             return;
         }
 
@@ -163,12 +164,12 @@ public class DealerActionHelper {
 
         dialog.showAndWait().ifPresent(newName -> {
             if (newName.trim().isEmpty()) {
-                FXController.showAlert(AlertType.ERROR, "Invalid Input", "Dealer name cannot be empty.");
+                AlertHelper.showError("Invalid Input", "Dealer name cannot be empty.");
             } else {
                 selectedDealer.setName(newName.trim());
                 dealerTable.refresh();
                 dealerNameField.setText(newName.trim());
-                FXController.showAlert(AlertType.INFORMATION, "Updated", "Dealer name successfully updated.");
+                AlertHelper.showSuccess("Updated", "Dealer name successfully updated.");
             }
         });
     }
@@ -185,7 +186,7 @@ public class DealerActionHelper {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please check at least one dealer.");
+            AlertHelper.showWarning("No Dealer Selected", "Please check at least one dealer.");
             return;
         }
 
@@ -220,7 +221,7 @@ public class DealerActionHelper {
                 .toList();
 
         if (selectedDealers.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Dealers Selected", "Please select dealers to delete.");
+            AlertHelper.showWarning( "No Dealers Selected", "Please select dealers to delete.");
             return;
         }
 
@@ -232,25 +233,23 @@ public class DealerActionHelper {
             int vehicleCount = dealer.vehicleCatalog.size();
 
             if (vehicleCount > 0) {
-                Alert confirm = new Alert(AlertType.CONFIRMATION);
-                confirm.setTitle("Delete Dealer");
-                confirm.setHeaderText("Dealer " + dealer.getName() + " has " + vehicleCount + " vehicle(s).");
-                confirm.setContentText("Choose an option for the dealer's vehicle inventory:");
+                ButtonType deleteVehicles = new ButtonType("Delete Vehicles", ButtonBar.ButtonData.YES);
+                ButtonType transferVehicles = new ButtonType("Transfer Vehicles", ButtonBar.ButtonData.NO);
+                ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-                ButtonType deleteVehicles = new ButtonType("Delete Vehicles", ButtonData.YES);
-                ButtonType transferVehicles = new ButtonType("Transfer Vehicles", ButtonData.NO);
-                ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+                Optional<ButtonType> response = AlertHelper.showConfirmation(
+                        "Delete Dealer",
+                        "Dealer " + dealer.getName() + " has " + vehicleCount + " vehicle(s).",
+                        "Choose an option for the dealer's vehicle inventory:",
+                        deleteVehicles, transferVehicles, cancel
+                );
 
-                confirm.getButtonTypes().setAll(deleteVehicles, transferVehicles, cancel);
-
-                ButtonType response = confirm.showAndWait().orElse(cancel);
-
-                if (response == deleteVehicles) {
+                if (response.orElse(cancel) == deleteVehicles) {
                     dealer.vehicleCatalog.clear();
                     finalizeDeletion(dealer, dealerObservableList, vehicleObservableList);
-                } else if (response == transferVehicles) {
+                } else if (response.orElse(cancel) == transferVehicles) {
                     if (otherDealers.isEmpty()) {
-                        FXController.showAlert(AlertType.ERROR, "No Available Dealers", "No other dealers to transfer vehicles to.");
+                        AlertHelper.showError("No Available Dealers", "No other dealers to transfer vehicles to.");
                         continue;
                     }
 
@@ -264,7 +263,7 @@ public class DealerActionHelper {
                         DealerCatalog.getInstance().transferInventory(toTransfer, destination.getId());
                         dealer.vehicleCatalog.clear();
                         finalizeDeletion(dealer, dealerObservableList, vehicleObservableList);
-                        FXController.showAlert(AlertType.INFORMATION, "Transfer Complete",
+                        AlertHelper.showSuccess("Transfer Complete",
                                 "Vehicles transferred to " + destination.getName() + ".");
                     });
                 }

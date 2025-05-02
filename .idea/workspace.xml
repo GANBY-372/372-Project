@@ -5,26 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
-<<<<<<< HEAD
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/user/UserManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/AlertHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/Exports/GL.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Exports/GL.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/Exports/selected_dealers.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Exports/selected_dealers.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Resources/Exports/selected_dealers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/Exports/selected_dealers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Resources/FXAPP-View.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Resources/FXAPP-View.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DataIOHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DataIOHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileExporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/XMLFileExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dataprocessing/XMLFileExporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/Dealer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/Dealer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/dealer/DealerCatalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/FXController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/metrostate/ics372/ganby/dealer/DealerCatalogTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/DataIOHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/DataIOHelper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/DealerActionHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileExporter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileExporter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dataprocessing/JSONFileImporter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/Dealer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/Dealer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/DealerBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/DealerBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/FXController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/FXController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/FXAPP/VehicleActionHelper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/DealerCatalog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/metrostate/ics372/ganby/dealer/DealerCatalog.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerCatalogTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerCatalogTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-edu.metrostate.ics372.ganby.dealer.DealerTest.xml" afterDir="false" />
@@ -37,7 +32,7 @@
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.dealer.DealerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.dealer.DealerTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.PickupTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.PickupTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.VehicleTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/edu.metrostate.ics372.ganby.vehicle.VehicleTest.txt" afterDir="false" />
->>>>>>> 2c09b6a (Fixed JSONFileimporter and Exporter to account for dealername, dealeracquisitionstatus, and vehicle rent status. It was Abdi's work but he couldn't push it. Also the import and export cancelled messages work now and don't show when import and export are successfull.)
+      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/dealer/DealerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/metrostate/ics372/ganby/dealer/DealerTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +45,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -114,6 +109,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "Yahya",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/abo_dawood/Phase3_372",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -139,9 +135,6 @@
       <recent name="edu.metrostate.ics372.ganby.dealer" />
     </key>
   </component>
-<<<<<<< HEAD
-  <component name="RunManager" selected="JUnit.All in FX_372_Project">
-=======
   <component name="RunManager" selected="Application.FXDriver">
     <configuration name="FXDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="edu.metrostate.ics372.ganby.FXDriver" />
@@ -156,7 +149,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
->>>>>>> 2c09b6a (Fixed JSONFileimporter and Exporter to account for dealername, dealeracquisitionstatus, and vehicle rent status. It was Abdi's work but he couldn't push it. Also the import and export cancelled messages work now and don't show when import and export are successfull.)
     <configuration name="All in FX_372_Project" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FX_372_Project" />
       <option name="PACKAGE_NAME" value="" />
@@ -232,20 +224,14 @@
         <item itemvalue="JUnit.UserManagerTest" />
         <item itemvalue="JUnit.DealerCatalogTest" />
         <item itemvalue="JUnit.DealerTest" />
-        <item itemvalue="JUnit.VehicleTest" />
-<<<<<<< HEAD
-=======
-        <item itemvalue="JUnit.VehicleBuilderTest" />
-        <item itemvalue="JUnit.PickupTest" />
->>>>>>> 2c09b6a (Fixed JSONFileimporter and Exporter to account for dealername, dealeracquisitionstatus, and vehicle rent status. It was Abdi's work but he couldn't push it. Also the import and export cancelled messages work now and don't show when import and export are successfull.)
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -267,6 +253,7 @@
       <workItem from="1745978548181" duration="1459000" />
       <workItem from="1746032889602" duration="2692000" />
       <workItem from="1746039314110" duration="4306000" />
+      <workItem from="1746140291760" duration="5318000" />
     </task>
     <servers />
   </component>

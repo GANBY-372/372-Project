@@ -40,7 +40,7 @@ public class VehicleActionHelper {
                 .toList();
 
         if (toDelete.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Vehicles Selected", "Please select vehicle(s) using the checkbox to delete.");
+            AlertHelper.showWarning("No Vehicles Selected", "Please select vehicle(s) using the checkbox to delete.");
             return;
         }
 
@@ -61,7 +61,7 @@ public class VehicleActionHelper {
 
                 vehicleTable.refresh();
                 dealerTable.refresh();
-                FXController.showAlert(AlertType.INFORMATION, "Deleted", "Selected vehicles deleted successfully.");
+                AlertHelper.showSuccess("Deleted", "Selected vehicles deleted successfully.");
             }
         });
     }
@@ -74,7 +74,7 @@ public class VehicleActionHelper {
     public static void modifyVehiclePrice(TableView<Vehicle> vehicleTable) {
         Vehicle selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
         if (selectedVehicle == null) {
-            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select a vehicle to modify.");
+            AlertHelper.showWarning("No Vehicle Selected", "Please select a vehicle to modify.");
             return;
         }
 
@@ -89,9 +89,9 @@ public class VehicleActionHelper {
                 if (newPrice < 0) throw new NumberFormatException("Price must be non-negative.");
                 selectedVehicle.setPrice(newPrice);
                 vehicleTable.refresh();
-                FXController.showAlert(AlertType.INFORMATION, "Updated", "Price updated to $" + newPrice);
+                AlertHelper.showSuccess("Updated", "Price updated to $" + newPrice);
             } catch (NumberFormatException e) {
-                FXController.showAlert(AlertType.ERROR, "Invalid Input", "Please enter a valid price.");
+                AlertHelper.showError( "Invalid Input", "Please enter a valid price.");
             }
         });
     }
@@ -105,14 +105,14 @@ public class VehicleActionHelper {
                 .toList();
 
         if (selectedVehicles.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to mark as rented.");
+            AlertHelper.showWarning("No Vehicle Selected", "Please select vehicle(s) to mark as rented.");
             return;
         }
 
         for (Vehicle vehicle : selectedVehicles) {
             String type = vehicle.getType().trim().replaceAll("\\s+", "");
             if (type.equalsIgnoreCase("SportsCar")) {
-                FXController.showAlert(AlertType.WARNING,
+                AlertHelper.showWarning(
                         "Action Not Allowed For Vehicle Id #" + vehicle.getVehicleId(),
                         "SportsCars cannot be rented.");
                 continue;
@@ -132,7 +132,7 @@ public class VehicleActionHelper {
                 .toList();
 
         if (selectedVehicles.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Vehicle Selected", "Please select vehicle(s) to mark as available.");
+            AlertHelper.showWarning("No Vehicle Selected", "Please select vehicle(s) to mark as available.");
             return;
         }
 
@@ -175,13 +175,13 @@ public class VehicleActionHelper {
      */
     public static void openAddVehicleWizard(Dealer selectedDealer, ObservableList<Vehicle> vehicleObservableList) {
         if (selectedDealer == null) {
-            FXController.showAlert(Alert.AlertType.WARNING, "No Dealer Selected", "Please select a dealer to add a vehicle.");
+            AlertHelper.showWarning( "No Dealer Selected", "Please select a dealer to add a vehicle.");
             return;
         }
 
         // 🔒 Acquisition check
         if (!selectedDealer.isVehicleAcquisitionEnabled()) {
-            FXController.showAlert(Alert.AlertType.ERROR, "Acquisition Disabled",
+            AlertHelper.showError("Acquisition Disabled",
                     "Vehicle acquisition is disabled for Dealer #%s. Enable acquisition first.".formatted(selectedDealer.getId()));
             return;
         }
@@ -280,12 +280,12 @@ public class VehicleActionHelper {
                 String msg = "%s %s (%s) was added to Dealer #%s".formatted(
                         manufacturer, model, category, selectedDealer.getId()
                 );
-                FXController.showAlert(Alert.AlertType.INFORMATION, "Success", msg);
+                AlertHelper.showSuccess("Success", msg);
 
                 wizardStage.close();
 
             } catch (Exception e) {
-                FXController.showAlert(Alert.AlertType.ERROR, "Error Adding Vehicle", e.getMessage());
+                AlertHelper.showError("Error Adding Vehicle", e.getMessage());
             }
         });
 
@@ -311,7 +311,7 @@ public class VehicleActionHelper {
             TableView<Dealer> dealerTable
     ) {
         if (selectedVehicles == null || selectedVehicles.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Vehicles Selected", "Please select vehicle(s) to transfer.");
+            AlertHelper.showWarning( "No Vehicles Selected", "Please select vehicle(s) to transfer.");
             return;
         }
 
@@ -324,7 +324,7 @@ public class VehicleActionHelper {
         List<Dealer> destinationOptions = DealerCatalog.getInstance().getDealers();
 
         if (destinationOptions.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Valid Destination", "No other dealers available for transfer.");
+            AlertHelper.showWarning("No Valid Destination", "No other dealers available for transfer.");
             return;
         }
 
@@ -358,7 +358,7 @@ public class VehicleActionHelper {
             vehicleTable.refresh();
             dealerTable.refresh();
 
-            FXController.showAlert(AlertType.INFORMATION, "Transfer Complete",
+            AlertHelper.showSuccess("Transfer Complete",
                     selectedVehicles.size() + " vehicle(s) transferred to " + destinationDealer.getName());
         });
     }
@@ -377,7 +377,7 @@ public class VehicleActionHelper {
      */
     public static void filterByType(String type, List<Dealer> selectedDealers, ObservableList<Vehicle> outputList) {
         if (selectedDealers == null || selectedDealers.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select at least one dealer.");
+            AlertHelper.showSuccess("No Dealer Selected", "Please select at least one dealer.");
             return;
         }
 
@@ -402,7 +402,7 @@ public class VehicleActionHelper {
      */
     public static void filterByRented(List<Dealer> selectedDealers, ObservableList<Vehicle> outputList) {
         if (selectedDealers == null || selectedDealers.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select at least one dealer.");
+            AlertHelper.showWarning( "No Dealer Selected", "Please select at least one dealer.");
             return;
         }
 
@@ -426,7 +426,7 @@ public class VehicleActionHelper {
      */
     public static void showAllVehiclesFromSelectedDealers(List<Dealer> selectedDealers, ObservableList<Vehicle> outputList) {
         if (selectedDealers == null || selectedDealers.isEmpty()) {
-            FXController.showAlert(AlertType.WARNING, "No Dealer Selected", "Please select at least one dealer.");
+            AlertHelper.showWarning("No Dealer Selected", "Please select at least one dealer.");
             return;
         }
 
