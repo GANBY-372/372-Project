@@ -94,6 +94,8 @@ The software shall:
 - User authentication added for secure access.
 - Username and password are required on first run.
 - Credentials are stored locally and checked on subsequent runs.
+- CHANGING PASSWORDS: Done by manually changing a resource file named user.txt in the main directory
+- The resource file is created after the first run of the program
 
 ---
 
