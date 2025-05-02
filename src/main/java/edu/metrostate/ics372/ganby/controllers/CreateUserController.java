@@ -1,5 +1,6 @@
 package edu.metrostate.ics372.ganby.controllers;
 
+import edu.metrostate.ics372.ganby.FXAPP.AlertHelper;
 import edu.metrostate.ics372.ganby.FXDriver;
 import edu.metrostate.ics372.ganby.user.UserManager;
 import javafx.event.ActionEvent;
@@ -23,7 +24,7 @@ public class CreateUserController {
         String password = passwordField.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Username and password cannot be empty.");
+            AlertHelper.showWarning("Sign-in","Username and password cannot be empty.");
             return;
         }
 
@@ -31,15 +32,9 @@ public class CreateUserController {
             UserManager.saveUser(username, password);
             FXDriver.launchMainApp((Stage) usernameField.getScene().getWindow());
         } catch (Exception e) {
-            showAlert("Failed to save user: " + e.getMessage());
+            AlertHelper.showError("Sign-in Error","Failed to save user: " + e.getMessage());
         }
     }
 
-    private void showAlert(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
 }
+

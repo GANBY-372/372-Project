@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5e70566-7b4c-4f9e-8f4a-8a783cfd8a29" name="Changes" comment="Merged with main">
-      <change afterPath="$PROJECT_DIR$/Documentation/Use_Cases/UserLoginUseCase.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/controllers/CreateUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/controllers/CreateUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/metrostate/ics372/ganby/controllers/LoginController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +45,7 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2uvXVK9a7ZKcgjq0D2byemZAo8s" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -53,47 +54,47 @@
     <option name="showLibraryContents" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Application.FXDriver.executor": "Run",
-    "Application.FilesTestDriver.executor": "Run",
-    "Application.TestEnv.executor": "Run",
-    "JUnit.All in FX_372_Project.executor": "Run",
-    "JUnit.DealerBuilderTest.executor": "Run",
-    "JUnit.DealerCatalogTest.executor": "Coverage",
-    "JUnit.DealerCatalogTest.getDealerWithId.executor": "Run",
-    "JUnit.DealerCatalogTest.getDealers.executor": "Run",
-    "JUnit.DealerTest.executor": "Coverage",
-    "JUnit.PickupTest.executor": "Coverage",
-    "JUnit.SportsCarTest.executor": "Run",
-    "JUnit.VehicleBuilderTest.executor": "Run",
-    "JUnit.VehicleTest.executor": "Run",
-    "JUnit.edu.metrostate.ics372.ganby.dealer in FX_372_Project.executor": "Coverage",
-    "Maven.FX_372_Project [clean].executor": "Run",
-    "Maven.FX_372_Project [compile].executor": "Run",
-    "Maven.FX_372_Project [test].executor": "Run",
-    "Maven.FX_372_Project [validate].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/abo_dawood/Phase3_372",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Application.FXDriver.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FilesTestDriver.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestEnv.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in FX_372_Project.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DealerBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DealerCatalogTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.DealerCatalogTest.getDealerWithId.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DealerCatalogTest.getDealers.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DealerTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.PickupTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.SportsCarTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleBuilderTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VehicleTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.edu.metrostate.ics372.ganby.dealer in FX_372_Project.executor&quot;: &quot;Coverage&quot;,
+    &quot;Maven.FX_372_Project [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.FX_372_Project [validate].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/abo_dawood/Phase3_372&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/Resources" />
@@ -228,6 +229,7 @@
       <workItem from="1746032889602" duration="2692000" />
       <workItem from="1746039314110" duration="4306000" />
       <workItem from="1746140291760" duration="8898000" />
+      <workItem from="1746157013804" duration="396000" />
     </task>
     <servers />
   </component>
